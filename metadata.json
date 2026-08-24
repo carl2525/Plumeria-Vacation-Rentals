@@ -1,0 +1,7 @@
+{
+  "name": "Plumeria Vacation Rentals",
+  "description": "Premium short-term vacation rentals at Waikiki Banyan in Waikiki, Honolulu, Hawaiʻi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

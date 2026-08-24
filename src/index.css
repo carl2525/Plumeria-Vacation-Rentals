@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Firefox modern scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: #B2C7D6 #FAF9F5;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: #0D274D;
+    background-color: #FAF9F5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Support smooth momentum scrolling on mobile/tablet containers */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif);
+  }
+}
+
+/* ==========================================================================
+   Modern Minimalist Scrollbar Design (Desktop, Tablet, & Mobile)
+   Supports both Vertical and Horizontal scrolling seamlessly
+   ========================================================================== */
+
+/* Universal WebKit Scrollbar Styling (Chrome, Safari, Edge, Android, iOS) */
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(250, 249, 245, 0.6);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+  border: 1.5px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #186A9E;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: #0D274D;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Slim modern scrollbar utility for modals, drawer panels, filter bars, and horizontal tabs */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #B2C7D6 transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #186A9E;
+}
+
+/* Clean hide-scrollbar utility with preserved touch/mouse scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom smooth animations & helpers */
+@keyframes waveDrift {
+  0% {
+    transform: translateX(0) translateZ(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-25%) translateZ(0) scaleY(1.05);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0) scaleY(1);
+  }
+}
+
+.animate-wave-drift {
+  animation: waveDrift 18s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+}
+
+.sleek-border {
+  border-color: #EAF7F9;
+}
+
+.sleek-card {
+  background-color: #ffffff;
+  border: 1px solid #EAF7F9;
+  box-shadow: 0 4px 20px -2px rgba(13, 39, 77, 0.05);
+}
+
+/* Logo Rainbow Gradient Bar: Outer Coral -> Mid Gold -> Inner Aqua -> Pacific Ocean */
+.rainbow-gradient-bar {
+  background: linear-gradient(90deg, #F78D74 0%, #F5B82E 33%, #4BB8C7 66%, #186A9E 100%);
+}
+
+.wave-gradient-bg {
+  background: linear-gradient(135deg, #0D274D 0%, #186A9E 60%, #4BB8C7 100%);
+}
+
+.rainbow-subtle-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(247, 141, 116, 0.09) 0%, rgba(245, 184, 46, 0.09) 30%, rgba(75, 184, 199, 0.08) 60%, transparent 85%);
+}
+
+/* Glassmorphic frosted header */
+.glass-header {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+

@@ -1,0 +1,148 @@
+import React, { useState } from 'react';
+import { WAIKIKI_DESTINATIONS } from '../../data/waikikiGuide';
+import { MapPin, Compass, ArrowRight, Sparkles } from 'lucide-react';
+import { AppImage } from '../common/AppImage';
+import { LogoWatermark } from '../brand/LogoWatermark';
+
+interface ExploreWaikikiSectionProps {
+  onExploreMore: () => void;
+}
+
+export const ExploreWaikikiSection: React.FC<ExploreWaikikiSectionProps> = ({ onExploreMore }) => {
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+
+  const categories = [
+    { id: 'all', label: 'All Waikiki' },
+    { id: 'beaches', label: 'Beach & Ocean' },
+    { id: 'activities', label: 'Surfing & Parks' },
+    { id: 'dining', label: 'Dining & Cafes' },
+    { id: 'nature', label: 'Diamond Head & Scenic' },
+  ];
+
+  const filteredItems =
+    activeCategory === 'all'
+      ? WAIKIKI_DESTINATIONS
+      : WAIKIKI_DESTINATIONS.filter((item) => item.category === activeCategory);
+
+  return (
+    <section className="relative py-20 sm:py-28 bg-[#FAF9F5] border-t border-[#EAF7F9] overflow-hidden">
+      {/* Decorative watermark */}
+      <LogoWatermark size="2xl" position="top-right" opacity="opacity-[0.035] sm:opacity-[0.06]" />
+      <LogoWatermark size="xl" position="bottom-left" opacity="opacity-[0.03] sm:opacity-[0.05]" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAF7F9] border border-[#186A9E]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#186A9E]">
+              <Compass className="w-3.5 h-3.5 text-[#186A9E]" />
+              <span>Explore Waikiki & Oʻahu</span>
+            </div>
+
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0D274D] leading-tight">
+              Beyond your front door.
+            </h2>
+
+            <p className="text-base sm:text-lg text-[#0D274D]/80 font-light">
+              Staying at Waikiki Banyan puts the best of Honolulu right at your fingertips: warm surf breaks, island eateries, Diamond Head views, and vibrant night markets.
+            </p>
+          </div>
+
+          <button
+            id="explore-waikiki-header-link"
+            onClick={onExploreMore}
+            className="text-[#186A9E] font-bold text-sm border-b-2 border-[#186A9E]/20 hover:border-[#186A9E] pb-1 transition-colors group self-start md:self-end cursor-pointer flex items-center gap-1.5"
+          >
+            <span>Explore Complete Waikiki Guide</span>
+            <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap gap-2 mb-10">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                activeCategory === cat.id
+                  ? 'bg-[#186A9E] text-white shadow-md shadow-[#186A9E]/20'
+                  : 'bg-white text-[#0D274D]/80 hover:bg-[#EAF7F9] border border-[#EAF7F9]'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Destination Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {filteredItems.slice(0, 3).map((item) => (
+            <article
+              key={item.id}
+              className="bg-white rounded-3xl overflow-hidden border border-[#EAF7F9] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div className="relative aspect-16/10 overflow-hidden bg-[#0D274D]/10">
+                <AppImage
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                <div className="absolute top-3.5 left-3.5">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/95 backdrop-blur-md text-[#0D274D]">
+                    {item.categoryLabel}
+                  </span>
+                </div>
+
+                <div className="absolute bottom-3 left-3.5 right-3.5 text-white flex items-center justify-between text-xs">
+                  <span className="flex items-center gap-1 font-medium drop-shadow-sm">
+                    <MapPin className="w-3.5 h-3.5 text-[#F78D74]" />
+                    <span>{item.distanceFromBanyan}</span>
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-6 space-y-3.5 flex-1 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <h3 className="font-serif text-xl font-bold text-[#0D274D] group-hover:text-[#186A9E] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#0D274D]/75 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Insider Tip Box */}
+                <div className="p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#EAF7F9] text-xs text-[#0D274D]/80 space-y-1">
+                  <span className="font-bold text-[#186A9E] flex items-center gap-1 text-[11px]">
+                    <Sparkles className="w-3 h-3 text-[#F5B82E]" />
+                    <span>Local Tip</span>
+                  </span>
+                  <p className="line-clamp-2 text-[11px] leading-relaxed text-[#0D274D]/75">
+                    {item.insiderTip}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Bottom Explorer Action */}
+        <div className="mt-12 text-center">
+          <button
+            id="explore-waikiki-bottom-cta"
+            onClick={onExploreMore}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#186A9E] hover:bg-[#0D274D] text-white shadow-lg shadow-[#186A9E]/20 transition-all cursor-pointer"
+          >
+            <span>Explore Complete Waikiki Guide</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
