@@ -2,6 +2,20 @@ import { FAQItem } from '../types';
 
 export const FAQS: FAQItem[] = [
   {
+    id: 'faq-why-better',
+    category: 'Waikiki Banyan',
+    question: 'Why is Waikiki Banyan better than other vacation rentals and hotels in Waikiki?',
+    answer:
+      'Waikiki Banyan is widely regarded by frequent visitors as the best vacation rental destination in Honolulu. Unlike cramped 280 sq. ft. hotel rooms or standard condo rentals with minimal amenities, Waikiki Banyan offers: (1) Oʻahu’s largest 1-acre 6th-floor resort recreation deck with a heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball courts, and 12 gas BBQ grills; (2) Full chef-ready kitchens with full-sized refrigerators, stoves, ovens, and cookware—saving families $200+ per day on dining; (3) Spacious 550 sq. ft. 1-bedroom layouts with private lanais that comfortably sleep up to 5 guests; (4) Flat 1-block (3-minute) stroll to calm Kuhio Beach while staying tucked away from noisy traffic; and (5) $0 mandatory resort fees.',
+  },
+  {
+    id: 'faq-resort-fees',
+    category: 'Booking & Policies',
+    question: 'Are there mandatory daily resort fees like Waikiki hotels charge?',
+    answer:
+      'No! While typical Waikiki hotels tack on $45 to $65+ per night in surprise "resort fees" upon check-in, Plumeria Vacation Rentals at Waikiki Banyan charges $0 in mandatory resort fees. Full access to the 1-acre recreation deck, heated pool, 2 jet hot tubs, dry sauna, tennis courts, BBQ pavilions, and fast Wi-Fi is 100% included in your booking.',
+  },
+  {
     id: 'faq-location',
     category: 'Waikiki Banyan',
     question: 'Where are Plumeria Vacation Rentals located?',
@@ -55,7 +69,14 @@ export const FAQS: FAQItem[] = [
     category: 'Booking & Policies',
     question: 'What is the policy on smoking and quiet hours?',
     answer:
-      'All suites and lanais are strictly 100% smoke-free (including cigarettes, cigars, vape devices, and cannabis per Hawaii building laws). Waikiki Banyan enforces residential quiet hours from 10:00 PM to 8:00 AM to ensure restful stays for all visitors.',
+      'All suites and lanais are strictly 100% smoke-free (including cigarettes, cigars, vape devices, and cannabis per Hawaii building laws). Waikiki Banyan observes recreation deck quiet hours from 10:00 PM to 6:00 AM and in-unit quiet hours from 10:00 PM to 7:00 AM to ensure restful stays for all visitors.',
+  },
+  {
+    id: 'faq-building-rules',
+    category: 'Booking & Policies',
+    question: 'Where can I read the full Waikiki Banyan building rules and Plumeria house rules?',
+    answer:
+      'We provide our complete 31-point Guest & Building Rules guide directly on our website under the House Rules tab (/rules). It details Part I (Waikiki Banyan Building Rules covering recreation deck, pool hours, Tower 2 freight elevator Car #5 for surfboards, trash chutes, and parking) and Part II (Plumeria In-House Rules for Unit 3205 and Tower 2 suites).',
   },
   {
     id: 'faq-inquiry',

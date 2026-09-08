@@ -1,32 +1,59 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, AlertCircle, Calendar, Users, Home, User, Mail, Phone, MessageSquare } from 'lucide-react';
+import {
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  Calendar,
+  Users,
+  Home,
+  User,
+  Mail,
+  Phone,
+  MessageSquare,
+  Copy,
+  Check,
+  ExternalLink,
+} from 'lucide-react';
 import { PROPERTIES } from '../../data/properties';
 import { SITE_CONFIG } from '../../config/site';
-import { InquiryFormData } from '../../types';
+import {
+  generateInquiryMailtoUrl,
+  buildInquiryEmailText,
+  openInquiryMailto,
+} from '../../utils/mailto';
 
 interface InquiryFormProps {
-  preselectedPropertyId?: string;
+  initialPropertyId?: string;
+  initialCheckIn?: string;
+  initialCheckOut?: string;
+  initialGuests?: number;
   onSuccess?: () => void;
+  title?: string;
 }
 
 export const InquiryForm: React.FC<InquiryFormProps> = ({
-  preselectedPropertyId,
+  initialPropertyId = '',
+  initialCheckIn = '',
+  initialCheckOut = '',
+  initialGuests = 2,
   onSuccess,
+  title,
 }) => {
-  const [formData, setFormData] = useState<InquiryFormData>({
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
-    checkIn: '',
-    checkOut: '',
-    guests: 2,
-    preferredProperty: preselectedPropertyId || '',
+    checkIn: initialCheckIn,
+    checkOut: initialCheckOut,
+    guests: initialGuests,
+    preferredProperty: initialPropertyId,
     message: '',
   });
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [copied, setCopied] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -35,72 +62,134 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const mailtoUrl = generateInquiryMailtoUrl(formData);
+  const formattedEmailBody = buildInquiryEmailText(formData);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
 
-    // Client-side validation
-    if (!formData.firstName.trim() || !formData.lastName.trim()) {
-      setErrorMessage('Please provide your full first and last name.');
+    if (!formData.firstName || !formData.lastName || !formData.email) {
+      setErrorMessage('Please provide your name and email address.');
       return;
     }
-    if (!formData.email.trim() || !formData.email.includes('@')) {
-      setErrorMessage('Please enter a valid email address so we can reply with your reservation details.');
-      return;
-    }
+
     if (!formData.checkIn || !formData.checkOut) {
-      setErrorMessage('Please select your preferred check-in and check-out dates.');
+      setErrorMessage('Please select both Check-In and Check-Out dates.');
       return;
     }
 
     if (new Date(formData.checkIn) >= new Date(formData.checkOut)) {
-      setErrorMessage('Check-out date must be after your check-in date.');
+      setErrorMessage('Check-Out date must be after Check-In date.');
       return;
     }
 
     setStatus('submitting');
 
-    // Simulate direct inquiry processing with mailto option or verified receipt
+    // Automatically trigger mailto link to open the visitor's email client
+    try {
+      openInquiryMailto(formData);
+    } catch {
+      // Gracefully fall back if browser intercepts window.location
+    }
+
     setTimeout(() => {
       setStatus('success');
       if (onSuccess) {
-        setTimeout(onSuccess, 2000);
+        onSuccess();
       }
-    }, 900);
+    }, 400);
+  };
+
+  const handleCopy = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(formattedEmailBody).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 3000);
+      });
+    }
   };
 
   if (status === 'success') {
     const selectedProp = PROPERTIES.find((p) => p.id === formData.preferredProperty);
+    const suiteName = selectedProp ? `${selectedProp.name} (${selectedProp.viewType})` : 'Waikiki Banyan Suite';
+
     return (
-      <div className="bg-emerald-50 border border-emerald-200/80 rounded-2xl p-8 text-center space-y-4 animate-fade-in">
-        <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
-          <CheckCircle2 className="w-8 h-8" />
+      <div className="bg-[#F9F7F2] border border-[#E8DCC6] rounded-3xl p-6 sm:p-8 text-center space-y-6 animate-fade-in shadow-xs">
+        <div className="w-16 h-16 bg-[#8CA58A]/20 text-[#1A3B34] rounded-full flex items-center justify-center mx-auto shadow-xs border border-[#8CA58A]/30">
+          <CheckCircle2 className="w-9 h-9 text-[#1A3B34]" />
         </div>
+
         <div className="space-y-2">
-          <h3 className="font-serif text-2xl font-bold text-[#0D274D]">
+          <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C59B4B] block">
+            Inquiry Prepared
+          </span>
+          <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
             Mahalo, {formData.firstName}!
           </h3>
-          <p className="text-[#0D274D]/80 text-sm max-w-md mx-auto leading-relaxed">
-            Your stay inquiry for <strong className="text-[#0D274D]">{selectedProp ? selectedProp.name : 'Waikiki Banyan'}</strong> ({formData.checkIn} to {formData.checkOut}) has been received.
-          </p>
-          <p className="text-xs text-[#0D274D]/70 pt-1">
-            Our local Plumeria team will review dates and respond directly to <strong className="text-[#186A9E]">{formData.email}</strong> within 12–24 hours with exact availability and rates.
+          <p className="text-[#1A3B34]/85 text-sm max-w-md mx-auto leading-relaxed font-light">
+            We’ve opened your email app with a pre-filled booking request for <strong className="text-[#1A3B34] font-semibold">{suiteName}</strong> ({formData.checkIn} to {formData.checkOut}).
           </p>
         </div>
 
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+        {/* Primary Mailto Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
           <a
-            href={`mailto:${SITE_CONFIG.email}?subject=Stay%20Inquiry%20from%20${encodeURIComponent(formData.firstName)}&body=Hi%20Plumeria%20Team,%0A%0AI%20submitted%20an%20inquiry%20for%20${encodeURIComponent(formData.checkIn)}%20to%20${encodeURIComponent(formData.checkOut)}%20for%20${formData.guests}%20guests.%0A%0AThank%20you!`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-[#186A9E] text-white hover:bg-[#0D274D] transition-colors"
+            href={mailtoUrl}
+            id="mailto-success-open-btn"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#1A3B34] text-white hover:bg-[#224D44] transition-all shadow-md cursor-pointer border border-[#C59B4B]/30"
           >
-            <Mail className="w-3.5 h-3.5" />
-            <span>Open Direct Email Client</span>
+            <Mail className="w-4 h-4 text-[#F6E7A7]" />
+            <span>Open in Email App (mailto)</span>
+            <ExternalLink className="w-3.5 h-3.5 text-white/60" />
           </a>
+
+          <button
+            type="button"
+            id="copy-inquiry-details-btn"
+            onClick={handleCopy}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full text-xs font-semibold bg-white border border-[#E8DCC6] text-[#1A3B34] hover:bg-[#E8DCC6]/40 transition-colors shadow-2xs cursor-pointer"
+          >
+            {copied ? (
+              <>
+                <Check className="w-4 h-4 text-[#8CA58A]" />
+                <span className="text-[#1A3B34] font-bold">Details Copied to Clipboard!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4 text-[#C59B4B]" />
+                <span>Copy Inquiry Details</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Inquiry Preview Box */}
+        <div className="text-left bg-white rounded-2xl p-4 border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1.5 shadow-2xs">
+          <div className="flex items-center justify-between pb-2 border-b border-[#E8DCC6]/60">
+            <span className="font-bold text-[10px] uppercase tracking-wider text-[#1A3B34]/60">
+              Recipient: {SITE_CONFIG.email}
+            </span>
+            <span className="text-[10px] text-[#8CA58A] font-semibold">Subject: Stay Inquiry</span>
+          </div>
+          <pre className="whitespace-pre-wrap font-sans text-xs text-[#1A3B34]/85 leading-relaxed pt-1 overflow-x-auto">
+            {formattedEmailBody}
+          </pre>
+        </div>
+
+        <div className="pt-2 text-xs text-[#1A3B34]/70 space-y-1.5">
+          <p>
+            Prefer calling or texting? Contact Plumeria host team directly at{' '}
+            <a href="tel:+18086719191" className="font-semibold text-[#1A3B34] hover:underline">
+              {SITE_CONFIG.phone}
+            </a>
+            .
+          </p>
           <button
             onClick={() => setStatus('idle')}
-            className="px-5 py-2.5 rounded-full text-xs font-medium text-[#0D274D]/70 hover:text-[#0D274D] hover:bg-emerald-100/50 transition-colors cursor-pointer"
+            className="text-[11px] font-semibold text-[#8CA58A] hover:underline cursor-pointer pt-2 block mx-auto"
           >
-            Submit Another Inquiry
+            ← Modify Details or Submit Another Inquiry
           </button>
         </div>
       </div>
@@ -109,6 +198,35 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {title && (
+        <div className="border-b border-[#E8DCC6] pb-3 mb-2">
+          <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1A3B34]">
+            {title}
+          </h2>
+          <p className="text-xs text-[#1A3B34]/70 font-light">
+            Fill out your desired dates and suite. Submitting automatically prepares a direct reservation email via mailto.
+          </p>
+        </div>
+      )}
+
+      {/* Quick Direct Email Banner */}
+      <div className="p-3.5 rounded-2xl bg-[#E8DCC6]/35 border border-[#C59B4B]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2 text-[#1A3B34]">
+          <Mail className="w-4 h-4 text-[#C59B4B] shrink-0" />
+          <span>
+            Direct Host Email:{' '}
+            <strong className="font-semibold text-[#1A3B34]">{SITE_CONFIG.email}</strong>
+          </span>
+        </div>
+        <a
+          href={`mailto:${SITE_CONFIG.email}?subject=Booking%20Inquiry%20-%20Waikiki%20Banyan&body=Aloha%20Plumeria%20Team,%0A%0AI%20would%20like%20to%20inquire%20about%20booking%20a%20stay%20at%20Waikiki%20Banyan.`}
+          className="inline-flex items-center gap-1 font-bold text-[#1A3B34] hover:text-[#8CA58A] transition-colors shrink-0 cursor-pointer"
+        >
+          <span>Open Email Client</span>
+          <ExternalLink className="w-3 h-3" />
+        </a>
+      </div>
+
       {errorMessage && (
         <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2.5 animate-shake">
           <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
@@ -119,11 +237,11 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
       {/* Name row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="inquiry-firstName" className="block text-xs font-semibold uppercase tracking-wider text-[#0D274D]/80 mb-1.5">
+          <label htmlFor="inquiry-firstName" className="block text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1.5">
             First Name <span className="text-rose-500">*</span>
           </label>
           <div className="relative">
-            <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D274D]/40" />
+            <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
             <input
               type="text"
               id="inquiry-firstName"
@@ -132,17 +250,17 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               value={formData.firstName}
               onChange={handleChange}
               placeholder="e.g. Kaia"
-              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#0D274D]/15 rounded-xl text-[#0D274D] placeholder:text-[#0D274D]/35 focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/35 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="inquiry-lastName" className="block text-xs font-semibold uppercase tracking-wider text-[#0D274D]/80 mb-1.5">
+          <label htmlFor="inquiry-lastName" className="block text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1.5">
             Last Name <span className="text-rose-500">*</span>
           </label>
           <div className="relative">
-            <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D274D]/40" />
+            <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
             <input
               type="text"
               id="inquiry-lastName"
@@ -151,7 +269,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               value={formData.lastName}
               onChange={handleChange}
               placeholder="e.g. Kealoha"
-              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#0D274D]/15 rounded-xl text-[#0D274D] placeholder:text-[#0D274D]/35 focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/35 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             />
           </div>
         </div>
@@ -160,11 +278,11 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
       {/* Email & Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="inquiry-email" className="block text-xs font-semibold uppercase tracking-wider text-[#0D274D]/80 mb-1.5">
+          <label htmlFor="inquiry-email" className="block text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1.5">
             Email Address <span className="text-rose-500">*</span>
           </label>
           <div className="relative">
-            <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D274D]/40" />
+            <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
             <input
               type="email"
               id="inquiry-email"
@@ -173,17 +291,17 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               value={formData.email}
               onChange={handleChange}
               placeholder="you@example.com"
-              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#0D274D]/15 rounded-xl text-[#0D274D] placeholder:text-[#0D274D]/35 focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/35 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="inquiry-phone" className="block text-xs font-semibold uppercase tracking-wider text-[#0D274D]/80 mb-1.5">
-            Phone <span className="text-[#0D274D]/40 text-[10px] font-normal">(Optional)</span>
+          <label htmlFor="inquiry-phone" className="block text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1.5">
+            Phone <span className="text-[#1A3B34]/40 text-[10px] font-normal">(Optional)</span>
           </label>
           <div className="relative">
-            <Phone className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D274D]/40" />
+            <Phone className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
             <input
               type="tel"
               id="inquiry-phone"
@@ -191,7 +309,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               value={formData.phone}
               onChange={handleChange}
               placeholder="(555) 000-0000"
-              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#0D274D]/15 rounded-xl text-[#0D274D] placeholder:text-[#0D274D]/35 focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/35 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             />
           </div>
         </div>
@@ -200,11 +318,11 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
       {/* Dates row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="inquiry-checkIn" className="block text-xs font-semibold uppercase tracking-wider text-[#0D274D]/80 mb-1.5">
+          <label htmlFor="inquiry-checkIn" className="block text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1.5">
             Check-In Date <span className="text-rose-500">*</span>
           </label>
           <div className="relative">
-            <Calendar className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D274D]/40" />
+            <Calendar className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
             <input
               type="date"
               id="inquiry-checkIn"
@@ -212,17 +330,17 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               required
               value={formData.checkIn}
               onChange={handleChange}
-              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#0D274D]/15 rounded-xl text-[#0D274D] focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="inquiry-checkOut" className="block text-xs font-semibold uppercase tracking-wider text-[#0D274D]/80 mb-1.5">
+          <label htmlFor="inquiry-checkOut" className="block text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1.5">
             Check-Out Date <span className="text-rose-500">*</span>
           </label>
           <div className="relative">
-            <Calendar className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D274D]/40" />
+            <Calendar className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
             <input
               type="date"
               id="inquiry-checkOut"
@@ -230,7 +348,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               required
               value={formData.checkOut}
               onChange={handleChange}
-              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#0D274D]/15 rounded-xl text-[#0D274D] focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             />
           </div>
         </div>
@@ -239,17 +357,17 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
       {/* Guests & Preferred Property */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="inquiry-guests" className="block text-xs font-semibold uppercase tracking-wider text-[#0D274D]/80 mb-1.5">
+          <label htmlFor="inquiry-guests" className="block text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1.5">
             Number of Guests
           </label>
           <div className="relative">
-            <Users className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D274D]/40" />
+            <Users className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
             <select
               id="inquiry-guests"
               name="guests"
               value={formData.guests}
               onChange={handleChange}
-              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#0D274D]/15 rounded-xl text-[#0D274D] focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             >
               <option value={1}>1 Guest</option>
               <option value={2}>2 Guests</option>
@@ -262,17 +380,17 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         </div>
 
         <div>
-          <label htmlFor="inquiry-preferredProperty" className="block text-xs font-semibold uppercase tracking-wider text-[#0D274D]/80 mb-1.5">
+          <label htmlFor="inquiry-preferredProperty" className="block text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1.5">
             Preferred Waikiki Banyan Suite
           </label>
           <div className="relative">
-            <Home className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D274D]/40" />
+            <Home className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
             <select
               id="inquiry-preferredProperty"
               name="preferredProperty"
               value={formData.preferredProperty}
               onChange={handleChange}
-              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#0D274D]/15 rounded-xl text-[#0D274D] focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+              className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             >
               <option value="">Any Available Waikiki Banyan Suite</option>
               {PROPERTIES.map((p) => (
@@ -287,11 +405,11 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
 
       {/* Message */}
       <div>
-        <label htmlFor="inquiry-message" className="block text-xs font-semibold uppercase tracking-wider text-[#0D274D]/80 mb-1.5">
-          Special Requests or Questions <span className="text-[#0D274D]/40 text-[10px] font-normal">(Optional)</span>
+        <label htmlFor="inquiry-message" className="block text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1.5">
+          Special Requests or Questions <span className="text-[#1A3B34]/40 text-[10px] font-normal">(Optional)</span>
         </label>
         <div className="relative">
-          <MessageSquare className="w-4 h-4 absolute left-3.5 top-3 text-[#0D274D]/40" />
+          <MessageSquare className="w-4 h-4 absolute left-3.5 top-3 text-[#1A3B34]/40" />
           <textarea
             id="inquiry-message"
             name="message"
@@ -299,7 +417,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             value={formData.message}
             onChange={handleChange}
             placeholder="Tell us about your trip to Waikiki, arrival times, parking inquiries, or questions..."
-            className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#0D274D]/15 rounded-xl text-[#0D274D] placeholder:text-[#0D274D]/35 focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+            className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/35 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
           />
         </div>
       </div>
@@ -309,24 +427,27 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         type="submit"
         id="inquiry-submit-btn"
         disabled={status === 'submitting'}
-        className="w-full py-3.5 px-6 rounded-xl bg-[#186A9E] hover:bg-[#0D274D] text-white font-medium text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 cursor-pointer"
+        className="w-full py-3.5 px-6 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 cursor-pointer border border-[#C59B4B]/30"
       >
         {status === 'submitting' ? (
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            <span>Sending Inquiry...</span>
+            <span>Preparing Your Email...</span>
           </div>
         ) : (
           <>
-            <Send className="w-4 h-4 text-[#F5B82E]" />
-            <span>Send Stay Inquiry to Plumeria</span>
+            <Mail className="w-4 h-4 text-[#F6E7A7]" />
+            <span>Send Stay Inquiry (Opens Email Client)</span>
           </>
         )}
       </button>
 
-      <p className="text-[11px] text-[#0D274D]/60 text-center pt-1">
-        Direct inquiry to host · No booking fees · Prompt response within 24 hours
-      </p>
+      <div className="text-[11px] text-[#1A3B34]/65 text-center pt-1 space-y-1">
+        <p>Direct inquiry to host · $0 booking fees · Directly sent via mailto</p>
+        <p className="text-[10px] text-[#1A3B34]/60">
+          By inquiring or booking, guests agree to follow the Waikiki Banyan Building Rules and Plumeria In-House Rules.
+        </p>
+      </div>
     </form>
   );
 };

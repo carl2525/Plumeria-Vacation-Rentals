@@ -10,7 +10,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
   return (
-    <section className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center pt-24 pb-20 overflow-hidden bg-[#0D274D]">
+    <section className="relative min-h-[92vh] sm:min-h-screen flex items-center justify-center pt-32 sm:pt-38 pb-24 sm:pb-32 overflow-hidden bg-[#1A3B34]">
       {/* Background Image with subtle cinematic depth */}
       <div className="absolute inset-0 z-0">
         <AppImage
@@ -19,60 +19,76 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
           className="w-full h-full object-cover object-center opacity-75"
         />
         {/* Layered Gradient Overlay for contrast & sleek atmosphere matching logo wave depths */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-[#0D274D]/50 to-[#0D274D]/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A3B34]/50 via-[#1A3B34]/65 to-[#1A3B34]/95" />
       </div>
 
       {/* Main Hero Content */}
       <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white space-y-6 sm:space-y-8 mt-6 sm:mt-10">
         {/* Eyebrow badge with logo symbol */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-[#4BB8C7]/40 rounded-full text-white text-[11px] font-bold tracking-[0.2em] uppercase shadow-lg animate-fade-in">
-          <PlumeriaSymbolLogo className="w-4 h-4 shrink-0 drop-shadow-sm" />
-          <span>Vacation Rentals at Waikiki Banyan · Honolulu, Hawaiʻi</span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-[#C59B4B]/50 rounded-full text-white text-[11px] font-bold tracking-[0.2em] uppercase shadow-lg animate-fade-in">
+          <PlumeriaSymbolLogo variant="white" className="w-4 h-4 shrink-0 drop-shadow-sm" />
+          <span>The Premier Condo-Resort in Waikiki · Tower 2</span>
         </div>
 
         {/* Main Headline */}
-        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] drop-shadow-2xl">
-          Your Waikiki stay <br className="hidden sm:inline" />
-          <span className="italic font-light text-[#8EE3ED]">begins here.</span>
+        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] drop-shadow-2xl max-w-4xl mx-auto">
+          Why Waikiki Banyan is <br className="hidden sm:inline" />
+          <span className="italic font-light text-[#F6E7A7]">the better way to stay.</span>
         </h1>
 
         {/* Supporting Copy */}
-        <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/90 font-light leading-relaxed drop-shadow-sm">
-          Experience boutique Hawaiian hospitality at Waikiki Banyan. Ocean breezes, golden sands, and the heart of Waikiki at your doorstep.
+        <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/95 font-light leading-relaxed drop-shadow-sm">
+          Skip cramped 280 sq. ft. hotel rooms and surprise resort fees. Experience 550 sq. ft. 1-bedroom suites with full chef kitchens, private breezy lanais, Oʻahu’s largest 1-acre resort deck, and just 1 block to Kuhio Beach.
         </p>
+
+        {/* 4 Core Banyan Advantages Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 max-w-3xl mx-auto">
+          <span className="px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold">
+            ✦ 1-Acre 6th-Floor Resort Deck
+          </span>
+          <span className="px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold">
+            ✦ Full Chef-Ready Kitchen
+          </span>
+          <span className="px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold">
+            ✦ 1 Block to Kuhio Beach
+          </span>
+          <span className="px-3.5 py-1 rounded-full bg-[#C59B4B]/30 backdrop-blur-sm border border-[#C59B4B]/60 text-[#F6E7A7] text-xs font-semibold">
+            ✦ $0 Mandatory Resort Fees
+          </span>
+        </div>
 
         {/* CTA Actions */}
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
           <button
             id="hero-explore-rentals-btn"
             onClick={onExploreRentals}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#F5B82E] hover:bg-[#FCD575] text-[#0D274D] px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold text-sm tracking-wide shadow-lg shadow-[#F5B82E]/25 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#C59B4B] hover:bg-[#D4A853] text-[#1A3B34] px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold text-sm tracking-wide shadow-lg shadow-[#C59B4B]/25 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
-            <Compass className="w-4 h-4 text-[#0D274D]" />
+            <Compass className="w-4 h-4 text-[#1A3B34]" />
             <span>Explore Our Rentals</span>
           </button>
 
           <button
             id="hero-book-stay-btn"
             onClick={onBookStay}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/10 backdrop-blur-md border border-[#4BB8C7]/40 text-white hover:bg-white/20 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold text-sm tracking-wide shadow-lg transition-all duration-200 cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/10 backdrop-blur-md border border-[#8CA58A]/50 text-white hover:bg-white/20 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold text-sm tracking-wide shadow-lg transition-all duration-200 cursor-pointer"
           >
-            <Calendar className="w-4 h-4 text-[#F5B82E]" />
+            <Calendar className="w-4 h-4 text-[#F6E7A7]" />
             <span>View Availability</span>
           </button>
         </div>
 
         {/* Location Marker Pill */}
         <div className="pt-3 flex items-center justify-center gap-2 text-xs sm:text-sm text-white/80 font-light">
-          <MapPin className="w-4 h-4 text-[#F78D74]" />
+          <MapPin className="w-4 h-4 text-[#C59B4B]" />
           <span>Waikiki Banyan · 201 ʻOhua Avenue · Honolulu, Oʻahu</span>
         </div>
       </div>
 
-      {/* Wave transition base to #FAF9F5 */}
+      {/* Wave transition base to #F9F7F2 (Ivory) */}
       <div className="absolute bottom-[-1px] left-0 right-0 w-full overflow-hidden leading-none z-30 pointer-events-none">
         <svg
-          className="relative block w-full h-12 sm:h-16 text-[#FAF9F5]"
+          className="relative block w-full h-12 sm:h-16 text-[#F9F7F2]"
           viewBox="0 0 1440 100"
           preserveAspectRatio="none"
           fill="currentColor"

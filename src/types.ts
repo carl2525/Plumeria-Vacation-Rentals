@@ -2,10 +2,11 @@ export interface Property {
   id: string;
   slug: string;
   name: string;
+  unitNumber?: string;
   tagline: string;
-  tower: 'Tower 1 (Mauka/Ewa)' | 'Tower 2 (Makai/Diamond Head)';
+  tower: 'Tower 1 (Mauka/Ewa)' | 'Tower 2 (Makai/Diamond Head)' | string;
   floorLevel: string;
-  viewType: 'Ocean View' | 'Partial Ocean & City' | 'Mountain & City View' | 'Diamond Head & Sunset';
+  viewType: 'Ocean View' | 'Partial Ocean & City' | 'Mountain & City View' | 'Diamond Head & Sunset' | string;
   guestsMax: number;
   bedrooms: number;
   beds: number;
@@ -77,4 +78,21 @@ export interface Testimonial {
   quote: string;
   rating: number;
   highlight: string;
+}
+
+export interface RuleItem {
+  id: string;
+  number: number;
+  title: string;
+  summary: string;
+  details: string[];
+  importantNote?: string;
+  tag?: string;
+}
+
+export interface RuleCategory {
+  part: 'I' | 'II';
+  partTitle: string;
+  partSubtitle: string;
+  rules: RuleItem[];
 }

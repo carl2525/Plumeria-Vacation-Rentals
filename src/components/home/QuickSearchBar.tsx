@@ -20,32 +20,32 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
       <form
         onSubmit={handleSubmit}
         id="quick-booking-search-form"
-        className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-5 border border-[#EAF7F9] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 items-stretch"
+        className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-5 border border-[#E8DCC6] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 items-stretch"
       >
-        {/* 1. Location (Fixed at Waikiki Banyan) - Sunset Coral */}
-        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#EAF7F9] flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#F78D74]/15 text-[#F78D74] flex items-center justify-center shrink-0">
-            <MapPin className="w-5 h-5 text-[#F78D74]" />
+        {/* 1. Location (Fixed at Waikiki Banyan) - Warm Gold */}
+        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-[#C59B4B]/20 text-[#C59B4B] flex items-center justify-center shrink-0">
+            <MapPin className="w-5 h-5 text-[#C59B4B]" />
           </div>
           <div className="min-w-0 flex-1">
-            <span className="block text-[10px] uppercase font-bold text-[#F78D74] tracking-widest leading-none mb-1">
+            <span className="block text-[10px] uppercase font-bold text-[#C59B4B] tracking-widest leading-none mb-1">
               Location
             </span>
-            <span className="block text-sm font-semibold text-[#0D274D] truncate">
+            <span className="block text-sm font-semibold text-[#1A3B34] truncate">
               Waikiki Banyan
             </span>
           </div>
         </div>
 
-        {/* 2. Check In - Hawaiian Gold */}
-        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#EAF7F9] flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#F5B82E]/20 text-[#0D274D] flex items-center justify-center shrink-0">
-            <Calendar className="w-5 h-5 text-[#E59900]" />
+        {/* 2. Check In - Plumeria Cream / Warm Gold */}
+        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-[#F6E7A7]/50 text-[#C59B4B] flex items-center justify-center shrink-0">
+            <Calendar className="w-5 h-5 text-[#C59B4B]" />
           </div>
           <div className="min-w-0 flex-1">
             <label
               htmlFor="search-checkin"
-              className="block text-[10px] uppercase font-bold text-[#D9822B] tracking-widest leading-none mb-1 cursor-pointer"
+              className="block text-[10px] uppercase font-bold text-[#C59B4B] tracking-widest leading-none mb-1 cursor-pointer"
             >
               Check In
             </label>
@@ -54,20 +54,20 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
               id="search-checkin"
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
-              className="w-full text-xs sm:text-sm font-semibold text-[#0D274D] bg-transparent focus:outline-none cursor-pointer p-0 m-0"
+              className="w-full text-xs sm:text-sm font-semibold text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer p-0 m-0"
             />
           </div>
         </div>
 
-        {/* 3. Check Out - Ocean Aqua */}
-        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#EAF7F9] flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#4BB8C7]/20 text-[#186A9E] flex items-center justify-center shrink-0">
-            <Calendar className="w-5 h-5 text-[#186A9E]" />
+        {/* 3. Check Out - Ocean Blue */}
+        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-[#7FB6D9]/25 text-[#1A3B34] flex items-center justify-center shrink-0">
+            <Calendar className="w-5 h-5 text-[#1A3B34]" />
           </div>
           <div className="min-w-0 flex-1">
             <label
               htmlFor="search-checkout"
-              className="block text-[10px] uppercase font-bold text-[#186A9E] tracking-widest leading-none mb-1 cursor-pointer"
+              className="block text-[10px] uppercase font-bold text-[#1A3B34] tracking-widest leading-none mb-1 cursor-pointer"
             >
               Check Out
             </label>
@@ -76,20 +76,20 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
               id="search-checkout"
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full text-xs sm:text-sm font-semibold text-[#0D274D] bg-transparent focus:outline-none cursor-pointer p-0 m-0"
+              className="w-full text-xs sm:text-sm font-semibold text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer p-0 m-0"
             />
           </div>
         </div>
 
-        {/* 4. Guests - Pacific Navy */}
-        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#EAF7F9] flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#186A9E]/15 text-[#186A9E] flex items-center justify-center shrink-0">
-            <Users className="w-5 h-5 text-[#186A9E]" />
+        {/* 4. Guests - Sage Green */}
+        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-[#8CA58A]/25 text-[#1A3B34] flex items-center justify-center shrink-0">
+            <Users className="w-5 h-5 text-[#8CA58A]" />
           </div>
           <div className="min-w-0 flex-1">
             <label
               htmlFor="search-guests"
-              className="block text-[10px] uppercase font-bold text-[#186A9E] tracking-widest leading-none mb-1 cursor-pointer"
+              className="block text-[10px] uppercase font-bold text-[#1A3B34] tracking-widest leading-none mb-1 cursor-pointer"
             >
               Guests
             </label>
@@ -97,7 +97,7 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
               id="search-guests"
               value={guests}
               onChange={(e) => setGuests(Number(e.target.value))}
-              className="w-full text-xs sm:text-sm font-semibold text-[#0D274D] bg-transparent focus:outline-none cursor-pointer p-0 m-0"
+              className="w-full text-xs sm:text-sm font-semibold text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer p-0 m-0"
             >
               <option value={1}>1 Guest</option>
               <option value={2}>2 Guests</option>
@@ -114,9 +114,9 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
           <button
             type="submit"
             id="search-find-stay-btn"
-            className="w-full h-full min-h-[50px] sm:min-h-[54px] px-6 rounded-2xl bg-[#186A9E] hover:bg-[#0D274D] text-white flex items-center justify-center gap-2.5 font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-[#186A9E]/25 transition-all duration-200 cursor-pointer"
+            className="w-full h-full min-h-[50px] sm:min-h-[54px] px-6 rounded-2xl bg-[#1A3B34] hover:bg-[#2A5D52] text-white flex items-center justify-center gap-2.5 font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md transition-all duration-200 cursor-pointer border border-[#C59B4B]/30"
           >
-            <Search className="w-4 h-4 text-[#F5B82E] shrink-0" />
+            <Search className="w-4 h-4 text-[#F6E7A7] shrink-0" />
             <span className="whitespace-nowrap">Find Your Stay</span>
           </button>
         </div>

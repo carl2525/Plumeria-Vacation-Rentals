@@ -10,14 +10,14 @@
     scroll-behavior: smooth;
     /* Firefox modern scrollbar styling */
     scrollbar-width: thin;
-    scrollbar-color: #B2C7D6 #FAF9F5;
+    scrollbar-color: #8CA58A #F9F7F2;
     -webkit-overflow-scrolling: touch;
   }
 
   body {
     font-family: var(--font-sans);
-    color: #0D274D;
-    background-color: #FAF9F5;
+    color: #1A3B34;
+    background-color: #F9F7F2;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -45,12 +45,12 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: rgba(250, 249, 245, 0.6);
+  background: rgba(249, 247, 242, 0.8);
   border-radius: 9999px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #E8DCC6;
   border-radius: 9999px;
   border: 1.5px solid transparent;
   background-clip: padding-box;
@@ -58,12 +58,12 @@
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #186A9E;
+  background: #8CA58A;
   background-clip: padding-box;
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background: #0D274D;
+  background: #1A3B34;
   background-clip: padding-box;
 }
 
@@ -74,7 +74,7 @@
 /* Slim modern scrollbar utility for modals, drawer panels, filter bars, and horizontal tabs */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #B2C7D6 transparent;
+  scrollbar-color: #8CA58A transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -87,12 +87,12 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #E8DCC6;
   border-radius: 9999px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #186A9E;
+  background: #8CA58A;
 }
 
 /* Clean hide-scrollbar utility with preserved touch/mouse scrolling */
@@ -122,31 +122,32 @@
 }
 
 .sleek-border {
-  border-color: #EAF7F9;
+  border-color: #E8DCC6;
 }
 
 .sleek-card {
   background-color: #ffffff;
-  border: 1px solid #EAF7F9;
-  box-shadow: 0 4px 20px -2px rgba(13, 39, 77, 0.05);
+  border: 1px solid #E8DCC6;
+  box-shadow: 0 4px 20px -2px rgba(26, 59, 52, 0.05);
 }
 
-/* Logo Rainbow Gradient Bar: Outer Coral -> Mid Gold -> Inner Aqua -> Pacific Ocean */
+/* Official Brand Color Palette Bar: Ivory -> Sand -> Plumeria Cream -> Sage Green -> Ocean Blue -> Deep Pine */
+.brand-gradient-bar,
 .rainbow-gradient-bar {
-  background: linear-gradient(90deg, #F78D74 0%, #F5B82E 33%, #4BB8C7 66%, #186A9E 100%);
+  background: linear-gradient(90deg, #E8DCC6 0%, #F6E7A7 25%, #8CA58A 50%, #7FB6D9 75%, #1A3B34 100%);
 }
 
 .wave-gradient-bg {
-  background: linear-gradient(135deg, #0D274D 0%, #186A9E 60%, #4BB8C7 100%);
+  background: linear-gradient(135deg, #1A3B34 0%, #224D44 45%, #2D6559 70%, #8CA58A 100%);
 }
 
 .rainbow-subtle-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(247, 141, 116, 0.09) 0%, rgba(245, 184, 46, 0.09) 30%, rgba(75, 184, 199, 0.08) 60%, transparent 85%);
+  background: radial-gradient(circle at 50% 0%, rgba(246, 231, 167, 0.15) 0%, rgba(140, 165, 138, 0.10) 35%, rgba(127, 182, 217, 0.10) 65%, transparent 85%);
 }
 
 /* Glassmorphic frosted header */
 .glass-header {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(249, 247, 242, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }

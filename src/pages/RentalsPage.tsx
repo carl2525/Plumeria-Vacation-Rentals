@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PROPERTIES } from '../data/properties';
 import { PropertyCard } from '../components/rentals/PropertyCard';
-import { Building2, Filter, Users, Sparkles, MapPin, Check, Search } from 'lucide-react';
+import { Building2, Search } from 'lucide-react';
 import { PlumeriaSymbolLogo } from '../components/brand/PlumeriaSymbolLogo';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 
@@ -43,7 +43,7 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
   });
 
   return (
-    <div className="relative pt-28 sm:pt-32 pb-24 bg-[#FAF9F5] min-h-screen overflow-hidden">
+    <div className="relative pt-28 sm:pt-32 pb-24 bg-[#F9F7F2] min-h-screen overflow-hidden">
       {/* Decorative background watermarks */}
       <LogoWatermark size="2xl" position="top-right" opacity="opacity-[0.035] sm:opacity-[0.06]" />
       <LogoWatermark size="xl" position="bottom-left" opacity="opacity-[0.03] sm:opacity-[0.05]" />
@@ -51,32 +51,32 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
         {/* Page Hero Header */}
         <div className="space-y-4 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAF7F9] border border-[#4BB8C7]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#186A9E]">
-            <Building2 className="w-3.5 h-3.5 text-[#186A9E]" />
-            <span>Waikiki Banyan Listings</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/40 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
+            <Building2 className="w-3.5 h-3.5 text-[#C59B4B]" />
+            <span>Waikiki Banyan Tower 2 · Premier Condo-Resort</span>
           </div>
 
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#0D274D] leading-tight">
-            Our Waikiki Banyan Rentals
+          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#1A3B34] leading-tight">
+            Why Waikiki Banyan is Better Than Other Vacation Rentals
           </h1>
 
-          <p className="text-base sm:text-lg text-[#0D274D]/80 font-light leading-relaxed">
-            Every Plumeria Vacation Rental is located within the Waikiki Banyan resort complex (201 ʻOhua Avenue), featuring full chef-ready kitchens, private breezy lanais, air conditioning, and complete access to Oʻahu’s premier 6th-floor recreation deck.
+          <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
+            Most vacation rentals in Waikiki force you to compromise: small kitchenettes, noisy street corners, aging walk-ups with no pool, or hidden $50/night resort fees. <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan delivers what no other rental can:</strong> high-floor 550 sq. ft. 1-bedroom suites with full chef kitchens, breezy ocean-breeze lanais, Oʻahu’s largest 1-acre resort deck, and a peaceful 1-block walk to Kuhio Beach—with zero mandatory resort fees.
           </p>
         </div>
 
         {/* Filter Bar Panel */}
-        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#0D274D]/8 shadow-sm space-y-4">
+        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#E8DCC6] shadow-xs space-y-4">
           <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
             {/* Search Input */}
             <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0D274D]/40" />
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
               <input
                 type="text"
                 placeholder="Search by view, features, or amenities..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm bg-[#FAF9F5] border border-[#0D274D]/10 rounded-2xl text-[#0D274D] placeholder:text-[#0D274D]/40 focus:outline-none focus:ring-2 focus:ring-[#186A9E]/30 focus:border-[#186A9E]"
+                className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm bg-[#F9F7F2] border border-[#E8DCC6] rounded-2xl text-[#1A3B34] placeholder:text-[#1A3B34]/40 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
               />
             </div>
 
@@ -84,11 +84,11 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
             <div className="flex flex-wrap items-center gap-3">
               {/* View Selector */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-[#0D274D]/70 hidden sm:inline">View:</span>
+                <span className="text-xs font-semibold text-[#1A3B34]/70 hidden sm:inline">View:</span>
                 <select
                   value={selectedView}
                   onChange={(e) => setSelectedView(e.target.value)}
-                  className="px-3 py-2 text-xs font-medium bg-[#FAF9F5] border border-[#0D274D]/10 rounded-xl text-[#0D274D] focus:outline-none cursor-pointer"
+                  className="px-3 py-2 text-xs font-medium bg-[#F9F7F2] border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none cursor-pointer"
                 >
                   <option value="all">All Views</option>
                   <option value="Ocean View">Ocean View</option>
@@ -100,11 +100,11 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
 
               {/* Tower Selector */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-[#0D274D]/70 hidden sm:inline">Tower:</span>
+                <span className="text-xs font-semibold text-[#1A3B34]/70 hidden sm:inline">Tower:</span>
                 <select
                   value={selectedTower}
                   onChange={(e) => setSelectedTower(e.target.value)}
-                  className="px-3 py-2 text-xs font-medium bg-[#FAF9F5] border border-[#0D274D]/10 rounded-xl text-[#0D274D] focus:outline-none cursor-pointer"
+                  className="px-3 py-2 text-xs font-medium bg-[#F9F7F2] border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none cursor-pointer"
                 >
                   <option value="all">Both Towers</option>
                   <option value="tower1">Tower 1 (Mauka/Ewa)</option>
@@ -114,11 +114,11 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
 
               {/* Guests Selector */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-[#0D274D]/70 hidden sm:inline">Guests:</span>
+                <span className="text-xs font-semibold text-[#1A3B34]/70 hidden sm:inline">Guests:</span>
                 <select
                   value={minGuests}
                   onChange={(e) => setMinGuests(Number(e.target.value))}
-                  className="px-3 py-2 text-xs font-medium bg-[#FAF9F5] border border-[#0D274D]/10 rounded-xl text-[#0D274D] focus:outline-none cursor-pointer"
+                  className="px-3 py-2 text-xs font-medium bg-[#F9F7F2] border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none cursor-pointer"
                 >
                   <option value={1}>1+ Guests</option>
                   <option value={2}>2+ Guests</option>
@@ -137,7 +137,7 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
                     setMinGuests(1);
                     setSearchQuery('');
                   }}
-                  className="text-xs text-[#186A9E] hover:underline font-semibold px-2 cursor-pointer"
+                  className="text-xs text-[#C59B4B] hover:underline font-semibold px-2 cursor-pointer"
                 >
                   Reset
                 </button>
@@ -145,15 +145,15 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-xs text-[#0D274D]/60 pt-2 border-t border-[#0D274D]/5">
+          <div className="flex items-center justify-between text-xs text-[#1A3B34]/60 pt-2 border-t border-[#E8DCC6]/60">
             <span>Showing {filteredProperties.length} suites at Waikiki Banyan</span>
-            <span className="text-[#186A9E] font-medium">All suites include private lanai & full kitchen</span>
+            <span className="text-[#8CA58A] font-medium">All suites include private lanai & full kitchen</span>
           </div>
         </div>
 
         {/* Listings Grid */}
         {filteredProperties.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {filteredProperties.map((property) => (
               <PropertyCard
                 key={property.id}
@@ -164,12 +164,12 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-3xl p-12 text-center space-y-4 border border-[#0D274D]/8">
+          <div className="bg-white rounded-3xl p-12 text-center space-y-4 border border-[#E8DCC6]">
             <PlumeriaSymbolLogo className="w-12 h-12 mx-auto opacity-40" />
-            <h3 className="font-serif text-xl font-bold text-[#0D274D]">
+            <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
               No suites matched your exact filter combination
             </h3>
-            <p className="text-sm text-[#0D274D]/70 max-w-md mx-auto">
+            <p className="text-sm text-[#1A3B34]/70 max-w-md mx-auto">
               Try adjusting your view type or guest count filter, or submit an inquiry to discuss custom stay requirements with our team.
             </p>
             <button
@@ -179,32 +179,32 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
                 setMinGuests(1);
                 setSearchQuery('');
               }}
-              className="px-6 py-2.5 rounded-full text-xs font-semibold bg-[#186A9E] text-white hover:bg-[#0D274D] transition-colors cursor-pointer"
+              className="px-6 py-2.5 rounded-full text-xs font-semibold bg-[#1A3B34] text-white hover:bg-[#224D44] transition-colors cursor-pointer"
             >
               Show All Waikiki Banyan Suites
             </button>
           </div>
         )}
 
-        {/* Building Perks Banner */}
-        <div className="bg-gradient-to-r from-[#0D274D] to-[#186A9E] rounded-3xl p-8 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg">
+        {/* Building Perks Banner: Why Waikiki Banyan Outclasses Other Rentals */}
+        <div className="bg-gradient-to-r from-[#1A3B34] via-[#224D44] to-[#2D6559] rounded-3xl p-8 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg border border-[#8CA58A]/30">
           <div className="space-y-2">
-            <span className="text-xs uppercase tracking-widest text-[#F5B82E] font-bold">
-              Included in Every Reservation
+            <span className="text-xs uppercase tracking-widest text-[#F6E7A7] font-bold">
+              The Waikiki Banyan Advantage
             </span>
             <h3 className="font-serif text-2xl font-bold">
-              Full Waikiki Banyan Resort Access
+              Amenities No Other Vacation Rental on Oʻahu Can Match
             </h3>
             <p className="text-sm text-white/80 max-w-xl font-light">
-              6th-floor heated swimming pool, dual jet hot tubs, dry sauna, tennis & pickleball, gas BBQs, children’s play area, and beach equipment in your suite.
+              Every reservation includes access to the 6th-floor 1-acre recreation oasis: heated swimming pool, dual jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs, children’s play park, and beach equipment inside your suite—all with $0 resort fees.
             </p>
           </div>
 
           <button
             onClick={() => onNavigate('/waikiki-banyan')}
-            className="px-6 py-3 rounded-full text-xs sm:text-sm font-semibold bg-white text-[#0D274D] hover:bg-[#D4F2F5] transition-colors whitespace-nowrap cursor-pointer shrink-0"
+            className="px-6 py-3 rounded-full text-xs sm:text-sm font-semibold bg-[#C59B4B] text-[#1A3B34] hover:bg-[#D4A853] transition-colors whitespace-nowrap cursor-pointer shrink-0 shadow-sm"
           >
-            Learn More About the Building
+            Why Banyan is Better →
           </button>
         </div>
       </div>

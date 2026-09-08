@@ -15,7 +15,12 @@ import { BookingCTA } from '../components/home/BookingCTA';
 interface HomePageProps {
   onNavigate: (path: string) => void;
   onSelectProperty: (slug: string) => void;
-  onOpenInquiry: (propertyId?: string) => void;
+  onOpenInquiry: (
+    propertyId?: string,
+    checkIn?: string,
+    checkOut?: string,
+    guests?: number
+  ) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
@@ -24,7 +29,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenInquiry,
 }) => {
   const handleQuickSearch = (params: { checkIn: string; checkOut: string; guests: number }) => {
-    onNavigate('/rentals');
+    onOpenInquiry(undefined, params.checkIn, params.checkOut, params.guests);
   };
 
   return (

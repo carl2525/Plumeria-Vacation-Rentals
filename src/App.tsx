@@ -12,6 +12,8 @@ import { ExplorePage } from './pages/ExplorePage';
 import { AboutPage } from './pages/AboutPage';
 import { FAQPage } from './pages/FAQPage';
 import { ContactPage } from './pages/ContactPage';
+import { RulesPage } from './pages/RulesPage';
+import { RentalPolicyPage } from './pages/RentalPolicyPage';
 
 export function App() {
   // Simple, robust client-side routing based on browser pathname or hash
@@ -23,6 +25,9 @@ export function App() {
 
   const [inquiryModalOpen, setInquiryModalOpen] = useState<boolean>(false);
   const [inquiryPropertyId, setInquiryPropertyId] = useState<string | undefined>(undefined);
+  const [inquiryCheckIn, setInquiryCheckIn] = useState<string | undefined>(undefined);
+  const [inquiryCheckOut, setInquiryCheckOut] = useState<string | undefined>(undefined);
+  const [inquiryGuests, setInquiryGuests] = useState<number | undefined>(undefined);
 
   // Synchronize browser history and hash navigation
   useEffect(() => {
@@ -54,8 +59,16 @@ export function App() {
     navigate(`/rentals/${slug}`);
   };
 
-  const handleOpenInquiry = (propertyId?: string) => {
+  const handleOpenInquiry = (
+    propertyId?: string,
+    checkIn?: string,
+    checkOut?: string,
+    guests?: number
+  ) => {
     setInquiryPropertyId(propertyId);
+    setInquiryCheckIn(checkIn);
+    setInquiryCheckOut(checkOut);
+    setInquiryGuests(guests);
     setInquiryModalOpen(true);
   };
 
@@ -139,6 +152,35 @@ export function App() {
       return <ContactPage />;
     }
 
+    if (
+      currentPath === '/rules' ||
+      currentPath === '/rules/' ||
+      currentPath === '/house-rules' ||
+      currentPath === '/building-rules'
+    ) {
+      return (
+        <RulesPage
+          onNavigate={navigate}
+          onOpenInquiry={() => handleOpenInquiry()}
+        />
+      );
+    }
+
+    if (
+      currentPath === '/rental-policy' ||
+      currentPath === '/rental-policy/' ||
+      currentPath === '/policy' ||
+      currentPath === '/policies' ||
+      currentPath === '/rent-policy'
+    ) {
+      return (
+        <RentalPolicyPage
+          onNavigate={navigate}
+          onOpenInquiry={() => handleOpenInquiry()}
+        />
+      );
+    }
+
     // Default fallback to Home
     return (
       <HomePage
@@ -150,7 +192,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] text-[#0D274D] font-sans selection:bg-[#4BB8C7]/30 selection:text-[#0D274D] flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F9F7F2] text-[#1A3B34] font-sans selection:bg-[#C59B4B]/30 selection:text-[#1A3B34] flex flex-col justify-between">
       {/* Universal Navigation Header */}
       <Navbar
         currentPath={currentPath}
@@ -174,6 +216,9 @@ export function App() {
         isOpen={inquiryModalOpen}
         onClose={() => setInquiryModalOpen(false)}
         initialPropertyId={inquiryPropertyId}
+        initialCheckIn={inquiryCheckIn}
+        initialCheckOut={inquiryCheckOut}
+        initialGuests={inquiryGuests}
       />
 
       {/* Floating Modern Scroll-to-Top Action */}

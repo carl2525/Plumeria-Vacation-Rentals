@@ -14,24 +14,29 @@ import {
   ShieldCheck,
   ChevronRight,
   Maximize2,
-  Share2,
-  Heart,
-  Clock,
   Waves,
-  Utensils,
   ArrowLeft,
-  Coffee,
+  Mail,
+  ExternalLink,
+  DollarSign,
+  Car,
+  Clock,
 } from 'lucide-react';
-import { PlumeriaSymbolLogo } from '../components/brand/PlumeriaSymbolLogo';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { SITE_CONFIG } from '../config/site';
 import { AppImage } from '../components/common/AppImage';
+import { generateInquiryMailtoUrl } from '../utils/mailto';
 
 interface PropertyDetailPageProps {
   slug: string;
   onNavigate: (path: string) => void;
   onSelectProperty: (slug: string) => void;
-  onOpenInquiry: (propertyId?: string) => void;
+  onOpenInquiry: (
+    propertyId?: string,
+    checkIn?: string,
+    checkOut?: string,
+    guests?: number
+  ) => void;
 }
 
 export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
@@ -55,43 +60,51 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onOpenInquiry(property.id);
+    onOpenInquiry(property.id, checkIn, checkOut, guests);
   };
+
+  const directMailtoUrl = generateInquiryMailtoUrl({
+    propertyId: property.id,
+    propertyName: property.name,
+    checkIn,
+    checkOut,
+    guests,
+  });
 
   const otherProperties = PROPERTIES.filter((p) => p.id !== property.id).slice(0, 2);
 
   return (
-    <div className="relative pt-28 sm:pt-32 pb-24 bg-[#FAF9F5] min-h-screen overflow-hidden">
+    <div className="relative pt-28 sm:pt-32 pb-24 bg-[#F9F7F2] min-h-screen overflow-hidden">
       {/* Decorative background watermarks */}
       <LogoWatermark size="2xl" position="top-right" opacity="opacity-[0.03] sm:opacity-[0.05]" />
       <LogoWatermark size="xl" position="bottom-left" opacity="opacity-[0.025] sm:opacity-[0.045]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
         {/* Breadcrumb & Navigation Bar */}
-        <div className="flex items-center justify-between text-xs text-[#0D274D]/70">
+        <div className="flex items-center justify-between text-xs text-[#1A3B34]/70">
           <div className="flex items-center gap-2">
             <button
               onClick={() => onNavigate('/')}
-              className="hover:text-[#186A9E] transition-colors cursor-pointer"
+              className="hover:text-[#8CA58A] transition-colors cursor-pointer"
             >
               Home
             </button>
-            <ChevronRight className="w-3 h-3 text-[#0D274D]/30" />
+            <ChevronRight className="w-3 h-3 text-[#1A3B34]/30" />
             <button
               onClick={() => onNavigate('/rentals')}
-              className="hover:text-[#186A9E] transition-colors cursor-pointer"
+              className="hover:text-[#8CA58A] transition-colors cursor-pointer"
             >
               Our Rentals
             </button>
-            <ChevronRight className="w-3 h-3 text-[#0D274D]/30" />
-            <span className="font-semibold text-[#0D274D] truncate max-w-[200px] sm:max-w-none">
+            <ChevronRight className="w-3 h-3 text-[#1A3B34]/30" />
+            <span className="font-semibold text-[#1A3B34] truncate max-w-[200px] sm:max-w-none">
               {property.name}
             </span>
           </div>
 
           <button
             onClick={() => onNavigate('/rentals')}
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-[#186A9E] hover:underline cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-[#8CA58A] hover:underline cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to all rentals</span>
@@ -101,34 +114,34 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         {/* Title & Location Header */}
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#EAF7F9] text-[#186A9E] border border-[#4BB8C7]/30">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8DCC6]/50 text-[#1A3B34] border border-[#C59B4B]/30">
               {property.viewType}
             </span>
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#FAF9F5] text-[#0D274D] border border-[#0D274D]/10">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-[#1A3B34] border border-[#E8DCC6]">
               {property.tower}
             </span>
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#FAF9F5] text-[#0D274D] border border-[#0D274D]/10">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-[#1A3B34] border border-[#E8DCC6]">
               {property.floorLevel}
             </span>
           </div>
 
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0D274D] leading-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#1A3B34] leading-tight">
             {property.name}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-[#0D274D]/75">
+          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-[#1A3B34]/75">
             <span className="flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-[#F78D74]" />
-              <strong className="text-[#0D274D]">Waikiki Banyan</strong> · 201 ʻOhua Ave, Waikiki, Honolulu, HI
+              <MapPin className="w-4 h-4 text-[#C59B4B]" />
+              <strong className="text-[#1A3B34]">Waikiki Banyan</strong> · 201 ʻOhua Ave, Waikiki, Honolulu, HI
             </span>
-            <span className="text-[#186A9E] font-medium">
+            <span className="text-[#8CA58A] font-medium">
               1 Block to Kuhio Beach & Queen’s Surf
             </span>
           </div>
         </div>
 
         {/* Photo Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 rounded-3xl overflow-hidden shadow-lg border border-[#0D274D]/10 bg-white p-2">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 rounded-3xl overflow-hidden shadow-sm border border-[#E8DCC6] bg-white p-2">
           {/* Main Hero Photo (Left 2 cols) */}
           <div
             onClick={() => openLightbox(0)}
@@ -152,7 +165,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               <div
                 key={idx}
                 onClick={() => openLightbox(idx + 1)}
-                className="relative rounded-2xl overflow-hidden cursor-pointer group bg-[#0D274D]/10"
+                className="relative rounded-2xl overflow-hidden cursor-pointer group bg-[#1A3B34]/10"
               >
                 <AppImage
                   src={img.url}
@@ -174,9 +187,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           <button
             id="view-all-photos-btn"
             onClick={() => openLightbox(0)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white border border-[#0D274D]/15 text-[#0D274D] hover:bg-[#EAF7F9] transition-colors cursor-pointer shadow-xs"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white border border-[#E8DCC6] text-[#1A3B34] hover:bg-[#F9F7F2] transition-colors cursor-pointer shadow-xs"
           >
-            <Maximize2 className="w-3.5 h-3.5 text-[#186A9E]" />
+            <Maximize2 className="w-3.5 h-3.5 text-[#C59B4B]" />
             <span>View All {property.gallery.length} Photos</span>
           </button>
         </div>
@@ -186,65 +199,114 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           {/* Left Column: Details, Amenities, Rules */}
           <div className="lg:col-span-8 space-y-10">
             {/* Quick Specs Highlight Bar */}
-            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#0D274D]/8 shadow-xs grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-              <div className="p-3 rounded-2xl bg-[#FAF9F5]">
-                <Users className="w-5 h-5 text-[#186A9E] mx-auto mb-1" />
-                <span className="text-xs text-[#0D274D]/60 block font-medium">Guests</span>
-                <span className="text-sm font-bold text-[#0D274D]">Up to {property.guestsMax}</span>
+            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#E8DCC6] shadow-xs grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+              <div className="p-3 rounded-2xl bg-[#F9F7F2]">
+                <Users className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
+                <span className="text-xs text-[#1A3B34]/60 block font-medium">Guests</span>
+                <span className="text-sm font-bold text-[#1A3B34]">Up to {property.guestsMax}</span>
               </div>
 
-              <div className="p-3 rounded-2xl bg-[#FAF9F5]">
-                <Bed className="w-5 h-5 text-[#186A9E] mx-auto mb-1" />
-                <span className="text-xs text-[#0D274D]/60 block font-medium">Bedrooms</span>
-                <span className="text-sm font-bold text-[#0D274D]">{property.bedrooms} Bed · {property.beds} Beds</span>
+              <div className="p-3 rounded-2xl bg-[#F9F7F2]">
+                <Bed className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
+                <span className="text-xs text-[#1A3B34]/60 block font-medium">Bedrooms</span>
+                <span className="text-sm font-bold text-[#1A3B34]">{property.bedrooms} Bed · {property.beds} Beds</span>
               </div>
 
-              <div className="p-3 rounded-2xl bg-[#FAF9F5]">
-                <Bath className="w-5 h-5 text-[#186A9E] mx-auto mb-1" />
-                <span className="text-xs text-[#0D274D]/60 block font-medium">Bathrooms</span>
-                <span className="text-sm font-bold text-[#0D274D]">{property.bathrooms} Full Bath</span>
+              <div className="p-3 rounded-2xl bg-[#F9F7F2]">
+                <Bath className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
+                <span className="text-xs text-[#1A3B34]/60 block font-medium">Bathrooms</span>
+                <span className="text-sm font-bold text-[#1A3B34]">{property.bathrooms} Full Bath</span>
               </div>
 
-              <div className="p-3 rounded-2xl bg-[#FAF9F5]">
-                <Waves className="w-5 h-5 text-[#186A9E] mx-auto mb-1" />
-                <span className="text-xs text-[#0D274D]/60 block font-medium">Outdoor</span>
-                <span className="text-sm font-bold text-[#0D274D]">Private Lanai</span>
+              <div className="p-3 rounded-2xl bg-[#F9F7F2]">
+                <Waves className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
+                <span className="text-xs text-[#1A3B34]/60 block font-medium">Outdoor</span>
+                <span className="text-sm font-bold text-[#1A3B34]">Private Lanai</span>
               </div>
             </div>
 
             {/* About This Suite Description */}
             <div className="space-y-4">
-              <h2 className="font-serif text-2xl font-bold text-[#0D274D]">
+              <h2 className="font-serif text-2xl font-bold text-[#1A3B34]">
                 About This Waikiki Banyan Suite
               </h2>
-              <div className="space-y-3.5 text-sm sm:text-base text-[#0D274D]/80 leading-relaxed font-light">
+              <div className="space-y-3.5 text-sm sm:text-base text-[#1A3B34]/80 leading-relaxed font-light">
                 {property.fullDescription.map((para, i) => (
                   <p key={i}>{para}</p>
                 ))}
               </div>
             </div>
 
+            {/* Why Waikiki Banyan Beats Other Vacation Rentals */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#1A3B34] to-[#224D44] text-white shadow-md space-y-5 border border-[#C59B4B]/30">
+              <div className="space-y-1.5">
+                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#F6E7A7]">
+                  The Waikiki Banyan Advantage
+                </span>
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">
+                  Why This Suite Outclasses Other Vacation Rentals in Waikiki
+                </h3>
+                <p className="text-xs sm:text-sm text-white/80 font-light leading-relaxed">
+                  Booking Unit {property.unitNumber} guarantees you the gold standard in Hawaiian vacation condo living:
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/10 border border-white/15">
+                  <Sparkles className="w-4 h-4 text-[#F6E7A7] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-xs font-semibold text-white block">1-Acre Recreation Deck</strong>
+                    <span className="text-[11px] text-white/75">Heated pool, 2 jet hot tubs, sauna, and tennis—unheard of in ordinary rentals.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/10 border border-white/15">
+                  <Check className="w-4 h-4 text-[#F6E7A7] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-xs font-semibold text-white block">Full Chef's Kitchen</strong>
+                    <span className="text-[11px] text-white/75">Stove, oven, and full fridge to cook island poke and save $1,000+ over hotels.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/10 border border-white/15">
+                  <Waves className="w-4 h-4 text-[#F6E7A7] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-xs font-semibold text-white block">1 Flat Block to Kuhio Beach</strong>
+                    <span className="text-[11px] text-white/75">3-minute stroll to calm waters with no heavy cross-town walking or noise.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/10 border border-white/15">
+                  <ShieldCheck className="w-4 h-4 text-[#F6E7A7] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-xs font-semibold text-white block">$0 Mandatory Resort Fees</strong>
+                    <span className="text-[11px] text-white/75">All recreation deck, pool, and Wi-Fi access included with zero hidden check-out fees.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Sleeping Arrangements Breakdown */}
             <div className="space-y-4">
-              <h2 className="font-serif text-2xl font-bold text-[#0D274D]">
+              <h2 className="font-serif text-2xl font-bold text-[#1A3B34]">
                 Sleeping Arrangements
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {property.sleepingArrangements.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-5 rounded-3xl bg-white border border-[#0D274D]/8 shadow-xs space-y-2"
+                    className="p-5 rounded-3xl bg-white border border-[#E8DCC6] shadow-xs space-y-2"
                   >
-                    <div className="flex items-center gap-2 text-[#186A9E]">
-                      <Bed className="w-5 h-5" />
-                      <h3 className="font-serif text-base font-bold text-[#0D274D]">
+                    <div className="flex items-center gap-2 text-[#8CA58A]">
+                      <Bed className="w-5 h-5 text-[#C59B4B]" />
+                      <h3 className="font-serif text-base font-bold text-[#1A3B34]">
                         {item.room}
                       </h3>
                     </div>
-                    <p className="text-xs font-semibold text-[#186A9E] uppercase tracking-wider">
+                    <p className="text-xs font-semibold text-[#8CA58A] uppercase tracking-wider">
                       {item.beds}
                     </p>
-                    <p className="text-xs text-[#0D274D]/75 leading-relaxed">
+                    <p className="text-xs text-[#1A3B34]/75 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -254,7 +316,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
             {/* Full Amenities by Category */}
             <div className="space-y-6">
-              <h2 className="font-serif text-2xl font-bold text-[#0D274D]">
+              <h2 className="font-serif text-2xl font-bold text-[#1A3B34]">
                 Verified Amenities
               </h2>
 
@@ -262,15 +324,15 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 {property.fullAmenities.map((group, idx) => (
                   <div
                     key={idx}
-                    className="p-6 rounded-3xl bg-white border border-[#0D274D]/8 shadow-xs space-y-3"
+                    className="p-6 rounded-3xl bg-white border border-[#E8DCC6] shadow-xs space-y-3"
                   >
-                    <h3 className="font-serif text-base font-bold text-[#0D274D] pb-2 border-b border-[#0D274D]/5">
+                    <h3 className="font-serif text-base font-bold text-[#1A3B34] pb-2 border-b border-[#E8DCC6]/60">
                       {group.category}
                     </h3>
-                    <ul className="space-y-2 text-xs sm:text-sm text-[#0D274D]/80">
+                    <ul className="space-y-2 text-xs sm:text-sm text-[#1A3B34]/80">
                       {group.items.map((item, i) => (
                         <li key={i} className="flex items-start gap-2.5">
-                          <Check className="w-4 h-4 text-[#186A9E] shrink-0 mt-0.5" />
+                          <Check className="w-4 h-4 text-[#8CA58A] shrink-0 mt-0.5" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -281,100 +343,198 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
             </div>
 
             {/* House Rules */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#0D274D]/8 shadow-xs space-y-4">
-              <h2 className="font-serif text-xl font-bold text-[#0D274D] flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#186A9E]" />
-                <span>House Rules & Building Standards</span>
-              </h2>
-              <ul className="space-y-2 text-xs sm:text-sm text-[#0D274D]/80">
+            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#E8DCC6] shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#E8DCC6]/60">
+                <h2 className="font-serif text-xl font-bold text-[#1A3B34] flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-[#8CA58A]" />
+                  <span>House Rules & Building Standards</span>
+                </h2>
+                <button
+                  onClick={() => onNavigate('/rules')}
+                  className="text-xs font-semibold text-[#8CA58A] hover:text-[#1A3B34] underline cursor-pointer inline-flex items-center gap-1 self-start sm:self-auto"
+                >
+                  <span>View All 31 Rules</span>
+                  <ExternalLink className="w-3 h-3" />
+                </button>
+              </div>
+
+              <ul className="space-y-2 text-xs sm:text-sm text-[#1A3B34]/80">
                 {property.houseRules.map((rule, idx) => (
                   <li key={idx} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#186A9E] shrink-0 mt-2" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#8CA58A] shrink-0 mt-2" />
                     <span>{rule}</span>
                   </li>
                 ))}
               </ul>
+
+              <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-[#1A3B34]/80">
+                <div className="space-y-0.5">
+                  <span className="font-semibold text-[#1A3B34] block">Official Waikiki Banyan (Part I) & Plumeria (Part II) Rules</span>
+                  <span className="text-[11px] text-[#1A3B34]/65">Includes quiet hours (10 PM), Tower 2 freight elevator Car #5 for surfboards, and lanai safety.</span>
+                </div>
+                <button
+                  onClick={() => onNavigate('/rules')}
+                  className="px-4 py-2 rounded-full bg-[#1A3B34] hover:bg-[#224D44] text-white font-semibold text-xs shrink-0 cursor-pointer shadow-2xs transition-colors"
+                >
+                  Read Complete Guide
+                </button>
+              </div>
+            </div>
+
+            {/* Direct Booking Rental Policy Highlights */}
+            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#E8DCC6] shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#E8DCC6]/60">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="w-5 h-5 text-[#8CA58A]" />
+                  <h2 className="font-serif text-xl font-bold text-[#1A3B34]">
+                    Direct Booking Rental Policy & Terms
+                  </h2>
+                </div>
+                <button
+                  onClick={() => onNavigate('/rental-policy')}
+                  className="text-xs font-semibold text-[#8CA58A] hover:text-[#1A3B34] underline cursor-pointer inline-flex items-center gap-1 self-start sm:self-auto"
+                >
+                  <span>View All 7 Policy Terms</span>
+                  <ExternalLink className="w-3 h-3" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div className="p-3 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6]/70 space-y-1">
+                  <span className="font-bold text-[#1A3B34] block">1. Transparent Rate & Inclusions</span>
+                  <p className="text-[#1A3B34]/75">
+                    $300/night base rate. Parking is included from check-in through checkout and Plumeria charges $0 separate resort or amenity fees.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6]/70 space-y-1">
+                  <span className="font-bold text-[#1A3B34] block">2. Check-In: 2 PM / Checkout: 12 PM</span>
+                  <p className="text-[#1A3B34]/75">
+                    Generous noon checkout. Late checkout options available with advance approval (1PM $50, 2PM $100, 3PM $150, after 3PM $300).
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6]/70 space-y-1">
+                  <span className="font-bold text-[#1A3B34] block">3. 14-Day Cancellation Protection</span>
+                  <p className="text-[#1A3B34]/75">
+                    100% refund of eligible accommodation charges 14+ days before arrival; 50% refund 7 to 13 days prior; non-refundable under 7 days.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6]/70 space-y-1">
+                  <span className="font-bold text-[#1A3B34] block">4. No Automatic Fixed Damage Fees</span>
+                  <p className="text-[#1A3B34]/75">
+                    Guests are simply responsible for actual documented costs beyond normal wear and tear or lost access credentials.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-2 flex justify-end">
+                <button
+                  onClick={() => onNavigate('/rental-policy')}
+                  className="text-xs font-bold text-[#1A3B34] hover:text-[#8CA58A] inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>Read Full Rental Policy, Fees & Agreement</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-[#8CA58A]" />
+                </button>
+              </div>
             </div>
 
             {/* Waikiki Banyan Location Context */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-[#EAF7F9] border border-[#4BB8C7]/30 space-y-4">
-              <div className="flex items-center gap-2.5 text-[#186A9E]">
-                <MapPin className="w-5 h-5" />
-                <h3 className="font-serif text-xl font-bold text-[#0D274D]">
+            <div className="p-6 sm:p-7 rounded-3xl bg-[#E8DCC6]/30 border border-[#C59B4B]/30 space-y-4">
+              <div className="flex items-center gap-2.5 text-[#1A3B34]">
+                <MapPin className="w-5 h-5 text-[#C59B4B]" />
+                <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
                   Location: Waikiki Banyan
                 </h3>
               </div>
-              <p className="text-xs sm:text-sm text-[#0D274D]/80 leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#1A3B34]/80 leading-relaxed font-light">
                 Situated at 201 ʻOhua Avenue, you are 1 short block from the warm beach sand, 2 blocks from the Honolulu Zoo and Kapiʻolani Park, and surrounded by Waikiki’s top casual eateries, coffee spots, and surf rentals.
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs text-[#0D274D]/75 font-medium">
-                <div className="p-2.5 rounded-xl bg-white/80">🏖️ Kuhio Beach · 3 min</div>
-                <div className="p-2.5 rounded-xl bg-white/80">🏄 Queen’s Surf · 4 min</div>
-                <div className="p-2.5 rounded-xl bg-white/80">🦁 Honolulu Zoo · 5 min</div>
-                <div className="p-2.5 rounded-xl bg-white/80">🌋 Diamond Head · 5 min drive</div>
-                <div className="p-2.5 rounded-xl bg-white/80">☕ Ground floor cafe on-site</div>
-                <div className="p-2.5 rounded-xl bg-white/80">🚗 On-site garage parking</div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs text-[#1A3B34]/75 font-medium">
+                <div className="p-2.5 rounded-xl bg-white border border-[#E8DCC6]/60">🏖️ Kuhio Beach · 3 min</div>
+                <div className="p-2.5 rounded-xl bg-white border border-[#E8DCC6]/60">🏄 Queen’s Surf · 4 min</div>
+                <div className="p-2.5 rounded-xl bg-white border border-[#E8DCC6]/60">🦁 Honolulu Zoo · 5 min</div>
+                <div className="p-2.5 rounded-xl bg-white border border-[#E8DCC6]/60">🌋 Diamond Head · 5 min drive</div>
+                <div className="p-2.5 rounded-xl bg-white border border-[#E8DCC6]/60">☕ Ground floor cafe on-site</div>
+                <div className="p-2.5 rounded-xl bg-white border border-[#E8DCC6]/60">🚗 On-site garage parking</div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Sticky Booking & Direct Inquiry Card (Desktop) */}
+          {/* Right Column: Sticky Booking & Direct Inquiry Card (Desktop & Tablet) */}
           <div className="lg:col-span-4">
-            <div className="sticky top-28 bg-white rounded-3xl p-6 sm:p-7 border border-[#0D274D]/10 shadow-xl space-y-5">
-              <div className="space-y-1.5 pb-4 border-b border-[#0D274D]/8">
+            <div className="sticky top-28 bg-white rounded-3xl p-6 sm:p-7 border border-[#E8DCC6] shadow-sm space-y-5">
+              <div className="space-y-2 pb-4 border-b border-[#E8DCC6]/70">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#186A9E]">
-                    Direct Host Reservation
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#8CA58A] bg-[#8CA58A]/15 px-2.5 py-0.5 rounded-full">
+                    Direct Booking
                   </span>
-                  <div className="flex items-center gap-1 text-[#F5B82E]">
-                    <Sparkles className="w-4 h-4" />
-                    <span className="text-xs font-semibold text-[#0D274D]">Best Rate Direct</span>
+                  <div className="flex items-center gap-1 text-[#C59B4B]">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span className="text-xs font-semibold text-[#1A3B34]">Best Rate Guarantee</span>
                   </div>
                 </div>
-                <h3 className="font-serif text-xl font-bold text-[#0D274D]">
-                  Plan Your Stay
-                </h3>
-                <p className="text-xs text-[#0D274D]/60">
-                  Waikiki Banyan · {property.tower}
-                </p>
+
+                <div className="flex items-baseline justify-between pt-1">
+                  <div>
+                    <span className="font-serif text-3xl font-bold text-[#1A3B34]">$300</span>
+                    <span className="text-xs text-[#1A3B34]/65 ml-1 font-medium">/ night base rate</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[11px] font-bold text-[#1A3B34] block">Parking Included</span>
+                    <span className="text-[10px] text-[#8CA58A] font-semibold block">$0 Resort Fees</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-[11px] text-[#1A3B34]/70 pt-1 border-t border-[#E8DCC6]/40">
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3 text-[#8CA58A]" />
+                    <span>Check-in: 2:00 PM</span>
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3 text-[#8CA58A]" />
+                    <span>Checkout: 12:00 PM</span>
+                  </span>
+                </div>
               </div>
 
               {/* Booking Dates Form in Sticky Card */}
               <form onSubmit={handleInquirySubmit} className="space-y-3.5">
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="p-2.5 rounded-xl bg-[#FAF9F5] border border-[#0D274D]/10">
-                    <label className="block text-[9px] font-bold uppercase tracking-wider text-[#0D274D]/60 mb-1">
+                  <div className="p-2.5 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6]">
+                    <label className="block text-[9px] font-bold uppercase tracking-wider text-[#1A3B34]/60 mb-1">
                       Check-In
                     </label>
                     <input
                       type="date"
                       value={checkIn}
                       onChange={(e) => setCheckIn(e.target.value)}
-                      className="w-full text-xs font-medium text-[#0D274D] bg-transparent focus:outline-none cursor-pointer"
+                      className="w-full text-xs font-medium text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer"
                     />
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-[#FAF9F5] border border-[#0D274D]/10">
-                    <label className="block text-[9px] font-bold uppercase tracking-wider text-[#0D274D]/60 mb-1">
+                  <div className="p-2.5 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6]">
+                    <label className="block text-[9px] font-bold uppercase tracking-wider text-[#1A3B34]/60 mb-1">
                       Check-Out
                     </label>
                     <input
                       type="date"
                       value={checkOut}
                       onChange={(e) => setCheckOut(e.target.value)}
-                      className="w-full text-xs font-medium text-[#0D274D] bg-transparent focus:outline-none cursor-pointer"
+                      className="w-full text-xs font-medium text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer"
                     />
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-[#FAF9F5] border border-[#0D274D]/10">
-                  <label className="block text-[9px] font-bold uppercase tracking-wider text-[#0D274D]/60 mb-1">
+                <div className="p-2.5 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6]">
+                  <label className="block text-[9px] font-bold uppercase tracking-wider text-[#1A3B34]/60 mb-1">
                     Guests
                   </label>
                   <select
                     value={guests}
                     onChange={(e) => setGuests(Number(e.target.value))}
-                    className="w-full text-xs font-semibold text-[#0D274D] bg-transparent focus:outline-none cursor-pointer"
+                    className="w-full text-xs font-semibold text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer"
                   >
                     {[...Array(property.guestsMax)].map((_, i) => (
                       <option key={i + 1} value={i + 1}>
@@ -384,39 +544,60 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   </select>
                 </div>
 
-                <button
-                  type="submit"
-                  id="sticky-card-inquire-btn"
-                  className="w-full py-3.5 px-4 rounded-xl bg-[#186A9E] hover:bg-[#0D274D] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer"
-                >
-                  <Calendar className="w-4 h-4 text-[#F5B82E]" />
-                  <span>Check Availability / Inquire</span>
-                </button>
+                <div className="space-y-2 pt-1">
+                  <button
+                    type="submit"
+                    id="sticky-card-inquire-btn"
+                    className="w-full py-3.5 px-4 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer border border-[#C59B4B]/30"
+                  >
+                    <Calendar className="w-4 h-4 text-[#F6E7A7]" />
+                    <span>Check Availability / Inquire</span>
+                  </button>
+
+                  <a
+                    href={directMailtoUrl}
+                    id="sticky-card-mailto-btn"
+                    className="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-[#E8DCC6]/40 text-[#1A3B34] font-semibold text-xs flex items-center justify-center gap-2 border border-[#E8DCC6] transition-colors cursor-pointer shadow-2xs"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-[#C59B4B]" />
+                    <span>Email Host Directly (mailto)</span>
+                    <ExternalLink className="w-3 h-3 text-[#1A3B34]/40" />
+                  </a>
+                </div>
               </form>
 
               {/* Direct email quick note */}
-              <div className="pt-2 text-center text-xs text-[#0D274D]/70 space-y-2">
-                <p>Have specific dates or questions?</p>
+              <div className="pt-2 text-center text-xs text-[#1A3B34]/70 space-y-1">
+                <p className="text-[11px]">Direct host communication · $0 resort fees</p>
                 <a
-                  href={`mailto:${SITE_CONFIG.email}?subject=Inquiry%20for%20${encodeURIComponent(property.name)}`}
-                  className="text-xs font-semibold text-[#186A9E] hover:underline block truncate"
+                  href={directMailtoUrl}
+                  className="text-xs font-semibold text-[#8CA58A] hover:underline inline-flex items-center gap-1"
                 >
-                  {SITE_CONFIG.email}
+                  <Mail className="w-3 h-3 text-[#C59B4B]" />
+                  <span>{SITE_CONFIG.email}</span>
                 </a>
               </div>
 
               {/* Perks list in card */}
-              <div className="pt-4 border-t border-[#0D274D]/8 space-y-2 text-xs text-[#0D274D]/75">
+              <div className="pt-4 border-t border-[#E8DCC6]/70 space-y-2 text-xs text-[#1A3B34]/75">
                 <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Contactless Smart Lock Check-In</span>
+                  <Check className="w-3.5 h-3.5 text-[#8CA58A]" />
+                  <span>Free Reserved Garage Parking Included</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <Check className="w-3.5 h-3.5 text-[#8CA58A]" />
+                  <span>Generous 12:00 PM Noon Checkout</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-[#8CA58A]" />
+                  <span>Contactless Smart Lock Check-In (2 PM)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-[#8CA58A]" />
                   <span>Full Kitchen & Private Lanai</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <Check className="w-3.5 h-3.5 text-[#8CA58A]" />
                   <span>6th Floor Resort Recreation Deck</span>
                 </div>
               </div>
@@ -426,26 +607,26 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
         {/* Similar Plumeria Rentals Section */}
         {otherProperties.length > 0 && (
-          <div className="pt-16 border-t border-[#0D274D]/10 space-y-8">
+          <div className="pt-16 border-t border-[#E8DCC6] space-y-8">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#186A9E]">
-                  More Accommodations
+                <span className="text-xs font-bold uppercase tracking-widest text-[#C59B4B]">
+                  Tower 2 Collection
                 </span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0D274D]">
-                  Other Plumeria Suites at Waikiki Banyan
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
+                  Also at Waikiki Banyan Tower 2
                 </h2>
               </div>
 
               <button
                 onClick={() => onNavigate('/rentals')}
-                className="text-xs sm:text-sm font-semibold text-[#186A9E] hover:underline cursor-pointer"
+                className="text-xs sm:text-sm font-semibold text-[#1A3B34] hover:text-[#8CA58A] hover:underline cursor-pointer"
               >
-                View All →
+                View Both Suites →
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="max-w-md">
               {otherProperties.map((p) => (
                 <PropertyCard
                   key={p.id}
@@ -459,13 +640,13 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         )}
       </div>
 
-      {/* Floating Bottom Mobile Booking Bar */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#0D274D]/10 p-3.5 px-4 flex items-center justify-between shadow-2xl">
+      {/* Floating Bottom Mobile Booking Bar - ONLY for small phones (< md), preventing tablet/desktop overlap */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E8DCC6] p-3.5 px-4 flex items-center justify-between shadow-2xl">
         <div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#186A9E] block">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#8CA58A] block">
             {property.viewType}
           </span>
-          <span className="font-serif text-sm font-bold text-[#0D274D] block truncate max-w-[190px]">
+          <span className="font-serif text-sm font-bold text-[#1A3B34] block truncate max-w-[190px]">
             {property.name}
           </span>
         </div>
@@ -473,9 +654,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         <button
           id="mobile-sticky-inquire-btn"
           onClick={() => onOpenInquiry(property.id)}
-          className="px-5 py-2.5 rounded-xl bg-[#186A9E] text-white text-xs font-semibold flex items-center gap-1.5 shadow-md"
+          className="px-5 py-2.5 rounded-xl bg-[#1A3B34] text-white text-xs font-semibold flex items-center gap-1.5 shadow-md border border-[#C59B4B]/30"
         >
-          <Calendar className="w-3.5 h-3.5 text-[#F5B82E]" />
+          <Calendar className="w-3.5 h-3.5 text-[#F6E7A7]" />
           <span>Check Dates</span>
         </button>
       </div>

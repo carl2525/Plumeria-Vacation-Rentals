@@ -10,7 +10,7 @@ interface IntroSectionProps {
 
 export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
   return (
-    <section className="relative py-20 sm:py-28 overflow-hidden bg-[#FAF9F5]">
+    <section className="relative py-20 sm:py-28 overflow-hidden bg-[#F9F7F2]">
       {/* Subtle Plumeria Symbol Watermark in Background */}
       <LogoWatermark size="xl" position="top-right" opacity="opacity-[0.05] sm:opacity-[0.08]" />
       <LogoWatermark size="lg" position="bottom-left" opacity="opacity-[0.03] sm:opacity-[0.05]" />
@@ -19,47 +19,47 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Story & Philosophy */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAF7F9] border border-[#186A9E]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#186A9E]">
-              <Sparkles className="w-3.5 h-3.5 text-[#F5B82E]" />
-              <span>Aloha from Waikiki</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/50 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
+              <Sparkles className="w-3.5 h-3.5 text-[#C59B4B]" />
+              <span>The Waikiki Banyan Difference</span>
             </div>
 
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0D274D] leading-tight">
-              A Hawaiian home base for your Waikiki adventure.
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#1A3B34] leading-tight">
+              Why Waikiki Banyan outclasses ordinary vacation rentals.
             </h2>
 
-            <p className="text-base sm:text-lg text-[#0D274D]/85 font-light leading-relaxed">
-              At <strong className="font-medium text-[#0D274D]">Plumeria Vacation Rentals</strong>, we specialize in welcoming, comfortable short-term stays at <strong className="font-medium text-[#186A9E]">Waikiki Banyan</strong>. Whether you are traveling for morning surf sessions, family beach days, or Oʻahu road trips, our suites offer the space, comfort, and independence of a true island home.
+            <p className="text-base sm:text-lg text-[#1A3B34]/85 font-light leading-relaxed">
+              Most Waikiki travelers get trapped between two extremes: expensive, cramped 280 sq. ft. hotel rooms with zero kitchen facilities and $50/day surprise resort fees, or aging walk-up condos with no amenities whatsoever.
             </p>
 
-            <p className="text-sm sm:text-base text-[#0D274D]/75 leading-relaxed">
-              Skip the cramped hotel room. Step onto your private breezy lanai, whip up fresh island fruit in your full kitchen, and walk just one block to the warm turquoise waters of Kuhio Beach.
+            <p className="text-sm sm:text-base text-[#1A3B34]/80 leading-relaxed font-light">
+              <strong className="font-semibold text-[#1A3B34]">Waikiki Banyan gives you the best of both worlds:</strong> a spacious 550 sq. ft. private 1-bedroom condo with full chef-ready kitchen and private lanai, combined with Oʻahu’s largest 1-acre resort recreation deck (heated pool, 2 jet spas, sauna, tennis/pickleball, and sunset BBQ grills).
             </p>
 
-            {/* 3 Quick Highlight Pills matching Logo Colors */}
+            {/* 3 Quick Highlight Pills matching Brand Palette */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3">
-              <div className="p-4 rounded-2xl bg-white border border-[#EAF7F9] shadow-xs space-y-1.5">
-                <div className="w-8 h-8 rounded-xl bg-[#4BB8C7]/20 text-[#186A9E] flex items-center justify-center">
-                  <Waves className="w-4 h-4 text-[#186A9E]" />
+              <div className="p-4 rounded-2xl bg-white border border-[#E8DCC6] shadow-xs space-y-1.5">
+                <div className="w-8 h-8 rounded-xl bg-[#7FB6D9]/20 text-[#1A3B34] flex items-center justify-center">
+                  <Waves className="w-4 h-4 text-[#1A3B34]" />
                 </div>
-                <h3 className="font-serif text-sm font-bold text-[#0D274D]">1 Block to Beach</h3>
-                <p className="text-xs text-[#0D274D]/70">Short 3-minute stroll to Kuhio & Queen’s Surf</p>
+                <h3 className="font-serif text-sm font-bold text-[#1A3B34]">1-Acre Resort Deck</h3>
+                <p className="text-xs text-[#1A3B34]/70">Heated pool, 2 hot tubs, sauna, tennis & BBQ pavilion</p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white border border-[#EAF7F9] shadow-xs space-y-1.5">
-                <div className="w-8 h-8 rounded-xl bg-[#F5B82E]/20 text-[#E59900] flex items-center justify-center">
-                  <Utensils className="w-4 h-4 text-[#E59900]" />
+              <div className="p-4 rounded-2xl bg-white border border-[#E8DCC6] shadow-xs space-y-1.5">
+                <div className="w-8 h-8 rounded-xl bg-[#F6E7A7]/40 text-[#C59B4B] flex items-center justify-center">
+                  <Utensils className="w-4 h-4 text-[#C59B4B]" />
                 </div>
-                <h3 className="font-serif text-sm font-bold text-[#0D274D]">Full Kitchens</h3>
-                <p className="text-xs text-[#0D274D]/70">Stove, oven, fridge & cookware in every suite</p>
+                <h3 className="font-serif text-sm font-bold text-[#1A3B34]">Full Chef Kitchen</h3>
+                <p className="text-xs text-[#1A3B34]/70">Save $200+/day by cooking fresh poke & breakfasts</p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white border border-[#EAF7F9] shadow-xs space-y-1.5">
-                <div className="w-8 h-8 rounded-xl bg-[#F78D74]/15 text-[#F78D74] flex items-center justify-center">
-                  <SunMedium className="w-4 h-4 text-[#F78D74]" />
+              <div className="p-4 rounded-2xl bg-white border border-[#E8DCC6] shadow-xs space-y-1.5">
+                <div className="w-8 h-8 rounded-xl bg-[#8CA58A]/20 text-[#1A3B34] flex items-center justify-center">
+                  <SunMedium className="w-4 h-4 text-[#8CA58A]" />
                 </div>
-                <h3 className="font-serif text-sm font-bold text-[#0D274D]">Private Lanais</h3>
-                <p className="text-xs text-[#0D274D]/70">Covered balcony with ocean & mountain breezes</p>
+                <h3 className="font-serif text-sm font-bold text-[#1A3B34]">3-Min Beach Walk</h3>
+                <p className="text-xs text-[#1A3B34]/70">Calm Kuhio Beach 1 block away; no street noise</p>
               </div>
             </div>
           </div>
@@ -72,10 +72,10 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
                 alt="Waikiki Banyan tropical scenery and ocean breeze"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D274D]/85 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A3B34]/85 via-transparent to-transparent" />
 
               <div className="absolute bottom-6 left-6 right-6 text-white space-y-2">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F5B82E]">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F6E7A7]">
                   Waikiki Banyan Community
                 </span>
                 <p className="font-serif text-lg sm:text-xl font-bold leading-snug">
@@ -88,11 +88,11 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
             </div>
 
             {/* Floating Brand Badge */}
-            <div className="absolute -bottom-5 -left-5 bg-white p-3.5 rounded-2xl shadow-xl border border-[#EAF7F9] flex items-center gap-3">
+            <div className="absolute -bottom-5 -left-5 bg-white p-3.5 rounded-2xl shadow-xl border border-[#E8DCC6] flex items-center gap-3">
               <PlumeriaSymbolLogo className="w-10 h-10 shrink-0" />
               <div>
-                <span className="text-xs font-bold text-[#0D274D] block">True Island Hospitality</span>
-                <span className="text-[11px] text-[#186A9E] font-medium">Direct Host Communication</span>
+                <span className="text-xs font-bold text-[#1A3B34] block">True Island Hospitality</span>
+                <span className="text-[11px] text-[#8CA58A] font-semibold">Direct Host Communication</span>
               </div>
             </div>
           </div>

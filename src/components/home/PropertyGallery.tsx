@@ -79,7 +79,7 @@ export const PropertyGallery: React.FC = () => {
   };
 
   return (
-    <section className="relative py-20 sm:py-28 bg-[#F6F4EE]/50 border-t border-[#0D274D]/5 overflow-hidden">
+    <section className="relative py-20 sm:py-28 bg-[#F9F7F2] border-t border-[#E8DCC6] overflow-hidden">
       {/* Decorative watermark */}
       <LogoWatermark size="xl" position="top-right" opacity="opacity-[0.035] sm:opacity-[0.06]" />
       <LogoWatermark size="lg" position="bottom-left" opacity="opacity-[0.03] sm:opacity-[0.05]" />
@@ -87,16 +87,16 @@ export const PropertyGallery: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAF7F9] border border-[#4BB8C7]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#186A9E]">
-            <Camera className="w-3.5 h-3.5 text-[#186A9E]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/40 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
+            <Camera className="w-3.5 h-3.5 text-[#C59B4B]" />
             <span>Visual Gallery</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0D274D] leading-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#1A3B34] leading-tight">
             Glimpses of Waikiki Banyan.
           </h2>
 
-          <p className="text-base sm:text-lg text-[#0D274D]/80 font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
             Take a look at our guest suites, private lanais, the 6th-floor resort deck, and the turquoise ocean awaiting just down the street.
           </p>
         </div>
@@ -109,8 +109,8 @@ export const PropertyGallery: React.FC = () => {
               onClick={() => setActiveCategory(cat.id)}
               className={`px-4 py-2 rounded-full text-xs font-medium transition-colors cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-[#186A9E] text-white shadow-xs'
-                  : 'bg-white text-[#0D274D]/80 hover:bg-[#EAF7F9] border border-[#0D274D]/10'
+                  ? 'bg-[#1A3B34] text-white shadow-xs'
+                  : 'bg-white text-[#1A3B34]/80 hover:bg-[#E8DCC6]/50 border border-[#E8DCC6]'
               }`}
             >
               {cat.label}
@@ -124,7 +124,7 @@ export const PropertyGallery: React.FC = () => {
             <div
               key={item.id}
               onClick={() => openLightbox(idx)}
-              className="group relative rounded-3xl overflow-hidden aspect-4/3 bg-[#0D274D]/10 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer border border-[#0D274D]/5"
+              className="group relative rounded-3xl overflow-hidden aspect-4/3 bg-[#1A3B34]/10 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer border border-[#E8DCC6]"
             >
               <AppImage
                 src={item.url}
@@ -134,7 +134,7 @@ export const PropertyGallery: React.FC = () => {
               />
 
               {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D274D]/80 via-[#0D274D]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A3B34]/85 via-[#1A3B34]/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 text-white">
                 <div className="self-end">
                   <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
                     <Maximize2 className="w-4 h-4" />

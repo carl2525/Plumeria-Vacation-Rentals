@@ -43,7 +43,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
   return (
     <div
       id="gallery-lightbox-overlay"
-      className="fixed inset-0 z-50 bg-[#0D274D]/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 animate-fade-in"
+      className="fixed inset-0 z-50 bg-[#1A3B34]/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 animate-fade-in"
       onClick={onClose}
     >
       {/* Top Bar */}
