@@ -153,13 +153,15 @@ export function App() {
     }
 
     if (
-      currentPath === '/rules' ||
-      currentPath === '/rules/' ||
-      currentPath === '/house-rules' ||
-      currentPath === '/building-rules'
+      currentPath === '/policy' ||
+      currentPath === '/policy/' ||
+      currentPath === '/rental-policy' ||
+      currentPath === '/rental-policy/' ||
+      currentPath === '/rent-policy' ||
+      currentPath === '/rent-policy/'
     ) {
       return (
-        <RulesPage
+        <RentalPolicyPage
           onNavigate={navigate}
           onOpenInquiry={() => handleOpenInquiry()}
         />
@@ -167,14 +169,13 @@ export function App() {
     }
 
     if (
-      currentPath === '/rental-policy' ||
-      currentPath === '/rental-policy/' ||
-      currentPath === '/policy' ||
-      currentPath === '/policies' ||
-      currentPath === '/rent-policy'
+      currentPath === '/rules' ||
+      currentPath === '/rules/' ||
+      currentPath === '/house-rules' ||
+      currentPath === '/building-rules'
     ) {
       return (
-        <RentalPolicyPage
+        <RulesPage
           onNavigate={navigate}
           onOpenInquiry={() => handleOpenInquiry()}
         />

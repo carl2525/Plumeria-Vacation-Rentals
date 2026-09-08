@@ -5,6 +5,7 @@ import {
   GUEST_ACKNOWLEDGMENT,
   QUICK_RULE_HIGHLIGHTS,
 } from '../data/rules';
+import { RENTAL_POLICY_OVERVIEW } from '../data/rentalPolicy';
 import { RuleItem } from '../types';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { PlumeriaSymbolLogo } from '../components/brand/PlumeriaSymbolLogo';
@@ -26,19 +27,24 @@ import {
   AlertCircle,
   Building2,
   Home,
-  Mail,
-  ExternalLink,
-  DollarSign,
-  ChevronRight,
+  FileText,
+  ArrowRight,
+  Sparkles,
 } from 'lucide-react';
 
+export type RulesTab = 'all' | 'part1' | 'part2';
+
 interface RulesPageProps {
+  initialTab?: RulesTab;
   onNavigate: (path: string) => void;
   onOpenInquiry: (propertyId?: string) => void;
 }
 
-export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'part1' | 'part2'>('all');
+export const RulesPage: React.FC<RulesPageProps> = ({
+  onNavigate,
+  onOpenInquiry,
+}) => {
+  const [activeTab, setActiveTab] = useState<RulesTab>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedRuleIds, setExpandedRuleIds] = useState<Record<string, boolean>>({
     'banyan-conduct': true,
@@ -70,11 +76,11 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
     setExpandedRuleIds({});
   };
 
-  // Filter rules based on search and tab
-  const filteredSections = useMemo(() => {
+  // Filter rules based on search
+  const filteredData = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
 
-    const filterList = (rules: RuleItem[]) => {
+    const filterRules = (rules: RuleItem[]) => {
       if (!q) return rules;
       return rules.filter((r) => {
         const titleMatch = r.title.toLowerCase().includes(q);
@@ -86,8 +92,8 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
       });
     };
 
-    const p1Rules = filterList(BUILDING_RULES.rules);
-    const p2Rules = filterList(IN_HOUSE_RULES.rules);
+    const p1Rules = filterRules(BUILDING_RULES.rules);
+    const p2Rules = filterRules(IN_HOUSE_RULES.rules);
 
     return {
       part1: p1Rules,
@@ -104,19 +110,22 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
     };
 
     const text = [
-      'WAIKIKI BANYAN & PLUMERIA VACATION RENTALS — GUEST & BUILDING RULES',
+      'PLUMERIA VACATION RENTALS — HOUSE & BUILDING RULES',
+      'Waikiki Banyan Tower 2 · Honolulu, Hawaiʻi',
       '==================================================================\n',
-      'PART I — WAIKIKI BANYAN BUILDING RULES',
-      '--------------------------------------',
+      'PART I: WAIKIKI BANYAN BUILDING RULES',
+      '-------------------------------------',
       ...BUILDING_RULES.rules.map((r) => formatRuleText(r, 'Building Rule')),
-      '\nPART II — PLUMERIA VACATION RENTALS IN-HOUSE RULES',
-      '---------------------------------------------------',
+      '\nPART II: PLUMERIA IN-HOUSE SUITE RULES',
+      '---------------------------------------',
       ...IN_HOUSE_RULES.rules.map((r) => formatRuleText(r, 'In-House Rule')),
-      '\nGUEST ACKNOWLEDGMENT',
-      '--------------------',
-      GUEST_ACKNOWLEDGMENT.text,
-      '\n' + GUEST_ACKNOWLEDGMENT.alohaGreeting,
-      GUEST_ACKNOWLEDGMENT.closingText,
+      '==================================================================',
+      `${GUEST_ACKNOWLEDGMENT.title.toUpperCase()}`,
+      `${GUEST_ACKNOWLEDGMENT.text}`,
+      `\n${GUEST_ACKNOWLEDGMENT.alohaGreeting}`,
+      `${GUEST_ACKNOWLEDGMENT.closingText}`,
+      `\nDirect Host Email: ${SITE_CONFIG.email}`,
+      `Direct Host Phone: ${SITE_CONFIG.phone}`,
     ].join('\n');
 
     if (navigator.clipboard) {
@@ -137,7 +146,7 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
       <LogoWatermark size="2xl" position="top-right" opacity="opacity-[0.035] sm:opacity-[0.05]" />
       <LogoWatermark size="xl" position="bottom-left" opacity="opacity-[0.03] sm:opacity-[0.04]" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
         {/* Page Header */}
         <div className="space-y-4 max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/40 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
@@ -146,46 +155,125 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
           </div>
 
           <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#1A3B34] leading-tight">
-            Guest & Building Rules
+            Rules / Policy
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Welcome to Waikiki Banyan Tower 2! To protect our home, ensure safety, and maintain a peaceful island environment for everyone, all guests agree to follow both the Waikiki Banyan Building Rules and Plumeria In-House Rules.
+            Welcome to Waikiki Banyan Tower 2! Please review our building community rules and suite standards below. For direct booking terms, payment, cancellation, and fee structures, refer to our official Rental Policy.
           </p>
+        </div>
 
-          {/* Rental Policy Companion Banner */}
-          <div className="mt-4 p-4 sm:p-5 rounded-2xl bg-white border border-[#E8DCC6] shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-[#8CA58A]/15 text-[#1A3B34] flex items-center justify-center shrink-0 mt-0.5">
-                <DollarSign className="w-5 h-5 text-[#1A3B34]" />
+        {/* PROMINENT DIRECT BOOKING RENTAL POLICY CARD */}
+        <div
+          id="rental-policy-redirect-card"
+          className="relative bg-gradient-to-br from-[#1A3B34] to-[#234E45] text-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#C59B4B]/40 shadow-lg overflow-hidden"
+        >
+          {/* Subtle floral watermark in background */}
+          <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none translate-x-12 translate-y-12">
+            <PlumeriaSymbolLogo className="w-64 h-64 text-white" />
+          </div>
+
+          <div className="relative z-10 space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C59B4B]/25 text-[#F6E7A7] text-xs font-bold uppercase tracking-wider border border-[#C59B4B]/40">
+                <FileText className="w-3.5 h-3.5" />
+                <span>Direct Booking Agreement</span>
               </div>
-              <div className="space-y-0.5">
-                <span className="font-serif font-bold text-sm sm:text-base text-[#1A3B34] block">
-                  Direct Booking Rental Policy (Rates, Cancellation & Late Checkout)
+              <span className="text-xs text-[#F6E7A7] font-semibold">
+                Official 7-Section Policy
+              </span>
+            </div>
+
+            <div className="space-y-2 max-w-3xl">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+                {RENTAL_POLICY_OVERVIEW.title}
+              </h2>
+              <p className="text-sm sm:text-base text-white/85 font-light leading-relaxed">
+                Looking for our direct rates, cancellation schedule, check-in details, and fee breakdown? Our complete Rental Policy covers everything you need to know with zero hidden resort fees.
+              </p>
+            </div>
+
+            {/* 4 Quick Highlights within Card */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-2">
+              <div className="bg-white/10 backdrop-blur-xs rounded-2xl p-4 border border-white/15">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#F6E7A7] block">
+                  Base Rate
                 </span>
-                <p className="text-xs text-[#1A3B34]/70">
-                  Base rate is $300/night with parking included, 2:00 PM check-in / 12:00 PM checkout, late departure fee schedule, and 14-day cancellation protection.
-                </p>
+                <span className="font-serif text-xl sm:text-2xl font-bold text-white block mt-0.5">
+                  $300<span className="text-xs font-normal text-white/75">/night</span>
+                </span>
+                <span className="text-[11px] text-white/70 block mt-1">
+                  $0 resort/amenity fee
+                </span>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-xs rounded-2xl p-4 border border-white/15">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#F6E7A7] block">
+                  Garage Parking
+                </span>
+                <span className="font-serif text-xl sm:text-2xl font-bold text-white block mt-0.5">
+                  Included
+                </span>
+                <span className="text-[11px] text-white/70 block mt-1">
+                  Covered on-site stall
+                </span>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-xs rounded-2xl p-4 border border-white/15">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#F6E7A7] block">
+                  Check-In / Out
+                </span>
+                <span className="font-serif text-xl sm:text-2xl font-bold text-white block mt-0.5">
+                  2 PM / 12 PM
+                </span>
+                <span className="text-[11px] text-white/70 block mt-1">
+                  Late checkout options
+                </span>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-xs rounded-2xl p-4 border border-white/15">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#F6E7A7] block">
+                  Cancellation
+                </span>
+                <span className="font-serif text-xl sm:text-2xl font-bold text-white block mt-0.5">
+                  100% Refund
+                </span>
+                <span className="text-[11px] text-white/70 block mt-1">
+                  14+ days before arrival
+                </span>
               </div>
             </div>
-            <button
-              onClick={() => onNavigate('/rental-policy')}
-              className="px-4 py-2 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-semibold text-xs transition-colors shrink-0 shadow-2xs cursor-pointer flex items-center gap-1.5 self-start sm:self-auto"
-            >
-              <span>View Rental Policy</span>
-              <ChevronRight className="w-3.5 h-3.5 text-[#F6E7A7]" />
-            </button>
+
+            {/* Action Buttons */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <button
+                id="view-full-policy-btn"
+                onClick={() => onNavigate('/policy')}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#C59B4B] hover:bg-[#D4AC5D] text-[#1A3B34] font-bold text-xs uppercase tracking-widest transition-all duration-200 transform hover:-translate-y-0.5 shadow-md cursor-pointer"
+              >
+                <span>View Full Rental Policy</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={() => onOpenInquiry()}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-widest border border-white/25 transition-colors cursor-pointer"
+              >
+                <span>Direct Booking Inquiry</span>
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Quick Reference Highlight Cards */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C59B4B]">
-              Quick Reference · 6 Golden Rules
+            <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#8CA58A] flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#C59B4B]" />
+              <span>Quick Reference · 6 Golden Rules</span>
             </span>
             <span className="text-xs text-[#1A3B34]/60 hidden sm:inline">
-              Essential guidelines for a seamless stay
+              Guidelines for a harmonious island community
             </span>
           </div>
 
@@ -230,7 +318,7 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
               <input
                 type="text"
                 id="search-rules-input"
-                placeholder="Search rules (e.g. surfboard, parking, quiet hours, lanai, pool)..."
+                placeholder="Search building & house rules (e.g. surfboard, quiet hours, lanai, pool)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm bg-[#F9F7F2] border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/40 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
@@ -252,7 +340,7 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
                 id="copy-rules-btn"
                 onClick={handleCopyAllRules}
                 className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#E8DCC6] text-[#1A3B34] text-xs font-semibold hover:bg-[#E8DCC6]/40 transition-colors cursor-pointer shadow-2xs"
-                title="Copy text of all rules to clipboard"
+                title="Copy all house and building rules text"
               >
                 {copied ? (
                   <>
@@ -291,8 +379,9 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
                     : 'bg-[#F9F7F2] text-[#1A3B34]/80 hover:bg-[#E8DCC6]/50'
                 }`}
               >
-                All Rules ({filteredSections.totalCount})
+                All Rules ({filteredData.totalCount})
               </button>
+
               <button
                 onClick={() => setActiveTab('part1')}
                 className={`px-4 py-1.5 rounded-full font-semibold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
@@ -301,9 +390,10 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
                     : 'bg-[#F9F7F2] text-[#1A3B34]/80 hover:bg-[#E8DCC6]/50'
                 }`}
               >
-                <Building2 className="w-3 h-3 text-[#C59B4B]" />
-                <span>Part I: Building Rules ({filteredSections.part1.length})</span>
+                <Building2 className="w-3 h-3 text-[#7FB6D9]" />
+                <span>Building Rules ({filteredData.part1.length})</span>
               </button>
+
               <button
                 onClick={() => setActiveTab('part2')}
                 className={`px-4 py-1.5 rounded-full font-semibold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
@@ -313,7 +403,7 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
                 }`}
               >
                 <Home className="w-3 h-3 text-[#8CA58A]" />
-                <span>Part II: In-House Rules ({filteredSections.part2.length})</span>
+                <span>In-House Rules ({filteredData.part2.length})</span>
               </button>
             </div>
 
@@ -337,7 +427,7 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
 
         {/* Section Display */}
         <div className="space-y-12">
-          {/* Part I: Building Rules */}
+          {/* SECTION 1: Part I Building Rules */}
           {(activeTab === 'all' || activeTab === 'part1') && (
             <div id="part1-building-rules" className="space-y-6">
               <div className="bg-[#1A3B34] text-white rounded-3xl p-6 sm:p-8 border border-[#C59B4B]/30 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -360,13 +450,13 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
                 </div>
               </div>
 
-              {filteredSections.part1.length === 0 ? (
+              {filteredData.part1.length === 0 ? (
                 <div className="bg-white rounded-2xl p-8 text-center text-sm text-[#1A3B34]/60 border border-[#E8DCC6]">
                   No building rules matched your search query.
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {filteredSections.part1.map((rule) => {
+                  {filteredData.part1.map((rule) => {
                     const isExpanded = expandedRuleIds[rule.id] ?? false;
                     return (
                       <div
@@ -381,16 +471,16 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
                           aria-expanded={isExpanded}
                         >
                           <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                            <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#1A3B34] text-white flex items-center justify-center font-bold text-xs sm:text-sm shrink-0">
+                            <span className="w-8 h-8 rounded-xl bg-[#1A3B34] text-white flex items-center justify-center font-bold text-xs shrink-0">
                               {rule.number}
                             </span>
                             <div className="min-w-0">
                               <div className="flex items-center gap-2 flex-wrap">
-                                <h3 className="font-serif text-base sm:text-lg font-bold text-[#1A3B34]">
+                                <h3 className="font-serif text-base font-bold text-[#1A3B34]">
                                   {rule.title}
                                 </h3>
                                 {rule.tag && (
-                                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-[#E8DCC6]/60 text-[#1A3B34]">
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-[#E8DCC6]/60 text-[#1A3B34]">
                                     {rule.tag}
                                   </span>
                                 )}
@@ -416,7 +506,7 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
                               <ul className="space-y-1.5 pl-1">
                                 {rule.details.map((detail, dIdx) => (
                                   <li key={dIdx} className="flex items-start gap-2">
-                                    <span className="text-[#C59B4B] font-bold text-sm leading-none mt-0.5">•</span>
+                                    <span className="text-[#8CA58A] font-bold text-sm leading-none mt-0.5">•</span>
                                     <span>{detail}</span>
                                   </li>
                                 ))}
@@ -444,12 +534,12 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
             </div>
           )}
 
-          {/* Part II: In-House Rules */}
+          {/* SECTION 2: Part II In-House Rules */}
           {(activeTab === 'all' || activeTab === 'part2') && (
-            <div id="part2-inhouse-rules" className="space-y-6">
-              <div className="bg-[#224D44] text-white rounded-3xl p-6 sm:p-8 border border-[#8CA58A]/30 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div id="part2-in-house-rules" className="space-y-6">
+              <div className="bg-[#1A3B34] text-white rounded-3xl p-6 sm:p-8 border border-[#C59B4B]/30 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#8CA58A]/30 text-[#F6E7A7] text-[10px] font-bold uppercase tracking-widest border border-[#8CA58A]/50">
+                  <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#8CA58A]/30 text-[#F6E7A7] text-[10px] font-bold uppercase tracking-widest border border-[#8CA58A]/40">
                     <Home className="w-3 h-3" />
                     <span>Plumeria Suite Standards</span>
                   </div>
@@ -462,18 +552,18 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
                 </div>
                 <div className="text-right shrink-0">
                   <span className="text-xs font-bold text-[#F6E7A7]">
-                    18 In-House Standards
+                    14 Suite Standards
                   </span>
                 </div>
               </div>
 
-              {filteredSections.part2.length === 0 ? (
+              {filteredData.part2.length === 0 ? (
                 <div className="bg-white rounded-2xl p-8 text-center text-sm text-[#1A3B34]/60 border border-[#E8DCC6]">
-                  No in-house rules matched your search query.
+                  No house rules matched your search query.
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {filteredSections.part2.map((rule) => {
+                  {filteredData.part2.map((rule) => {
                     const isExpanded = expandedRuleIds[rule.id] ?? false;
                     return (
                       <div
@@ -488,16 +578,16 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
                           aria-expanded={isExpanded}
                         >
                           <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                            <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#8CA58A] text-[#1A3B34] flex items-center justify-center font-bold text-xs sm:text-sm shrink-0">
+                            <span className="w-8 h-8 rounded-xl bg-[#8CA58A] text-white flex items-center justify-center font-bold text-xs shrink-0">
                               {rule.number}
                             </span>
                             <div className="min-w-0">
                               <div className="flex items-center gap-2 flex-wrap">
-                                <h3 className="font-serif text-base sm:text-lg font-bold text-[#1A3B34]">
+                                <h3 className="font-serif text-base font-bold text-[#1A3B34]">
                                   {rule.title}
                                 </h3>
                                 {rule.tag && (
-                                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-[#8CA58A]/20 text-[#1A3B34]">
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-[#E8DCC6]/60 text-[#1A3B34]">
                                     {rule.tag}
                                   </span>
                                 )}
@@ -581,12 +671,12 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
             </p>
           </div>
 
-          {/* Direct Host Contact CTA */}
+          {/* Direct Host Contact CTA & Rental Policy Link */}
           <div className="pt-4 border-t border-[#E8DCC6] flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-xs text-[#1A3B34]/75 text-center sm:text-left">
-              <span>Questions regarding special accommodations or rules? </span>
+              <span>Questions regarding special accommodations, rules, or rental policy? </span>
               <a
-                href={`mailto:${SITE_CONFIG.email}?subject=Question%20About%20House%20Rules`}
+                href={`mailto:${SITE_CONFIG.email}?subject=Question%20About%20Rules%20and%20Rental%20Policy`}
                 className="font-bold text-[#1A3B34] hover:text-[#8CA58A] underline"
               >
                 {SITE_CONFIG.email}
@@ -594,6 +684,14 @@ export const RulesPage: React.FC<RulesPageProps> = ({ onNavigate, onOpenInquiry 
             </div>
 
             <div className="flex items-center gap-3">
+              <button
+                onClick={() => onNavigate('/policy')}
+                className="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E8DCC6]/60 hover:bg-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer inline-flex items-center gap-1.5 border border-[#C59B4B]/30"
+              >
+                <FileText className="w-3.5 h-3.5 text-[#C59B4B]" />
+                <span>Rental Policy</span>
+              </button>
+
               <button
                 onClick={() => onOpenInquiry()}
                 className="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#1A3B34] text-white hover:bg-[#224D44] transition-colors cursor-pointer shadow-xs border border-[#C59B4B]/30"

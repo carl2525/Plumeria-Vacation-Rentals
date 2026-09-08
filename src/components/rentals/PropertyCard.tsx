@@ -90,27 +90,15 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
           {/* Key Amenities preview */}
           <div className="flex flex-wrap gap-1.5 pt-1">
-            <span className="text-[11px] px-2.5 py-0.5 rounded-md bg-[#8CA58A]/15 text-[#1A3B34] font-semibold">
-              ✓ Free Parking Included
-            </span>
-            <span className="text-[11px] px-2.5 py-0.5 rounded-md bg-[#8CA58A]/15 text-[#1A3B34] font-semibold">
-              ✓ $0 Resort Fees
-            </span>
-            <span className="text-[11px] px-2.5 py-0.5 rounded-md bg-[#E8DCC6]/50 text-[#1A3B34] font-medium">
-              2 PM Check-in · 12 PM Checkout
-            </span>
+            {property.keyAmenities.slice(0, 3).map((amenity, idx) => (
+              <span
+                key={idx}
+                className="text-[11px] px-2.5 py-0.5 rounded-md bg-[#E8DCC6]/50 text-[#1A3B34] font-medium"
+              >
+                ✓ {amenity}
+              </span>
+            ))}
           </div>
-        </div>
-
-        {/* Rate & Pricing Info */}
-        <div className="pt-3 pb-1 border-t border-[#E8DCC6]/60 flex items-baseline justify-between">
-          <div>
-            <span className="font-serif text-2xl font-bold text-[#1A3B34]">$300</span>
-            <span className="text-xs text-[#1A3B34]/65 ml-1">/ night base rate</span>
-          </div>
-          <span className="text-[11px] text-[#8CA58A] font-medium">
-            Direct Host Pricing
-          </span>
         </div>
 
         {/* Actions bottom */}

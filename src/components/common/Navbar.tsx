@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Calendar, MapPin, Mail, Phone, ChevronRight } from 'lucide-react';
+import { Menu, X, Calendar, MapPin, Mail, Phone, ChevronRight, Youtube, Instagram, Facebook, Video } from 'lucide-react';
 import { PlumeriaLogo } from '../brand/PlumeriaLogo';
 import { SITE_CONFIG } from '../../config/site';
 
@@ -16,6 +16,20 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const getSocialIcon = (platform: string) => {
+    switch (platform) {
+      case 'youtube':
+        return <Youtube className="w-4 h-4 text-[#C59B4B]" />;
+      case 'instagram':
+        return <Instagram className="w-4 h-4 text-[#8CA58A]" />;
+      case 'facebook':
+        return <Facebook className="w-4 h-4 text-[#7FB6D9]" />;
+      case 'tiktok':
+      default:
+        return <Video className="w-4 h-4 text-[#1A3B34]" />;
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -179,19 +193,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </button>
                   );
                 })}
-
-                <button
-                  id="mobile-link-rental-policy"
-                  onClick={() => handleNavClick('/rental-policy')}
-                  className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-semibold uppercase tracking-wider transition-colors text-left cursor-pointer ${
-                    currentPath === '/rental-policy'
-                      ? 'bg-[#E8DCC6] text-[#1A3B34] font-bold'
-                      : 'text-[#1A3B34] hover:bg-[#E8DCC6]/30'
-                  }`}
-                >
-                  <span>Rental Policy</span>
-                  <ChevronRight className="w-4 h-4 text-[#8CA58A]" />
-                </button>
               </div>
             </div>
 
@@ -226,6 +227,27 @@ export const Navbar: React.FC<NavbarProps> = ({
                     {SITE_CONFIG.phone}
                   </a>
                 </p>
+              </div>
+
+              {/* Mobile Drawer Social Links */}
+              <div className="pt-3 border-t border-[#E8DCC6]/60">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#C59B4B] block mb-2">
+                  Follow Our Channels
+                </span>
+                <div className="grid grid-cols-2 gap-2">
+                  {SITE_CONFIG.socials.map((soc) => (
+                    <a
+                      key={soc.platform}
+                      href={soc.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-xl bg-[#E8DCC6]/30 hover:bg-[#E8DCC6]/60 text-xs font-semibold text-[#1A3B34] flex items-center gap-1.5 transition-colors"
+                    >
+                      {getSocialIcon(soc.platform)}
+                      <span className="truncate">{soc.name}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

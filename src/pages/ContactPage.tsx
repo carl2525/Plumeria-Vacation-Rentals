@@ -1,11 +1,24 @@
 import React from 'react';
 import { InquiryForm } from '../components/common/InquiryForm';
-import { Mail, MapPin, Clock, Phone } from 'lucide-react';
+import { Mail, MapPin, Clock, Phone, Video, Youtube, Instagram, Facebook, ExternalLink, FileText } from 'lucide-react';
 import { SITE_CONFIG } from '../config/site';
 import { PlumeriaSymbolLogo } from '../components/brand/PlumeriaSymbolLogo';
 import { AppImage } from '../components/common/AppImage';
 
 export const ContactPage: React.FC = () => {
+  const getSocialIcon = (platform: string) => {
+    switch (platform) {
+      case 'youtube':
+        return <Youtube className="w-4 h-4 text-[#C59B4B]" />;
+      case 'instagram':
+        return <Instagram className="w-4 h-4 text-[#8CA58A]" />;
+      case 'facebook':
+        return <Facebook className="w-4 h-4 text-[#7FB6D9]" />;
+      case 'tiktok':
+      default:
+        return <Video className="w-4 h-4 text-[#1A3B34]" />;
+    }
+  };
   return (
     <div className="pt-28 sm:pt-32 pb-24 bg-[#F9F7F2] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
@@ -109,6 +122,49 @@ export const ContactPage: React.FC = () => {
                     </p>
                   </div>
                 </div>
+              </div>
+
+              {/* Official Social Media Channels */}
+              <div className="pt-4 border-t border-[#E8DCC6]/60 space-y-3">
+                <span className="block text-[10px] font-bold uppercase tracking-wider text-[#C59B4B]">
+                  Official Social Channels
+                </span>
+                <div className="grid grid-cols-2 gap-2">
+                  {SITE_CONFIG.socials.map((soc) => (
+                    <a
+                      key={soc.platform}
+                      href={soc.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2.5 rounded-xl bg-[#F9F7F2] hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] transition-colors flex items-center justify-between group"
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        {getSocialIcon(soc.platform)}
+                        <span className="text-xs font-semibold text-[#1A3B34] truncate">
+                          {soc.name}
+                        </span>
+                      </div>
+                      <ExternalLink className="w-3 h-3 text-[#1A3B34]/40 group-hover:text-[#1A3B34] shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Direct Booking Rental Policy & Rules Reference */}
+              <div className="pt-3 border-t border-[#E8DCC6]/60">
+                <a
+                  href="#/rules"
+                  className="w-full p-3 rounded-2xl bg-[#E8DCC6]/30 hover:bg-[#E8DCC6]/60 border border-[#C59B4B]/30 flex items-center justify-between transition-colors text-xs"
+                >
+                  <div className="flex items-center gap-2">
+                    <FileText className="w-4 h-4 text-[#C59B4B]" />
+                    <div>
+                      <span className="font-bold text-[#1A3B34] block">Rules & Rental Policy</span>
+                      <span className="text-[11px] text-[#1A3B34]/70">$300/nt base rate · Parking included · Building & In-House Rules</span>
+                    </div>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#1A3B34]/60" />
+                </a>
               </div>
             </div>
 

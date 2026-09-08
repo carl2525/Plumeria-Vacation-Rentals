@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Mail, Phone, Calendar, Compass, ShieldCheck } from 'lucide-react';
+import { MapPin, Mail, Phone, Calendar, Compass, ShieldCheck, Youtube, Instagram, Facebook, Video, ExternalLink } from 'lucide-react';
 import { PlumeriaLogo } from '../brand/PlumeriaLogo';
 import { SITE_CONFIG } from '../../config/site';
 
@@ -9,6 +9,19 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => {
+  const getSocialIcon = (platform: string) => {
+    switch (platform) {
+      case 'youtube':
+        return <Youtube className="w-4 h-4 text-[#F6E7A7]" />;
+      case 'instagram':
+        return <Instagram className="w-4 h-4 text-[#F6E7A7]" />;
+      case 'facebook':
+        return <Facebook className="w-4 h-4 text-[#F6E7A7]" />;
+      case 'tiktok':
+      default:
+        return <Video className="w-4 h-4 text-[#F6E7A7]" />;
+    }
+  };
   return (
     <footer className="relative bg-[#1A3B34] text-white overflow-hidden">
       {/* Signature Brand Color Palette Bar */}
@@ -44,6 +57,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <span>Waikiki Banyan</span>
               </button>
             </div>
+
+            {/* Social Media Channels */}
+            <div className="pt-3 space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F6E7A7] block">
+                Connect With Us
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {SITE_CONFIG.socials.map((soc) => (
+                  <a
+                    key={soc.platform}
+                    href={soc.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id={`footer-social-${soc.platform}`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs transition-colors border border-white/15 hover:border-[#F6E7A7]/40"
+                    title={`${soc.name}: ${soc.handle}`}
+                  >
+                    {getSocialIcon(soc.platform)}
+                    <span className="font-medium text-[11px]">{soc.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Col 2: Navigation Links */}
@@ -66,6 +102,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                   className="text-white/75 hover:text-[#F6E7A7] transition-colors cursor-pointer text-left"
                 >
                   Our Waikiki Banyan Rentals
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/rules')}
+                  className="text-[#F6E7A7] hover:underline transition-colors cursor-pointer text-left font-semibold flex items-center gap-1.5"
+                >
+                  <span>Rules / Policy</span>
                 </button>
               </li>
               <li>
@@ -98,22 +142,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                   className="text-white/75 hover:text-[#F6E7A7] transition-colors cursor-pointer text-left"
                 >
                   Frequently Asked Questions
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('/rules')}
-                  className="text-white/75 hover:text-[#F6E7A7] transition-colors cursor-pointer text-left"
-                >
-                  Guest & Building Rules
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('/rental-policy')}
-                  className="text-white/75 hover:text-[#F6E7A7] transition-colors cursor-pointer text-left"
-                >
-                  Direct Booking Rental Policy
                 </button>
               </li>
               <li>

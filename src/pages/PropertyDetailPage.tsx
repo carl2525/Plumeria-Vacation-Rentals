@@ -18,9 +18,6 @@ import {
   ArrowLeft,
   Mail,
   ExternalLink,
-  DollarSign,
-  Car,
-  Clock,
 } from 'lucide-react';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { SITE_CONFIG } from '../config/site';
@@ -381,65 +378,6 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               </div>
             </div>
 
-            {/* Direct Booking Rental Policy Highlights */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#E8DCC6] shadow-xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#E8DCC6]/60">
-                <div className="flex items-center gap-2">
-                  <DollarSign className="w-5 h-5 text-[#8CA58A]" />
-                  <h2 className="font-serif text-xl font-bold text-[#1A3B34]">
-                    Direct Booking Rental Policy & Terms
-                  </h2>
-                </div>
-                <button
-                  onClick={() => onNavigate('/rental-policy')}
-                  className="text-xs font-semibold text-[#8CA58A] hover:text-[#1A3B34] underline cursor-pointer inline-flex items-center gap-1 self-start sm:self-auto"
-                >
-                  <span>View All 7 Policy Terms</span>
-                  <ExternalLink className="w-3 h-3" />
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div className="p-3 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6]/70 space-y-1">
-                  <span className="font-bold text-[#1A3B34] block">1. Transparent Rate & Inclusions</span>
-                  <p className="text-[#1A3B34]/75">
-                    $300/night base rate. Parking is included from check-in through checkout and Plumeria charges $0 separate resort or amenity fees.
-                  </p>
-                </div>
-
-                <div className="p-3 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6]/70 space-y-1">
-                  <span className="font-bold text-[#1A3B34] block">2. Check-In: 2 PM / Checkout: 12 PM</span>
-                  <p className="text-[#1A3B34]/75">
-                    Generous noon checkout. Late checkout options available with advance approval (1PM $50, 2PM $100, 3PM $150, after 3PM $300).
-                  </p>
-                </div>
-
-                <div className="p-3 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6]/70 space-y-1">
-                  <span className="font-bold text-[#1A3B34] block">3. 14-Day Cancellation Protection</span>
-                  <p className="text-[#1A3B34]/75">
-                    100% refund of eligible accommodation charges 14+ days before arrival; 50% refund 7 to 13 days prior; non-refundable under 7 days.
-                  </p>
-                </div>
-
-                <div className="p-3 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6]/70 space-y-1">
-                  <span className="font-bold text-[#1A3B34] block">4. No Automatic Fixed Damage Fees</span>
-                  <p className="text-[#1A3B34]/75">
-                    Guests are simply responsible for actual documented costs beyond normal wear and tear or lost access credentials.
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-2 flex justify-end">
-                <button
-                  onClick={() => onNavigate('/rental-policy')}
-                  className="text-xs font-bold text-[#1A3B34] hover:text-[#8CA58A] inline-flex items-center gap-1.5 transition-colors cursor-pointer"
-                >
-                  <span>Read Full Rental Policy, Fees & Agreement</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-[#8CA58A]" />
-                </button>
-              </div>
-            </div>
-
             {/* Waikiki Banyan Location Context */}
             <div className="p-6 sm:p-7 rounded-3xl bg-[#E8DCC6]/30 border border-[#C59B4B]/30 space-y-4">
               <div className="flex items-center gap-2.5 text-[#1A3B34]">
@@ -465,38 +403,22 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           {/* Right Column: Sticky Booking & Direct Inquiry Card (Desktop & Tablet) */}
           <div className="lg:col-span-4">
             <div className="sticky top-28 bg-white rounded-3xl p-6 sm:p-7 border border-[#E8DCC6] shadow-sm space-y-5">
-              <div className="space-y-2 pb-4 border-b border-[#E8DCC6]/70">
+              <div className="space-y-1.5 pb-4 border-b border-[#E8DCC6]/70">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#8CA58A] bg-[#8CA58A]/15 px-2.5 py-0.5 rounded-full">
-                    Direct Booking
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#8CA58A]">
+                    Direct Host Reservation
                   </span>
                   <div className="flex items-center gap-1 text-[#C59B4B]">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span className="text-xs font-semibold text-[#1A3B34]">Best Rate Guarantee</span>
+                    <Sparkles className="w-4 h-4" />
+                    <span className="text-xs font-semibold text-[#1A3B34]">Best Rate Direct</span>
                   </div>
                 </div>
-
-                <div className="flex items-baseline justify-between pt-1">
-                  <div>
-                    <span className="font-serif text-3xl font-bold text-[#1A3B34]">$300</span>
-                    <span className="text-xs text-[#1A3B34]/65 ml-1 font-medium">/ night base rate</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[11px] font-bold text-[#1A3B34] block">Parking Included</span>
-                    <span className="text-[10px] text-[#8CA58A] font-semibold block">$0 Resort Fees</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between text-[11px] text-[#1A3B34]/70 pt-1 border-t border-[#E8DCC6]/40">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-[#8CA58A]" />
-                    <span>Check-in: 2:00 PM</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-[#8CA58A]" />
-                    <span>Checkout: 12:00 PM</span>
-                  </span>
-                </div>
+                <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
+                  Plan Your Stay
+                </h3>
+                <p className="text-xs text-[#1A3B34]/60">
+                  Waikiki Banyan · {property.tower}
+                </p>
               </div>
 
               {/* Booking Dates Form in Sticky Card */}
@@ -582,15 +504,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               <div className="pt-4 border-t border-[#E8DCC6]/70 space-y-2 text-xs text-[#1A3B34]/75">
                 <div className="flex items-center gap-2">
                   <Check className="w-3.5 h-3.5 text-[#8CA58A]" />
-                  <span>Free Reserved Garage Parking Included</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-[#8CA58A]" />
-                  <span>Generous 12:00 PM Noon Checkout</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-[#8CA58A]" />
-                  <span>Contactless Smart Lock Check-In (2 PM)</span>
+                  <span>Contactless Smart Lock Check-In</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="w-3.5 h-3.5 text-[#8CA58A]" />

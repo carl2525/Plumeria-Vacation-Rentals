@@ -11,9 +11,9 @@ export const FAQS: FAQItem[] = [
   {
     id: 'faq-resort-fees',
     category: 'Booking & Policies',
-    question: 'Are there mandatory daily resort fees like Waikiki hotels charge?',
+    question: 'Are there mandatory daily resort fees or parking fees?',
     answer:
-      'No! While typical Waikiki hotels tack on $45 to $65+ per night in surprise "resort fees" upon check-in, Plumeria Vacation Rentals at Waikiki Banyan charges $0 in mandatory resort fees. Full access to the 1-acre recreation deck, heated pool, 2 jet hot tubs, dry sauna, tennis courts, BBQ pavilions, and fast Wi-Fi is 100% included in your booking.',
+      'No! Plumeria Vacation Rentals does not charge a separate resort or amenity fee. Furthermore, covered on-site garage parking is included with your stay from check-in through checkout. Your base rate is $300 per night (unless a different rate is displayed or quoted for your dates), and all cleaning fees and taxes are disclosed before payment.',
   },
   {
     id: 'faq-location',
@@ -39,16 +39,23 @@ export const FAQS: FAQItem[] = [
   {
     id: 'faq-checkin',
     category: 'Booking & Policies',
-    question: 'How does check-in and check-out work?',
+    question: 'What are the check-in and checkout times, and is late checkout available?',
     answer:
-      'We offer seamless, contactless self check-in using digital smart keypad locks on our suite doors. Check-in begins at 3:00 PM and check-out is at 10:00 AM. Detailed access instructions, keypad codes, and building arrival guides are sent prior to your arrival date.',
+      'Check-in is at 2:00 PM and checkout is at 12:00 PM (enjoy a relaxed final morning!). Contactless keyless keypad entry is provided. Early check-in and late checkout require advance approval and are subject to availability. Late checkout fee schedule: Until 1:00 PM ($50), Until 2:00 PM ($100), Until 3:00 PM ($150), and After 3:00 PM (up to $300, equivalent to base rate for another night).',
+  },
+  {
+    id: 'faq-cancellation',
+    category: 'Booking & Policies',
+    question: 'What is your direct booking cancellation policy?',
+    answer:
+      'Our direct booking cancellation policy is clear and transparent: 14 days or more before check-in receives a 100% refund of eligible accommodation charges; 7 to 13 days before check-in receives a 50% refund; less than 7 days before check-in receives no standard refund. Cancellation must be submitted in writing.',
   },
   {
     id: 'faq-parking',
     category: 'Waikiki Banyan',
-    question: 'Is parking available at Waikiki Banyan?',
+    question: 'Is parking included with my stay at Waikiki Banyan?',
     answer:
-      'Yes, Waikiki Banyan features a multi-story covered parking garage on site. Daily and weekly parking passes can be arranged through the parking garage operator on the ground floor, or selected with your reservation depending on the specific suite arrangement.',
+      'Yes! Covered garage parking at Waikiki Banyan is included with your Plumeria reservation from check-in through checkout ($0 extra charge). Guests must follow Waikiki Banyan garage rules (5 MPH speed limit, authorized stalls).',
   },
   {
     id: 'faq-occupancy',

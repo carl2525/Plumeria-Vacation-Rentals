@@ -96,3 +96,18 @@ export interface RuleCategory {
   partSubtitle: string;
   rules: RuleItem[];
 }
+
+export interface RentalPolicySection {
+  id: string;
+  number: number;
+  title: string;
+  summary: string;
+  content: string[];
+  highlights?: {
+    label: string;
+    value: string;
+    subtext?: string;
+  }[];
+  importantData?: string[];
+  alertNote?: string;
+}
