@@ -21,19 +21,19 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/50 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
               <Sparkles className="w-3.5 h-3.5 text-[#C59B4B]" />
-              <span>The Waikiki Banyan Difference</span>
+              <span>Plumeria Vacation Rentals · The Waikiki Banyan Advantage</span>
             </div>
 
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#1A3B34] leading-tight">
-              Why Waikiki Banyan outclasses ordinary vacation rentals.
+              Why our Waikiki condo rentals outclass ordinary vacation rentals.
             </h2>
 
             <p className="text-base sm:text-lg text-[#1A3B34]/85 font-light leading-relaxed">
-              Most Waikiki travelers get trapped between two extremes: expensive, cramped 280 sq. ft. hotel rooms with zero kitchen facilities and $50/day surprise resort fees, or aging walk-up condos with no amenities whatsoever.
+              When searching for a Waikiki vacation rental, travelers usually face a frustrating dilemma: cramped 280 sq. ft. hotel rooms with zero kitchen facilities and $50/day surprise resort fees, or aging walk-up rentals with zero amenities.
             </p>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 leading-relaxed font-light">
-              <strong className="font-semibold text-[#1A3B34]">Waikiki Banyan gives you the best of both worlds:</strong> a spacious 550 sq. ft. private 1-bedroom condo with full chef-ready kitchen and private lanai, combined with Oʻahu’s largest 1-acre resort recreation deck (heated pool, 2 jet spas, sauna, tennis/pickleball, and sunset BBQ grills).
+              <strong className="font-semibold text-[#1A3B34]">Waikiki Banyan vacation rentals give you the best of both worlds:</strong> spacious 550 sq. ft. private 1-bedroom suites with full chef-ready kitchens and private ocean-breeze lanais, paired with Oʻahu’s largest 1-acre resort recreation deck (heated pool, 2 jet spas, sauna, tennis/pickleball, and sunset BBQ grills). When you book direct in Waikiki with Plumeria Vacation Rentals, you secure the finest Waikiki short term rentals with zero hidden fees.
             </p>
 
             {/* 3 Quick Highlight Pills matching Brand Palette */}

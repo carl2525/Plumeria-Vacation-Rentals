@@ -69,7 +69,7 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
           <div className="lg:col-span-7 space-y-5">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1A3B34] text-[#F6E7A7] border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] shadow-xs">
               <Award className="w-3.5 h-3.5 text-[#C59B4B]" />
-              <span>The Gold Standard in Waikiki Stays</span>
+              <span>Plumeria Vacation Rentals · Waikiki Banyan Condo Rentals</span>
             </div>
 
             <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-[#1A3B34] leading-tight">
@@ -77,7 +77,7 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
             </h1>
 
             <p className="text-base sm:text-lg text-[#1A3B34]/85 font-light leading-relaxed">
-              Consistently rated one of the most beloved condo-resorts in Honolulu, <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan (201 ʻOhua Avenue)</strong> solves every headache of traveling to Oʻahu. You get the independence, space, and kitchen savings of a full private condo paired with resort recreation that eclipses 95% of Waikiki hotels.
+              Consistently rated among the top Waikiki vacation rentals and condo rentals in Honolulu, <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan (201 ʻOhua Avenue)</strong> solves every headache of traveling to Oʻahu. Unlike ordinary Waikiki short term rentals, you enjoy the space and kitchen savings of a 550 sq. ft. private condo paired with Oʻahu’s largest 1-acre resort deck. Book direct in Waikiki with Plumeria Vacation Rentals for the best rates and zero resort fees.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2 text-xs sm:text-sm text-[#1A3B34]/80">

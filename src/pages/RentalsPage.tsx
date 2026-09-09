@@ -53,16 +53,34 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
         <div className="space-y-4 max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/40 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
             <Building2 className="w-3.5 h-3.5 text-[#C59B4B]" />
-            <span>Waikiki Banyan Tower 2 · Premier Condo-Resort</span>
+            <span>Plumeria Vacation Rentals · Waikiki Banyan Tower 2</span>
           </div>
 
           <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#1A3B34] leading-tight">
-            Why Waikiki Banyan is Better Than Other Vacation Rentals
+            Waikiki Vacation Rentals at Waikiki Banyan
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Most vacation rentals in Waikiki force you to compromise: small kitchenettes, noisy street corners, aging walk-ups with no pool, or hidden $50/night resort fees. <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan delivers what no other rental can:</strong> high-floor 550 sq. ft. 1-bedroom suites with full chef kitchens, breezy ocean-breeze lanais, Oʻahu’s largest 1-acre resort deck, and a peaceful 1-block walk to Kuhio Beach—with zero mandatory resort fees.
+            Browse our handpicked collection of Waikiki condo rentals and short term rentals. Most vacation rentals in Waikiki force you to compromise: cramped kitchenettes, noisy street corners, or hidden $50/night resort fees. <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan vacation rentals deliver what no other rental can:</strong> high-floor 550 sq. ft. 1-bedroom suites with full chef kitchens, breezy ocean lanais, Oʻahu’s largest 1-acre resort deck, and a peaceful 1-block walk to Kuhio Beach. Reserve on Airbnb or send a direct booking inquiry for zero mandatory resort fees.
           </p>
+        </div>
+
+        {/* Airbnb First & Direct Inquiry Clarification Banner */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#C59B4B]/35 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-start sm:items-center gap-3">
+            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#FF385C] text-white shrink-0 shadow-2xs">
+              Airbnb First
+            </span>
+            <p className="text-xs sm:text-sm text-[#1A3B34]/85 leading-relaxed">
+              Our primary listings are hosted on <strong className="text-[#1A3B34]">Airbnb</strong>. You can view each suite’s verified details, or submit a direct website inquiry below for personalized host communication, dates, and $0 resort fees.
+            </p>
+          </div>
+          <button
+            onClick={() => onInquireProperty('')}
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#1A3B34] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#224D44] transition-colors shrink-0 cursor-pointer shadow-xs border border-[#C59B4B]/30"
+          >
+            <span>Send Direct Inquiry</span>
+          </button>
         </div>
 
         {/* Filter Bar Panel */}

@@ -15,6 +15,7 @@ export const PROPERTIES: Property[] = [
     beds: 3,
     bathrooms: 1,
     squareFeet: 550,
+    airbnbUrl: 'https://www.airbnb.com',
     featured: true,
     heroImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80',
     gallery: [
@@ -161,6 +162,7 @@ export const PROPERTIES: Property[] = [
     beds: 3,
     bathrooms: 1,
     squareFeet: 550,
+    airbnbUrl: 'https://www.airbnb.com',
     featured: true,
     heroImage: 'https://images.unsplash.com/photo-1505852679233-d9fd70aff568?auto=format&fit=crop&w=1600&q=80',
     gallery: [

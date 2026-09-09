@@ -41,11 +41,16 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
           <div className="flex items-center gap-3">
             <PlumeriaSymbolLogo className="w-10 h-10 shrink-0" />
             <div>
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#8CA58A] block">
-                Stay at Waikiki Banyan
-              </span>
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#8CA58A]">
+                  Stay at Waikiki Banyan
+                </span>
+                <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase bg-[#FF385C]/10 text-[#FF385C] border border-[#FF385C]/20">
+                  Airbnb Listed
+                </span>
+              </div>
               <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1A3B34]">
-                Plan Your Waikiki Vacation
+                Booking Inquiry
               </h2>
             </div>
           </div>
@@ -68,7 +73,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
           </span>
           <span className="flex items-center gap-1 text-[#1A3B34] font-medium">
             <Sparkles className="w-3 h-3 text-[#C59B4B]" />
-            <span>Direct Host Rates</span>
+            <span>Direct Inquiry · $0 Resort Fees</span>
           </span>
         </div>
 

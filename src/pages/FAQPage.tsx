@@ -53,7 +53,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ onOpenInquiry, onNavigate }) =
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Everything you need to know about staying at Waikiki Banyan with Plumeria Vacation Rentals—and why Waikiki Banyan is widely preferred over ordinary vacation rentals and hotels across Waikiki.
+            Everything you need to know about booking direct Waikiki vacation rentals at Waikiki Banyan with Plumeria Vacation Rentals—and why our Waikiki condo rentals are preferred over ordinary short term rentals and hotels across Honolulu.
           </p>
         </div>
 

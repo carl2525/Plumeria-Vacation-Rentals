@@ -113,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Right Action: Book Your Stay CTA (Desktop only to prevent duplicate on tablet) */}
+          {/* Right Action: Inquire / Book CTA (Desktop only to prevent duplicate on tablet) */}
           <div className="hidden lg:flex items-center shrink-0">
             <button
               id="nav-book-stay-cta"
@@ -121,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="inline-flex items-center gap-1.5 px-4 xl:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-xs transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer bg-[#1A3B34] hover:bg-[#224D44] text-white border border-[#C59B4B]/30 hover:border-[#C59B4B]/60 whitespace-nowrap"
             >
               <Calendar className="w-3.5 h-3.5 text-[#F6E7A7]" />
-              <span>Book Your Stay</span>
+              <span>Inquire / Book</span>
             </button>
           </div>
 
@@ -132,7 +132,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => onOpenInquiry()}
               className="rounded-full text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 transition-colors cursor-pointer bg-[#1A3B34] text-white shadow-xs"
             >
-              Book
+              Inquire
             </button>
             <button
               id="nav-mobile-toggle-btn"
@@ -207,8 +207,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full py-3.5 px-4 rounded-2xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer border border-[#C59B4B]/30"
               >
                 <Calendar className="w-4 h-4 text-[#F6E7A7]" />
-                <span>Book Your Stay</span>
+                <span>Send Booking Inquiry</span>
               </button>
+              <p className="text-[11px] text-center text-[#1A3B34]/60 font-medium">
+                Main listings on Airbnb · Direct inquiries welcomed
+              </p>
 
               <div className="text-xs text-[#1A3B34]/75 space-y-1.5 pt-2">
                 <p className="flex items-center gap-1.5">

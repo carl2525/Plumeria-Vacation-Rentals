@@ -36,9 +36,14 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/95 backdrop-blur-md text-[#1A3B34] shadow-sm">
             {property.viewType}
           </span>
-          <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#1A3B34] text-[#F6E7A7] shadow-sm border border-[#C59B4B]/30">
-            {property.unitNumber ? `Unit #${property.unitNumber}` : property.tower}
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#FF385C] text-white shadow-sm">
+              Airbnb
+            </span>
+            <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#1A3B34] text-[#F6E7A7] shadow-sm border border-[#C59B4B]/30">
+              {property.unitNumber ? `Unit #${property.unitNumber}` : property.tower}
+            </span>
+          </div>
         </div>
 
         {/* Bottom image overlay metadata */}
@@ -118,7 +123,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             className="flex-1 py-2.5 px-3 rounded-xl bg-[#1A3B34] hover:bg-[#2A5D52] text-white text-[11px] font-bold transition-colors uppercase tracking-widest flex items-center justify-center gap-1.5 cursor-pointer shadow-xs border border-[#C59B4B]/30"
           >
             <Calendar className="w-3.5 h-3.5 text-[#F6E7A7]" />
-            <span>Check Dates</span>
+            <span>Send Inquiry</span>
           </button>
         </div>
       </div>

@@ -1,0 +1,8 @@
+# Robots.txt for Plumeria Vacation Rentals
+# https://plumeriavacationrentals.com
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://plumeriavacationrentals.com/sitemap.xml

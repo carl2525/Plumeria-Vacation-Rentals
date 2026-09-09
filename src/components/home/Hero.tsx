@@ -23,37 +23,34 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
       </div>
 
       {/* Main Hero Content */}
-      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white space-y-6 sm:space-y-8 mt-6 sm:mt-10">
+      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white space-y-5 sm:space-y-6 mt-4 sm:mt-8">
         {/* Eyebrow badge with logo symbol */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-[#C59B4B]/50 rounded-full text-white text-[11px] font-bold tracking-[0.2em] uppercase shadow-lg animate-fade-in">
           <PlumeriaSymbolLogo variant="white" className="w-4 h-4 shrink-0 drop-shadow-sm" />
-          <span>The Premier Condo-Resort in Waikiki · Tower 2</span>
+          <span>Waikiki Vacation Rentals · Waikiki Banyan</span>
         </div>
 
         {/* Main Headline */}
-        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] drop-shadow-2xl max-w-4xl mx-auto">
+        <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.12] drop-shadow-2xl max-w-3xl mx-auto">
           Why Waikiki Banyan is <br className="hidden sm:inline" />
           <span className="italic font-light text-[#F6E7A7]">the better way to stay.</span>
         </h1>
 
-        {/* Supporting Copy */}
-        <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/95 font-light leading-relaxed drop-shadow-sm">
-          Skip cramped 280 sq. ft. hotel rooms and surprise resort fees. Experience 550 sq. ft. 1-bedroom suites with full chef kitchens, private breezy lanais, Oʻahu’s largest 1-acre resort deck, and just 1 block to Kuhio Beach.
+        {/* Supporting Copy - Clean, concise & breathable */}
+        <p className="max-w-2xl mx-auto text-base sm:text-lg text-white/90 font-light leading-relaxed drop-shadow-sm">
+          Spacious 1-bedroom condo suites with full kitchens, private lanais, and Oʻahu’s largest 1-acre resort deck—just 1 block to Kuhio Beach. Reserve on Airbnb or inquire direct with $0 resort fees.
         </p>
 
-        {/* 4 Core Banyan Advantages Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 max-w-3xl mx-auto">
+        {/* 3 Core Banyan Advantages Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-2 pt-1 max-w-2xl mx-auto">
           <span className="px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold">
             ✦ 1-Acre 6th-Floor Resort Deck
           </span>
           <span className="px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold">
             ✦ Full Chef-Ready Kitchen
           </span>
-          <span className="px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold">
-            ✦ 1 Block to Kuhio Beach
-          </span>
           <span className="px-3.5 py-1 rounded-full bg-[#C59B4B]/30 backdrop-blur-sm border border-[#C59B4B]/60 text-[#F6E7A7] text-xs font-semibold">
-            ✦ $0 Mandatory Resort Fees
+            ✦ Airbnb Listed · Inquire Direct
           </span>
         </div>
 
@@ -74,7 +71,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/10 backdrop-blur-md border border-[#8CA58A]/50 text-white hover:bg-white/20 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold text-sm tracking-wide shadow-lg transition-all duration-200 cursor-pointer"
           >
             <Calendar className="w-4 h-4 text-[#F6E7A7]" />
-            <span>View Availability</span>
+            <span>Send Stay Inquiry</span>
           </button>
         </div>
 

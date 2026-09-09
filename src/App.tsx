@@ -3,6 +3,7 @@ import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 import { InquiryModal } from './components/common/InquiryModal';
 import { ScrollToTop } from './components/common/ScrollToTop';
+import { SEOHelper } from './components/common/SEOHelper';
 
 import { HomePage } from './pages/HomePage';
 import { RentalsPage } from './pages/RentalsPage';
@@ -194,6 +195,9 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-[#F9F7F2] text-[#1A3B34] font-sans selection:bg-[#C59B4B]/30 selection:text-[#1A3B34] flex flex-col justify-between">
+      {/* Dynamic SEO Meta, Titles & Breadcrumbs */}
+      <SEOHelper currentPath={currentPath} />
+
       {/* Universal Navigation Header */}
       <Navbar
         currentPath={currentPath}

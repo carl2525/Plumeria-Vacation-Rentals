@@ -123,8 +123,15 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           </div>
 
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#1A3B34] leading-tight">
-            {property.name}
+            {property.name}{' '}
+            <span className="font-light text-xl sm:text-2xl md:text-3xl text-[#1A3B34]/70 block sm:inline">
+              · Waikiki Banyan Vacation Rental
+            </span>
           </h1>
+
+          <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light max-w-3xl">
+            {property.tagline}
+          </p>
 
           <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-[#1A3B34]/75">
             <span className="flex items-center gap-1.5">
@@ -403,21 +410,21 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           {/* Right Column: Sticky Booking & Direct Inquiry Card (Desktop & Tablet) */}
           <div className="lg:col-span-4">
             <div className="sticky top-28 bg-white rounded-3xl p-6 sm:p-7 border border-[#E8DCC6] shadow-sm space-y-5">
-              <div className="space-y-1.5 pb-4 border-b border-[#E8DCC6]/70">
+              <div className="space-y-2 pb-4 border-b border-[#E8DCC6]/70">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#8CA58A]">
-                    Direct Host Reservation
-                  </span>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FF385C]/10 border border-[#FF385C]/30 text-[10px] font-bold uppercase tracking-wider text-[#FF385C]">
+                    <span>Airbnb Primary</span>
+                  </div>
                   <div className="flex items-center gap-1 text-[#C59B4B]">
-                    <Sparkles className="w-4 h-4" />
-                    <span className="text-xs font-semibold text-[#1A3B34]">Best Rate Direct</span>
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span className="text-xs font-semibold text-[#1A3B34]">Inquire Direct</span>
                   </div>
                 </div>
                 <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                  Plan Your Stay
+                  Send Booking Inquiry
                 </h3>
-                <p className="text-xs text-[#1A3B34]/60">
-                  Waikiki Banyan · {property.tower}
+                <p className="text-xs text-[#1A3B34]/70 leading-relaxed">
+                  Our main listing is on Airbnb. You can also send a direct inquiry here to check dates, ask questions, or request direct booking with $0 resort fees.
                 </p>
               </div>
 
@@ -473,16 +480,29 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     className="w-full py-3.5 px-4 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer border border-[#C59B4B]/30"
                   >
                     <Calendar className="w-4 h-4 text-[#F6E7A7]" />
-                    <span>Check Availability / Inquire</span>
+                    <span>Send Booking Inquiry</span>
                   </button>
+
+                  {property.airbnbUrl && (
+                    <a
+                      href={property.airbnbUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      id="sticky-card-airbnb-btn"
+                      className="w-full py-2.5 px-3 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
+                    >
+                      <span>View & Book on Airbnb</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-white/80" />
+                    </a>
+                  )}
 
                   <a
                     href={directMailtoUrl}
                     id="sticky-card-mailto-btn"
-                    className="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-[#E8DCC6]/40 text-[#1A3B34] font-semibold text-xs flex items-center justify-center gap-2 border border-[#E8DCC6] transition-colors cursor-pointer shadow-2xs"
+                    className="w-full py-2 px-3 rounded-xl bg-white hover:bg-[#E8DCC6]/40 text-[#1A3B34] font-medium text-xs flex items-center justify-center gap-1.5 border border-[#E8DCC6] transition-colors cursor-pointer shadow-2xs"
                   >
                     <Mail className="w-3.5 h-3.5 text-[#C59B4B]" />
-                    <span>Email Host Directly (mailto)</span>
+                    <span>Email Host Directly</span>
                     <ExternalLink className="w-3 h-3 text-[#1A3B34]/40" />
                   </a>
                 </div>
@@ -490,7 +510,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
               {/* Direct email quick note */}
               <div className="pt-2 text-center text-xs text-[#1A3B34]/70 space-y-1">
-                <p className="text-[11px]">Direct host communication · $0 resort fees</p>
+                <p className="text-[11px]">Direct host inquiry · $0 mandatory resort fees</p>
                 <a
                   href={directMailtoUrl}
                   className="text-xs font-semibold text-[#8CA58A] hover:underline inline-flex items-center gap-1"
@@ -571,7 +591,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           className="px-5 py-2.5 rounded-xl bg-[#1A3B34] text-white text-xs font-semibold flex items-center gap-1.5 shadow-md border border-[#C59B4B]/30"
         >
           <Calendar className="w-3.5 h-3.5 text-[#F6E7A7]" />
-          <span>Check Dates</span>
+          <span>Send Inquiry</span>
         </button>
       </div>
 

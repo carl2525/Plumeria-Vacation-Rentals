@@ -29,7 +29,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Plumeria Vacation Rentals was founded to offer travelers a more personal, relaxing, and comfortable way to experience Waikiki. We specialize in well-maintained 1-bedroom suites at <strong className="text-[#1A3B34] font-medium">Waikiki Banyan</strong>—just steps from the ocean.
+            Plumeria Vacation Rentals was founded to offer travelers a more personal, relaxing, and authentic way to experience Waikiki. We specialize in boutique Waikiki vacation rentals and Waikiki Banyan condo rentals—just 1 block from the ocean with direct booking privileges.
           </p>
         </div>
 
@@ -41,11 +41,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             </h2>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">
-              When founding Plumeria Vacation Rentals, we scouted every condo building and resort property in Honolulu. Most Waikiki vacation rentals force guests to sacrifice: cramped 280 sq. ft. studio layouts, zero kitchen facilities, noisy street traffic, or tiny postage-stamp pools.
+              When founding Plumeria Vacation Rentals, we scouted every condo building and resort property across Honolulu. Most Waikiki short term rentals and vacation rental options force guests to sacrifice: cramped 280 sq. ft. studio layouts, zero kitchen facilities, noisy street traffic, or tiny postage-stamp pools.
             </p>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">
-              <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan proved to be indisputably superior to any other vacation rental in Honolulu.</strong> Where else can you get a true 550 sq. ft. 1-bedroom suite with a full chef's kitchen and private ocean lanai, paired with Oʻahu’s largest 1-acre 6th-floor resort deck (heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs), just 1 short block to Kuhio Beach—all with zero mandatory resort fees?
+              <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan vacation rentals proved to be indisputably superior to any other rental in Honolulu.</strong> Where else can you get a true 550 sq. ft. 1-bedroom suite with a full chef kitchen and private ocean-breeze lanai, paired with Oʻahu’s largest 1-acre 6th-floor resort deck (heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs), just 1 short block to Kuhio Beach—all with zero mandatory resort fees?
             </p>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">

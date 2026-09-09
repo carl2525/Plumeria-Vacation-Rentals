@@ -37,13 +37,13 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
 
         <div className="space-y-3 max-w-2xl mx-auto">
           <span className="text-xs uppercase tracking-[0.25em] font-bold text-[#F6E7A7]">
-            Start Planning Your Island Escape
+            Listed on Airbnb · Direct Inquiries Welcome
           </span>
           <h2 className="font-serif text-3xl sm:text-5xl font-bold leading-tight">
             Your Waikiki vacation is closer than you think.
           </h2>
           <p className="text-base sm:text-lg text-white/85 font-light leading-relaxed">
-            Experience why Waikiki Banyan is better than any other vacation rental in Honolulu. Reserve your high-floor Tower 2 suite directly with Plumeria and enjoy 1-acre resort amenities, full kitchens, and $0 resort fees.
+            Our suites are primarily listed on Airbnb, with direct inquiries welcomed right here. Experience why Waikiki Banyan condo rentals are better than any other vacation rental in Honolulu—enjoy spacious 1-bedroom suites with 1-acre resort deck amenities, full chef kitchens, and $0 mandatory resort fees.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider bg-[#C59B4B] hover:bg-[#D4A853] text-[#1A3B34] shadow-xl transition-all cursor-pointer"
           >
             <Compass className="w-4 h-4 text-[#1A3B34]" />
-            <span>View Available Rentals</span>
+            <span>Browse All Suites</span>
           </button>
 
           <button
@@ -63,7 +63,7 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider bg-white/15 hover:bg-white/25 text-white backdrop-blur-md border border-[#8CA58A]/50 transition-all cursor-pointer"
           >
             <Mail className="w-4 h-4 text-[#F6E7A7]" />
-            <span>Send an Inquiry</span>
+            <span>Send Direct Inquiry</span>
           </button>
         </div>
 

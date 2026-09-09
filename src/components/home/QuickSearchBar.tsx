@@ -117,7 +117,7 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
             className="w-full h-full min-h-[50px] sm:min-h-[54px] px-6 rounded-2xl bg-[#1A3B34] hover:bg-[#2A5D52] text-white flex items-center justify-center gap-2.5 font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md transition-all duration-200 cursor-pointer border border-[#C59B4B]/30"
           >
             <Search className="w-4 h-4 text-[#F6E7A7] shrink-0" />
-            <span className="whitespace-nowrap">Find Your Stay</span>
+            <span className="whitespace-nowrap">Inquire Dates</span>
           </button>
         </div>
       </form>

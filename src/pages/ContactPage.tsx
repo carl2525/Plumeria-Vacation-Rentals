@@ -54,6 +54,19 @@ export const ContactPage: React.FC = () => {
                 </div>
               </div>
 
+              {/* Airbnb First Information Badge */}
+              <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#FF385C]/30 text-xs text-[#1A3B34]/85 space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase bg-[#FF385C] text-white">
+                    Airbnb Primary
+                  </span>
+                  <span className="font-semibold text-[#1A3B34]">Direct Inquiries Welcomed</span>
+                </div>
+                <p className="text-[11px] text-[#1A3B34]/75 leading-relaxed pt-0.5">
+                  Our main listings are on Airbnb. You can submit this inquiry to check availability, ask questions, or inquire about direct booking rates with $0 resort fees.
+                </p>
+              </div>
+
               <div className="space-y-4 text-xs sm:text-sm text-[#1A3B34]/80">
                 <div className="flex items-start gap-3.5">
                   <div className="w-9 h-9 rounded-xl bg-[#E8DCC6]/50 text-[#1A3B34] flex items-center justify-center shrink-0">

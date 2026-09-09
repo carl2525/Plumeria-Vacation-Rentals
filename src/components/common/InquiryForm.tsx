@@ -227,6 +227,16 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         </a>
       </div>
 
+      {/* Airbnb Primary Clarification Notice */}
+      <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#C59B4B]/30 text-xs text-[#1A3B34]/85 flex items-start gap-2.5">
+        <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase bg-[#FF385C] text-white shrink-0 mt-0.5 shadow-2xs">
+          Airbnb
+        </span>
+        <div className="leading-relaxed">
+          <strong className="text-[#1A3B34] font-semibold">Primary listing is on Airbnb:</strong> Submitting this direct inquiry allows you to check dates with our host team, ask custom questions, or request direct booking rates with $0 mandatory resort fees.
+        </div>
+      </div>
+
       {errorMessage && (
         <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2.5 animate-shake">
           <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />

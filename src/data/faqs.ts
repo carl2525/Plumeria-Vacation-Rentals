@@ -90,6 +90,6 @@ export const FAQS: FAQItem[] = [
     category: 'Booking & Policies',
     question: 'How do I check availability or book a stay?',
     answer:
-      'You can submit a direct stay inquiry via our online inquiry form, call or text us at (808) 671-9191, or email us at plumeria.vacationrentals808@gmail.com with your preferred dates and guest count. Our team responds promptly with verified availability, rates, and booking confirmation.',
+      'Our primary listings are hosted on Airbnb, where you can view verified guest reviews, calendar availability, and reserve your stay. You can also submit a direct booking inquiry right here on our website to check dates, ask custom questions, or request direct booking rates with $0 mandatory resort fees. We can also be reached directly at (808) 671-9191 or plumeria.vacationrentals808@gmail.com.',
   },
 ];

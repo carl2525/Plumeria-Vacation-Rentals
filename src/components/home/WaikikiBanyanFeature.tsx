@@ -20,7 +20,7 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/50 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
             <MapPin className="w-3.5 h-3.5 text-[#C59B4B]" />
-            <span>The Premier Waikiki Standard</span>
+            <span>Waikiki Banyan Vacation Rentals · The Gold Standard</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-[#1A3B34] leading-tight">
@@ -28,7 +28,7 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
           </h2>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Discover why knowledgeable Hawaiian travelers consistently choose Waikiki Banyan over cramped beachfront hotels and standard vacation rentals.
+            Discover why savvy Hawaiian travelers choose our Waikiki Banyan rentals over cramped beachfront hotels and standard Waikiki vacation rentals.
           </p>
         </div>
 
@@ -95,10 +95,10 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
                 <Compass className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                Zero Resort Fees
+                Book Direct · $0 Fees
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-                No surprise $45–$65 daily fees at checkout. All pool, hot tub, sauna, tennis court, beach gear, and high-speed Wi-Fi access are completely included.
+                Book direct in Waikiki with Plumeria Vacation Rentals. No surprise $45–$65 daily fees at checkout. All pool, hot tub, sauna, tennis, and beach gear are 100% included.
               </p>
             </div>
             <span className="text-[11px] font-semibold text-[#8CA58A] pt-2 block">

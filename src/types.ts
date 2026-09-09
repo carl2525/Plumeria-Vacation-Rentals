@@ -15,6 +15,7 @@ export interface Property {
   ratePerNight?: number; // Verified rate if supplied, optional
   cleaningFee?: number;
   taxRateDescription?: string;
+  airbnbUrl?: string;
   featured: boolean;
   heroImage: string;
   gallery: {
