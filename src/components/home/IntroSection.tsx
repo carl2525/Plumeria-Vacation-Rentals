@@ -89,7 +89,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
 
             {/* Floating Brand Badge */}
             <div className="absolute -bottom-5 -left-5 bg-white p-3.5 rounded-2xl shadow-xl border border-[#E8DCC6] flex items-center gap-3">
-              <PlumeriaSymbolLogo className="w-10 h-10 shrink-0" />
+              <PlumeriaSymbolLogo className="w-12 h-12 shrink-0" />
               <div>
                 <span className="text-xs font-bold text-[#1A3B34] block">True Island Hospitality</span>
                 <span className="text-[11px] text-[#8CA58A] font-semibold">Direct Host Communication</span>

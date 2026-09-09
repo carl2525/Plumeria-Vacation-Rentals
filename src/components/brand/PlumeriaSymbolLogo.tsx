@@ -7,7 +7,7 @@ interface LogoProps {
 }
 
 export const PlumeriaSymbolLogo: React.FC<LogoProps> = ({
-  className = 'w-10 h-10',
+  className = 'w-12 h-12',
   variant = 'dark',
 }) => {
   const isWhite = variant === 'white' || variant === 'light';
@@ -26,7 +26,7 @@ export const PlumeriaSymbolLogo: React.FC<LogoProps> = ({
 
   return (
     <svg
-      viewBox="16 28 208 168"
+      viewBox="20 30 202 163"
       width="100%"
       height="100%"
       fill="none"

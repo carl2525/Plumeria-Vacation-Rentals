@@ -31,8 +31,8 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
       <LogoWatermark size="xl" position="bottom-left" variant="white" opacity="opacity-[0.04] sm:opacity-[0.07]" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7">
-        <div className="w-16 h-16 mx-auto bg-white/10 backdrop-blur-md rounded-2xl p-2.5 flex items-center justify-center border border-[#C59B4B]/40 shadow-lg">
-          <PlumeriaSymbolLogo variant="white" className="w-11 h-11" />
+        <div className="w-20 h-20 mx-auto bg-white/10 backdrop-blur-md rounded-2xl p-3 flex items-center justify-center border border-[#C59B4B]/40 shadow-lg">
+          <PlumeriaSymbolLogo variant="white" className="w-14 h-14" />
         </div>
 
         <div className="space-y-3 max-w-2xl mx-auto">

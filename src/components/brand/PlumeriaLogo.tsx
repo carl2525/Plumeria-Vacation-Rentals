@@ -25,11 +25,11 @@ export const PlumeriaLogo: React.FC<FullLogoProps> = ({
       <div className={`flex flex-col items-center text-center group ${className}`}>
         <PlumeriaSymbolLogo
           variant={variant}
-          className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 transition-transform duration-300 group-hover:scale-105"
+          className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 transition-transform duration-300 group-hover:scale-105"
         />
         
         {/* Main Brand Name */}
-        <h2 className={`font-serif text-2xl sm:text-3xl font-bold uppercase tracking-[0.2em] mt-2.5 ${textColor}`}>
+        <h2 className={`font-serif text-2xl sm:text-3xl font-bold uppercase tracking-[0.2em] mt-3 ${textColor}`}>
           Plumeria
         </h2>
 
@@ -48,19 +48,19 @@ export const PlumeriaLogo: React.FC<FullLogoProps> = ({
   // 2. Compact Horizontal Layout (Mobile viewports)
   if (compact) {
     return (
-      <div className={`flex items-center gap-2.5 ${className}`}>
+      <div className={`flex items-center gap-3 ${className}`}>
         <PlumeriaSymbolLogo
           variant={variant}
-          className="w-9 h-9 shrink-0 transition-transform duration-300 group-hover:scale-105"
+          className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 transition-transform duration-300 group-hover:scale-105"
         />
         <div className="flex flex-col justify-center">
           <span
-            className={`font-serif text-[16px] leading-tight font-bold uppercase tracking-[0.12em] ${textColor}`}
+            className={`font-serif text-[17px] leading-tight font-bold uppercase tracking-[0.12em] ${textColor}`}
           >
             Plumeria
           </span>
           <span
-            className={`text-[8px] font-semibold tracking-[0.14em] uppercase whitespace-nowrap mt-0.5 ${goldColor}`}
+            className={`text-[8.5px] font-semibold tracking-[0.14em] uppercase whitespace-nowrap mt-0.5 ${goldColor}`}
           >
             Vacation Rentals
           </span>
@@ -71,19 +71,19 @@ export const PlumeriaLogo: React.FC<FullLogoProps> = ({
 
   // 3. Standard Horizontal Layout (Desktop Header & navigation bar)
   return (
-    <div className={`flex items-center gap-3 group ${className}`}>
+    <div className={`flex items-center gap-3.5 group ${className}`}>
       <PlumeriaSymbolLogo
         variant={variant}
-        className="w-10 h-10 sm:w-11 sm:h-11 shrink-0 transition-transform duration-300 group-hover:scale-105"
+        className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 transition-transform duration-300 group-hover:scale-105"
       />
       <div className="flex flex-col justify-center">
         <span
-          className={`font-serif text-[18px] sm:text-[19px] leading-none font-bold uppercase tracking-[0.14em] ${textColor}`}
+          className={`font-serif text-[19px] sm:text-[21px] leading-none font-bold uppercase tracking-[0.14em] ${textColor}`}
         >
           Plumeria
         </span>
         <span
-          className={`text-[8.5px] sm:text-[9px] font-semibold tracking-[0.18em] uppercase whitespace-nowrap mt-1 ${goldColor}`}
+          className={`text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] uppercase whitespace-nowrap mt-1 ${goldColor}`}
         >
           Vacation Rentals
         </span>

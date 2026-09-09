@@ -38,8 +38,8 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
 
         {/* Modal Header */}
         <div className="p-6 sm:p-7 pb-4 flex items-start justify-between border-b border-[#E8DCC6] bg-white">
-          <div className="flex items-center gap-3">
-            <PlumeriaSymbolLogo className="w-10 h-10 shrink-0" />
+          <div className="flex items-center gap-3.5">
+            <PlumeriaSymbolLogo className="w-12 h-12 shrink-0" />
             <div>
               <div className="flex items-center gap-2 mb-0.5">
                 <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#8CA58A]">

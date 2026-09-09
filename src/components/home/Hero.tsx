@@ -26,7 +26,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
       <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white space-y-5 sm:space-y-6 mt-4 sm:mt-8">
         {/* Eyebrow badge with logo symbol */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-[#C59B4B]/50 rounded-full text-white text-[11px] font-bold tracking-[0.2em] uppercase shadow-lg animate-fade-in">
-          <PlumeriaSymbolLogo variant="white" className="w-4 h-4 shrink-0 drop-shadow-sm" />
+          <PlumeriaSymbolLogo variant="white" className="w-5 h-5 shrink-0 drop-shadow-sm" />
           <span>Waikiki Vacation Rentals · Waikiki Banyan</span>
         </div>
 
