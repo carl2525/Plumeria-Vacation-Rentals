@@ -138,7 +138,7 @@ export const PROPERTIES: Property[] = [
       'Strictly 100% Smoke-Free (unit, lanai, and common areas within 20ft)',
       'Surfboards & bicycles must strictly use Tower 2 freight elevator Car #5',
       'Lanai safety: No hanging towels or items over railings; no grilling or outdoor storage',
-      'No visiting pets (Waikiki Banyan Association rules)',
+      'Pets: Allowed subject to building rules & authorization; advance host notification & written confirmation required (service animals welcome per law)',
       'Maximum occupancy: 5 registered guests only; no parties or disruptive gatherings',
     ],
     waikikiBanyanPerks: [
@@ -285,7 +285,7 @@ export const PROPERTIES: Property[] = [
       'Strictly 100% Smoke-Free (unit, lanai, and common areas within 20ft)',
       'Surfboards & bicycles must strictly use Tower 2 freight elevator Car #5',
       'Lanai safety: No hanging towels or items over railings; no grilling or outdoor storage',
-      'No visiting pets (Waikiki Banyan Association rules)',
+      'Pets: Allowed subject to building rules & authorization; advance host notification & written confirmation required (service animals welcome per law)',
       'Maximum occupancy: 5 registered guests only; no parties or disruptive gatherings',
     ],
     waikikiBanyanPerks: [

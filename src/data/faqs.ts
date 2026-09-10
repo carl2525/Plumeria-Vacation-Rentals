@@ -79,6 +79,13 @@ export const FAQS: FAQItem[] = [
       'All suites and lanais are strictly 100% smoke-free (including cigarettes, cigars, vape devices, and cannabis per Hawaii building laws). Waikiki Banyan observes recreation deck quiet hours from 10:00 PM to 6:00 AM and in-unit quiet hours from 10:00 PM to 7:00 AM to ensure restful stays for all visitors.',
   },
   {
+    id: 'faq-pets',
+    category: 'Booking & Policies',
+    question: 'Are pets allowed at Waikiki Banyan with Plumeria Vacation Rentals?',
+    answer:
+      'Waikiki Banyan allows pets subject to the building’s rules, authorization requirements, and management discretion. Guests must notify Plumeria Vacation Rentals in advance and receive written confirmation before bringing any pet to the unit. All applicable Waikiki Banyan requirements must be satisfied before a pet is permitted on the property. The building does not have breed, height, or weight restrictions, and the General Manager may determine what constitutes a reasonable number of animals. Service animals are handled in accordance with applicable law and should be communicated through the appropriate booking or host process when needed.',
+  },
+  {
     id: 'faq-building-rules',
     category: 'Booking & Policies',
     question: 'Where can I read the full Waikiki Banyan building rules and Plumeria house rules?',

@@ -101,13 +101,16 @@ export const BUILDING_RULES: RuleCategory = {
     {
       id: 'banyan-pets',
       number: 8,
-      title: 'Pets',
-      tag: 'Pets',
-      summary: "Waikiki Banyan does not allow visiting pets. Any pet kept by an occupant must meet the building's authorization requirements.",
+      title: 'Pets & Animals',
+      tag: 'Pets Permitted w/ Approval',
+      summary: 'Waikiki Banyan allows pets subject to the building’s rules, authorization requirements, and management discretion.',
       details: [
-        'Do not bring a pet unless Plumeria Vacation Rentals has specifically confirmed in writing that the animal is permitted and all applicable requirements have been satisfied.',
-        'Service animals are handled in accordance with applicable law and should be communicated through the appropriate booking/host process when needed.',
+        'Guests must notify Plumeria Vacation Rentals in advance and receive written confirmation before bringing any pet to the unit.',
+        'All applicable Waikiki Banyan requirements must be satisfied before a pet is permitted on the property.',
+        'The building does not have breed, height, or weight restrictions. The General Manager may determine what constitutes a reasonable number of animals.',
+        'Service animals are handled in accordance with applicable law and should be communicated through the appropriate booking or host process when needed.',
       ],
+      importantNote: 'Prior Written Confirmation Required: Advance notification and written confirmation from Plumeria Vacation Rentals are required before bringing any pet. All building authorization requirements must be satisfied prior to arrival.',
     },
     {
       id: 'banyan-rec-deck',
@@ -230,12 +233,16 @@ export const IN_HOUSE_RULES: RuleCategory = {
     {
       id: 'plumeria-pets',
       number: 5,
-      title: 'Pets',
-      tag: 'No Pets',
-      summary: 'No pets are allowed for ordinary vacation-rental stays because Waikiki Banyan prohibits visiting pets.',
+      title: 'Pet Policy & Guidelines',
+      tag: 'Advance Confirmation Required',
+      summary: 'Waikiki Banyan allows pets subject to the building’s rules, authorization requirements, and management discretion.',
       details: [
-        'Nothing in this rule is intended to limit rights that apply to qualified service animals under applicable law.',
+        'Guests must notify Plumeria Vacation Rentals in advance and receive written confirmation before bringing any pet to the unit.',
+        'All applicable Waikiki Banyan requirements must be satisfied before a pet is permitted on the property.',
+        'The building does not have breed, height, or weight restrictions. The General Manager may determine what constitutes a reasonable number of animals.',
+        'Service animals are handled in accordance with applicable law and should be communicated through the appropriate booking or host process when needed.',
       ],
+      importantNote: 'Guests must notify Plumeria in advance and receive written confirmation prior to check-in. Pets must be well-mannered, leashed in common areas, and must never cause excessive noise or disturb other residents.',
     },
     {
       id: 'plumeria-lanai-safety',
@@ -431,6 +438,11 @@ export const QUICK_RULE_HIGHLIGHTS = [
     icon: 'Clock',
     title: 'Pool & Rec Deck',
     text: 'Pool: 8 AM – 9 PM. BBQ/Deck: 8 AM – 10 PM. No glass anywhere on recreation deck.',
+  },
+  {
+    icon: 'PawPrint',
+    title: 'Pet Policy',
+    text: 'Pets allowed subject to building rules & discretion. Prior written confirmation from Plumeria is required.',
   },
   {
     icon: 'Car',
