@@ -98,7 +98,7 @@ export const WAIKIKI_DESTINATIONS: WaikikiDestination[] = [
     category: 'shopping',
     categoryLabel: 'Open-Air Shopping & Culture',
     distanceFromBanyan: '6 Blocks · 8 min stroll down Kalākaua Ave',
-    image: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/destinations/waikiki-market-place.jpg',
     description:
       'An open-air shopping and cultural destination built around a magnificent 160-year-old banyan tree. Features Hawaiian cultural workshops, open-air retail, evening torch lighting, and the third-floor Grand Lanai showcasing celebrated chef-driven restaurants.',
     insiderTip:
@@ -124,7 +124,7 @@ export const WAIKIKI_DESTINATIONS: WaikikiDestination[] = [
     category: 'nature',
     categoryLabel: 'Island Exploration & Scenic Drives',
     distanceFromBanyan: 'Direct exit via Kapahulu Ave to H-1 in 3 min',
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/destinations/oahu-coastal-highway.jpg',
     description:
       'The #1 logistical advantage of staying at Waikiki Banyan: located on the eastern Diamond Head edge of Waikiki, pulling out of our secure parking structure puts you on Kapahulu Ave and the H-1 Freeway in under 3 minutes—saving 25+ minutes of crawling through dense central Waikiki traffic gridlock!',
     insiderTip:
