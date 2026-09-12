@@ -72,9 +72,9 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
                 alt="Waikiki Banyan tropical scenery and ocean breeze"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A3B34]/85 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A3B34] via-[#1A3B34]/60 to-transparent" />
 
-              <div className="absolute bottom-6 left-6 right-6 text-white space-y-2">
+              <div className="absolute bottom-24 sm:bottom-28 left-6 right-6 text-white space-y-2">
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F6E7A7]">
                   Waikiki Banyan Community
                 </span>
@@ -87,8 +87,8 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
               </div>
             </div>
 
-            {/* Floating Brand Badge */}
-            <div className="absolute -bottom-5 -left-5 bg-white p-3.5 rounded-2xl shadow-xl border border-[#E8DCC6] flex items-center gap-3">
+            {/* Floating Brand Badge with generous spacing from image text */}
+            <div className="absolute -bottom-5 left-4 sm:left-6 bg-white p-3.5 rounded-2xl shadow-xl border border-[#E8DCC6] flex items-center gap-3 z-10">
               <PlumeriaSymbolLogo className="w-12 h-12 shrink-0" />
               <div>
                 <span className="text-xs font-bold text-[#1A3B34] block">True Island Hospitality</span>

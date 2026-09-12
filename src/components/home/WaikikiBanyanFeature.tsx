@@ -155,12 +155,17 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
 
             {/* Right side CTA & imagery */}
             <div className="lg:col-span-5 flex flex-col items-start lg:items-end justify-center space-y-4">
-              <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-white/20 aspect-16/10">
+              <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-white/20 aspect-16/10 relative group">
                 <AppImage
-                  src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80"
-                  alt="Waikiki Banyan 6th floor pool and recreation sundeck"
-                  className="w-full h-full object-cover"
+                  src="/images/banyan/banyan-amenity-09.webp"
+                  fallbackSrc="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80"
+                  alt="Waikiki Banyan 6th floor heated resort swimming pool and recreation sundeck"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+                <div className="absolute bottom-2.5 left-2.5 right-2.5 px-3 py-1.5 rounded-xl bg-[#1A3B34]/85 backdrop-blur-xs text-white text-[11px] font-medium flex items-center justify-between">
+                  <span className="text-[#F6E7A7]">Heated Resort Pool & Spas</span>
+                  <span className="text-white/80">6th-Floor 1-Acre Oasis</span>
+                </div>
               </div>
 
               <button

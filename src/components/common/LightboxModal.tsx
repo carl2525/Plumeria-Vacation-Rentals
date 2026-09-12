@@ -4,6 +4,7 @@ import { AppImage } from './AppImage';
 
 export interface LightboxImage {
   url: string;
+  fallbackUrl?: string;
   caption: string;
   category?: string;
 }
@@ -70,6 +71,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
         <AppImage
           src={currentImage.url}
           alt={currentImage.caption}
+          fallbackSrc={currentImage.fallbackUrl}
           className="max-h-[75vh] sm:max-h-[80vh] w-auto max-w-full object-contain rounded-2xl shadow-2xl"
         />
 

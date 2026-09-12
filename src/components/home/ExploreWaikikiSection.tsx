@@ -17,6 +17,7 @@ export const ExploreWaikikiSection: React.FC<ExploreWaikikiSectionProps> = ({ on
     { id: 'activities', label: 'Surfing & Parks' },
     { id: 'dining', label: 'Dining & Cafes' },
     { id: 'nature', label: 'Diamond Head & Scenic' },
+    { id: 'shopping', label: 'Shopping & Culture' },
   ];
 
   const filteredItems =
@@ -77,7 +78,7 @@ export const ExploreWaikikiSection: React.FC<ExploreWaikikiSectionProps> = ({ on
 
         {/* Destination Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredItems.slice(0, 3).map((item) => (
+          {filteredItems.slice(0, 6).map((item) => (
             <article
               key={item.id}
               className="bg-white rounded-3xl overflow-hidden border border-[#E8DCC6] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
@@ -91,35 +92,49 @@ export const ExploreWaikikiSection: React.FC<ExploreWaikikiSectionProps> = ({ on
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-                <div className="absolute top-3.5 left-3.5">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/95 backdrop-blur-md text-[#1A3B34]">
+                <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-1.5">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/95 backdrop-blur-md text-[#1A3B34] shadow-xs">
                     {item.categoryLabel}
                   </span>
                 </div>
 
                 <div className="absolute bottom-3 left-3.5 right-3.5 text-white flex items-center justify-between text-xs">
                   <span className="flex items-center gap-1 font-medium drop-shadow-sm">
-                    <MapPin className="w-3.5 h-3.5 text-[#C59B4B]" />
+                    <MapPin className="w-3.5 h-3.5 text-[#F6E7A7]" />
                     <span>{item.distanceFromBanyan}</span>
                   </span>
                 </div>
               </div>
 
               <div className="p-6 space-y-3.5 flex-1 flex flex-col justify-between">
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   <h3 className="font-serif text-xl font-bold text-[#1A3B34] group-hover:text-[#8CA58A] transition-colors leading-snug">
                     {item.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
                     {item.description}
                   </p>
+
+                  {/* Highlight Pills */}
+                  {item.highlightPills && item.highlightPills.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {item.highlightPills.slice(0, 3).map((pill, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#1A3B34]/5 text-[#1A3B34]/80 border border-[#1A3B34]/10"
+                        >
+                          {pill}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Insider Tip Box */}
-                <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1">
+                <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1 mt-2">
                   <span className="font-bold text-[#1A3B34] flex items-center gap-1 text-[11px]">
                     <Sparkles className="w-3 h-3 text-[#C59B4B]" />
-                    <span>Local Tip</span>
+                    <span>Banyan Guest Advantage</span>
                   </span>
                   <p className="line-clamp-2 text-[11px] leading-relaxed text-[#1A3B34]/75">
                     {item.insiderTip}

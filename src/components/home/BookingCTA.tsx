@@ -19,8 +19,8 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
       {/* Background with warm golden hour tones */}
       <div className="absolute inset-0 z-0">
         <AppImage
-          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2200&q=80"
-          alt="Golden hour sun setting over Waikiki Pacific ocean"
+          src="/images/banyan/banyan-amenity-01.webp"
+          alt="Diamond Head and Waikiki skyline vista from Waikiki Banyan"
           className="w-full h-full object-cover opacity-25"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A3B34] via-[#1A3B34]/95 to-[#2A5D52]/85" />

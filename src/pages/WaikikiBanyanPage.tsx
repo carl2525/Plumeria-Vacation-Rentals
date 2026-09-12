@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { PROPERTIES } from '../data/properties';
+import { BANYAN_AMENITY_PHOTOS, BanyanAmenityPhoto } from '../data/banyanAmenities';
 import { PropertyCard } from '../components/rentals/PropertyCard';
+import { LightboxModal } from '../components/common/LightboxModal';
 import {
   Building2,
   MapPin,
@@ -14,6 +16,9 @@ import {
   Utensils,
   ShieldCheck,
   Mail,
+  Camera,
+  Maximize2,
+  Filter,
 } from 'lucide-react';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { AppImage } from '../components/common/AppImage';
@@ -30,6 +35,28 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
   onInquireProperty,
   onNavigate,
 }) => {
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'deck' | 'lobby' | 'location' | 'views'>('all');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const filteredPhotos = useMemo(() => {
+    if (selectedCategory === 'all') return BANYAN_AMENITY_PHOTOS;
+    return BANYAN_AMENITY_PHOTOS.filter((p) => p.category === selectedCategory);
+  }, [selectedCategory]);
+
+  const lightboxImages = useMemo(() => {
+    return BANYAN_AMENITY_PHOTOS.map((p) => ({
+      url: p.url,
+      caption: `${p.title} — ${p.caption}`,
+      category: p.categoryLabel,
+    }));
+  }, []);
+
+  const openLightboxAt = (photoId: string) => {
+    const idx = BANYAN_AMENITY_PHOTOS.findIndex((p) => p.id === photoId);
+    setLightboxIndex(idx >= 0 ? idx : 0);
+    setLightboxOpen(true);
+  };
   const banyanFaqs = [
     {
       id: 'parking',
@@ -97,12 +124,22 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
           </div>
 
           <div className="lg:col-span-5 relative">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-4/3 relative">
+            <div
+              onClick={() => openLightboxAt('banyan-amenity-09')}
+              className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-4/3 relative cursor-pointer group"
+            >
               <AppImage
-                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80"
-                alt="Waikiki Banyan 6th floor pool deck with palm trees and ocean views"
-                className="w-full h-full object-cover"
+                src="/images/banyan/banyan-amenity-09.webp"
+                fallbackSrc="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80"
+                alt="Waikiki Banyan 6th floor heated resort swimming pool with palm trees and sun deck"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-16">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 text-[#1A3B34] text-xs font-semibold shadow-lg">
+                  <Maximize2 className="w-3.5 h-3.5 text-[#C59B4B]" />
+                  <span>Click to expand 12 amenity photos</span>
+                </span>
+              </div>
               <div className="absolute bottom-4 left-4 right-4 p-3 rounded-2xl bg-[#1A3B34]/90 backdrop-blur-md text-white border border-white/20 text-xs flex items-center justify-between">
                 <span className="font-serif font-bold text-[#F6E7A7]">6th-Floor Resort Recreation Oasis</span>
                 <span className="text-[11px] text-white/80">Tower 1 & Tower 2</span>
@@ -380,36 +417,219 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
           </div>
         </div>
 
-        {/* Building Recreation Deck Detail Banner */}
-        <div className="bg-gradient-to-br from-[#1A3B34] via-[#224D44] to-[#2D6559] rounded-3xl p-8 sm:p-12 text-white shadow-xl space-y-6 border border-[#8CA58A]/30">
-          <div className="max-w-3xl space-y-3">
-            <span className="text-xs uppercase tracking-widest text-[#F6E7A7] font-bold">
-              Floor 6 Amenities Breakdown
-            </span>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold">
-              Everything Included With Your Waikiki Banyan Stay
-            </h3>
-            <p className="text-sm sm:text-base text-white/85 font-light leading-relaxed">
-              When booking through Plumeria Vacation Rentals, your party receives complete access to building facilities throughout your visit.
-            </p>
+        {/* Building Recreation Deck Detail Banner & Interactive Photo Showcase */}
+        <div className="space-y-8">
+          <div className="bg-gradient-to-br from-[#1A3B34] via-[#224D44] to-[#2D6559] rounded-3xl p-8 sm:p-12 text-white shadow-xl space-y-8 border border-[#8CA58A]/30">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div className="max-w-3xl space-y-3">
+                <span className="text-xs uppercase tracking-widest text-[#F6E7A7] font-bold">
+                  Shared Tower 2 Building & Resort Facilities
+                </span>
+                <h3 className="font-serif text-2xl sm:text-4xl font-bold">
+                  Waikiki Banyan Amenities Experience
+                </h3>
+                <p className="text-sm sm:text-base text-white/85 font-light leading-relaxed">
+                  Both Plumeria suites (#3205-T2 and #3609-T2) enjoy complete, 100% complimentary access to all 6th-floor resort deck amenities, the ground lobby waterfalls, and dedicated facilities.
+                </p>
+              </div>
+
+              <button
+                id="view-all-banyan-photos-btn"
+                onClick={() => {
+                  setLightboxIndex(0);
+                  setLightboxOpen(true);
+                }}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#C59B4B] hover:bg-[#D4A853] text-[#1A3B34] font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0 cursor-pointer"
+              >
+                <Camera className="w-4 h-4" />
+                <span>View All 12 Amenity Photos</span>
+              </button>
+            </div>
+
+            {/* Amenity Spotlight Cards with Real Matching Thumbnails */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm text-white/90">
+              {/* Pool Card */}
+              <div
+                onClick={() => openLightboxAt('banyan-amenity-09')}
+                className="p-3.5 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-md transition-all space-y-2.5 cursor-pointer group border border-white/10"
+              >
+                <div className="h-32 rounded-xl overflow-hidden relative">
+                  <AppImage
+                    src="/images/banyan/banyan-amenity-09.webp"
+                    fallbackSrc="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
+                    alt="Heated resort swimming pool with sun loungers and palms"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white">
+                    <Maximize2 className="w-3 h-3" />
+                  </div>
+                </div>
+                <div>
+                  <span className="font-bold text-[#F6E7A7] block text-sm">🏊 Heated Resort Pool</span>
+                  <p className="text-white/75 text-xs">Spacious sundeck with sun loungers, umbrellas & palm trees</p>
+                </div>
+              </div>
+
+              {/* Hot Tubs Card */}
+              <div
+                onClick={() => openLightboxAt('banyan-amenity-08')}
+                className="p-3.5 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-md transition-all space-y-2.5 cursor-pointer group border border-white/10"
+              >
+                <div className="h-32 rounded-xl overflow-hidden relative">
+                  <AppImage
+                    src="/images/banyan/banyan-amenity-08.webp"
+                    fallbackSrc="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&q=80"
+                    alt="Dual heated jet hot tubs with Diamond Head view"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white">
+                    <Maximize2 className="w-3 h-3" />
+                  </div>
+                </div>
+                <div>
+                  <span className="font-bold text-[#F6E7A7] block text-sm">♨️ 2 Jet Spas & Sauna</span>
+                  <p className="text-white/75 text-xs">Hot tubs with Diamond Head views plus indoor dry saunas</p>
+                </div>
+              </div>
+
+              {/* BBQ Card */}
+              <div
+                onClick={() => openLightboxAt('banyan-amenity-06')}
+                className="p-3.5 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-md transition-all space-y-2.5 cursor-pointer group border border-white/10"
+              >
+                <div className="h-32 rounded-xl overflow-hidden relative">
+                  <AppImage
+                    src="/images/banyan/banyan-amenity-06.webp"
+                    fallbackSrc="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80"
+                    alt="Outdoor 12-station gas barbecue grilling area with stone picnic tables"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white">
+                    <Maximize2 className="w-3 h-3" />
+                  </div>
+                </div>
+                <div>
+                  <span className="font-bold text-[#F6E7A7] block text-sm">🥩 Gas BBQ Pavilion</span>
+                  <p className="text-white/75 text-xs">12 gas grills with solid stone picnic tables under shade trees</p>
+                </div>
+              </div>
+
+              {/* Playground & Sports Card */}
+              <div
+                onClick={() => openLightboxAt('banyan-amenity-07')}
+                className="p-3.5 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-md transition-all space-y-2.5 cursor-pointer group border border-white/10"
+              >
+                <div className="h-32 rounded-xl overflow-hidden relative">
+                  <AppImage
+                    src="/images/banyan/banyan-amenity-07.webp"
+                    fallbackSrc="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80"
+                    alt="Children's recreation playground structure and artificial turf lawn"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white">
+                    <Maximize2 className="w-3 h-3" />
+                  </div>
+                </div>
+                <div>
+                  <span className="font-bold text-[#F6E7A7] block text-sm">🛝 Kids Playground & Sports</span>
+                  <p className="text-white/75 text-xs">Fenced play structure on turf lawn plus tennis & pickleball courts</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm text-white/90">
-            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md space-y-1">
-              <span className="font-bold text-[#F6E7A7] block">🏊 Heated Pool</span>
-              <p className="text-white/75 text-xs">Spacious sundeck with lounge chairs and shaded umbrellas</p>
+          {/* Full 12-Photo Amenity Gallery with Responsive Filter Tabs */}
+          <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#E8DCC6] shadow-xs space-y-8">
+            <div className="space-y-6 border-b border-[#E8DCC6] pb-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8DCC6]/40 text-[#1A3B34] text-xs font-semibold uppercase tracking-wider mb-2">
+                    <Camera className="w-3.5 h-3.5 text-[#C59B4B]" />
+                    <span>Resort Photo Catalog (12 Authentic Photos)</span>
+                  </div>
+                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
+                    Explore Waikiki Banyan Amenities
+                  </h3>
+                </div>
+
+                <div className="text-xs text-[#1A3B34]/70 font-medium self-start sm:self-center px-3 py-1.5 rounded-full bg-[#F9F7F2] border border-[#E8DCC6]">
+                  Showing {filteredPhotos.length} of 12 resort photos
+                </div>
+              </div>
+
+              {/* Category Filter Pills - Responsive individual pill buttons */}
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { key: 'all', label: 'All Photos', count: 12 },
+                  { key: 'deck', label: '6th Floor Deck', count: 5 },
+                  { key: 'lobby', label: 'Lobby & Grounds', count: 2 },
+                  { key: 'location', label: 'Beach & Map', count: 2 },
+                  { key: 'views', label: 'High Views', count: 3 },
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setSelectedCategory(tab.key as any)}
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                      selectedCategory === tab.key
+                        ? 'bg-[#1A3B34] text-white shadow-xs border border-[#1A3B34]'
+                        : 'bg-[#F9F7F2] text-[#1A3B34]/80 hover:bg-[#E8DCC6]/60 border border-[#E8DCC6]'
+                    }`}
+                  >
+                    <span>{tab.label}</span>
+                    <span
+                      className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
+                        selectedCategory === tab.key
+                          ? 'bg-white/20 text-white'
+                          : 'bg-[#E8DCC6]/70 text-[#1A3B34]/80'
+                      }`}
+                    >
+                      {tab.count}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md space-y-1">
-              <span className="font-bold text-[#F6E7A7] block">♨️ 2 Jet Spas & Sauna</span>
-              <p className="text-white/75 text-xs">Soothing hot tubs for muscle relaxation after hiking Diamond Head</p>
-            </div>
-            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md space-y-1">
-              <span className="font-bold text-[#F6E7A7] block">🎾 Sports & Playground</span>
-              <p className="text-white/75 text-xs">Tennis & pickleball courts plus fenced kids recreation play area</p>
-            </div>
-            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md space-y-1">
-              <span className="font-bold text-[#F6E7A7] block">🥩 BBQ Picnic Area</span>
-              <p className="text-white/75 text-xs">Community gas grills and open-air covered dining tables</p>
+
+            {/* Photos Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredPhotos.map((photo) => (
+                <div
+                  key={photo.id}
+                  onClick={() => openLightboxAt(photo.id)}
+                  className="bg-[#F9F7F2] rounded-2xl overflow-hidden border border-[#E8DCC6] hover:shadow-md transition-all flex flex-col justify-between group cursor-pointer"
+                >
+                  <div className="relative aspect-16/10 overflow-hidden bg-[#1A3B34]/5">
+                    <AppImage
+                      src={photo.url}
+                      fallbackSrc={photo.fallbackUrl}
+                      alt={photo.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-[#1A3B34]/80 backdrop-blur-xs text-white text-[10px] font-semibold tracking-wide">
+                      {photo.categoryLabel}
+                    </div>
+                    <div className="absolute top-2.5 right-2.5 p-1.5 rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Maximize2 className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+
+                  <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 className="font-serif text-base font-bold text-[#1A3B34] group-hover:text-[#C59B4B] transition-colors">
+                        {photo.title}
+                      </h4>
+                      <p className="text-xs text-[#1A3B34]/75 line-clamp-2 mt-1 leading-relaxed">
+                        {photo.caption}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-[#E8DCC6]/60 flex items-center justify-between text-[11px] text-[#1A3B34]/60">
+                      <span>Photo #{photo.number} of 12</span>
+                      <span className="font-medium text-[#C59B4B] group-hover:underline">Click to enlarge →</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -470,6 +690,16 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Full-Screen Interactive Lightbox for Amenities */}
+      <LightboxModal
+        images={lightboxImages}
+        currentIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onPrev={() => setLightboxIndex((prev) => (prev > 0 ? prev - 1 : lightboxImages.length - 1))}
+        onNext={() => setLightboxIndex((prev) => (prev < lightboxImages.length - 1 ? prev + 1 : 0))}
+      />
     </div>
   );
 };

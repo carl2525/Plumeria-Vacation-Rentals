@@ -20,8 +20,9 @@ export interface Property {
   heroImage: string;
   gallery: {
     url: string;
+    fallbackUrl?: string;
     caption: string;
-    category: 'living' | 'bedroom' | 'kitchen' | 'lanai' | 'view' | 'amenity';
+    category: 'living' | 'bedroom' | 'kitchen' | 'lanai' | 'view' | 'amenity' | 'bathroom';
   }[];
   shortDescription: string;
   fullDescription: string[];

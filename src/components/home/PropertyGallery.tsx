@@ -12,51 +12,75 @@ export const PropertyGallery: React.FC = () => {
   const galleryItems: (LightboxImage & { id: string; category: 'interiors' | 'views' | 'banyan' | 'beach' })[] = [
     {
       id: 'g-1',
-      url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80',
-      caption: 'Turquoise ocean water and gentle waves at Kuhio Beach, 1 block from Waikiki Banyan',
+      url: '/images/banyan/banyan-amenity-03.webp',
+      caption: 'Sweeping aerial view of Waikiki Beach and turquoise Pacific waters, just 1 block down ʻOhua Ave',
       category: 'beach',
     },
     {
       id: 'g-2',
-      url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=80',
-      caption: 'Comfortable air-conditioned living suite with sliding doors to the private lanai',
+      url: '/images/properties/wb-3205-t2/unit-3205-02.webp',
+      caption: 'Unit #3205-T2 open living lounge featuring air conditioning and breakfast bar island with barstools',
       category: 'interiors',
     },
     {
       id: 'g-3',
-      url: 'https://images.unsplash.com/photo-1505852679233-d9fd70aff568?auto=format&fit=crop&w=1400&q=80',
-      caption: 'Iconic Diamond Head Crater views and afternoon trade wind clouds',
+      url: '/images/banyan/banyan-amenity-01.webp',
+      caption: 'High-elevation Diamond Head Crater and Honolulu city skyline panorama from Waikiki Banyan',
       category: 'views',
     },
     {
       id: 'g-4',
-      url: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1400&q=80',
-      caption: 'Waikiki Banyan 6th-floor heated swimming pool and recreation sundeck',
+      url: '/images/banyan/banyan-amenity-09.webp',
+      caption: 'Waikiki Banyan 6th-floor heated swimming pool and 1-acre recreation sundeck',
       category: 'banyan',
     },
     {
       id: 'g-5',
-      url: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1400&q=80',
-      caption: 'Clean, serene master bedroom appointed with fresh island-style linens',
+      url: '/images/properties/wb-3205-t2/unit-3205-12.webp',
+      caption: 'Clean, modern master bedroom with platform bed, dual reading lamps, and Koʻolau mountain window views',
       category: 'interiors',
     },
     {
       id: 'g-6',
-      url: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1400&q=80',
-      caption: 'Fully equipped kitchen with full-size refrigerator, oven, range & coffee maker',
+      url: '/images/properties/wb-3205-t2/unit-3205-07.webp',
+      caption: 'Fully equipped chef’s kitchen with full refrigerator, electric range, microwave, and coffee maker',
       category: 'interiors',
     },
     {
       id: 'g-7',
-      url: 'https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1400&q=80',
-      caption: 'Emerald Koʻolau mountain peaks with afternoon trade wind breezes',
+      url: '/images/banyan/banyan-amenity-11.webp',
+      caption: 'Emerald Ala Wai Golf Course, peaceful canal, and Koʻolau mountain range directly behind Banyan',
       category: 'views',
     },
     {
       id: 'g-8',
-      url: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1400&q=80',
-      caption: 'Surfers catching golden hour rollers at Canoes and Queen’s Surf break',
+      url: '/images/banyan/banyan-amenity-08.webp',
+      caption: 'Dual 6th-floor heated therapeutic jet hot tubs framing Diamond Head for evening relaxation',
+      category: 'banyan',
+    },
+    {
+      id: 'g-9',
+      url: '/images/banyan/banyan-amenity-06.webp',
+      caption: 'Outdoor 12-station gas barbecue grilling pavilion with solid stone picnic dining tables',
+      category: 'banyan',
+    },
+    {
+      id: 'g-10',
+      url: '/images/properties/wb-3205-t2/unit-3205-05.webp',
+      caption: 'Private covered 32nd-floor lanai with armchair seating framing scenic city and canal views',
+      category: 'views',
+    },
+    {
+      id: 'g-11',
+      url: '/images/banyan/banyan-amenity-02.webp',
+      caption: 'Aerial location perspective showing Waikiki Banyan’s direct, flat 1-block walk to Kuhio Beach',
       category: 'beach',
+    },
+    {
+      id: 'g-12',
+      url: '/images/properties/wb-3205-t2/unit-3205-10.webp',
+      caption: 'Bright, clean bathroom with walk-in shower and green speckled decorative trim',
+      category: 'interiors',
     },
   ];
 
@@ -129,6 +153,7 @@ export const PropertyGallery: React.FC = () => {
               <AppImage
                 src={item.url}
                 alt={item.caption}
+                fallbackSrc={item.fallbackUrl}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />

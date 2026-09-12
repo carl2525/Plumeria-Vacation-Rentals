@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Property } from '../types';
 import { PROPERTIES } from '../data/properties';
 import { LightboxModal } from '../components/common/LightboxModal';
@@ -49,6 +49,28 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(2);
+  const dynamicGallery = useMemo(() => {
+    if (property.id !== 'wb-3205-t2') {
+      return property.gallery;
+    }
+    try {
+      const stored = localStorage.getItem('wb_3205_custom_photos');
+      if (!stored) return property.gallery;
+      const parsed: Record<number, string> = JSON.parse(stored);
+      return property.gallery.map((img, idx) => {
+        const customUrl = parsed[idx + 1];
+        if (customUrl) {
+          return {
+            ...img,
+            url: customUrl,
+          };
+        }
+        return img;
+      });
+    } catch {
+      return property.gallery;
+    }
+  }, [property]);
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -145,27 +167,29 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         </div>
 
         {/* Photo Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 rounded-3xl overflow-hidden shadow-sm border border-[#E8DCC6] bg-white p-2">
+        <div className="relative grid grid-cols-1 md:grid-cols-4 gap-3 rounded-3xl overflow-hidden shadow-sm border border-[#E8DCC6] p-2 bg-white">
+
           {/* Main Hero Photo (Left 2 cols) */}
           <div
             onClick={() => openLightbox(0)}
             className="md:col-span-2 relative aspect-16/10 md:aspect-auto md:h-[420px] rounded-2xl overflow-hidden cursor-pointer group"
           >
             <AppImage
-              src={property.gallery[0]?.url || property.heroImage}
-              alt={property.gallery[0]?.caption || property.name}
+              src={dynamicGallery[0]?.url || property.heroImage}
+              alt={dynamicGallery[0]?.caption || property.name}
+              fallbackSrc={dynamicGallery[0]?.fallbackUrl}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="absolute bottom-3 left-3 bg-black/60 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md flex items-center gap-1.5">
               <Maximize2 className="w-3.5 h-3.5" />
-              <span>{property.gallery[0]?.caption || 'Click to view photo'}</span>
+              <span>{dynamicGallery[0]?.caption || 'Click to view photo'}</span>
             </div>
           </div>
 
           {/* Right 2 cols: 4 smaller grid thumbnails */}
           <div className="md:col-span-2 grid grid-cols-2 gap-3 h-[420px]">
-            {property.gallery.slice(1, 5).map((img, idx) => (
+            {dynamicGallery.slice(1, 5).map((img, idx) => (
               <div
                 key={idx}
                 onClick={() => openLightbox(idx + 1)}
@@ -174,6 +198,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 <AppImage
                   src={img.url}
                   alt={img.caption}
+                  fallbackSrc={img.fallbackUrl}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
@@ -187,14 +212,14 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         </div>
 
         {/* View All Photos Button */}
-        <div className="flex justify-end">
+        <div className="flex items-center justify-end">
           <button
             id="view-all-photos-btn"
             onClick={() => openLightbox(0)}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white border border-[#E8DCC6] text-[#1A3B34] hover:bg-[#F9F7F2] transition-colors cursor-pointer shadow-xs"
           >
             <Maximize2 className="w-3.5 h-3.5 text-[#C59B4B]" />
-            <span>View All {property.gallery.length} Photos</span>
+            <span>View All {dynamicGallery.length} Photos</span>
           </button>
         </div>
 
@@ -597,12 +622,12 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
       {/* Lightbox Modal */}
       <LightboxModal
-        images={property.gallery}
+        images={dynamicGallery}
         currentIndex={lightboxIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-        onPrev={() => setLightboxIndex((prev) => (prev > 0 ? prev - 1 : property.gallery.length - 1))}
-        onNext={() => setLightboxIndex((prev) => (prev < property.gallery.length - 1 ? prev + 1 : 0))}
+        onPrev={() => setLightboxIndex((prev) => (prev > 0 ? prev - 1 : dynamicGallery.length - 1))}
+        onNext={() => setLightboxIndex((prev) => (prev < dynamicGallery.length - 1 ? prev + 1 : 0))}
       />
     </div>
   );
