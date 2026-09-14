@@ -45,7 +45,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             </p>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">
-              <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan vacation rentals proved to be indisputably superior to any other rental in Honolulu.</strong> Where else can you get a true 550 sq. ft. 1-bedroom suite with a full chef kitchen and private ocean-breeze lanai, paired with Oʻahu’s largest 1-acre 6th-floor resort deck (heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs), just 1 short block to Kuhio Beach—all with zero mandatory resort fees?
+              <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan vacation rentals proved to be indisputably superior to any other rental in Honolulu.</strong> Where else can you get a true 557 sq. ft. 1-bedroom suite with a 67 sq. ft. private lanai (624 sq. ft. total) framing 180° Diamond Head and mountain views, full chef kitchen, paired with Oʻahu’s largest 1-acre 6th-floor resort deck (heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs), just 1 short block to Kuhio Beach—all with zero mandatory resort fees?
             </p>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">

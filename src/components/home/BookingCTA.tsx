@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, Mail } from 'lucide-react';
+import { Compass, Mail, ExternalLink } from 'lucide-react';
 import { PlumeriaSymbolLogo } from '../brand/PlumeriaSymbolLogo';
 import { LogoWatermark } from '../brand/LogoWatermark';
 import { AppImage } from '../common/AppImage';
@@ -51,19 +51,30 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
           <button
             id="cta-view-rentals-btn"
             onClick={onViewRentals}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider bg-[#C59B4B] hover:bg-[#D4A853] text-[#1A3B34] shadow-xl transition-all cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#C59B4B] hover:bg-[#D4A853] text-[#1A3B34] shadow-xl transition-all cursor-pointer"
           >
             <Compass className="w-4 h-4 text-[#1A3B34]" />
             <span>Browse All Suites</span>
           </button>
 
+          <a
+            id="cta-airbnb-link-btn"
+            href={SITE_CONFIG.airbnbUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#FF385C] hover:bg-[#E00B41] text-white shadow-xl transition-all cursor-pointer"
+          >
+            <span>Book on Airbnb</span>
+            <ExternalLink className="w-4 h-4" />
+          </a>
+
           <button
             id="cta-send-inquiry-btn"
             onClick={onSendInquiry}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider bg-white/15 hover:bg-white/25 text-white backdrop-blur-md border border-[#8CA58A]/50 transition-all cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/15 hover:bg-white/25 text-white backdrop-blur-md border border-[#8CA58A]/50 transition-all cursor-pointer"
           >
             <Mail className="w-4 h-4 text-[#F6E7A7]" />
-            <span>Send Direct Inquiry</span>
+            <span>Direct Inquiry</span>
           </button>
         </div>
 

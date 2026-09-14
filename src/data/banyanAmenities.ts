@@ -112,7 +112,7 @@ export const BANYAN_AMENITY_PHOTOS: BanyanAmenityPhoto[] = [
     title: 'Waikiki Coastline & Ocean Perspective',
     category: 'location',
     categoryLabel: 'Prime Waikiki Location',
-    caption: 'Sweeping aerial perspective of the Waikiki beachfront and sparkling turquoise Pacific ocean right down the street.',
+    caption: 'Sweeping aerial perspective of the Waikiki coastline and sparkling turquoise Pacific ocean just 1 block down the street.',
     url: '/images/banyan/banyan-amenity-03.webp',
     altFilename: 'Waikiki Banyan T2 Building and Ammenities (3).webp',
   },

@@ -12,6 +12,7 @@ export interface Property {
   beds: number;
   bathrooms: number;
   squareFeet?: number;
+  lanaiSquareFeet?: number;
   ratePerNight?: number; // Verified rate if supplied, optional
   cleaningFee?: number;
   taxRateDescription?: string;

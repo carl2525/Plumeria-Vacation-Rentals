@@ -53,7 +53,18 @@ export function App() {
   const navigate = (path: string) => {
     setCurrentPath(path);
     window.location.hash = path;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const hashIndex = path.indexOf('#');
+    if (hashIndex !== -1) {
+      const anchorId = path.substring(hashIndex + 1);
+      setTimeout(() => {
+        const el = document.getElementById(anchorId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 150);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleSelectProperty = (slug: string) => {
@@ -107,7 +118,7 @@ export function App() {
       );
     }
 
-    if (currentPath === '/waikiki-banyan' || currentPath === '/waikiki-banyan/') {
+    if (currentPath === '/waikiki-banyan' || currentPath === '/waikiki-banyan/' || currentPath.startsWith('/waikiki-banyan#')) {
       return (
         <WaikikiBanyanPage
           onSelectProperty={handleSelectProperty}

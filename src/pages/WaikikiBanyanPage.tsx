@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { PROPERTIES } from '../data/properties';
 import { BANYAN_AMENITY_PHOTOS, BanyanAmenityPhoto } from '../data/banyanAmenities';
 import { PropertyCard } from '../components/rentals/PropertyCard';
@@ -23,6 +23,7 @@ import {
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { AppImage } from '../components/common/AppImage';
 import { SITE_CONFIG } from '../config/site';
+import { FullCompetitorComparison } from '../components/banyan/FullCompetitorComparison';
 
 interface WaikikiBanyanPageProps {
   onSelectProperty: (slug: string) => void;
@@ -38,6 +39,18 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'deck' | 'lobby' | 'location' | 'views'>('all');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  // Auto-scroll to full-comparison anchor if present in URL
+  useEffect(() => {
+    if (window.location.hash.includes('full-comparison')) {
+      setTimeout(() => {
+        const el = document.getElementById('full-comparison');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 200);
+    }
+  }, []);
 
   const filteredPhotos = useMemo(() => {
     if (selectedCategory === 'all') return BANYAN_AMENITY_PHOTOS;
@@ -104,7 +117,7 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
             </h1>
 
             <p className="text-base sm:text-lg text-[#1A3B34]/85 font-light leading-relaxed">
-              Consistently rated among the top Waikiki vacation rentals and condo rentals in Honolulu, <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan (201 ʻOhua Avenue)</strong> solves every headache of traveling to Oʻahu. Unlike ordinary Waikiki short term rentals, you enjoy the space and kitchen savings of a 550 sq. ft. private condo paired with Oʻahu’s largest 1-acre resort deck. Book direct in Waikiki with Plumeria Vacation Rentals for the best rates and zero resort fees.
+              Consistently rated among the top Waikiki vacation rentals and condo rentals in Honolulu, <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan (201 ʻOhua Avenue)</strong> solves every headache of traveling to Oʻahu. Unlike ordinary Waikiki short term rentals, you enjoy the space and kitchen savings of a 557 sq. ft. private condo + 67 sq. ft. lanai paired with 180° Diamond Head & mountain views and Oʻahu’s largest 1-acre resort deck. Book direct in Waikiki with Plumeria Vacation Rentals for the best rates and zero resort fees.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2 text-xs sm:text-sm text-[#1A3B34]/80">
@@ -273,87 +286,11 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
           </div>
         </div>
 
-        {/* Real Math: The Vacation Savings Breakdown */}
-        <div className="bg-gradient-to-br from-[#1A3B34] via-[#1A3B34]/95 to-[#224D44] rounded-3xl p-8 sm:p-12 text-white shadow-xl space-y-8 border border-[#C59B4B]/40">
-          <div className="max-w-3xl space-y-2">
-            <span className="text-xs uppercase tracking-[0.22em] text-[#F6E7A7] font-bold">
-              The True Vacation Economics
-            </span>
-            <h3 className="font-serif text-2xl sm:text-4xl font-bold">
-              How Much Do You Save at Waikiki Banyan?
-            </h3>
-            <p className="text-sm sm:text-base text-white/85 font-light leading-relaxed">
-              Here is an honest cost comparison for a 5-night stay in Waikiki for a party of 4 (family or friends):
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-            {/* Column A: Typical Hotel */}
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/15 space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-red-300">
-                  Standard 4-Star Waikiki Hotel
-                </span>
-                <ul className="space-y-2.5 text-xs sm:text-sm text-white/80">
-                  <li className="flex justify-between pb-1.5 border-b border-white/10">
-                    <span>2 Cramped Rooms (no suite option)</span>
-                    <span className="font-semibold text-white">$4,200</span>
-                  </li>
-                  <li className="flex justify-between pb-1.5 border-b border-white/10">
-                    <span>Mandatory Resort Fees ($55/night × 2 rooms)</span>
-                    <span className="font-semibold text-white">$550</span>
-                  </li>
-                  <li className="flex justify-between pb-1.5 border-b border-white/10">
-                    <span>Dining Out (Breakfast, Lunch & Dinner for 4)</span>
-                    <span className="font-semibold text-white">$1,600</span>
-                  </li>
-                  <li className="flex justify-between pb-1.5 border-b border-white/10">
-                    <span>Beach Chairs & Towel Rentals</span>
-                    <span className="font-semibold text-white">$150</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="pt-4 border-t border-white/20 flex items-center justify-between">
-                <span className="text-sm font-light text-white/90">Estimated Total Cost:</span>
-                <span className="text-xl sm:text-2xl font-bold text-red-300">~$6,500</span>
-              </div>
-            </div>
-
-            {/* Column B: Waikiki Banyan */}
-            <div className="bg-[#C59B4B]/20 backdrop-blur-md rounded-2xl p-6 border-2 border-[#C59B4B] space-y-4 flex flex-col justify-between relative">
-              <div className="space-y-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#F6E7A7]">
-                  Waikiki Banyan (Plumeria Suite)
-                </span>
-                <ul className="space-y-2.5 text-xs sm:text-sm text-white/95">
-                  <li className="flex justify-between pb-1.5 border-b border-white/15">
-                    <span>1 Spacious 550 sq.ft. Suite (Sleeps 4–5 with 3 beds)</span>
-                    <span className="font-semibold text-[#F6E7A7]">~$1,500–$1,900</span>
-                  </li>
-                  <li className="flex justify-between pb-1.5 border-b border-white/15">
-                    <span>Mandatory Resort Fees</span>
-                    <span className="font-semibold text-emerald-300">$0 Included</span>
-                  </li>
-                  <li className="flex justify-between pb-1.5 border-b border-white/15">
-                    <span>Home-Cooked Breakfasts + Sunset BBQ Dinners</span>
-                    <span className="font-semibold text-[#F6E7A7]">Save ~$800</span>
-                  </li>
-                  <li className="flex justify-between pb-1.5 border-b border-white/15">
-                    <span>Tommy Bahama Beach Chairs & Towels</span>
-                    <span className="font-semibold text-emerald-300">$0 In-Unit</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="pt-4 border-t border-white/20 flex items-center justify-between">
-                <div>
-                  <span className="text-sm font-light text-white/90 block">Estimated Total Cost:</span>
-                  <span className="text-xs text-emerald-300 font-semibold">You save $2,500+ on your trip</span>
-                </div>
-                <span className="text-xl sm:text-2xl font-bold text-[#F6E7A7]">~$2,500</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Comprehensive Competitor Comparison Matrix & Vacation Cost Calculator */}
+        <FullCompetitorComparison
+          onBookStay={() => onInquireProperty()}
+          onExploreRentals={() => onNavigate('/rentals')}
+        />
 
         {/* Editorial Summary: Why Waikiki Banyan stands above other vacation rentals */}
         <div className="p-8 sm:p-10 rounded-3xl bg-[#F9F7F2] border border-[#E8DCC6] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">

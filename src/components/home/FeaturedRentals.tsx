@@ -29,7 +29,7 @@ export const FeaturedRentals: React.FC<FeaturedRentalsProps> = ({
             </h2>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light">
-              Unlike typical vacation rentals with cramped quarters or zero resort amenities, our high-floor Tower 2 suites give you 550 sq. ft. of private comfort, full chef-ready kitchens, breezy ocean-facing lanais, and unrestricted access to Oʻahu’s 1-acre recreation deck—with zero mandatory resort fees.
+              Unlike typical vacation rentals with cramped quarters or zero resort amenities, our high-floor Tower 2 suites give you 557 sq. ft. of private comfort + 67 sq. ft. private lanais (624 sq. ft. total), full chef-ready kitchens, 180° Diamond Head and mountain vistas, and unrestricted access to Oʻahu’s 1-acre recreation deck—with zero mandatory resort fees.
             </p>
           </div>
 

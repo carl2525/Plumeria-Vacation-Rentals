@@ -18,6 +18,7 @@ import {
   ArrowLeft,
   Mail,
   ExternalLink,
+  Mountain,
 } from 'lucide-react';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { SITE_CONFIG } from '../config/site';
@@ -228,30 +229,48 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           {/* Left Column: Details, Amenities, Rules */}
           <div className="lg:col-span-8 space-y-10">
             {/* Quick Specs Highlight Bar */}
-            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#E8DCC6] shadow-xs grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+            <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#E8DCC6] shadow-xs grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-center">
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">
                 <Users className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
-                <span className="text-xs text-[#1A3B34]/60 block font-medium">Guests</span>
-                <span className="text-sm font-bold text-[#1A3B34]">Up to {property.guestsMax}</span>
+                <span className="text-[11px] text-[#1A3B34]/60 block font-medium">Guests</span>
+                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">Up to {property.guestsMax}</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">
                 <Bed className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
-                <span className="text-xs text-[#1A3B34]/60 block font-medium">Bedrooms</span>
-                <span className="text-sm font-bold text-[#1A3B34]">{property.bedrooms} Bed · {property.beds} Beds</span>
+                <span className="text-[11px] text-[#1A3B34]/60 block font-medium">Beds</span>
+                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">{property.bedrooms} Bed · {property.beds} Beds</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">
                 <Bath className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
-                <span className="text-xs text-[#1A3B34]/60 block font-medium">Bathrooms</span>
-                <span className="text-sm font-bold text-[#1A3B34]">{property.bathrooms} Full Bath</span>
+                <span className="text-[11px] text-[#1A3B34]/60 block font-medium">Bathrooms</span>
+                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">{property.bathrooms} Full Bath</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">
                 <Waves className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
-                <span className="text-xs text-[#1A3B34]/60 block font-medium">Outdoor</span>
-                <span className="text-sm font-bold text-[#1A3B34]">Private Lanai</span>
+                <span className="text-[11px] text-[#1A3B34]/60 block font-medium">Total Size</span>
+                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">{property.squareFeet || 557} + {property.lanaiSquareFeet || 67} Lanai</span>
               </div>
+
+              <div className="p-3 rounded-2xl bg-[#F9F7F2] col-span-2 sm:col-span-1">
+                <Mountain className="w-5 h-5 text-[#C59B4B] mx-auto mb-1" />
+                <span className="text-[11px] text-[#1A3B34]/60 block font-medium">Vantage View</span>
+                <span className="text-xs sm:text-sm font-bold text-[#1A3B34] truncate block" title={property.viewType}>
+                  {property.viewType}
+                </span>
+              </div>
+            </div>
+
+            {/* View & Seclusion Orientation Note */}
+            <div className="p-4 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] flex items-start gap-3">
+              <div className="w-8 h-8 rounded-xl bg-[#8CA58A]/20 flex items-center justify-center shrink-0 mt-0.5">
+                <Mountain className="w-4 h-4 text-[#1A3B34]" />
+              </div>
+              <p className="text-xs sm:text-sm text-[#1A3B34]/85 leading-relaxed font-light">
+                <strong className="text-[#1A3B34] font-semibold">Location & View Note:</strong> This suite is situated 1 flat block (approx. 3-minute walk) to Kuhio Beach. While not beachfront, its high-floor positioning grants breathtaking 180-degree panoramic views of Diamond Head Mountain and the Koʻolau mountain range, while insulating you from noisy shoreline crowds.
+              </p>
             </div>
 
             {/* About This Suite Description */}

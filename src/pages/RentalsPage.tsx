@@ -61,7 +61,7 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Browse our handpicked collection of Waikiki condo rentals and short term rentals. Most vacation rentals in Waikiki force you to compromise: cramped kitchenettes, noisy street corners, or hidden $50/night resort fees. <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan vacation rentals deliver what no other rental can:</strong> high-floor 550 sq. ft. 1-bedroom suites with full chef kitchens, breezy ocean lanais, Oʻahu’s largest 1-acre resort deck, and a peaceful 1-block walk to Kuhio Beach. Reserve on Airbnb or send a direct booking inquiry for zero mandatory resort fees.
+            Browse our handpicked collection of Waikiki condo rentals and short term rentals. Most vacation rentals in Waikiki force you to compromise: cramped kitchenettes, noisy street corners, or hidden $50/night resort fees. <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan vacation rentals deliver what no other rental can:</strong> high-floor 557 sq. ft. 1-bedroom suites + 67 sq. ft. private lanais (624 sq. ft. total) with full chef kitchens, 180° Diamond Head and mountain views, Oʻahu’s largest 1-acre resort deck, and a peaceful 1-block walk to Kuhio Beach. Reserve on Airbnb or send a direct booking inquiry for zero mandatory resort fees.
           </p>
         </div>
 

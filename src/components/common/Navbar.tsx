@@ -114,7 +114,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Right Action: Inquire / Book CTA (Desktop only to prevent duplicate on tablet) */}
-          <div className="hidden lg:flex items-center shrink-0">
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+            <a
+              id="nav-airbnb-link-btn"
+              href={SITE_CONFIG.airbnbUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 xl:px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-xs transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer bg-[#FF385C] hover:bg-[#E00B41] text-white whitespace-nowrap"
+            >
+              <span>Airbnb</span>
+            </a>
             <button
               id="nav-book-stay-cta"
               onClick={() => onOpenInquiry()}
@@ -197,7 +206,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             {/* Bottom Actions & Brand Note */}
-            <div className="pt-6 border-t border-[#E8DCC6] space-y-4">
+            <div className="pt-6 border-t border-[#E8DCC6] space-y-3">
+              <a
+                id="mobile-drawer-airbnb-cta"
+                href={SITE_CONFIG.airbnbUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#FF385C] hover:bg-[#E00B41] text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer"
+              >
+                <span>Book / View on Airbnb</span>
+              </a>
+
               <button
                 id="mobile-drawer-book-cta"
                 onClick={() => {
@@ -207,7 +226,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full py-3.5 px-4 rounded-2xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer border border-[#C59B4B]/30"
               >
                 <Calendar className="w-4 h-4 text-[#F6E7A7]" />
-                <span>Send Booking Inquiry</span>
+                <span>Send Direct Inquiry</span>
               </button>
               <p className="text-[11px] text-center text-[#1A3B34]/60 font-medium">
                 Main listings on Airbnb · Direct inquiries welcomed

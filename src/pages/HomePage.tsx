@@ -4,6 +4,7 @@ import { QuickSearchBar } from '../components/home/QuickSearchBar';
 import { IntroSection } from '../components/home/IntroSection';
 import { FeaturedRentals } from '../components/home/FeaturedRentals';
 import { WaikikiBanyanFeature } from '../components/home/WaikikiBanyanFeature';
+import { HotelSuiteComparison } from '../components/home/HotelSuiteComparison';
 import { PlumeriaExperience } from '../components/home/PlumeriaExperience';
 import { OceanBreakMoment } from '../components/home/OceanBreakMoment';
 import { ExploreWaikikiSection } from '../components/home/ExploreWaikikiSection';
@@ -50,6 +51,12 @@ export const HomePage: React.FC<HomePageProps> = ({
       />
 
       <WaikikiBanyanFeature onLearnMore={() => onNavigate('/waikiki-banyan')} />
+
+      <HotelSuiteComparison
+        onExploreRentals={() => onNavigate('/rentals')}
+        onBookStay={() => onOpenInquiry()}
+        onViewFullComparison={() => onNavigate('/waikiki-banyan#full-comparison')}
+      />
 
       <PlumeriaExperience />
 

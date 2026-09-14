@@ -14,8 +14,10 @@ export const PROPERTIES: Property[] = [
     bedrooms: 1,
     beds: 2,
     bathrooms: 1,
-    squareFeet: 550,
-    airbnbUrl: 'https://www.airbnb.com',
+    squareFeet: 557,
+    lanaiSquareFeet: 67,
+    airbnbUrl:
+      'https://www.airbnb.com/rooms/1767420192344611400?guests=1&adults=1&s=67&unique_share_id=086ed1ef-5f90-49c9-84d5-ead36b679bef&source_impression_id=p3_1789256216_P3Fpxgx_Oqa41CRK',
     featured: true,
     heroImage: '/images/banyan/banyan-amenity-03.webp',
     gallery: [
@@ -41,7 +43,7 @@ export const PROPERTIES: Property[] = [
       },
       {
         url: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1400&q=80',
-        caption: 'Private covered lanai for morning Kona coffee and golden hour sunset cocktails',
+        caption: 'Private covered 67 sq. ft. lanai for morning Kona coffee and golden hour sunset cocktails',
         category: 'lanai',
       },
       {
@@ -52,10 +54,10 @@ export const PROPERTIES: Property[] = [
       },
     ],
     shortDescription:
-      'Perched high on the 36th floor of Tower 2 at Waikiki Banyan, Unit #3609-T2 proves why Waikiki Banyan outclasses other vacation rentals: sweeping Pacific Ocean vistas, full chef-ready kitchen, 1-acre resort recreation deck access, and a 1-block beach stroll with $0 resort fees.',
+      'Perched high on the 36th floor of Tower 2 at Waikiki Banyan, Unit #3609-T2 offers 557 sq. ft. of comfortable living space plus a 67 sq. ft. private lanai (624 sq. ft. total). Enjoy sweeping Pacific Ocean vistas, full chef-ready kitchen, 1-acre resort recreation deck access, and an easy 1-block beach stroll with $0 resort fees.',
     fullDescription: [
-      'Welcome to Unit #3609-T2 at Waikiki Banyan, managed with care by Plumeria Vacation Rentals. Located on the 36th floor of Tower 2 (Makai/Diamond Head Tower), this penthouse-tier 1-bedroom suite boasts panoramic views of the glistening Pacific Ocean and vibrant Hawaiian sunsets.',
-      'Step onto your private covered lanai to enjoy warm trade wind breezes and watch the morning surf roll into Waikiki. Inside, the cool, air-conditioned living space is furnished with comfortable seating, high-speed Wi-Fi, and a Smart HD TV for unwinding after a day on the sand.',
+      'Welcome to Unit #3609-T2 at Waikiki Banyan, managed with care by Plumeria Vacation Rentals. Located on the 36th floor of Tower 2 (Makai/Diamond Head Tower), this penthouse-tier 1-bedroom suite offers 557 sq. ft. of interior living space plus a 67 sq. ft. private lanai (624 sq. ft. total living area).',
+      'Step onto your private covered 67 sq. ft. lanai to enjoy warm trade wind breezes and watch the morning surf roll into Waikiki. Inside, the cool, air-conditioned living space is furnished with comfortable seating, high-speed Wi-Fi, and a Smart HD TV for unwinding after a day on the sand.',
       'The full kitchen is equipped with full-sized appliances, cookware, dinnerware, and coffee makers, giving you the flexibility to prepare tropical breakfasts or dine in with fresh island ingredients—saving families $200+ per day over expensive restaurant dining.',
       'Unlike ordinary Waikiki vacation rentals with cramped rooms or zero amenities, guests of Unit #3609-T2 receive full access to Waikiki Banyan’s expansive 1-acre 6th-floor recreation deck: large heated swimming pool, two jet hot tubs, dry sauna, BBQ grilling stations, and tennis/pickleball courts—with zero mandatory resort fees.',
     ],
@@ -74,18 +76,19 @@ export const PROPERTIES: Property[] = [
     keyAmenities: [
       'Unit #3609-T2 (Floor 36)',
       'Pacific Ocean & Sunset Vistas',
+      '557 Sq. Ft. + 67 Sq. Ft. Lanai',
       'Private Covered Lanai',
       'Full Kitchen with Appliances',
       'Air Conditioning & Fast Wi-Fi',
       'Banyan Heated Pool & 2 Jet Spas',
       'Complimentary Beach Chairs & Towels',
-      'Keyless Smart Entry',
     ],
     fullAmenities: [
       {
         category: 'Unit Specifics & Comfort',
         items: [
           'Exact Unit: Waikiki Banyan Tower 2 #3609',
+          '557 sq. ft. interior + 67 sq. ft. private lanai (624 sq. ft. total)',
           'High 36th-floor penthouse tier elevation',
           'Private covered lanai with patio chairs & table',
           'Air conditioning system in unit',
@@ -139,7 +142,7 @@ export const PROPERTIES: Property[] = [
       'Strictly 100% Smoke-Free (unit, lanai, and common areas within 20ft)',
       'Surfboards & bicycles must strictly use Tower 2 freight elevator Car #5',
       'Lanai safety: No hanging towels or items over railings; no grilling or outdoor storage',
-      'Pets: Allowed subject to building rules & authorization; advance host notification & written confirmation required (service animals welcome per law)',
+      'Pets: Strictly no pets allowed in the unit (service animals accommodated per ADA regulations)',
       'Maximum occupancy: 5 registered guests only; no parties or disruptive gatherings',
     ],
     waikikiBanyanPerks: [
@@ -154,23 +157,25 @@ export const PROPERTIES: Property[] = [
     slug: 'waikiki-banyan-3205-t2',
     name: 'Waikiki Banyan #3205-T2',
     unitNumber: '3205-T2',
-    tagline: 'High-Floor Diamond Head & Ocean Vista Suite · Tower 2 Floor 32',
+    tagline: 'High-Floor 180° Diamond Head & Mountain View Suite · Tower 2 Floor 32',
     tower: 'Tower 2 (Makai/Diamond Head)',
     floorLevel: '32nd Floor (High Floor)',
-    viewType: 'Diamond Head & Sunset',
+    viewType: '180° Diamond Head & Mountain View',
     guestsMax: 4,
     bedrooms: 1,
     beds: 2,
     bathrooms: 1,
-    squareFeet: 550,
-    airbnbUrl: 'https://www.airbnb.com',
+    squareFeet: 557,
+    lanaiSquareFeet: 67,
+    airbnbUrl:
+      'https://www.airbnb.com/rooms/1767420192344611400?guests=1&adults=1&s=67&unique_share_id=086ed1ef-5f90-49c9-84d5-ead36b679bef&source_impression_id=p3_1789256216_P3Fpxgx_Oqa41CRK',
     featured: true,
     heroImage: '/images/properties/wb-3205-t2/unit-3205-01.webp',
     gallery: [
       {
         url: '/images/properties/wb-3205-t2/unit-3205-01.webp',
         fallbackUrl: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1400&q=80',
-        caption: 'Modern living room featuring black leather sofa, white coffee table over bright red shag rug, and sliding glass doors to the private lanai',
+        caption: 'Modern living room featuring black leather sofa, white coffee table over bright red shag rug, and sliding glass doors to the private 67 sq. ft. lanai',
         category: 'living',
       },
       {
@@ -182,25 +187,25 @@ export const PROPERTIES: Property[] = [
       {
         url: '/images/properties/wb-3205-t2/unit-3205-03.webp',
         fallbackUrl: '/images/banyan/banyan-amenity-01.webp',
-        caption: 'Bright open suite view looking past the living lounge and bedroom area toward floor-to-ceiling glass sliding doors framing mountain vistas',
+        caption: 'Bright open suite view looking past the living lounge toward sliding glass doors framing 180° Diamond Head and mountain vistas',
         category: 'view',
       },
       {
         url: '/images/properties/wb-3205-t2/unit-3205-04.webp',
         fallbackUrl: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1400&q=80',
-        caption: 'Air-conditioned living suite with wall-mounted flat-screen TV and large glass doors opening to the private balcony',
+        caption: 'Air-conditioned living suite with wall-mounted flat-screen TV and large glass doors opening to the private 67 sq. ft. lanai',
         category: 'living',
       },
       {
         url: '/images/properties/wb-3205-t2/unit-3205-05.webp',
         fallbackUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80',
-        caption: 'Private high-floor lanai with armchair seating overlooking panoramic views of Ala Wai Canal, golf course, and Koʻolau mountains',
+        caption: 'Private high-floor lanai with armchair seating overlooking 180° panoramic views of Ala Wai Canal, golf course, and Koʻolau mountain peaks',
         category: 'lanai',
       },
       {
         url: '/images/properties/wb-3205-t2/unit-3205-06.webp',
         fallbackUrl: 'https://images.unsplash.com/photo-1505852679233-d9fd70aff568?auto=format&fit=crop&w=1400&q=80',
-        caption: 'Covered private lanai with wooden patio armchairs, vibrant red cushions, and a drink table framing scenic Diamond Head and city views',
+        caption: 'Covered private lanai with wooden patio armchairs, vibrant red cushions, and a drink table framing panoramic Diamond Head Mountain views',
         category: 'lanai',
       },
       {
@@ -241,12 +246,12 @@ export const PROPERTIES: Property[] = [
       },
     ],
     shortDescription:
-      'High on the 32nd floor of Tower 2 at Waikiki Banyan, Unit #3205-T2 showcases why Waikiki Banyan is better than other vacation rentals: sunrise Diamond Head views, full chef kitchen, 1-acre resort deck access, and just 1 block to Kuhio Beach with $0 resort fees.',
+      'High on the 32nd floor of Tower 2 at Waikiki Banyan, Unit #3205-T2 offers 557 sq. ft. of comfortable living space plus a 67 sq. ft. private lanai (624 sq. ft. total). While not beachfront, it commands spectacular 180-degree panoramic views of iconic Diamond Head Mountain and the lush Koʻolau mountain range, full chef kitchen, 1-acre resort deck access, and is just 1 block to Kuhio Beach with $0 resort fees.',
     fullDescription: [
-      'Experience the magic of Honolulu from Unit #3205-T2 at Waikiki Banyan, hosted by Plumeria Vacation Rentals. Located on the 32nd floor of Tower 2 (Makai/Diamond Head Tower), this high-floor suite frames world-famous Diamond Head Crater and glimpses of the sparkling ocean horizon.',
-      'Wake up with the morning golden glow over the crater and sip your morning coffee on your private covered lanai. The open living room is equipped with air conditioning, comfortable furnishings, and high-speed Wi-Fi to keep you connected.',
-      'Prepare delicious meals in the full kitchen equipped with a full-size refrigerator, oven, stove, microwave, and cookware—allowing your group to save significantly over standard hotel rooms. Beach towels and chairs are provided for easy, fun-filled days at Kuhio Beach, just one block away.',
-      'Unlike standard vacation rentals that offer small studios or no pool, guests of Unit #3205-T2 enjoy unrestricted access to Waikiki Banyan’s 1-acre recreation oasis: heated swimming pool, twin hot tubs, dry sauna, tennis/pickleball courts, and 12 gas BBQs—with zero mandatory resort fees.',
+      'Experience the magic of Honolulu from Unit #3205-T2 at Waikiki Banyan, hosted by Plumeria Vacation Rentals. Located on the 32nd floor of Tower 2 (Makai/Diamond Head Tower), this high-floor suite features 557 sq. ft. of interior living space paired with a 67 sq. ft. private covered lanai (624 sq. ft. total living area).',
+      'While the property is not beachfront, its elevated 32nd-floor vantage point frames breathtaking 180-degree panoramic views of world-famous Diamond Head Mountain and the dramatic Koʻolau mountain peaks, providing peaceful seclusion away from noisy beachfront traffic.',
+      'Wake up with the morning golden glow illuminating Diamond Head and sip your morning Kona coffee on your private 67 sq. ft. lanai. The open living room is equipped with air conditioning, comfortable furnishings, high-speed Wi-Fi, and versatile accordion doors for optional bedroom privacy.',
+      'Prepare delicious meals in the full kitchen equipped with a breakfast bar island, full-size refrigerator, oven, stove, microwave, and cookware—allowing your group to save significantly over standard hotel rooms. When you are ready for the sand and surf, the calm waters of Kuhio Beach are just 1 flat block away (approx. 3-minute walk), plus full access to Waikiki Banyan’s 1-acre recreation deck with $0 mandatory resort fees.',
     ],
     sleepingArrangements: [
       {
@@ -262,12 +267,12 @@ export const PROPERTIES: Property[] = [
     ],
     keyAmenities: [
       'Unit #3205-T2 (Floor 32)',
-      'Diamond Head & Mountain Vistas',
+      '180° Diamond Head & Mountain Views',
+      '557 Sq. Ft. + 67 Sq. Ft. Lanai',
       'Private Covered Lanai with Seating',
       'Breakfast Bar Island with 3 Stools',
       'Full Chef-Ready Granite Kitchen',
       'Emerald Tile Walk-In Shower',
-      'Air Conditioning & Fast Wi-Fi',
       'Banyan Heated Pool & 2 Jet Spas',
     ],
     fullAmenities: [
@@ -275,8 +280,10 @@ export const PROPERTIES: Property[] = [
         category: 'Unit Specifics & Comfort',
         items: [
           'Exact Unit: Waikiki Banyan Tower 2 #3205',
+          '557 sq. ft. interior + 67 sq. ft. private lanai (624 sq. ft. total)',
           'Elevated 32nd-floor positioning in Tower 2',
-          'Private covered lanai with 2 wooden armchairs, red cushions & drink table',
+          '180-degree panoramic views of Diamond Head Mountain and Koʻolau range',
+          'Private covered 67 sq. ft. lanai with 2 wooden armchairs, red cushions & drink table',
           'Versatile accordion partition wall for open-concept living or bedroom privacy',
           'In-unit air conditioning system',
           'High-speed wireless internet (Wi-Fi)',
@@ -339,12 +346,12 @@ export const PROPERTIES: Property[] = [
       'Strictly 100% Smoke-Free (unit, lanai, and common areas within 20ft)',
       'Surfboards & bicycles must strictly use Tower 2 freight elevator Car #5',
       'Lanai safety: No hanging towels or items over railings; no grilling or outdoor storage',
-      'Pets: Allowed subject to building rules & authorization; advance host notification & written confirmation required (service animals welcome per law)',
+      'Pets: Strictly no pets allowed in the unit (service animals accommodated per ADA regulations)',
       'Maximum occupancy: 5 registered guests only; no parties or disruptive gatherings',
     ],
     waikikiBanyanPerks: [
-      'Stunning 32nd-floor views toward Diamond Head Crater',
-      'One block to the golden sands of Kuhio Beach',
+      'Stunning 32nd-floor 180° views of Diamond Head Mountain & mountain ridges',
+      'One flat block (3-minute walk) to the calm sands of Kuhio Beach',
       'Full kitchen to prepare family meals and beach lunches',
       'Access to all Waikiki Banyan resort recreation amenities',
     ],

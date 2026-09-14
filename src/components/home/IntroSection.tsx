@@ -1,7 +1,7 @@
 import React from 'react';
 import { PlumeriaSymbolLogo } from '../brand/PlumeriaSymbolLogo';
 import { LogoWatermark } from '../brand/LogoWatermark';
-import { Sparkles, Utensils, SunMedium, Waves } from 'lucide-react';
+import { Sparkles, Utensils, SunMedium, Waves, Car } from 'lucide-react';
 import { AppImage } from '../common/AppImage';
 
 interface IntroSectionProps {
@@ -33,33 +33,33 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
             </p>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 leading-relaxed font-light">
-              <strong className="font-semibold text-[#1A3B34]">Waikiki Banyan vacation rentals give you the best of both worlds:</strong> spacious 550 sq. ft. private 1-bedroom suites with full chef-ready kitchens and private ocean-breeze lanais, paired with Oʻahu’s largest 1-acre resort recreation deck (heated pool, 2 jet spas, sauna, tennis/pickleball, and sunset BBQ grills). When you book direct in Waikiki with Plumeria Vacation Rentals, you secure the finest Waikiki short term rentals with zero hidden fees.
+              <strong className="font-semibold text-[#1A3B34]">Waikiki Banyan vacation rentals give you the best of both worlds:</strong> spacious 557 sq. ft. private 1-bedroom suites with 67 sq. ft. private lanais (624 sq. ft. total), full chef-ready kitchens, free covered garage parking included ($45/night value), 180° Diamond Head and mountain vistas, paired with Oʻahu’s largest 1-acre resort recreation deck (heated pool, 2 jet spas, sauna, tennis/pickleball, and sunset BBQ grills). When you book direct in Waikiki with Plumeria Vacation Rentals, you secure the finest Waikiki short term rentals with zero hidden fees.
             </p>
 
             {/* 3 Quick Highlight Pills matching Brand Palette */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-3">
               <div className="p-4 rounded-2xl bg-white border border-[#E8DCC6] shadow-xs space-y-1.5">
                 <div className="w-8 h-8 rounded-xl bg-[#7FB6D9]/20 text-[#1A3B34] flex items-center justify-center">
                   <Waves className="w-4 h-4 text-[#1A3B34]" />
                 </div>
                 <h3 className="font-serif text-sm font-bold text-[#1A3B34]">1-Acre Resort Deck</h3>
-                <p className="text-xs text-[#1A3B34]/70">Heated pool, 2 hot tubs, sauna, tennis & BBQ pavilion</p>
+                <p className="text-xs text-[#1A3B34]/70 leading-relaxed">Heated pool, 2 jet spas, sauna & 12 BBQ pavilions</p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-[#C59B4B]/40 shadow-xs space-y-1.5 bg-gradient-to-b from-white to-[#FDFBF7]">
+                <div className="w-8 h-8 rounded-xl bg-[#C59B4B]/20 text-[#C59B4B] flex items-center justify-center">
+                  <Car className="w-4 h-4 text-[#C59B4B]" />
+                </div>
+                <h3 className="font-serif text-sm font-bold text-[#1A3B34]">Free Garage Parking</h3>
+                <p className="text-xs text-[#1A3B34]/70 leading-relaxed">Covered parking pass included ($45/day value at $0)</p>
               </div>
 
               <div className="p-4 rounded-2xl bg-white border border-[#E8DCC6] shadow-xs space-y-1.5">
                 <div className="w-8 h-8 rounded-xl bg-[#F6E7A7]/40 text-[#C59B4B] flex items-center justify-center">
                   <Utensils className="w-4 h-4 text-[#C59B4B]" />
                 </div>
-                <h3 className="font-serif text-sm font-bold text-[#1A3B34]">Full Chef Kitchen</h3>
-                <p className="text-xs text-[#1A3B34]/70">Save $200+/day by cooking fresh poke & breakfasts</p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-white border border-[#E8DCC6] shadow-xs space-y-1.5">
-                <div className="w-8 h-8 rounded-xl bg-[#8CA58A]/20 text-[#1A3B34] flex items-center justify-center">
-                  <SunMedium className="w-4 h-4 text-[#8CA58A]" />
-                </div>
-                <h3 className="font-serif text-sm font-bold text-[#1A3B34]">3-Min Beach Walk</h3>
-                <p className="text-xs text-[#1A3B34]/70">Calm Kuhio Beach 1 block away; no street noise</p>
+                <h3 className="font-serif text-sm font-bold text-[#1A3B34]">Full Kitchen & Beach</h3>
+                <p className="text-xs text-[#1A3B34]/70 leading-relaxed">1 block to Kuhio Beach; cook poke & fresh meals</p>
               </div>
             </div>
           </div>

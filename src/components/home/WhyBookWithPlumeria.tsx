@@ -30,7 +30,7 @@ export const WhyBookWithPlumeria: React.FC = () => {
               Twice the Living Space
             </h3>
             <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-              550 sq. ft. true 1-bedroom suite with closing doors, full chef’s kitchen, and separate living room (sleeps up to 5 with 3 beds) vs cramped 280 sq. ft. hotel rooms.
+              557 sq. ft. true 1-bedroom suite + 67 sq. ft. private lanai (624 sq. ft. total) with closing doors, full chef’s kitchen, and separate living room (sleeps up to 5 with 3 beds) vs cramped 280 sq. ft. hotel rooms.
             </p>
           </div>
 
@@ -66,9 +66,27 @@ export const WhyBookWithPlumeria: React.FC = () => {
               Zero Surprise Fees
             </h3>
             <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-              No surprise $45–$65 daily resort fees at checkout. High-speed Wi-Fi, Tommy Bahama beach chairs, towels, and all recreation deck amenities are 100% included.
+              No surprise $45–$65 daily resort fees or $50/day parking fees at checkout. Covered garage parking ($0 fee), high-speed Wi-Fi, Tommy Bahama beach gear, and all recreation deck amenities are 100% included.
             </p>
           </div>
+        </div>
+
+        {/* Competitor Comparison Callout */}
+        <div className="mt-12 p-5 sm:p-6 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 text-center sm:text-left">
+            <h4 className="font-serif text-base font-bold text-[#1A3B34]">
+              Comparing to Hilton, Sheraton, or Aston at Waikiki Banyan?
+            </h4>
+            <p className="text-xs sm:text-sm text-[#1A3B34]/75 font-light">
+              See why our high-floor Tower 2 suites with free parking and $0 amenity fees beat hotel suites and other Waikiki vacation rentals.
+            </p>
+          </div>
+          <a
+            href="#hotel-suite-comparison"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#1A3B34] hover:bg-[#2A5D52] text-[#F6E7A7] font-semibold text-xs transition-colors shrink-0"
+          >
+            <span>Compare Rates & Amenities</span>
+          </a>
         </div>
       </div>
     </section>

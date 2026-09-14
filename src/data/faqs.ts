@@ -6,7 +6,7 @@ export const FAQS: FAQItem[] = [
     category: 'Waikiki Banyan',
     question: 'Why is Waikiki Banyan better than other vacation rentals and hotels in Waikiki?',
     answer:
-      'Waikiki Banyan is widely regarded by frequent visitors as the best vacation rental destination in Honolulu. Unlike cramped 280 sq. ft. hotel rooms or standard condo rentals with minimal amenities, Waikiki Banyan offers: (1) Oʻahu’s largest 1-acre 6th-floor resort recreation deck with a heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball courts, and 12 gas BBQ grills; (2) Full chef-ready kitchens with full-sized refrigerators, stoves, ovens, and cookware—saving families $200+ per day on dining; (3) Spacious 550 sq. ft. 1-bedroom layouts with private lanais that comfortably sleep up to 5 guests; (4) Flat 1-block (3-minute) stroll to calm Kuhio Beach while staying tucked away from noisy traffic; and (5) $0 mandatory resort fees.',
+      'Waikiki Banyan is widely regarded by frequent visitors as the best vacation rental destination in Honolulu. Unlike cramped 280 sq. ft. hotel rooms or standard condo rentals with minimal amenities, Waikiki Banyan offers: (1) Oʻahu’s largest 1-acre 6th-floor resort recreation deck with a heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball courts, and 12 gas BBQ grills; (2) Full chef-ready kitchens with full-sized refrigerators, stoves, ovens, and cookware—saving families $200+ per day on dining; (3) Spacious 557 sq. ft. 1-bedroom layouts with 67 sq. ft. private lanais (624 sq. ft. total) framing 180° Diamond Head and mountain vistas that comfortably sleep up to 4–5 guests; (4) Flat 1-block (3-minute) stroll to calm Kuhio Beach (offering quiet seclusion without beachfront traffic noise); and (5) $0 mandatory resort fees.',
   },
   {
     id: 'faq-resort-fees',
@@ -83,7 +83,7 @@ export const FAQS: FAQItem[] = [
     category: 'Booking & Policies',
     question: 'Are pets allowed at Waikiki Banyan with Plumeria Vacation Rentals?',
     answer:
-      'Waikiki Banyan allows pets subject to the building’s rules, authorization requirements, and management discretion. Guests must notify Plumeria Vacation Rentals in advance and receive written confirmation before bringing any pet to the unit. All applicable Waikiki Banyan requirements must be satisfied before a pet is permitted on the property. The building does not have breed, height, or weight restrictions, and the General Manager may determine what constitutes a reasonable number of animals. Service animals are handled in accordance with applicable law and should be communicated through the appropriate booking or host process when needed.',
+      'Pets are not permitted in our vacation rental suites to maintain a clean and allergen-friendly environment for all guests. Certified task-trained service animals covered under the Americans with Disabilities Act (ADA) are accommodated per applicable laws (please notify our host team in advance of check-in).',
   },
   {
     id: 'faq-building-rules',

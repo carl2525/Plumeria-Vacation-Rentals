@@ -88,7 +88,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           </p>
 
           {/* Quick Specs Pill Row */}
-          <div className="flex items-center gap-3 text-[11px] text-[#1A3B34]/70 font-medium pt-1">
+          <div className="flex items-center flex-wrap gap-2 text-[11px] text-[#1A3B34]/70 font-medium pt-1">
             <span className="inline-flex items-center gap-1">
               <Users className="w-3.5 h-3.5 text-[#8CA58A]" />
               <span>{property.guestsMax} Guests</span>
@@ -103,6 +103,14 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
               <Bath className="w-3.5 h-3.5 text-[#8CA58A]" />
               <span>{property.bathrooms} Bath</span>
             </span>
+            {property.squareFeet && (
+              <>
+                <span>•</span>
+                <span className="inline-flex items-center gap-1 font-semibold text-[#1A3B34]">
+                  <span>{property.squareFeet}+{property.lanaiSquareFeet || 67} sq ft</span>
+                </span>
+              </>
+            )}
           </div>
 
           {/* Key Amenities preview */}

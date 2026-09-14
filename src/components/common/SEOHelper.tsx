@@ -26,11 +26,19 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
 
     const cleanPath = currentPath.replace(/\/$/, '') || '/';
 
-    if (cleanPath === '/rentals') {
+    if (cleanPath === '/') {
+      meta = {
+        title: `${SITE_CONFIG.name} | Waikiki Vacation Rentals & Hotel Suite Alternative`,
+        description:
+          'Spacious 1-bedroom Waikiki vacation rental suites with full chef kitchens, free covered parking, and 1-acre resort deck. Compare luxury suites at $300/nt vs $1,000–$1,700/nt at Hilton and Sheraton mega-resorts and save on parking vs Aston at Waikiki Banyan. $0 resort fees.',
+        canonicalUrl: 'https://plumeriavacationrentals.com',
+        breadcrumbName: 'Home',
+      };
+    } else if (cleanPath === '/rentals') {
       meta = {
         title: 'Waikiki Vacation Rentals & Condo Suites | Plumeria Vacation Rentals at Waikiki Banyan',
         description:
-          'Browse handpicked Waikiki vacation rentals and short term condo rentals at Waikiki Banyan Tower 2. 550 sq. ft. 1-bedroom suites with full chef kitchens, ocean lanais, 1-acre resort deck, and $0 resort fees.',
+          'Browse handpicked Waikiki vacation rentals and short term condo rentals at Waikiki Banyan Tower 2. 557 sq. ft. 1-bedroom suites + 67 sq. ft. lanai with full chef kitchens, mountain and ocean views, 1-acre resort deck, and $0 resort fees.',
         canonicalUrl: 'https://plumeriavacationrentals.com/#/rentals',
         breadcrumbName: 'Vacation Rentals',
       };
@@ -47,9 +55,9 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
       }
     } else if (cleanPath === '/waikiki-banyan') {
       meta = {
-        title: 'Why Waikiki Banyan is Better | Waikiki Banyan Vacation Rentals vs Waikiki Hotels',
+        title: 'Why Waikiki Banyan is Better | Luxury Suites vs Hilton & Sheraton Waikiki',
         description:
-          'Discover why Waikiki Banyan vacation rentals deliver a superior stay: 1-acre 6th-floor resort recreation deck, heated pool, 2 hot tubs, tennis court, full chef kitchens, and $0 resort fees just 1 block to Kuhio Beach.',
+          'Discover why Waikiki Banyan suites outclass $1,000–$1,700/night hotel suites: 1-acre resort deck, heated pool, 2 hot tubs, tennis court, full chef kitchens, free covered parking, and $0 resort fees just 1 block to Kuhio Beach.',
         canonicalUrl: 'https://plumeriavacationrentals.com/#/waikiki-banyan',
         breadcrumbName: 'Why Waikiki Banyan',
       };

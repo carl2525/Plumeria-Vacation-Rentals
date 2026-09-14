@@ -30,7 +30,7 @@ import {
   FileText,
   ArrowRight,
   Sparkles,
-  PawPrint,
+  Ban,
 } from 'lucide-react';
 
 export type RulesTab = 'all' | 'part1' | 'part2';
@@ -288,7 +288,7 @@ export const RulesPage: React.FC<RulesPageProps> = ({
                 Waves: <Waves className="w-4 h-4 text-[#7FB6D9]" />,
                 Eye: <Eye className="w-4 h-4 text-[#C59B4B]" />,
                 Clock: <Clock className="w-4 h-4 text-[#8CA58A]" />,
-                PawPrint: <PawPrint className="w-4 h-4 text-[#C59B4B]" />,
+                Ban: <Ban className="w-4 h-4 text-rose-700" />,
                 Car: <Car className="w-4 h-4 text-[#1A3B34]" />,
               };
               return (
@@ -310,86 +310,6 @@ export const RulesPage: React.FC<RulesPageProps> = ({
                 </div>
               );
             })}
-          </div>
-        </div>
-
-        {/* Highlighted Pet Policy Box */}
-        <div
-          id="pet-policy-highlight"
-          className="relative bg-gradient-to-br from-white via-[#FDFBF7] to-[#F9F7F2] rounded-3xl p-6 sm:p-8 border-2 border-[#C59B4B]/60 shadow-sm space-y-5 overflow-hidden"
-        >
-          {/* Subtle gold accent corner glow */}
-          <div className="absolute top-0 right-0 w-72 h-72 bg-[#C59B4B]/10 rounded-full blur-3xl pointer-events-none -mr-24 -mt-24" />
-
-          <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E8DCC6] pb-4">
-            <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-[#1A3B34] text-[#F6E7A7] flex items-center justify-center shrink-0 shadow-sm">
-                <PawPrint className="w-6 h-6 text-[#C59B4B]" />
-              </div>
-              <div>
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#C59B4B]/15 text-[#1A3B34] text-[10px] font-bold uppercase tracking-widest border border-[#C59B4B]/30 mb-1">
-                  <span>Highlighted Policy</span>
-                </div>
-                <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1A3B34]">
-                  Waikiki Banyan Pet Policy & Guidelines
-                </h2>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#1A3B34] bg-white px-3.5 py-1.5 rounded-full border border-[#E8DCC6] self-start sm:self-auto shadow-2xs">
-              <Check className="w-3.5 h-3.5 text-[#C59B4B]" />
-              <span>Advance Written Confirmation Required</span>
-            </div>
-          </div>
-
-          <div className="relative space-y-4">
-            <p className="text-sm sm:text-base font-semibold text-[#1A3B34] leading-relaxed">
-              Waikiki Banyan allows pets subject to the building’s rules, authorization requirements, and management discretion.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
-              <div className="flex items-start gap-3 bg-white p-4 sm:p-4.5 rounded-2xl border border-[#E8DCC6] shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-[#C59B4B] shrink-0 mt-2" />
-                <p className="text-xs sm:text-sm text-[#1A3B34]/90 leading-relaxed font-light">
-                  <strong className="text-[#1A3B34] font-semibold">Advance Host Notification:</strong> Guests must notify Plumeria Vacation Rentals in advance and receive written confirmation before bringing any pet to the unit.
-                </p>
-              </div>
-
-              <div className="flex items-start gap-3 bg-white p-4 sm:p-4.5 rounded-2xl border border-[#E8DCC6] shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-[#C59B4B] shrink-0 mt-2" />
-                <p className="text-xs sm:text-sm text-[#1A3B34]/90 leading-relaxed font-light">
-                  <strong className="text-[#1A3B34] font-semibold">Building Authorization:</strong> All applicable Waikiki Banyan requirements must be satisfied before a pet is permitted on the property.
-                </p>
-              </div>
-
-              <div className="flex items-start gap-3 bg-white p-4 sm:p-4.5 rounded-2xl border border-[#E8DCC6] shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-[#C59B4B] shrink-0 mt-2" />
-                <p className="text-xs sm:text-sm text-[#1A3B34]/90 leading-relaxed font-light">
-                  <strong className="text-[#1A3B34] font-semibold">No Breed or Size Limits:</strong> The building does not have breed, height, or weight restrictions. The General Manager may determine what constitutes a reasonable number of animals.
-                </p>
-              </div>
-
-              <div className="flex items-start gap-3 bg-white p-4 sm:p-4.5 rounded-2xl border border-[#E8DCC6] shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-[#C59B4B] shrink-0 mt-2" />
-                <p className="text-xs sm:text-sm text-[#1A3B34]/90 leading-relaxed font-light">
-                  <strong className="text-[#1A3B34] font-semibold">Service Animals:</strong> Service animals are handled in accordance with applicable law and should be communicated through the appropriate booking or host process when needed.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-[#E8DCC6]/35 rounded-xl p-3 sm:p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-[#1A3B34]/85 border border-[#E8DCC6]">
-              <div className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-[#C59B4B] shrink-0" />
-                <span>Traveling with a pet or service animal? Reach out to our team in advance so we can assist with necessary paperwork and building requirements.</span>
-              </div>
-              <button
-                onClick={() => onOpenInquiry()}
-                className="inline-flex items-center gap-1.5 font-bold text-[#1A3B34] hover:text-[#C59B4B] transition-colors underline cursor-pointer shrink-0"
-              >
-                <span>Inquire with Host</span>
-                <ArrowRight className="w-3 h-3" />
-              </button>
-            </div>
           </div>
         </div>
 
