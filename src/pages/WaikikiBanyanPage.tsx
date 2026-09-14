@@ -72,6 +72,12 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
   };
   const banyanFaqs = [
     {
+      id: 'pool-heating-tower2',
+      question: 'Is the swimming pool heated, and are the hot tubs accessible from Tower 2?',
+      answer:
+        'Yes! Waikiki Banyan’s large outdoor swimming pool is heated year-round, and the recreation deck features therapeutic jet hot tubs framing Diamond Head views. The expansive 1-acre resort deck is situated on the 6th floor connecting both Tower 1 and Tower 2—guests staying in Tower 2 take the Tower 2 elevator directly to the 6th floor for seamless, immediate access with $0 resort fees.',
+    },
+    {
       id: 'parking',
       question: 'Is parking available on-site at Waikiki Banyan?',
       answer:
@@ -416,7 +422,7 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
                   <AppImage
                     src="/images/banyan/banyan-amenity-08.webp"
                     fallbackSrc="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&q=80"
-                    alt="Dual heated jet hot tubs with Diamond Head view"
+                    alt="Therapeutic jet hot tubs with Diamond Head view"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white">
@@ -424,8 +430,8 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
                   </div>
                 </div>
                 <div>
-                  <span className="font-bold text-[#F6E7A7] block text-sm">♨️ 2 Jet Spas & Sauna</span>
-                  <p className="text-white/75 text-xs">Hot tubs with Diamond Head views plus indoor dry saunas</p>
+                  <span className="font-bold text-[#F6E7A7] block text-sm">♨️ Jet Spas & Hot Tubs</span>
+                  <p className="text-white/75 text-xs">Therapeutic hot tubs with Diamond Head views plus indoor dry saunas</p>
                 </div>
               </div>
 

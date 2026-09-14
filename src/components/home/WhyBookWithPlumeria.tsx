@@ -66,7 +66,7 @@ export const WhyBookWithPlumeria: React.FC = () => {
               Zero Surprise Fees
             </h3>
             <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-              No surprise $45–$65 daily resort fees or $50/day parking fees at checkout. Covered garage parking ($0 fee), high-speed Wi-Fi, Tommy Bahama beach gear, and all recreation deck amenities are 100% included.
+              No surprise $38–$65 daily resort/amenity fees or $43–$72/day parking fees at checkout. Covered garage parking ($0 fee), high-speed Wi-Fi, Tommy Bahama beach gear, and all recreation deck amenities are 100% included.
             </p>
           </div>
         </div>

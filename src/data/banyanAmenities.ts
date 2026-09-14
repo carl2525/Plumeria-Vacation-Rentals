@@ -27,10 +27,10 @@ export const BANYAN_AMENITY_PHOTOS: BanyanAmenityPhoto[] = [
   {
     id: 'banyan-amenity-08',
     number: 8,
-    title: 'Dual Heated Jet Hot Tubs with Diamond Head View',
+    title: 'Therapeutic Jet Hot Tubs with Diamond Head View',
     category: 'deck',
     categoryLabel: '6th Floor Resort Oasis',
-    caption: 'Two soothing heated jet hot tubs set into sun decking framing a direct, iconic view of Diamond Head crater.',
+    caption: 'Two soothing therapeutic jet hot tubs set into the 6th-floor sundeck framing direct, iconic views of Diamond Head crater.',
     url: '/images/banyan/banyan-amenity-08.webp',
     altFilename: 'Waikiki Banyan T2 Building and Ammenities (8).webp',
     fallbackUrl: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1400&q=80',

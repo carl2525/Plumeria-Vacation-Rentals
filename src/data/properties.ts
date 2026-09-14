@@ -74,14 +74,14 @@ export const PROPERTIES: Property[] = [
       },
     ],
     keyAmenities: [
-      'Unit #3609-T2 (Floor 36)',
+      'Free Covered Parking',
+      'Full Chef Kitchen',
+      '1 Block to Beach',
       'Pacific Ocean & Sunset Vistas',
-      '557 Sq. Ft. + 67 Sq. Ft. Lanai',
-      'Private Covered Lanai',
-      'Full Kitchen with Appliances',
+      'Private 36th-Fl Lanai',
       'Air Conditioning & Fast Wi-Fi',
-      'Banyan Heated Pool & 2 Jet Spas',
-      'Complimentary Beach Chairs & Towels',
+      'Banyan Heated Pool & 2 Spas',
+      'Beach Chairs & Towels',
     ],
     fullAmenities: [
       {
@@ -266,14 +266,14 @@ export const PROPERTIES: Property[] = [
       },
     ],
     keyAmenities: [
-      'Unit #3205-T2 (Floor 32)',
-      '180° Diamond Head & Mountain Views',
-      '557 Sq. Ft. + 67 Sq. Ft. Lanai',
-      'Private Covered Lanai with Seating',
-      'Breakfast Bar Island with 3 Stools',
-      'Full Chef-Ready Granite Kitchen',
-      'Emerald Tile Walk-In Shower',
-      'Banyan Heated Pool & 2 Jet Spas',
+      'Free Covered Parking',
+      'Full Chef Kitchen',
+      '1 Block to Beach',
+      '180° Diamond Head Views',
+      'Private 32nd-Fl Lanai',
+      'Breakfast Bar Island',
+      'Emerald Tile Shower',
+      'Banyan Heated Pool & 2 Spas',
     ],
     fullAmenities: [
       {

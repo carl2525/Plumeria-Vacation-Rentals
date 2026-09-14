@@ -65,15 +65,19 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
           </button>
         </div>
 
-        {/* Location note */}
-        <div className="bg-[#E8DCC6]/40 px-6 py-2.5 flex items-center justify-between text-xs text-[#1A3B34] border-b border-[#C59B4B]/20">
-          <span className="flex items-center gap-1.5">
-            <MapPin className="w-3.5 h-3.5 text-[#C59B4B]" />
-            <span>Waikiki Banyan · 1 Block to Kuhio Beach</span>
-          </span>
-          <span className="flex items-center gap-1 text-[#1A3B34] font-medium">
-            <Sparkles className="w-3 h-3 text-[#C59B4B]" />
-            <span>Direct Inquiry · $0 Resort Fees</span>
+        {/* 15% Website Direct Discount Bar */}
+        <div className="bg-[#1A3B34] text-white px-5 sm:px-6 py-2.5 flex items-center justify-between text-xs border-b border-[#C59B4B]/30">
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 rounded bg-[#C59B4B] text-[#1A3B34] text-[10px] font-black uppercase tracking-wider">
+              15% OFF
+            </span>
+            <span className="font-semibold text-white">
+              Direct Website Special upon booking acceptance
+            </span>
+          </div>
+          <span className="hidden sm:flex items-center gap-1 text-[#F6E7A7] text-[11px] font-medium">
+            <Sparkles className="w-3.5 h-3.5 text-[#F6E7A7]" />
+            <span>$0 Resort Fees · Free Parking</span>
           </span>
         </div>
 

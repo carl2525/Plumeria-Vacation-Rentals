@@ -50,6 +50,14 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(2);
+
+  const stickyNights = useMemo(() => {
+    if (!checkIn || !checkOut) return 0;
+    const start = new Date(checkIn).getTime();
+    const end = new Date(checkOut).getTime();
+    if (isNaN(start) || isNaN(end) || end <= start) return 0;
+    return Math.round((end - start) / (1000 * 60 * 60 * 24));
+  }, [checkIn, checkOut]);
   const dynamicGallery = useMemo(() => {
     if (property.id !== 'wb-3205-t2') {
       return property.gallery;
@@ -134,13 +142,13 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         {/* Title & Location Header */}
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8DCC6]/50 text-[#1A3B34] border border-[#C59B4B]/30">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8DCC6]/50 text-[#1A3B34] border border-[#C59B4B]/30 whitespace-nowrap">
               {property.viewType}
             </span>
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-[#1A3B34] border border-[#E8DCC6]">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-[#1A3B34] border border-[#E8DCC6] whitespace-nowrap">
               {property.tower}
             </span>
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-[#1A3B34] border border-[#E8DCC6]">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-[#1A3B34] border border-[#E8DCC6] whitespace-nowrap">
               {property.floorLevel}
             </span>
           </div>
@@ -459,16 +467,35 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FF385C]/10 border border-[#FF385C]/30 text-[10px] font-bold uppercase tracking-wider text-[#FF385C]">
                     <span>Airbnb Primary</span>
                   </div>
-                  <div className="flex items-center gap-1 text-[#C59B4B]">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span className="text-xs font-semibold text-[#1A3B34]">Inquire Direct</span>
+                  <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#C59B4B] text-[#1A3B34] text-[10px] font-black uppercase tracking-wider shadow-2xs">
+                    <Sparkles className="w-3 h-3" />
+                    <span>15% Direct Discount</span>
                   </div>
                 </div>
-                <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                  Send Booking Inquiry
-                </h3>
-                <p className="text-xs text-[#1A3B34]/70 leading-relaxed">
-                  Our main listing is on Airbnb. You can also send a direct inquiry here to check dates, ask questions, or request direct booking with $0 resort fees.
+
+                {/* Nightly Rates Breakdown */}
+                <div className="pt-2 flex items-baseline justify-between">
+                  <div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
+                        $255
+                      </span>
+                      <span className="text-xs text-[#1A3B34]/60 font-medium">/ night</span>
+                      <span className="text-xs text-[#1A3B34]/40 line-through">
+                        $300/nt
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-[#8CA58A] font-bold block uppercase tracking-wider">
+                      Website Direct Rate (Save 15%)
+                    </span>
+                  </div>
+                  <span className="text-xs font-semibold text-[#1A3B34]/70 bg-[#E8DCC6]/50 px-2 py-1 rounded-md">
+                    $0 Resort Fees
+                  </span>
+                </div>
+
+                <p className="text-xs text-[#1A3B34]/70 leading-relaxed pt-1">
+                  Inquire directly on our website. When your booking is accepted, enjoy an exclusive 15% discount off standard rates, free covered parking, and zero resort fees.
                 </p>
               </div>
 
@@ -500,6 +527,23 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   </div>
                 </div>
 
+                {/* Sticky Nights Calculation Box */}
+                {stickyNights > 0 && (
+                  <div className="p-3 rounded-xl bg-[#1A3B34] text-white space-y-1.5 text-xs shadow-xs animate-fade-in border border-[#C59B4B]/30">
+                    <div className="flex items-center justify-between text-[#F6E7A7] font-semibold text-[11px]">
+                      <span>{stickyNights} Nights Estimate:</span>
+                      <span>15% Off Applied</span>
+                    </div>
+                    <div className="flex items-baseline justify-between">
+                      <span className="text-white/60 line-through">${stickyNights * 300}</span>
+                      <span className="text-base font-bold text-white">${stickyNights * 255}</span>
+                      <span className="text-[11px] font-bold text-[#F6E7A7] bg-white/15 px-1.5 py-0.5 rounded">
+                        Save ${stickyNights * 45}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 <div className="p-2.5 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6]">
                   <label className="block text-[9px] font-bold uppercase tracking-wider text-[#1A3B34]/60 mb-1">
                     Guests
@@ -524,7 +568,11 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     className="w-full py-3.5 px-4 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer border border-[#C59B4B]/30"
                   >
                     <Calendar className="w-4 h-4 text-[#F6E7A7]" />
-                    <span>Send Booking Inquiry</span>
+                    <span>
+                      {stickyNights > 0
+                        ? `Inquire & Claim 15% Off ($${stickyNights * 255})`
+                        : 'Inquire & Claim 15% Off'}
+                    </span>
                   </button>
 
                   {property.airbnbUrl && (

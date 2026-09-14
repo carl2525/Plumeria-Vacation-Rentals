@@ -43,7 +43,7 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
             Your Waikiki vacation is closer than you think.
           </h2>
           <p className="text-base sm:text-lg text-white/85 font-light leading-relaxed">
-            Our suites are primarily listed on Airbnb, with direct inquiries welcomed right here. Experience why Waikiki Banyan condo rentals are better than any other vacation rental in Honolulu—enjoy spacious 1-bedroom suites with 1-acre resort deck amenities, full chef kitchens, and $0 mandatory resort fees.
+            Our suites are primarily listed on Airbnb, with direct inquiries welcomed right here. Experience why Waikiki Banyan condo rentals are better than any other vacation rental in Honolulu—enjoy spacious 1-bedroom suites with 1-acre resort deck amenities, full chef kitchens, <strong className="text-[#F6E7A7] font-semibold">15% discount on direct website bookings</strong> upon host acceptance ($255/nt vs $300/nt), and $0 mandatory resort fees.
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/15 hover:bg-white/25 text-white backdrop-blur-md border border-[#8CA58A]/50 transition-all cursor-pointer"
           >
             <Mail className="w-4 h-4 text-[#F6E7A7]" />
-            <span>Direct Inquiry</span>
+            <span>Inquire & Save 15%</span>
           </button>
         </div>
 

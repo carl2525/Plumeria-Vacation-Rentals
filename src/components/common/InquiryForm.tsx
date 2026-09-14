@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Send,
   CheckCircle2,
@@ -13,6 +13,8 @@ import {
   Copy,
   Check,
   ExternalLink,
+  Sparkles,
+  Tag,
 } from 'lucide-react';
 import { PROPERTIES } from '../../data/properties';
 import { SITE_CONFIG } from '../../config/site';
@@ -54,6 +56,15 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [copied, setCopied] = useState(false);
+
+  // Compute number of nights and discount rate
+  const nights = useMemo(() => {
+    if (!formData.checkIn || !formData.checkOut) return 0;
+    const start = new Date(formData.checkIn).getTime();
+    const end = new Date(formData.checkOut).getTime();
+    if (isNaN(start) || isNaN(end) || end <= start) return 0;
+    return Math.round((end - start) / (1000 * 60 * 60 * 24));
+  }, [formData.checkIn, formData.checkOut]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -122,13 +133,13 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
 
         <div className="space-y-2">
           <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C59B4B] block">
-            Inquiry Prepared
+            Inquiry Prepared · 15% Discount Attached
           </span>
           <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
             Mahalo, {formData.firstName}!
           </h3>
           <p className="text-[#1A3B34]/85 text-sm max-w-md mx-auto leading-relaxed font-light">
-            We’ve opened your email app with a pre-filled booking request for <strong className="text-[#1A3B34] font-semibold">{suiteName}</strong> ({formData.checkIn} to {formData.checkOut}).
+            We’ve opened your email app with a pre-filled booking request for <strong className="text-[#1A3B34] font-semibold">{suiteName}</strong> ({formData.checkIn} to {formData.checkOut}). Your inquiry includes the <strong className="text-[#1A3B34] font-semibold">15% Direct Website Discount</strong> ($255/night direct rate applied upon host acceptance).
           </p>
         </div>
 
@@ -209,6 +220,27 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         </div>
       )}
 
+      {/* 15% Direct Booking Discount Banner */}
+      <div className="p-3.5 rounded-2xl bg-gradient-to-r from-[#1A3B34] to-[#244E45] text-white border border-[#C59B4B]/40 shadow-xs flex items-start gap-3">
+        <div className="w-10 h-10 rounded-xl bg-[#C59B4B] text-[#1A3B34] flex flex-col items-center justify-center shrink-0 shadow-2xs">
+          <span className="text-xs font-black leading-none">15%</span>
+          <span className="text-[8px] font-bold uppercase tracking-tight leading-none mt-0.5">OFF</span>
+        </div>
+        <div className="space-y-0.5 flex-1 min-w-0">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="font-serif font-bold text-sm text-[#F6E7A7]">
+              15% Direct Website Booking Discount
+            </span>
+            <span className="px-1.5 py-0.2 text-[9px] font-bold uppercase rounded bg-white/20 text-white whitespace-nowrap">
+              Exclusive
+            </span>
+          </div>
+          <p className="text-[11px] text-white/85 leading-relaxed font-light">
+            Inquire directly here on our website. When your booking is accepted by our host team, receive an exclusive <strong>15% discount</strong> off standard nightly rates (<strong>$255/nt</strong> vs $300/nt) + $0 resort fees and free covered parking!
+          </p>
+        </div>
+      </div>
+
       {/* Quick Direct Email Banner */}
       <div className="p-3.5 rounded-2xl bg-[#E8DCC6]/35 border border-[#C59B4B]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2 text-[#1A3B34]">
@@ -219,7 +251,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
           </span>
         </div>
         <a
-          href={`mailto:${SITE_CONFIG.email}?subject=Booking%20Inquiry%20-%20Waikiki%20Banyan&body=Aloha%20Plumeria%20Team,%0A%0AI%20would%20like%20to%20inquire%20about%20booking%20a%20stay%20at%20Waikiki%20Banyan.`}
+          href={`mailto:${SITE_CONFIG.email}?subject=Booking%20Inquiry%20-%20Waikiki%20Banyan%20(15%25%20Direct%20Discount)&body=Aloha%20Plumeria%20Team,%0A%0AI%20would%20like%20to%20inquire%20about%20booking%20a%20stay%20at%20Waikiki%20Banyan%20with%20the%2015%25%20direct%20website%20discount.`}
           className="inline-flex items-center gap-1 font-bold text-[#1A3B34] hover:text-[#8CA58A] transition-colors shrink-0 cursor-pointer"
         >
           <span>Open Email Client</span>
@@ -364,6 +396,47 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         </div>
       </div>
 
+      {/* Dynamic 15% Discount Calculation Box when dates are selected */}
+      {nights > 0 && (
+        <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#C59B4B]/50 shadow-2xs space-y-2.5 animate-fade-in">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-[#C59B4B]" />
+              <span className="font-serif font-bold text-xs sm:text-sm text-[#1A3B34]">
+                15% Website Discount Applied ({nights} {nights === 1 ? 'Night' : 'Nights'})
+              </span>
+            </div>
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-[#C59B4B] text-[#1A3B34]">
+              Save ${nights * 45}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 text-center text-xs">
+            <div className="p-2 rounded-xl bg-white border border-[#E8DCC6]">
+              <span className="text-[10px] uppercase font-bold text-[#1A3B34]/50 block">Standard</span>
+              <span className="font-medium text-[#1A3B34]/50 line-through text-xs sm:text-sm">${nights * 300}</span>
+              <span className="text-[9px] text-[#1A3B34]/50 block">($300/nt)</span>
+            </div>
+            <div className="p-2 rounded-xl bg-[#1A3B34] text-white border border-[#C59B4B]/40">
+              <span className="text-[10px] uppercase font-bold text-[#F6E7A7] block">Your Rate</span>
+              <span className="font-bold text-sm sm:text-base text-white">${nights * 255}</span>
+              <span className="text-[9px] text-[#F6E7A7] block font-medium">($255/nt)</span>
+            </div>
+            <div className="p-2 rounded-xl bg-[#8CA58A]/20 border border-[#8CA58A]/30">
+              <span className="text-[10px] uppercase font-bold text-[#1A3B34] block">You Save</span>
+              <span className="font-bold text-sm sm:text-base text-[#1A3B34]">${nights * 45}</span>
+              <span className="text-[9px] text-[#1A3B34]/70 block font-medium">15% Off Suite</span>
+            </div>
+          </div>
+
+          <div className="text-[11px] text-[#1A3B34]/80 flex flex-wrap items-center justify-between gap-1 pt-1 border-t border-[#E8DCC6]">
+            <span>✨ $0 Mandatory Resort Fees</span>
+            <span>🚗 Free Covered Garage Parking</span>
+            <span className="text-[#8CA58A] font-semibold">Applied upon booking acceptance</span>
+          </div>
+        </div>
+      )}
+
       {/* Guests & Preferred Property */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
@@ -442,18 +515,22 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         {status === 'submitting' ? (
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            <span>Preparing Your Email...</span>
+            <span>Preparing Your 15% Discount Inquiry...</span>
           </div>
         ) : (
           <>
             <Mail className="w-4 h-4 text-[#F6E7A7]" />
-            <span>Send Stay Inquiry (Opens Email Client)</span>
+            <span>
+              {nights > 0
+                ? `Send Inquiry & Request 15% Discount ($${nights * 255})`
+                : 'Send Inquiry & Request 15% Website Discount'}
+            </span>
           </>
         )}
       </button>
 
       <div className="text-[11px] text-[#1A3B34]/65 text-center pt-1 space-y-1">
-        <p>Direct inquiry to host · $0 booking fees · Directly sent via mailto</p>
+        <p>Direct inquiry to host · 15% discount applied upon booking acceptance · $0 resort fees</p>
         <p className="text-[10px] text-[#1A3B34]/60">
           By inquiring or booking, guests agree to follow the Waikiki Banyan Building Rules and Plumeria In-House Rules.
         </p>

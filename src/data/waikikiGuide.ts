@@ -3,7 +3,7 @@ import { WaikikiDestination } from '../types';
 export const WAIKIKI_DESTINATIONS: WaikikiDestination[] = [
   {
     id: 'kuhio-beach',
-    title: 'Kūhiō Beach & Protected Ocean Lagoons',
+    title: 'Kuhio Beach & Protected Ocean Lagoons',
     category: 'beaches',
     categoryLabel: 'Beach & Ocean',
     distanceFromBanyan: '1 Flat Block · 3 min walk down ʻOhua Ave',
@@ -12,11 +12,11 @@ export const WAIKIKI_DESTINATIONS: WaikikiDestination[] = [
       'Just 1 flat block from Waikiki Banyan—walk down in your flip-flops with the beach chairs and towels provided in your suite! Historic offshore breakwalls create serene, wave-sheltered turquoise lagoons perfect for families with young children, raft floating, and effortless ocean swimming.',
     insiderTip:
       'Head down early at 7:30 AM for crystal-clear, glassy water before the afternoon crowds arrive, or gather on the sand at dusk for the free sunset torch-lighting and live hula show by the Duke Kahanamoku statue.',
-    highlightPills: ['1 Block From Banyan', 'Calm Breakwall Lagoons', 'Beach Chairs & Towels Provided', 'Duke Kahanamoku Statue'],
+    highlightPills: ['1 Block From Banyan', 'Calm Breakwall Lagoons', 'Beach Chairs & Towels', 'Duke Kahanamoku Statue'],
   },
   {
     id: 'diamond-head-hike',
-    title: 'Diamond Head State Monument (Lēʻahi Crater)',
+    title: 'Diamond Head State Monument (Leʻahi Crater)',
     category: 'nature',
     categoryLabel: 'Scenic Hiking & Views',
     distanceFromBanyan: '1.4 Miles · 5 min drive / open-air trolley',
@@ -100,17 +100,17 @@ export const WAIKIKI_DESTINATIONS: WaikikiDestination[] = [
     distanceFromBanyan: '6 Blocks · 8 min stroll down Kalākaua Ave',
     image: '/images/destinations/waikiki-market-place.jpg',
     description:
-      'An open-air shopping and cultural destination built around a magnificent 160-year-old banyan tree. Features Hawaiian cultural workshops, open-air retail, evening torch lighting, and the third-floor Grand Lanai showcasing celebrated chef-driven restaurants.',
+      'An open-air shopping and cultural destination built around a magnificent 160-year-old banyan tree. Features authentic Hawaiian cultural workshops, world-class retail boutiques, evening torch lighting, and the third-floor Grand Lanai showcasing celebrated chef-driven restaurants—just an easy 8-minute stroll down Kalākaua Ave.',
     insiderTip:
       'Arrive in the Queen’s Court central garden around sunset for the free nightly torch lighting and live traditional hula storytelling performance.',
     highlightPills: ['160-Year-Old Banyan Tree', 'Grand Lanai Dining', 'Free Nightly Hula & Torches', 'Open-Air Boutiques'],
   },
   {
     id: 'kalakaua-dining',
-    title: 'Authentic Local Kūhiō Dining & Fresh Hawaiian Poke',
+    title: 'Authentic Local Kuhio Dining & Fresh Hawaiian Poke',
     category: 'dining',
     categoryLabel: 'Local Dining & Island Cafes',
-    distanceFromBanyan: 'Steps away along ʻOhua & Kūhiō Avenues',
+    distanceFromBanyan: 'Steps away along ʻOhua & Kuhio Avenues',
     image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=80',
     description:
       'One of the best reasons foodies choose Waikiki Banyan: avoid overpriced hotel buffets and dine where locals eat! Within 1 to 3 flat blocks you’ll find world-renowned fresh ahi poke at Maguro Spot, warm handmade musubi at Musubi Cafe IYASUME, artisanal coffees, and our ground-floor Banyan bakeshop.',

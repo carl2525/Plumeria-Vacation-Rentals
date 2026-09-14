@@ -55,7 +55,7 @@ export const PropertyGallery: React.FC = () => {
     {
       id: 'g-8',
       url: '/images/banyan/banyan-amenity-08.webp',
-      caption: 'Dual 6th-floor heated therapeutic jet hot tubs framing Diamond Head for evening relaxation',
+      caption: '6th-floor therapeutic jet hot tubs framing Diamond Head for evening relaxation',
       category: 'banyan',
     },
     {
@@ -131,7 +131,7 @@ export const PropertyGallery: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+              className={`px-4 py-2 rounded-full text-xs font-medium transition-colors cursor-pointer whitespace-nowrap ${
                 activeCategory === cat.id
                   ? 'bg-[#1A3B34] text-white shadow-xs'
                   : 'bg-white text-[#1A3B34]/80 hover:bg-[#E8DCC6]/50 border border-[#E8DCC6]'

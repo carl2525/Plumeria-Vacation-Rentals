@@ -77,13 +77,13 @@ export const ExploreWaikikiSection: React.FC<ExploreWaikikiSectionProps> = ({ on
         </div>
 
         {/* Destination Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {filteredItems.slice(0, 6).map((item) => (
             <article
               key={item.id}
-              className="bg-white rounded-3xl overflow-hidden border border-[#E8DCC6] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-3xl overflow-hidden border border-[#E8DCC6] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col h-full group"
             >
-              <div className="relative aspect-16/10 overflow-hidden bg-[#1A3B34]/10">
+              <div className="relative aspect-16/10 overflow-hidden bg-[#1A3B34]/10 shrink-0">
                 <AppImage
                   src={item.image}
                   alt={item.title}
@@ -106,9 +106,9 @@ export const ExploreWaikikiSection: React.FC<ExploreWaikikiSectionProps> = ({ on
                 </div>
               </div>
 
-              <div className="p-6 space-y-3.5 flex-1 flex flex-col justify-between">
+              <div className="p-6 flex-1 flex flex-col justify-between">
                 <div className="space-y-2.5">
-                  <h3 className="font-serif text-xl font-bold text-[#1A3B34] group-hover:text-[#8CA58A] transition-colors leading-snug">
+                  <h3 className="font-serif text-xl font-bold text-[#1A3B34] group-hover:text-[#C59B4B] transition-colors leading-snug">
                     {item.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
@@ -118,10 +118,10 @@ export const ExploreWaikikiSection: React.FC<ExploreWaikikiSectionProps> = ({ on
                   {/* Highlight Pills */}
                   {item.highlightPills && item.highlightPills.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 pt-1">
-                      {item.highlightPills.slice(0, 3).map((pill, idx) => (
+                      {item.highlightPills.map((pill, idx) => (
                         <span
                           key={idx}
-                          className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#1A3B34]/5 text-[#1A3B34]/80 border border-[#1A3B34]/10"
+                          className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#1A3B34]/5 text-[#1A3B34]/80 border border-[#1A3B34]/10 whitespace-nowrap"
                         >
                           {pill}
                         </span>
@@ -131,7 +131,7 @@ export const ExploreWaikikiSection: React.FC<ExploreWaikikiSectionProps> = ({ on
                 </div>
 
                 {/* Insider Tip Box */}
-                <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1 mt-2">
+                <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1 mt-4">
                   <span className="font-bold text-[#1A3B34] flex items-center gap-1 text-[11px]">
                     <Sparkles className="w-3 h-3 text-[#C59B4B]" />
                     <span>Banyan Guest Advantage</span>

@@ -81,14 +81,14 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
         </div>
 
         {/* Destination Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {filteredItems.map((item) => (
             <article
               key={item.id}
-              className="bg-white rounded-3xl overflow-hidden border border-[#E8DCC6] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-3xl overflow-hidden border border-[#E8DCC6] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col h-full group"
             >
               {/* Image & Badges */}
-              <div className="relative aspect-16/10 overflow-hidden bg-[#1A3B34]/10">
+              <div className="relative aspect-16/10 overflow-hidden bg-[#1A3B34]/10 shrink-0">
                 <AppImage
                   src={item.image}
                   alt={item.title}
@@ -98,7 +98,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
                 <div className="absolute top-3.5 left-3.5">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/90 backdrop-blur-md text-[#1A3B34]">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/90 backdrop-blur-md text-[#1A3B34] whitespace-nowrap shadow-sm">
                     {item.categoryLabel}
                   </span>
                 </div>
@@ -112,34 +112,34 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
               </div>
 
               {/* Content Body */}
-              <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <h3 className="font-serif text-xl font-bold text-[#1A3B34] group-hover:text-[#8CA58A] transition-colors leading-snug">
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <h3 className="font-serif text-xl font-bold text-[#1A3B34] group-hover:text-[#C59B4B] transition-colors leading-snug">
                     {item.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed font-light">
                     {item.description}
                   </p>
-                </div>
 
-                {/* Highlights and Tip */}
-                <div className="space-y-3 pt-2">
-                  <div className="flex flex-wrap gap-1.5">
+                  {/* Highlights Pills directly below description */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
                     {item.highlightPills.map((h, i) => (
                       <span
                         key={i}
-                        className="text-[11px] px-2.5 py-0.5 rounded-md bg-[#E8DCC6]/40 text-[#1A3B34] font-medium"
+                        className="text-[11px] px-2.5 py-1 rounded-md bg-[#E8DCC6]/40 text-[#1A3B34] font-medium whitespace-nowrap"
                       >
                         ✓ {h}
                       </span>
                     ))}
                   </div>
+                </div>
 
-                  {/* Local Tip */}
+                {/* Local Tip */}
+                <div className="mt-auto pt-4">
                   <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1">
-                    <span className="font-bold text-[#8CA58A] flex items-center gap-1 text-[11px]">
-                      <Sparkles className="w-3 h-3 text-[#C59B4B]" />
-                      <span>Host Insider Tip</span>
+                    <span className="font-bold text-[#1A3B34] flex items-center gap-1.5 text-[11px]">
+                      <Sparkles className="w-3.5 h-3.5 text-[#C59B4B]" />
+                      <span className="text-[#8CA58A] font-semibold">Host Insider Tip</span>
                     </span>
                     <p className="text-[11px] leading-relaxed text-[#1A3B34]/75">
                       {item.insiderTip}

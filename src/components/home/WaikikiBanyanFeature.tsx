@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Waves, Home, Compass, ArrowRight, Check } from 'lucide-react';
+import { MapPin, Waves, Home, Compass, ArrowRight, Check, Sparkles } from 'lucide-react';
 import { AppImage } from '../common/AppImage';
 import { LogoWatermark } from '../brand/LogoWatermark';
 
@@ -162,19 +162,22 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
                   alt="Waikiki Banyan 6th floor heated resort swimming pool and recreation sundeck"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 px-3 py-1.5 rounded-xl bg-[#1A3B34]/85 backdrop-blur-xs text-white text-[11px] font-medium flex items-center justify-between">
-                  <span className="text-[#F6E7A7]">Heated Resort Pool & Spas</span>
-                  <span className="text-white/80">6th-Floor 1-Acre Oasis</span>
+                <div className="absolute bottom-2.5 inset-x-2.5 px-3.5 py-2 rounded-xl bg-[#1A3B34]/90 backdrop-blur-md text-white text-[11px] font-medium flex items-center justify-between border border-white/15 shadow-xs">
+                  <span className="text-[#F6E7A7] font-semibold flex items-center gap-1.5 whitespace-nowrap">
+                    <Sparkles className="w-3.5 h-3.5 text-[#C59B4B] shrink-0" />
+                    <span>Heated Pool & Spas</span>
+                  </span>
+                  <span className="text-white/80 whitespace-nowrap text-[10.5px] sm:text-[11px]">6th-Floor Oasis</span>
                 </div>
               </div>
 
               <button
                 id="discover-waikiki-banyan-btn"
                 onClick={onLearnMore}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#C59B4B] hover:bg-[#D4A853] text-[#1A3B34] transition-all shadow-md cursor-pointer self-stretch sm:self-auto text-center justify-center"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#C59B4B] hover:bg-[#D4A853] text-[#1A3B34] transition-all shadow-md hover:shadow-lg cursor-pointer w-full sm:w-auto text-center justify-center whitespace-nowrap group"
               >
-                <span>Discover Waikiki Banyan Guide</span>
-                <ArrowRight className="w-4 h-4" />
+                <span className="whitespace-nowrap">Discover Waikiki Banyan</span>
+                <ArrowRight className="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
               </button>
             </div>
           </div>

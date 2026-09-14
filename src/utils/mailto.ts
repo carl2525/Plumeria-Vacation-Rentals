@@ -39,14 +39,31 @@ export function buildInquiryEmailText(params: MailtoInquiryParams): string {
   const phoneText = params.phone || 'Not provided';
   const notesText = params.message && params.message.trim() ? params.message.trim() : 'No special requests submitted.';
 
+  // Calculate nights and estimated pricing if dates provided
+  let rateDetail = 'Standard $300/nt → Direct 15% Discount Rate: $255/nt (applied upon booking acceptance)';
+  if (params.checkIn && params.checkOut) {
+    const start = new Date(params.checkIn).getTime();
+    const end = new Date(params.checkOut).getTime();
+    if (!isNaN(start) && !isNaN(end) && end > start) {
+      const nights = Math.round((end - start) / (1000 * 60 * 60 * 24));
+      const regularTotal = nights * 300;
+      const discountedTotal = nights * 255;
+      const savings = regularTotal - discountedTotal;
+      rateDetail = `${nights} Nights: Standard $${regularTotal} ($300/nt) → Direct 15% Discount Rate: $${discountedTotal} ($255/nt, Save $${savings} on suite)`;
+    }
+  }
+
   return `Aloha Plumeria Vacation Rentals Team,
 
-I would like to inquire about booking a stay at Waikiki Banyan:
+I would like to inquire about booking a stay at Waikiki Banyan and request the 15% Direct Website Booking Discount:
 
 • Preferred Suite: ${suiteName}
 • Check-In Date: ${checkInText}
 • Check-Out Date: ${checkOutText}
 • Number of Guests: ${guestsText}
+• Promotion Requested: 15% Website Direct Discount (Applied upon accepted booking)
+• Rate Estimate: ${rateDetail}
+• Included Perks: $0 Mandatory Resort Fees + Free Covered Garage Parking
 
 Guest Details:
 • Name: ${guestName}
@@ -57,7 +74,7 @@ Special Requests / Questions:
 ${notesText}
 
 Mahalo!
-Sent from Plumeria Vacation Rentals (Waikiki Banyan Tower 2)`;
+Sent from Plumeria Vacation Rentals Official Website (plumeriavacationrentals.com)`;
 }
 
 /**
@@ -70,7 +87,7 @@ export function buildInquirySubject(params: MailtoInquiryParams): string {
   const guestName = [params.firstName, params.lastName].filter(Boolean).join(' ');
   const fromPart = guestName ? ` - ${guestName}` : '';
 
-  return `Stay Inquiry: ${suite}${dates}${fromPart}`;
+  return `Stay Inquiry: ${suite}${dates} [15% Direct Website Discount]${fromPart}`;
 }
 
 /**

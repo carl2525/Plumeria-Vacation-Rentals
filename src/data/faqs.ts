@@ -16,6 +16,13 @@ export const FAQS: FAQItem[] = [
       'No! Plumeria Vacation Rentals does not charge a separate resort or amenity fee. Furthermore, covered on-site garage parking is included with your stay from check-in through checkout. Your base rate is $300 per night (unless a different rate is displayed or quoted for your dates), and all cleaning fees and taxes are disclosed before payment.',
   },
   {
+    id: 'faq-competitor-pricing',
+    category: 'Booking & Policies',
+    question: 'How does Plumeria compare in price to Aston at Waikiki Banyan and Waikiki hotels?',
+    answer:
+      'Even inside the exact same Waikiki Banyan building, booking with Plumeria saves you $700+ on a typical 5-night stay compared to Aston at Waikiki Banyan. Aston charges a mandatory daily Hospitality/Amenity fee ($32 + tax = $37.74/day) plus $43/day for parking ($400+ extra in mandatory fees alone), while Plumeria includes covered parking and 1-acre deck access with $0 resort fees, plus guaranteed top-floor Tower 2 placement (32nd or 36th floor). Compared to Waikiki beachfront resorts like Hilton Hawaiian Village or Sheraton Waikiki (where 1-bedroom suites cost $750–$1,450+/night, daily resort charges run $55–$65/day, and parking is $55–$69/day), Plumeria saves traveling families $4,000+ per stay with full gourmet chef kitchens and in-unit beach gear.',
+  },
+  {
     id: 'faq-location',
     category: 'Waikiki Banyan',
     question: 'Where are Plumeria Vacation Rentals located?',
@@ -34,7 +41,14 @@ export const FAQS: FAQItem[] = [
     category: 'Waikiki Banyan',
     question: 'What building amenities are available at Waikiki Banyan?',
     answer:
-      'Guests at Waikiki Banyan enjoy access to one of the largest recreation decks on Oʻahu (located on the 6th floor). Amenities include a large heated swimming pool, two jet spas (hot tubs), a dry sauna, a community BBQ area with gas grills, a tennis and pickleball sports court, a children’s playground, and an on-site cafe and convenience shop on the ground floor.',
+      'Guests at Waikiki Banyan enjoy access to one of the largest recreation decks on Oʻahu (located on the 6th floor). Amenities include a large heated swimming pool, therapeutic jet hot tubs (spas), dry saunas, a community BBQ area with 12 gas grills, a tennis and pickleball sports court, a children’s playground, and an on-site cafe and convenience shop on the ground floor.',
+  },
+  {
+    id: 'faq-banyan-pool-hottub',
+    category: 'Waikiki Banyan',
+    question: 'Is the pool heated, are there hot tubs, and how do Tower 2 guests access them?',
+    answer:
+      'Yes! Waikiki Banyan features a genuine heated outdoor swimming pool (a rare and valued luxury in Waikiki where many condo and hotel pools are unheated) along with therapeutic jet hot tubs (spas) framing Diamond Head views. The 1-acre resort recreation deck sits on the 6th-floor podium connecting Tower 1 and Tower 2. Guests staying in Tower 2 take the Tower 2 elevators directly to the 6th floor for seamless, immediate access to the heated pool, hot tubs, saunas, tennis/pickleball courts, and BBQ pavilions—all with $0 resort fees.',
   },
   {
     id: 'faq-checkin',
