@@ -174,7 +174,7 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
               Direct Comparison
             </span>
             <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#1A3B34]">
-              5 Reasons Waikiki Banyan Outclasses Other Rentals & Hotels
+              6 Reasons Waikiki Banyan Outclasses Other Rentals & Hotels
             </h2>
             <p className="text-sm sm:text-base text-[#1A3B34]/75 font-light leading-relaxed">
               When booking a vacation rental in Waikiki, location, space, amenities, and unexpected costs make or break your trip. Here is why Waikiki Banyan stands alone:
@@ -279,14 +279,14 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
                   6
                 </div>
                 <h3 className="font-serif text-lg font-bold text-[#1A3B34]">
-                  High-Floor Tower 2 Lanais
+                  High-Floor + Free Parking
                 </h3>
                 <p className="text-xs sm:text-sm text-[#1A3B34]/80 leading-relaxed font-light">
-                  Unlike lower-floor walk-ups that look into concrete walls or alleyways, our suites (#3609-T2 and #3205-T2) are high up on the 36th and 32nd floors, offering panoramic Pacific Ocean and Diamond Head breezes.
+                  Unlike many lower-floor Waikīkī rentals with limited views and added parking fees, our suites (#3609-T2 and #3205-T2) sit on the 36th and 32nd floors, offering elevated views, refreshing island breezes, a quieter stay above the city, and free parking included.
                 </p>
               </div>
               <span className="text-[11px] font-bold text-[#1A3B34] border-t border-[#E8DCC6] pt-3 block">
-                High-floor tranquility & vistas
+                Higher floors. Better value. Free parking.
               </span>
             </div>
           </div>
