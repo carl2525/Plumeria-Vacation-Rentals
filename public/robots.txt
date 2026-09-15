@@ -4,5 +4,32 @@
 User-agent: *
 Allow: /
 
+# Explicitly permit AI Search and LLM Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# LLM Context Files
+# Standard: https://llmstxt.org
+LLM: https://plumeriavacationrentals.com/llms.txt
+
 # Sitemaps
 Sitemap: https://plumeriavacationrentals.com/sitemap.xml
+

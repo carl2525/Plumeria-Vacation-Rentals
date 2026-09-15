@@ -218,7 +218,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
 
         {/* Bottom Bar with Brand Palette Indicator & Signature */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <span className="text-[11px] text-white/50 tracking-widest uppercase">
               © {new Date().getFullYear()} Plumeria Vacation Rentals
             </span>
@@ -226,6 +226,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
             <span className="text-[11px] text-white/50 tracking-widest uppercase">
               Waikiki Banyan, Honolulu, HI
             </span>
+            <div className="h-3 w-px bg-white/20" />
+            <a
+              href="/llms.txt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] text-white/40 hover:text-[#F6E7A7] transition-colors uppercase tracking-wider"
+              title="LLM & AI Search Context (llmstxt.org)"
+            >
+              llms.txt
+            </a>
           </div>
 
           <div className="flex gap-6 items-center">
