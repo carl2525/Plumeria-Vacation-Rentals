@@ -42,7 +42,10 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       <QuickSearchBar onSearch={handleQuickSearch} />
 
-      <IntroSection onLearnMore={() => onNavigate('/about')} />
+      <IntroSection
+        onLearnMore={() => onNavigate('/about')}
+        onNavigate={onNavigate}
+      />
 
       <FeaturedRentals
         onSelectProperty={onSelectProperty}
@@ -50,7 +53,10 @@ export const HomePage: React.FC<HomePageProps> = ({
         onViewAllRentals={() => onNavigate('/rentals')}
       />
 
-      <WaikikiBanyanFeature onLearnMore={() => onNavigate('/waikiki-banyan')} />
+      <WaikikiBanyanFeature
+        onLearnMore={() => onNavigate('/waikiki-banyan')}
+        onNavigate={onNavigate}
+      />
 
       <HotelSuiteComparison
         onExploreRentals={() => onNavigate('/rentals')}
@@ -64,7 +70,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       <ExploreWaikikiSection onExploreMore={() => onNavigate('/explore')} />
 
-      <WhyBookWithPlumeria />
+      <WhyBookWithPlumeria onNavigate={onNavigate} />
 
       <PropertyGallery />
 
@@ -73,6 +79,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <BookingCTA
         onViewRentals={() => onNavigate('/rentals')}
         onSendInquiry={() => onOpenInquiry()}
+        onNavigate={onNavigate}
       />
     </div>
   );

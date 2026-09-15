@@ -161,7 +161,12 @@ export function App() {
     }
 
     if (currentPath === '/contact' || currentPath === '/contact/') {
-      return <ContactPage />;
+      return (
+        <ContactPage
+          onNavigate={navigate}
+          onOpenInquiry={() => handleOpenInquiry()}
+        />
+      );
     }
 
     if (

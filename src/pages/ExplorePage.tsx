@@ -8,6 +8,7 @@ import {
 import { PlumeriaSymbolLogo } from '../components/brand/PlumeriaSymbolLogo';
 import { AppImage } from '../components/common/AppImage';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
+import { InlineLink } from '../components/common/InlineLink';
 
 interface ExplorePageProps {
   onNavigate: (path: string) => void;
@@ -53,7 +54,15 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Unlike other vacation rentals stuck in congested gridlock or remote corners with zero amenities, staying at <strong className="text-[#1A3B34] font-medium">Waikiki Banyan</strong> gives you the premier launchpad for your Hawaiʻi vacation: just 1 flat block to the calm surf of Kuhio Beach, effortless highway access for North Shore day trips, covered parking on site, and Waikiki’s finest restaurants within walking distance.
+            Unlike other vacation rentals stuck in congested gridlock or remote corners with zero amenities, staying at{' '}
+            <InlineLink to="/waikiki-banyan" onNavigate={onNavigate}>
+              Waikiki Banyan
+            </InlineLink>{' '}
+            gives you the premier launchpad for your Hawaiʻi vacation: just 1 flat block to the calm surf of Kuhio Beach, effortless highway access for North Shore day trips, covered garage parking on site, and{' '}
+            <InlineLink to="/rentals" onNavigate={onNavigate}>
+              spacious 1-bedroom suites with full kitchens
+            </InlineLink>
+            .
           </p>
         </div>
 
@@ -158,7 +167,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
             Experience it all from Waikiki Banyan
           </h3>
           <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed font-light">
-            With beach gear included in your suite, full kitchens for fresh poke lunches, and a 6th-floor pool deck to unwind, Plumeria Vacation Rentals makes your island exploration seamless.
+            With beach gear included in your suite, full kitchens for fresh local meals, and Waikiki's largest 1-acre resort recreation deck to unwind, Plumeria Vacation Rentals makes your island exploration seamless.
           </p>
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
             <button

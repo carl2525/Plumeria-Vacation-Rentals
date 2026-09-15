@@ -606,16 +606,42 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
               </div>
             ))}
           </div>
+
+          <div className="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-[#E8DCC6]/60">
+            <span className="text-xs text-[#1A3B34]/70">
+              Need more details on rules, parking, luggage storage, or check-in?
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => onNavigate('/rules')}
+                className="text-xs font-bold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer underline underline-offset-2"
+              >
+                Building & House Rules →
+              </button>
+              <span className="text-[#1A3B34]/30">•</span>
+              <button
+                type="button"
+                onClick={() => onNavigate('/faq')}
+                className="text-xs font-bold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer underline underline-offset-2"
+              >
+                All FAQs →
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center bg-[#E8DCC6]/30 p-8 rounded-3xl border border-[#C59B4B]/30 space-y-4">
-          <h3 className="font-serif text-2xl font-bold text-[#1A3B34]">
-            Ready to experience Waikiki Banyan?
-          </h3>
-          <p className="text-sm text-[#1A3B34]/75 max-w-md mx-auto">
-            Book directly with Plumeria Vacation Rentals for verified suite quality, keyless access, and personal host communication.
-          </p>
+        <div className="text-center bg-[#E8DCC6]/30 p-8 sm:p-10 rounded-3xl border border-[#C59B4B]/30 space-y-6">
+          <div className="space-y-2 max-w-md mx-auto">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
+              Ready to experience Waikiki Banyan?
+            </h3>
+            <p className="text-sm text-[#1A3B34]/75">
+              Book directly with Plumeria Vacation Rentals for verified suite quality, keyless access, and personal host communication.
+            </p>
+          </div>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <button
               onClick={() => onInquireProperty()}
@@ -623,13 +649,63 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
             >
               Check Waikiki Banyan Availability
             </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rentals')}
+              className="w-full sm:w-auto px-6 py-3.5 rounded-full text-sm font-semibold bg-[#C59B4B] hover:bg-[#D4A853] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs font-bold"
+            >
+              Browse 1-Bedroom Suites
+            </button>
             <a
               href={`mailto:${SITE_CONFIG.email}?subject=Waikiki%20Banyan%20Stay%20Inquiry`}
               className="w-full sm:w-auto px-6 py-3.5 rounded-full text-sm font-semibold bg-white hover:bg-[#E8DCC6]/50 text-[#1A3B34] border border-[#E8DCC6] transition-colors inline-flex items-center justify-center gap-2 cursor-pointer shadow-2xs"
             >
               <Mail className="w-4 h-4 text-[#C59B4B]" />
-              <span>Email Host (mailto)</span>
+              <span>Email Host</span>
             </a>
+          </div>
+
+          {/* Quick Cross-Resource Footer */}
+          <div className="pt-4 border-t border-[#C59B4B]/20 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[#1A3B34]/75">
+            <button
+              type="button"
+              onClick={() => onNavigate('/rules')}
+              className="hover:text-[#C59B4B] transition-colors cursor-pointer font-medium"
+            >
+              Building & House Rules
+            </button>
+            <span className="text-[#1A3B34]/30">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rental-policy')}
+              className="hover:text-[#C59B4B] transition-colors cursor-pointer font-medium"
+            >
+              Direct Rental Policy (15% Off)
+            </button>
+            <span className="text-[#1A3B34]/30">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/faq')}
+              className="hover:text-[#C59B4B] transition-colors cursor-pointer font-medium"
+            >
+              Frequently Asked Questions
+            </button>
+            <span className="text-[#1A3B34]/30">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/explore')}
+              className="hover:text-[#C59B4B] transition-colors cursor-pointer font-medium"
+            >
+              Waikiki Beaches & Dining Guide
+            </button>
+            <span className="text-[#1A3B34]/30">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/contact')}
+              className="hover:text-[#C59B4B] transition-colors cursor-pointer font-medium"
+            >
+              Contact Direct Host
+            </button>
           </div>
         </div>
       </div>

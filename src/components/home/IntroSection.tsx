@@ -1,14 +1,16 @@
 import React from 'react';
 import { PlumeriaSymbolLogo } from '../brand/PlumeriaSymbolLogo';
 import { LogoWatermark } from '../brand/LogoWatermark';
-import { Sparkles, Utensils, SunMedium, Waves, Car } from 'lucide-react';
+import { Sparkles, Utensils, Waves, Car } from 'lucide-react';
 import { AppImage } from '../common/AppImage';
+import { InlineLink } from '../common/InlineLink';
 
 interface IntroSectionProps {
   onLearnMore: () => void;
+  onNavigate?: (path: string) => void;
 }
 
-export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
+export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore, onNavigate }) => {
   return (
     <section className="relative py-20 sm:py-28 overflow-hidden bg-[#F9F7F2]">
       {/* Subtle Plumeria Symbol Watermark in Background */}
@@ -33,7 +35,19 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore }) => {
             </p>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 leading-relaxed font-light">
-              <strong className="font-semibold text-[#1A3B34]">Waikiki Banyan vacation rentals give you the best of both worlds:</strong> spacious 557 sq. ft. private 1-bedroom suites with 67 sq. ft. private lanais (624 sq. ft. total), full chef-ready kitchens, free covered garage parking included ($45/night value), 180° Diamond Head and mountain vistas, paired with Oʻahu’s largest 1-acre resort recreation deck (heated pool, 2 jet spas, sauna, tennis/pickleball, and sunset BBQ grills). When you book direct in Waikiki with Plumeria Vacation Rentals, you secure the finest Waikiki short term rentals with zero hidden fees.
+              <strong className="font-semibold text-[#1A3B34]">Waikiki Banyan vacation rentals give you the best of both worlds:</strong> spacious 557 sq. ft.{' '}
+              <InlineLink to="/rentals" onNavigate={onNavigate}>
+                private 1-bedroom suites
+              </InlineLink>{' '}
+              with 67 sq. ft. private lanais (624 sq. ft. total), full chef-ready kitchens, free covered garage parking included ($45/night value), 180° Diamond Head and mountain vistas, paired with Oʻahu’s largest{' '}
+              <InlineLink to="/waikiki-banyan" onNavigate={onNavigate}>
+                1-acre resort recreation deck
+              </InlineLink>{' '}
+              (heated pool, 2 jet spas, sauna, tennis/pickleball, and sunset BBQ grills). When you{' '}
+              <InlineLink to="/rental-policy" onNavigate={onNavigate}>
+                book direct in Waikiki
+              </InlineLink>{' '}
+              with Plumeria Vacation Rentals, you secure the finest Waikiki short term rentals with zero hidden fees.
             </p>
 
             {/* 3 Quick Highlight Pills matching Brand Palette */}

@@ -1,11 +1,17 @@
 import React from 'react';
 import { InquiryForm } from '../components/common/InquiryForm';
-import { Mail, MapPin, Clock, Phone, Video, Youtube, Instagram, Facebook, ExternalLink, FileText } from 'lucide-react';
+import { Mail, MapPin, Clock, Phone, Video, Youtube, Instagram, Facebook, ExternalLink, FileText, ArrowRight, ShieldCheck, Compass, HelpCircle } from 'lucide-react';
 import { SITE_CONFIG } from '../config/site';
 import { PlumeriaSymbolLogo } from '../components/brand/PlumeriaSymbolLogo';
 import { AppImage } from '../components/common/AppImage';
+import { InlineLink } from '../components/common/InlineLink';
 
-export const ContactPage: React.FC = () => {
+interface ContactPageProps {
+  onNavigate?: (path: string) => void;
+  onOpenInquiry?: () => void;
+}
+
+export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const getSocialIcon = (platform: string) => {
     switch (platform) {
       case 'youtube':
@@ -24,9 +30,9 @@ export const ContactPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/40 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/50 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
             <Mail className="w-3.5 h-3.5 text-[#C59B4B]" />
-            <span>Connect with Plumeria</span>
+            <span>Direct Host Communication</span>
           </div>
 
           <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#1A3B34] leading-tight">
@@ -34,8 +40,52 @@ export const ContactPage: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Have questions about our Waikiki Banyan Tower 2 suites, rates, or dates? Connect with us directly to enjoy direct-host pricing, personalized Hawaiian hospitality, and $0 hidden resort fees at Waikiki’s premier condo-resort.
+            Have questions about our Waikiki Banyan Tower 2 suites, rates, or dates? Connect with us directly to enjoy direct-host pricing (save 15%), personalized Hawaiian hospitality, and $0 hidden resort fees at Waikiki’s premier condo-resort.
           </p>
+
+          {/* Quick Cross-Navigation Links */}
+          {onNavigate && (
+            <div className="pt-2 flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => onNavigate('/rentals')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+              >
+                <Compass className="w-3.5 h-3.5 text-[#C59B4B]" />
+                <span>View Suites</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('/waikiki-banyan')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+              >
+                <span>Banyan Amenities</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('/faq')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+              >
+                <HelpCircle className="w-3.5 h-3.5 text-[#7FB6D9]" />
+                <span>Guest FAQs</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('/rules')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-[#8CA58A]" />
+                <span>Building Rules</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('/rental-policy')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+              >
+                <span>Rental Policy</span>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Main Grid: Form + Info Panel */}
@@ -164,20 +214,36 @@ export const ContactPage: React.FC = () => {
               </div>
 
               {/* Direct Booking Rental Policy & Rules Reference */}
-              <div className="pt-3 border-t border-[#E8DCC6]/60">
-                <a
-                  href="#/rules"
-                  className="w-full p-3 rounded-2xl bg-[#E8DCC6]/30 hover:bg-[#E8DCC6]/60 border border-[#C59B4B]/30 flex items-center justify-between transition-colors text-xs"
+              <div className="pt-3 border-t border-[#E8DCC6]/60 space-y-2">
+                <button
+                  type="button"
+                  onClick={() => onNavigate ? onNavigate('/rules') : window.location.assign('#/rules')}
+                  className="w-full p-3 rounded-2xl bg-[#E8DCC6]/30 hover:bg-[#E8DCC6]/60 border border-[#C59B4B]/30 flex items-center justify-between transition-colors text-xs text-left cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-[#C59B4B]" />
+                    <FileText className="w-4 h-4 text-[#C59B4B] shrink-0" />
                     <div>
-                      <span className="font-bold text-[#1A3B34] block">Rules & Rental Policy</span>
-                      <span className="text-[11px] text-[#1A3B34]/70">$300/nt base rate · Parking included · Building & In-House Rules</span>
+                      <span className="font-bold text-[#1A3B34] block">House & Building Rules</span>
+                      <span className="text-[11px] text-[#1A3B34]/70">Quiet hours, pool etiquette, parking garage & trash chutes</span>
                     </div>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#1A3B34]/60" />
-                </a>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#1A3B34]/60 shrink-0" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => onNavigate ? onNavigate('/rental-policy') : window.location.assign('#/rental-policy')}
+                  className="w-full p-3 rounded-2xl bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] flex items-center justify-between transition-colors text-xs text-left cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-[#8CA58A] shrink-0" />
+                    <div>
+                      <span className="font-bold text-[#1A3B34] block">Direct Rental & Payment Policy</span>
+                      <span className="text-[11px] text-[#1A3B34]/70">$255/nt direct (15% off) · $0 resort fees · Free parking pass</span>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#1A3B34]/60 shrink-0" />
+                </button>
               </div>
             </div>
 

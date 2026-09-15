@@ -107,9 +107,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
               <li>
                 <button
                   onClick={() => onNavigate('/rules')}
+                  className="text-white/75 hover:text-[#F6E7A7] transition-colors cursor-pointer text-left"
+                >
+                  Building & House Rules
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/rental-policy')}
                   className="text-[#F6E7A7] hover:underline transition-colors cursor-pointer text-left font-semibold flex items-center gap-1.5"
                 >
-                  <span>Rules / Policy</span>
+                  <span>Direct Rental Policy (Save 15%)</span>
                 </button>
               </li>
               <li>

@@ -3,6 +3,7 @@ import { PlumeriaSymbolLogo } from '../components/brand/PlumeriaSymbolLogo';
 import { Sparkles, HeartHandshake, Waves, Rainbow, Compass } from 'lucide-react';
 import { SITE_CONFIG } from '../config/site';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
+import { InlineLink } from '../components/common/InlineLink';
 
 interface AboutPageProps {
   onNavigate: (path: string) => void;
@@ -29,7 +30,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Plumeria Vacation Rentals was founded to offer travelers a more personal, relaxing, and authentic way to experience Waikiki. We specialize in boutique Waikiki vacation rentals and Waikiki Banyan condo rentals—just 1 block from the ocean with direct booking privileges.
+            Plumeria Vacation Rentals was founded to offer travelers a more personal, relaxing, and authentic way to experience Waikiki. We specialize in boutique{' '}
+            <InlineLink to="/waikiki-banyan" onNavigate={onNavigate}>
+              Waikiki Banyan condo rentals
+            </InlineLink>
+            —just 1 block from the ocean with{' '}
+            <InlineLink to="/rental-policy" onNavigate={onNavigate}>
+              direct booking privileges (save 15%)
+            </InlineLink>
+            .
           </p>
         </div>
 
@@ -45,11 +54,30 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             </p>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">
-              <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan vacation rentals proved to be indisputably superior to any other rental in Honolulu.</strong> Where else can you get a true 557 sq. ft. 1-bedroom suite with a 67 sq. ft. private lanai (624 sq. ft. total) framing 180° Diamond Head and mountain views, full chef kitchen, paired with Oʻahu’s largest 1-acre 6th-floor resort deck (heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs), just 1 short block to Kuhio Beach—all with zero mandatory resort fees?
+              <strong className="text-[#1A3B34] font-semibold">
+                Waikiki Banyan vacation rentals proved to be indisputably superior to any other rental in Honolulu.
+              </strong>{' '}
+              Where else can you get a true{' '}
+              <InlineLink to="/rentals" onNavigate={onNavigate}>
+                557 sq. ft. 1-bedroom suite with a 67 sq. ft. private lanai
+              </InlineLink>{' '}
+              (624 sq. ft. total) framing 180° Diamond Head and mountain views, full chef kitchen, paired with Oʻahu’s largest{' '}
+              <InlineLink to="/waikiki-banyan" onNavigate={onNavigate}>
+                1-acre 6th-floor resort deck
+              </InlineLink>{' '}
+              (heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs), just 1 short block to Kuhio Beach—all with zero mandatory resort fees?
             </p>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">
-              Combined with our personalized Plumeria care, clean linens, keyless entry, and included beach equipment, it offers the highest-value, most relaxing stay anywhere on the island.
+              Combined with our personalized Plumeria care, clean linens, keyless entry, and included beach equipment, it offers the highest-value, most relaxing stay anywhere on the island. You can also review our{' '}
+              <InlineLink to="/rules" onNavigate={onNavigate}>
+                building rules
+              </InlineLink>{' '}
+              or browse our{' '}
+              <InlineLink to="/faq" onNavigate={onNavigate}>
+                guest FAQs
+              </InlineLink>{' '}
+              at any time.
             </p>
 
             <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-[#1A3B34]/80">
@@ -69,6 +97,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 <span className="w-2 h-2 rounded-full bg-[#8CA58A]" />
                 <span>Included Beach Gear</span>
               </div>
+            </div>
+
+            {/* Contextual Links */}
+            <div className="pt-4 flex flex-wrap items-center gap-4 text-xs font-semibold text-[#1A3B34]">
+              <span>Explore further:</span>
+              <InlineLink to="/waikiki-banyan#full-comparison" onNavigate={onNavigate}>
+                Banyan vs. Waikiki Hotels Comparison →
+              </InlineLink>
+              <InlineLink to="/rentals" onNavigate={onNavigate}>
+                Browse All Suites →
+              </InlineLink>
             </div>
           </div>
 
@@ -130,6 +169,49 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                     {val.description}
                   </p>
                 </div>
+
+                <div className="pt-3 border-t border-[#E8DCC6]/60">
+                  {val.symbol === 'plumeria' && (
+                    <button
+                      type="button"
+                      onClick={() => onNavigate('/rentals')}
+                      className="text-xs font-bold text-[#1A3B34] hover:text-[#C59B4B] transition-colors inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>Explore 1-Bedroom Suites</span>
+                      <span>→</span>
+                    </button>
+                  )}
+                  {val.symbol === 'ocean' && (
+                    <button
+                      type="button"
+                      onClick={() => onNavigate('/waikiki-banyan')}
+                      className="text-xs font-bold text-[#1A3B34] hover:text-[#7FB6D9] transition-colors inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>View 1-Acre Pool Deck</span>
+                      <span>→</span>
+                    </button>
+                  )}
+                  {val.symbol === 'rainbow' && (
+                    <button
+                      type="button"
+                      onClick={() => onNavigate('/rental-policy')}
+                      className="text-xs font-bold text-[#1A3B34] hover:text-[#C59B4B] transition-colors inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>Direct 15% Off Policy</span>
+                      <span>→</span>
+                    </button>
+                  )}
+                  {val.symbol === 'surf' && (
+                    <button
+                      type="button"
+                      onClick={() => onNavigate('/explore')}
+                      className="text-xs font-bold text-[#1A3B34] hover:text-[#8CA58A] transition-colors inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>Waikiki Beaches Guide</span>
+                      <span>→</span>
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -158,6 +240,49 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               className="px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-[#8CA58A]/40 transition-all cursor-pointer"
             >
               Send Stay Inquiry
+            </button>
+          </div>
+
+          {/* Cross-Page Resource Links */}
+          <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/70">
+            <button
+              type="button"
+              onClick={() => onNavigate('/waikiki-banyan')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Waikiki Banyan Deck & Amenities
+            </button>
+            <span className="text-white/30 hidden sm:inline">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rules')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Building & House Rules
+            </button>
+            <span className="text-white/30 hidden sm:inline">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rental-policy')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Direct Rental Policy
+            </button>
+            <span className="text-white/30 hidden sm:inline">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/faq')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Frequently Asked Questions
+            </button>
+            <span className="text-white/30 hidden sm:inline">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/contact')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Contact Direct Host
             </button>
           </div>
         </div>

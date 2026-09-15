@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FAQS } from '../data/faqs';
-import { HelpCircle, ChevronDown, ChevronUp, Search } from 'lucide-react';
+import { HelpCircle, ChevronDown, ChevronUp, Search, ArrowRight } from 'lucide-react';
 import { SITE_CONFIG } from '../config/site';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 
@@ -55,6 +55,52 @@ export const FAQPage: React.FC<FAQPageProps> = ({ onOpenInquiry, onNavigate }) =
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
             Everything you need to know about booking direct Waikiki vacation rentals at Waikiki Banyan with Plumeria Vacation Rentals—and why our Waikiki condo rentals are preferred over ordinary short term rentals and hotels across Honolulu.
           </p>
+
+          {/* Quick Hub Navigation Pills */}
+          <div className="pt-2 flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => onNavigate('/rentals')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Browse Suites</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/waikiki-banyan')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>1-Acre Deck Amenities</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rules')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Building Rules</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rental-policy')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Direct Rental Policy</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/explore')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Waikiki Guide</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/contact')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Contact Host</span>
+            </button>
+          </div>
         </div>
 
         {/* Quick Advantage Banner */}
@@ -137,8 +183,85 @@ export const FAQPage: React.FC<FAQPageProps> = ({ onOpenInquiry, onNavigate }) =
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#1A3B34]/80 leading-relaxed font-light border-t border-[#E8DCC6]/50">
-                      {faq.answer}
+                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#1A3B34]/80 leading-relaxed font-light border-t border-[#E8DCC6]/50 space-y-3">
+                      <div>{faq.answer}</div>
+                      
+                      {/* Contextual single navigation link tailored to question topic */}
+                      <div className="pt-2">
+                        {(() => {
+                          const q = (faq.question + ' ' + faq.id).toLowerCase();
+                          if (q.includes('park') || q.includes('rule') || q.includes('quiet') || q.includes('pet') || q.includes('bbq')) {
+                            return (
+                              <button
+                                type="button"
+                                onClick={() => onNavigate('/rules')}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer group"
+                              >
+                                <span>Read Waikiki Banyan Building & Garage Rules</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                              </button>
+                            );
+                          }
+                          if (q.includes('fee') || q.includes('competitor') || q.includes('rate') || q.includes('aston') || q.includes('price')) {
+                            return (
+                              <button
+                                type="button"
+                                onClick={() => onNavigate('/waikiki-banyan#full-comparison')}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer group"
+                              >
+                                <span>Compare Plumeria vs. Aston & Waikiki Hotels</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                              </button>
+                            );
+                          }
+                          if (q.includes('book') || q.includes('direct') || q.includes('cancel') || q.includes('checkin') || q.includes('deposit') || q.includes('polic')) {
+                            return (
+                              <button
+                                type="button"
+                                onClick={() => onNavigate('/rental-policy')}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer group"
+                              >
+                                <span>View Direct Booking Terms (Save 15%)</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                              </button>
+                            );
+                          }
+                          if (q.includes('amenit') || q.includes('pool') || q.includes('deck') || q.includes('banyan') || q.includes('sauna') || q.includes('court')) {
+                            return (
+                              <button
+                                type="button"
+                                onClick={() => onNavigate('/waikiki-banyan')}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer group"
+                              >
+                                <span>Explore 1-Acre Resort Deck Amenities</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                              </button>
+                            );
+                          }
+                          if (q.includes('beach') || q.includes('location') || q.includes('where') || q.includes('kuhio')) {
+                            return (
+                              <button
+                                type="button"
+                                onClick={() => onNavigate('/explore')}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer group"
+                              >
+                                <span>Explore Kuhio Beach & Waikiki Area Guide</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                              </button>
+                            );
+                          }
+                          return (
+                            <button
+                              type="button"
+                              onClick={() => onNavigate('/rentals')}
+                              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer group"
+                            >
+                              <span>Browse 1-Bedroom Suites</span>
+                              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                            </button>
+                          );
+                        })()}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -153,20 +276,65 @@ export const FAQPage: React.FC<FAQPageProps> = ({ onOpenInquiry, onNavigate }) =
         </div>
 
         {/* Still Have Questions Box */}
-        <div className="bg-gradient-to-r from-[#1A3B34] via-[#224D44] to-[#2D6559] rounded-3xl p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md border border-[#8CA58A]/30">
-          <div className="space-y-1">
-            <h3 className="font-serif text-xl font-bold">Have an unlisted question?</h3>
-            <p className="text-xs sm:text-sm text-white/80 font-light">
-              Contact us directly at <span className="underline">{SITE_CONFIG.email}</span> or call/text <a href="tel:+18086719191" className="underline font-medium hover:text-[#F6E7A7]">{SITE_CONFIG.phone}</a>.
-            </p>
+        <div className="bg-gradient-to-r from-[#1A3B34] via-[#224D44] to-[#2D6559] rounded-3xl p-8 text-white space-y-6 shadow-md border border-[#8CA58A]/30">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="space-y-1">
+              <h3 className="font-serif text-xl font-bold">Have an unlisted question?</h3>
+              <p className="text-xs sm:text-sm text-white/80 font-light">
+                Contact us directly at <span className="underline">{SITE_CONFIG.email}</span> or call/text <a href="tel:+18086719191" className="underline font-medium hover:text-[#F6E7A7]">{SITE_CONFIG.phone}</a>.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => onNavigate('/contact')}
+                className="px-5 py-2.5 rounded-full text-xs font-semibold bg-white/15 hover:bg-white/25 text-white transition-all cursor-pointer border border-white/20"
+              >
+                Contact Host
+              </button>
+              <button
+                onClick={onOpenInquiry}
+                className="px-6 py-2.5 rounded-full text-xs font-semibold bg-[#C59B4B] text-[#1A3B34] hover:bg-[#D4A853] transition-all shadow-sm cursor-pointer shrink-0"
+              >
+                Send Us a Message
+              </button>
+            </div>
           </div>
 
-          <button
-            onClick={onOpenInquiry}
-            className="px-6 py-3 rounded-full text-xs font-semibold bg-[#C59B4B] text-[#1A3B34] hover:bg-[#D4A853] transition-all shadow-sm cursor-pointer shrink-0"
-          >
-            Send Us a Message
-          </button>
+          <div className="pt-4 border-t border-white/15 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/70">
+            <span className="font-semibold text-white/90">Quick Resource Links:</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rules')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Building & House Rules
+            </button>
+            <span className="text-white/30">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rental-policy')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Direct Rental Policy
+            </button>
+            <span className="text-white/30">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/waikiki-banyan')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Waikiki Banyan Amenities
+            </button>
+            <span className="text-white/30">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/explore')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Waikiki Guide
+            </button>
+          </div>
         </div>
       </div>
     </div>

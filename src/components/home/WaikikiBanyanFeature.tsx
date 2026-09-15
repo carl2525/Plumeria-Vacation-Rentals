@@ -2,12 +2,14 @@ import React from 'react';
 import { MapPin, Waves, Home, Compass, ArrowRight, Check, Sparkles } from 'lucide-react';
 import { AppImage } from '../common/AppImage';
 import { LogoWatermark } from '../brand/LogoWatermark';
+import { InlineLink } from '../common/InlineLink';
 
 interface WaikikiBanyanFeatureProps {
   onLearnMore: () => void;
+  onNavigate?: (path: string) => void;
 }
 
-export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLearnMore }) => {
+export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLearnMore, onNavigate }) => {
   return (
     <section className="py-20 sm:py-28 bg-[#F9F7F2] relative overflow-hidden">
       {/* Decorative background aura & watermark */}
@@ -28,7 +30,11 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
           </h2>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Discover why savvy Hawaiian travelers choose our Waikiki Banyan rentals over cramped beachfront hotels and standard Waikiki vacation rentals.
+            Discover why savvy Hawaiian travelers choose our{' '}
+            <InlineLink to="/waikiki-banyan" onNavigate={onNavigate}>
+              Waikiki Banyan condo rentals
+            </InlineLink>{' '}
+            over cramped beachfront hotels and standard vacation rentals.
           </p>
         </div>
 
@@ -41,7 +47,9 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
                 <Waves className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                1-Acre Resort Oasis
+                <InlineLink to="/waikiki-banyan" onNavigate={onNavigate}>
+                  1-Acre Resort Oasis
+                </InlineLink>
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
                 While ordinary condos offer little or no pool, Banyan’s 6th-floor deck features a heated swimming pool, 2 jet hot tubs, dry sauna, tennis & pickleball, and 12 gas BBQs.
@@ -59,7 +67,9 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
                 <Home className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                Full Kitchen & Lanai
+                <InlineLink to="/rentals" onNavigate={onNavigate}>
+                  Full Kitchen & Lanai
+                </InlineLink>
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
                 Hotels charge $400/night for mini-fridges. Banyan suites give you a full stove, oven, refrigerator, and private lanai—saving families $200+ each day on dining.
@@ -77,10 +87,12 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
                 <MapPin className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                1 Block to Kuhio Beach
+                <InlineLink to="/explore" onNavigate={onNavigate}>
+                  1 Block to Kuhio Beach
+                </InlineLink>
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-                Enjoy flat, 3-minute walking access to the calmest swimming waters in Waikiki, while being peacefully tucked away from late-night Kalākaua traffic noise.
+                Enjoy flat, 3-minute walking access to the calmest swimming waters at Kuhio Beach, while being peacefully tucked away from late-night Kalākaua traffic noise.
               </p>
             </div>
             <span className="text-[11px] font-semibold text-[#C59B4B] pt-2 block">
@@ -95,10 +107,12 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
                 <Compass className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                Book Direct · $0 Fees
+                <InlineLink to="/rental-policy" onNavigate={onNavigate}>
+                  Book Direct · $0 Fees
+                </InlineLink>
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-                Book direct in Waikiki with Plumeria Vacation Rentals. No surprise $45–$65 daily fees at checkout. All pool, hot tub, sauna, tennis, and beach gear are 100% included.
+                Reserve directly with Plumeria Vacation Rentals. No surprise $45–$65 daily fees at checkout. All pool, hot tub, sauna, tennis, and free garage parking are 100% included.
               </p>
             </div>
             <span className="text-[11px] font-semibold text-[#8CA58A] pt-2 block">
@@ -121,7 +135,23 @@ export const WaikikiBanyanFeature: React.FC<WaikikiBanyanFeatureProps> = ({ onLe
                 One of Oʻahu’s Largest Condo-Resort Recreation Decks
               </h3>
               <p className="text-sm sm:text-base text-white/85 font-light leading-relaxed">
-                Spanning almost an entire acre on the 6th floor between Tower 1 and Tower 2, the Waikiki Banyan recreation deck offers an oasis of leisure after a day on the beach.
+                Spanning almost an entire acre on the 6th floor between Tower 1 and Tower 2, the{' '}
+                <button
+                  type="button"
+                  onClick={onLearnMore}
+                  className="font-medium text-[#F6E7A7] underline decoration-[#C59B4B] hover:text-white transition-colors cursor-pointer"
+                >
+                  Waikiki Banyan recreation deck
+                </button>{' '}
+                offers an oasis of leisure after a day at{' '}
+                <button
+                  type="button"
+                  onClick={() => onNavigate?.('/explore')}
+                  className="font-medium text-[#F6E7A7] underline decoration-[#C59B4B] hover:text-white transition-colors cursor-pointer"
+                >
+                  Waikiki beach
+                </button>
+                .
               </p>
 
               {/* Verified Amenity Checkmarks */}

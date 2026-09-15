@@ -31,6 +31,7 @@ import {
   MapPin,
   Compass,
 } from 'lucide-react';
+import { InlineLink } from '../components/common/InlineLink';
 
 interface RentalPolicyPageProps {
   onNavigate: (path: string) => void;
@@ -184,6 +185,45 @@ export const RentalPolicyPage: React.FC<RentalPolicyPageProps> = ({
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
             {RENTAL_POLICY_OVERVIEW.subtitle} Designed to be fair, completely transparent, and straightforward—protecting both our valued guests and our Waikiki Banyan community.
           </p>
+
+          {/* Quick Cross-Navigation Links */}
+          <div className="pt-2 flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => onNavigate('/rules')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Building Rules</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rentals')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Browse Suites</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/waikiki-banyan')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>1-Acre Deck Amenities</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/faq')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Frequently Asked Questions</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/contact')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Contact Direct Host</span>
+            </button>
+          </div>
         </div>
 
         {/* 4 Balanced Key Metric Highlights Cards */}

@@ -32,6 +32,7 @@ import {
   Sparkles,
   Ban,
 } from 'lucide-react';
+import { InlineLink } from '../components/common/InlineLink';
 
 export type RulesTab = 'all' | 'part1' | 'part2';
 
@@ -162,8 +163,48 @@ export const RulesPage: React.FC<RulesPageProps> = ({
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Welcome to Waikiki Banyan Tower 2! Please review our building community rules and suite standards below. For direct booking terms, payment, cancellation, and fee structures, refer to our official Rental Policy.
+            Welcome to Waikiki Banyan Tower 2. Please review our building community rules and suite standards below. For direct booking terms, payment, cancellation, and fee structures, refer to our official Rental Policy below or explore our helpful resource links.
           </p>
+
+          {/* Quick Cross-Navigation Links */}
+          <div className="pt-2 flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => onNavigate('/rental-policy')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#C59B4B]" />
+              <span>Direct Rental Policy</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/waikiki-banyan')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>1-Acre Deck Amenities</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rentals')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Browse Suites</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/faq')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Rules FAQs</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/contact')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#E8DCC6]/40 border border-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer shadow-2xs"
+            >
+              <span>Contact Host</span>
+            </button>
+          </div>
         </div>
 
         {/* PROMINENT DIRECT BOOKING RENTAL POLICY CARD */}
@@ -687,7 +728,21 @@ export const RulesPage: React.FC<RulesPageProps> = ({
               </a>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => onNavigate('/faq')}
+                className="px-4 py-2.5 rounded-full text-xs font-semibold bg-[#F9F7F2] hover:bg-[#E8DCC6]/60 text-[#1A3B34] transition-colors cursor-pointer border border-[#E8DCC6]"
+              >
+                <span>Guest FAQs</span>
+              </button>
+
+              <button
+                onClick={() => onNavigate('/contact')}
+                className="px-4 py-2.5 rounded-full text-xs font-semibold bg-[#F9F7F2] hover:bg-[#E8DCC6]/60 text-[#1A3B34] transition-colors cursor-pointer border border-[#E8DCC6]"
+              >
+                <span>Contact Host</span>
+              </button>
+
               <button
                 onClick={() => onNavigate('/policy')}
                 className="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E8DCC6]/60 hover:bg-[#E8DCC6] text-[#1A3B34] transition-colors cursor-pointer inline-flex items-center gap-1.5 border border-[#C59B4B]/30"

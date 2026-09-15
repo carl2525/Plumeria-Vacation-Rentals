@@ -8,11 +8,13 @@ import { SITE_CONFIG } from '../../config/site';
 interface BookingCTAProps {
   onViewRentals: () => void;
   onSendInquiry: () => void;
+  onNavigate?: (path: string) => void;
 }
 
 export const BookingCTA: React.FC<BookingCTAProps> = ({
   onViewRentals,
   onSendInquiry,
+  onNavigate,
 }) => {
   return (
     <section className="relative py-20 sm:py-28 overflow-hidden bg-[#1A3B34] text-white border-y border-[#C59B4B]/30">
@@ -77,6 +79,51 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
             <span>Inquire & Save 15%</span>
           </button>
         </div>
+
+        {/* Quick Cross Links */}
+        {onNavigate && (
+          <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/70">
+            <button
+              type="button"
+              onClick={() => onNavigate('/waikiki-banyan')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Waikiki Banyan 1-Acre Deck
+            </button>
+            <span className="text-white/30 hidden sm:inline">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rules')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Building & House Rules
+            </button>
+            <span className="text-white/30 hidden sm:inline">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/rental-policy')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Direct Rental Policy
+            </button>
+            <span className="text-white/30 hidden sm:inline">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/faq')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              Guest FAQs
+            </button>
+            <span className="text-white/30 hidden sm:inline">•</span>
+            <button
+              type="button"
+              onClick={() => onNavigate('/about')}
+              className="hover:text-[#F6E7A7] transition-colors cursor-pointer"
+            >
+              About Plumeria
+            </button>
+          </div>
+        )}
 
         <p className="text-xs text-white/70 pt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
           <span>Waikiki Banyan · 201 ʻOhua Ave, Honolulu, HI 96815</span>
