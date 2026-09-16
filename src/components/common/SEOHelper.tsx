@@ -28,17 +28,17 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
 
     if (cleanPath === '/') {
       meta = {
-        title: `${SITE_CONFIG.name} | Waikiki Vacation Rentals & Hotel Suite Alternative`,
+        title: 'Plumeria Vacation Rentals | Waikiki Banyan Condo Rentals | No Resort Fees',
         description:
-          'Spacious 1-bedroom Waikiki vacation rental suites with full chef kitchens, free covered parking, and 1-acre resort deck. Compare luxury suites at $300/nt vs $750–$1,450+/nt at Hilton and Sheraton mega-resorts and save $400+ on parking & resort fees vs Aston at Waikiki Banyan. $0 resort fees.',
+          'Book direct Waikiki Banyan vacation rentals with Plumeria Vacation Rentals. 1-bedroom suites with full kitchens, covered parking, 1-acre recreation deck, and $0 resort fees just 1 block to Kuhio Beach, Honolulu. Save 15% booking direct.',
         canonicalUrl: 'https://plumeriavacationrentals.com',
         breadcrumbName: 'Home',
       };
     } else if (cleanPath === '/rentals') {
       meta = {
-        title: 'Waikiki Vacation Rentals & Condo Suites | Plumeria Vacation Rentals at Waikiki Banyan',
+        title: 'Waikiki Banyan Vacation Rentals & 1-Bedroom Suites | Plumeria Vacation Rentals',
         description:
-          'Browse handpicked Waikiki vacation rentals and short term condo rentals at Waikiki Banyan Tower 2. 557 sq. ft. 1-bedroom suites + 67 sq. ft. lanai with full chef kitchens, mountain and ocean views, 1-acre resort deck, and $0 resort fees.',
+          'Spacious 1-bedroom Waikiki vacation rentals and condo suites at Waikiki Banyan Tower 2. Full chef kitchens, covered parking, private lanais, 1 block to Kuhio Beach, and $0 resort fees. Save 15% booking direct.',
         canonicalUrl: 'https://plumeriavacationrentals.com/#/rentals',
         breadcrumbName: 'Vacation Rentals',
       };
@@ -48,26 +48,26 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
       if (prop) {
         meta = {
           title: `${prop.name} (${prop.viewType}) | Waikiki Banyan Vacation Rentals | Plumeria`,
-          description: `${prop.tagline}. High-floor Waikiki condo rental at Waikiki Banyan with full kitchen, private lanai, sleeps ${prop.guestsMax}. 1 block to Kuhio Beach with $0 resort fees. Book direct or via Airbnb.`,
+          description: `${prop.tagline}. High-floor Waikiki condo rental at Waikiki Banyan with full kitchen, private lanai, sleeps ${prop.guestsMax}. 1 block to Kuhio Beach with $0 resort fees. Save 15% booking direct.`,
           canonicalUrl: `https://plumeriavacationrentals.com/#/rentals/${prop.slug}`,
           breadcrumbName: prop.name,
         };
       }
     } else if (cleanPath === '/waikiki-banyan') {
       meta = {
-        title: 'Why Waikiki Banyan is Better | Luxury Suites vs Hilton & Sheraton Waikiki',
+        title: 'Waikiki Banyan 1-Acre Resort Deck & Hotel Comparison | Plumeria Vacation Rentals',
         description:
-          'Discover why Waikiki Banyan suites outclass $750–$1,450/night hotel suites: 1-acre resort deck, heated pool, 2 hot tubs, tennis court, full chef kitchens, free covered parking, and $0 resort fees just 1 block to Kuhio Beach.',
+          'Explore Waikiki Banyan amenities: 1-acre resort deck, heated pool, 2 jet hot tubs, tennis court, and full kitchens. Compare vs Aston at Waikiki Banyan with $0 resort fees and direct 15% savings.',
         canonicalUrl: 'https://plumeriavacationrentals.com/#/waikiki-banyan',
-        breadcrumbName: 'Why Waikiki Banyan',
+        breadcrumbName: 'Waikiki Banyan Deck & Amenities',
       };
     } else if (cleanPath === '/explore') {
       meta = {
-        title: 'Explore Waikiki & Oʻahu | Kuhio Beach, Dining & Attractions near Waikiki Banyan',
+        title: 'Waikiki Condos Near Kuhio Beach & Diamond Head | Plumeria Area Guide',
         description:
-          'Local insider guide to Waikiki vacation rentals area: Kuhio Beach swimming, Diamond Head hiking, surf spots, Duke Kahanamoku statue, and Oʻahu island dining steps from Waikiki Banyan.',
+          'Stay just 1 flat block to Kuhio Beach at Waikiki Banyan. Explore local surf spots, Diamond Head crater, Honolulu Zoo, and top Oʻahu attractions from your condo home base.',
         canonicalUrl: 'https://plumeriavacationrentals.com/#/explore',
-        breadcrumbName: 'Explore Waikiki',
+        breadcrumbName: 'Kuhio Beach & Area Guide',
       };
     } else if (cleanPath === '/rules' || cleanPath === '/house-rules') {
       meta = {
