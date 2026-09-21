@@ -61,7 +61,7 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Browse our handpicked collection of Waikiki condo rentals and short term rentals. Most vacation rentals in Waikiki force you to compromise: cramped kitchenettes, noisy street corners, or hidden $50/night resort fees. <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan vacation rentals deliver what no other rental can:</strong> high-floor 557 sq. ft. 1-bedroom suites + 67 sq. ft. private lanais (624 sq. ft. total) with full chef kitchens, 180° Diamond Head and mountain views, Oʻahu’s largest 1-acre resort deck, and a peaceful 1-block walk to Kuhio Beach. Reserve on Airbnb or send a direct booking inquiry for zero mandatory resort fees.
+            Browse our handpicked collection of Waikiki condo rentals and short term rentals. Most vacation rentals in Waikiki force you to compromise: cramped kitchenettes, noisy street corners, or hidden $50/night resort fees. <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan vacation rentals deliver what no other rental can:</strong> high-floor 557 sq. ft. 1-bedroom suites + 67 sq. ft. private lanais (624 sq. ft. total) with Full kitchens, 180° Diamond Head and mountain views, Oʻahu’s largest 1-acre resort deck, and a peaceful 1-block walk to Kuhio Beach. Reserve on Airbnb or send a direct booking inquiry for zero mandatory resort fees. Authorized Short-Term Rental License by the City and County of Honolulu.
           </p>
         </div>
 
@@ -73,11 +73,11 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
                 Airbnb First
               </span>
               <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-[#1A3B34] text-[#F6E7A7] border border-[#C59B4B]/40 whitespace-nowrap">
-                15% Direct Off
+                Promo $199 Base
               </span>
             </div>
             <p className="text-xs sm:text-sm text-[#1A3B34]/85 leading-relaxed">
-              Our primary listings are on <strong className="text-[#1A3B34] font-semibold">Airbnb</strong>. Inquire directly on our website to receive an exclusive <strong className="text-[#1A3B34] font-semibold">15% discount</strong> upon accepted booking (<strong className="text-[#1A3B34] font-semibold">$255/night</strong> vs $300/nt standard), $0 resort fees, and free garage parking.
+              Our primary listings are on <strong className="text-[#1A3B34] font-semibold">Airbnb</strong>. Inquire directly on our website to receive our special promotional base rate (<strong className="text-[#1A3B34] font-semibold">$199/night in all units</strong>), $0 Resort fees, waived cleaning fee on 3+ nights, and free garage parking.
             </p>
           </div>
           <button
@@ -86,7 +86,7 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:py-2.5 rounded-xl bg-[#1A3B34] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#224D44] transition-colors shrink-0 cursor-pointer shadow-xs border border-[#C59B4B]/30 whitespace-nowrap"
           >
             <Calendar className="w-3.5 h-3.5 text-[#F6E7A7] shrink-0" />
-            <span>Inquire & Save 15%</span>
+            <span>Inquire to Book</span>
           </button>
         </div>
 

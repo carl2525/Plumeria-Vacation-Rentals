@@ -243,22 +243,22 @@ export const RentalPolicyPage: React.FC<RentalPolicyPageProps> = ({
             <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between">
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#1A3B34]/65 whitespace-nowrap">
-                    Nightly Rate
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#C59B4B] whitespace-nowrap">
+                    Promo Nightly Rate
                   </span>
-                  <span className="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#E8DCC6]/50 text-[#1A3B34] whitespace-nowrap shrink-0">
-                    $0 Resort Fee
+                  <span className="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#1A3B34] text-[#F6E7A7] whitespace-nowrap shrink-0">
+                    All Units Promo
                   </span>
                 </div>
                 <div className="flex items-baseline gap-1.5 whitespace-nowrap">
                   <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34] leading-none">
-                    $300
+                    $199
                   </span>
-                  <span className="text-xs font-normal text-[#1A3B34]/70">/ night</span>
+                  <span className="text-xs font-normal text-[#C59B4B] font-semibold">/ night promo</span>
                 </div>
               </div>
-              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 whitespace-nowrap truncate" title="Direct rate with zero hidden resort or amenity fees.">
-                Direct rate with zero hidden resort fees.
+              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 whitespace-nowrap truncate" title="Special promotional rate in all units with zero hidden resort fees.">
+                Special promotional rate across all units with $0 resort fees.
               </p>
             </div>
 

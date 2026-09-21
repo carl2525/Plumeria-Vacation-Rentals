@@ -24,6 +24,7 @@ import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { SITE_CONFIG } from '../config/site';
 import { AppImage } from '../components/common/AppImage';
 import { generateInquiryMailtoUrl } from '../utils/mailto';
+import { calculateStayPricing, formatCurrency, BASE_NIGHTLY_RATE } from '../utils/pricing';
 
 interface PropertyDetailPageProps {
   slug: string;
@@ -58,6 +59,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
     if (isNaN(start) || isNaN(end) || end <= start) return 0;
     return Math.round((end - start) / (1000 * 60 * 60 * 24));
   }, [checkIn, checkOut]);
+
+  const stickyPricing = useMemo(() => calculateStayPricing(stickyNights), [stickyNights]);
   const dynamicGallery = useMemo(() => {
     if (property.id !== 'wb-3205-t2') {
       return property.gallery;
@@ -319,8 +322,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/10 border border-white/15">
                   <Check className="w-4 h-4 text-[#F6E7A7] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-xs font-semibold text-white block">Full Chef's Kitchen</strong>
-                    <span className="text-[11px] text-white/75">Stove, oven, and full fridge to cook island poke and save $1,000+ over hotels.</span>
+                    <strong className="text-xs font-semibold text-white block">Full Kitchen</strong>
+                    <span className="text-[11px] text-white/75">Stove, oven, and full fridge to cook island meals and save $200+/person daily over restaurants.</span>
                   </div>
                 </div>
 
@@ -467,35 +470,32 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FF385C]/10 border border-[#FF385C]/30 text-[10px] font-bold uppercase tracking-wider text-[#FF385C]">
                     <span>Airbnb Primary</span>
                   </div>
-                  <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#C59B4B] text-[#1A3B34] text-[10px] font-black uppercase tracking-wider shadow-2xs">
-                    <Sparkles className="w-3 h-3" />
-                    <span>15% Direct Discount</span>
+                  <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#1A3B34] text-[#F6E7A7] text-[10px] font-bold uppercase tracking-wider shadow-2xs border border-[#C59B4B]/30">
+                    <Sparkles className="w-3 h-3 text-[#F6E7A7]" />
+                    <span>$0 Resort Fees</span>
                   </div>
                 </div>
 
                 {/* Nightly Rates Breakdown */}
                 <div className="pt-2 flex items-baseline justify-between">
                   <div>
-                    <div className="flex items-baseline gap-2">
+                    <div className="flex items-baseline gap-1.5">
                       <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
-                        $255
+                        $199
                       </span>
-                      <span className="text-xs text-[#1A3B34]/60 font-medium">/ night</span>
-                      <span className="text-xs text-[#1A3B34]/40 line-through">
-                        $300/nt
-                      </span>
+                      <span className="text-xs text-[#C59B4B] font-semibold">/ night promo</span>
                     </div>
                     <span className="text-[10px] text-[#8CA58A] font-bold block uppercase tracking-wider">
-                      Website Direct Rate (Save 15%)
+                      Special Rate Promotion · All Units
                     </span>
                   </div>
-                  <span className="text-xs font-semibold text-[#1A3B34]/70 bg-[#E8DCC6]/50 px-2 py-1 rounded-md">
-                    $0 Resort Fees
+                  <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60 px-2 py-1 rounded-md">
+                    Honolulu STR License
                   </span>
                 </div>
 
                 <p className="text-xs text-[#1A3B34]/70 leading-relaxed pt-1">
-                  Inquire directly on our website. When your booking is accepted, enjoy an exclusive 15% discount off standard rates, free covered parking, and zero resort fees.
+                  Inquire directly on our website. Transparent pricing: TAX + Base + Cleaning Fee with $0 Resort fees and free covered parking.
                 </p>
               </div>
 
@@ -529,16 +529,41 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
                 {/* Sticky Nights Calculation Box */}
                 {stickyNights > 0 && (
-                  <div className="p-3 rounded-xl bg-[#1A3B34] text-white space-y-1.5 text-xs shadow-xs animate-fade-in border border-[#C59B4B]/30">
-                    <div className="flex items-center justify-between text-[#F6E7A7] font-semibold text-[11px]">
+                  <div className="p-3.5 rounded-2xl bg-[#1A3B34] text-white space-y-2 text-xs shadow-xs animate-fade-in border border-[#C59B4B]/30">
+                    <div className="flex items-center justify-between text-[#F6E7A7] font-semibold text-[11px] pb-1 border-b border-white/15">
                       <span>{stickyNights} Nights Estimate:</span>
-                      <span>15% Off Applied</span>
+                      <span>Formula: TAX + Base + Cleaning</span>
                     </div>
-                    <div className="flex items-baseline justify-between">
-                      <span className="text-white/60 line-through">${stickyNights * 300}</span>
-                      <span className="text-base font-bold text-white">${stickyNights * 255}</span>
-                      <span className="text-[11px] font-bold text-[#F6E7A7] bg-white/15 px-1.5 py-0.5 rounded">
-                        Save ${stickyNights * 45}
+
+                    <div className="space-y-1 text-[11px] text-white/85">
+                      <div className="flex justify-between">
+                        <span>Base Rate (${BASE_NIGHTLY_RATE} × {stickyNights} nts):</span>
+                        <span>{formatCurrency(stickyPricing.grossRoomTotal)}</span>
+                      </div>
+                      {stickyPricing.discountPercent > 0 && (
+                        <div className="flex justify-between text-[#F6E7A7] font-semibold">
+                          <span>{stickyPricing.discountPercent}% Stay Discount ({stickyNights}+ days):</span>
+                          <span>-{formatCurrency(stickyPricing.discountAmount)}</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between">
+                        <span>Cleaning Fee:</span>
+                        <span>
+                          {stickyPricing.cleaningFee > 0
+                            ? formatCurrency(stickyPricing.cleaningFee)
+                            : '$0 (Waived for 3+ nights)'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-white/70 text-[10px]">
+                        <span>Taxes (18.50% GET+TAT+OTAT):</span>
+                        <span>{formatCurrency(stickyPricing.totalTaxes)}</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-1.5 border-t border-white/20 flex items-baseline justify-between">
+                      <span className="text-xs font-semibold text-white/90">Estimated Total:</span>
+                      <span className="font-serif text-base sm:text-lg font-bold text-[#F6E7A7]">
+                        {formatCurrency(stickyPricing.grandTotal)}
                       </span>
                     </div>
                   </div>
@@ -570,8 +595,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     <Calendar className="w-4 h-4 text-[#F6E7A7]" />
                     <span>
                       {stickyNights > 0
-                        ? `Inquire & Claim 15% Off ($${stickyNights * 255})`
-                        : 'Inquire & Claim 15% Off'}
+                        ? `Inquire to Book (${formatCurrency(stickyPricing.grandTotal)} Total)`
+                        : 'Inquire to Book · $199/nt'}
                     </span>
                   </button>
 
@@ -602,7 +627,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
               {/* Direct email quick note */}
               <div className="pt-2 text-center text-xs text-[#1A3B34]/70 space-y-1">
-                <p className="text-[11px]">Direct host inquiry · $0 mandatory resort fees</p>
+                <p className="text-[11px]">
+                  Final details & computation sent in email · May require email verification
+                </p>
                 <a
                   href={directMailtoUrl}
                   className="text-xs font-semibold text-[#8CA58A] hover:underline inline-flex items-center gap-1"

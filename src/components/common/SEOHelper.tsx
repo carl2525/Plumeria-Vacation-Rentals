@@ -30,7 +30,7 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
       meta = {
         title: 'Plumeria Vacation Rentals | Waikiki Banyan Condo Rentals | No Resort Fees',
         description:
-          'Book direct Waikiki Banyan vacation rentals with Plumeria Vacation Rentals. 1-bedroom suites with full kitchens, covered parking, 1-acre recreation deck, and $0 resort fees just 1 block to Kuhio Beach, Honolulu. Save 15% booking direct.',
+          'Book direct Waikiki Banyan vacation rentals with Plumeria Vacation Rentals. 1-bedroom suites with Full kitchens, covered parking, 1-acre recreation deck, and $0 resort fees just 1 block to Kuhio Beach, Honolulu. Special $199 promo rate in all units.',
         canonicalUrl: 'https://plumeriavacationrentals.com',
         breadcrumbName: 'Home',
       };
@@ -38,7 +38,7 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
       meta = {
         title: 'Waikiki Banyan Vacation Rentals & 1-Bedroom Suites | Plumeria Vacation Rentals',
         description:
-          'Spacious 1-bedroom Waikiki vacation rentals and condo suites at Waikiki Banyan Tower 2. Full chef kitchens, covered parking, private lanais, 1 block to Kuhio Beach, and $0 resort fees. Save 15% booking direct.',
+          'Spacious 1-bedroom Waikiki vacation rentals and condo suites at Waikiki Banyan Tower 2. Full kitchens, covered parking, private lanais, 1 block to Kuhio Beach, and $0 resort fees. Promotional $199 base rate.',
         canonicalUrl: 'https://plumeriavacationrentals.com/#/rentals',
         breadcrumbName: 'Vacation Rentals',
       };
@@ -48,7 +48,7 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
       if (prop) {
         meta = {
           title: `${prop.name} (${prop.viewType}) | Waikiki Banyan Vacation Rentals | Plumeria`,
-          description: `${prop.tagline}. High-floor Waikiki condo rental at Waikiki Banyan with full kitchen, private lanai, sleeps ${prop.guestsMax}. 1 block to Kuhio Beach with $0 resort fees. Save 15% booking direct.`,
+          description: `${prop.tagline}. High-floor Waikiki condo rental at Waikiki Banyan with Full kitchen, private lanai, sleeps ${prop.guestsMax}. 1 block to Kuhio Beach with $0 resort fees. Promotional $199 base rate.`,
           canonicalUrl: `https://plumeriavacationrentals.com/#/rentals/${prop.slug}`,
           breadcrumbName: prop.name,
         };
@@ -57,7 +57,7 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
       meta = {
         title: 'Waikiki Banyan 1-Acre Resort Deck & Hotel Comparison | Plumeria Vacation Rentals',
         description:
-          'Explore Waikiki Banyan amenities: 1-acre resort deck, heated pool, 2 jet hot tubs, tennis court, and full kitchens. Compare vs Aston at Waikiki Banyan with $0 resort fees and direct 15% savings.',
+          'Explore Waikiki Banyan amenities: 1-acre resort deck, heated pool, 2 jet hot tubs, tennis court, and Full kitchens. Compare vs hotels with $0 resort fees and direct transparent pricing.',
         canonicalUrl: 'https://plumeriavacationrentals.com/#/waikiki-banyan',
         breadcrumbName: 'Waikiki Banyan Deck & Amenities',
       };

@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: 'Plumeria Vacation Rentals',
   legalName: 'Plumeria Vacation Rentals LLC',
   tagline: 'Waikiki Vacation Rentals & Waikiki Banyan Condo Rentals | Book Direct Waikiki',
-  shortDescription: 'Book direct Waikiki vacation rentals at Waikiki Banyan with Plumeria Vacation Rentals. Premier Waikiki condo rentals and short term rentals featuring 1-acre resort deck, full chef kitchens, and $0 resort fees in Honolulu, Hawaiʻi.',
+  shortDescription: 'Book direct Waikiki vacation rentals at Waikiki Banyan with Plumeria Vacation Rentals. Authorized Short-Term Rental License by the City and County of Honolulu. Featuring 1-acre resort deck, Full kitchens, and $0 resort fees in Honolulu, Hawaiʻi.',
   seoKeywords: [
     'waikiki vacation rentals',
     'waikiki vacation rental',

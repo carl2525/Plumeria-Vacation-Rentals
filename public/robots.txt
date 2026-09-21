@@ -26,9 +26,8 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-# LLM Context Files
-# Standard: https://llmstxt.org
-LLM: https://plumeriavacationrentals.com/llms.txt
+# LLM Context File (Standard: https://llmstxt.org)
+# Available at: https://plumeriavacationrentals.com/llms.txt
 
 # Sitemaps
 Sitemap: https://plumeriavacationrentals.com/sitemap.xml

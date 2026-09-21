@@ -128,7 +128,12 @@ export function App() {
       );
     }
 
-    if (currentPath === '/explore' || currentPath === '/explore/') {
+    if (
+      currentPath === '/explore' ||
+      currentPath === '/explore/' ||
+      currentPath.startsWith('/explore#') ||
+      currentPath.startsWith('/explore?')
+    ) {
       return (
         <ExplorePage
           onNavigate={navigate}

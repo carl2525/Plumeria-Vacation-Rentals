@@ -4,8 +4,8 @@ export const PROPERTIES: Property[] = [
   {
     id: 'wb-3609-t2',
     slug: 'waikiki-banyan-3609-t2',
-    name: 'Waikiki Banyan #3609-T2',
-    unitNumber: '3609-T2',
+    name: 'Waikiki Banyan #3609',
+    unitNumber: '3609',
     tagline: 'Penthouse-Tier Ocean & Sunset View Suite · Tower 2 Floor 36',
     tower: 'Tower 2 (Makai/Diamond Head)',
     floorLevel: '36th Floor (Penthouse Tier)',
@@ -38,7 +38,7 @@ export const PROPERTIES: Property[] = [
       },
       {
         url: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1400&q=80',
-        caption: 'Fully equipped chef-ready kitchen with full-size refrigerator, range, microwave & cookware',
+        caption: 'Fully equipped kitchen with full-size refrigerator, range, microwave & cookware',
         category: 'kitchen',
       },
       {
@@ -54,18 +54,18 @@ export const PROPERTIES: Property[] = [
       },
     ],
     shortDescription:
-      'Perched high on the 36th floor of Tower 2 at Waikiki Banyan, Unit #3609-T2 offers 557 sq. ft. of comfortable living space plus a 67 sq. ft. private lanai (624 sq. ft. total). Enjoy sweeping Pacific Ocean vistas, full chef-ready kitchen, 1-acre resort recreation deck access, and an easy 1-block beach stroll with $0 resort fees.',
+      'Perched high on the 36th floor of Tower 2 at Waikiki Banyan, Unit #3609-T2 offers 557 sq. ft. of comfortable living space plus a 67 sq. ft. private lanai (624 sq. ft. total). Enjoy sweeping Pacific Ocean vistas, Full kitchen, Fully Airconditioned comfort, 1-acre resort deck access, and an easy 1-block beach stroll with $0 Resort fees. Authorized Short-Term Rental License by the City and County of Honolulu.',
     fullDescription: [
-      'Welcome to Unit #3609-T2 at Waikiki Banyan, managed with care by Plumeria Vacation Rentals. Located on the 36th floor of Tower 2 (Makai/Diamond Head Tower), this penthouse-tier 1-bedroom suite offers 557 sq. ft. of interior living space plus a 67 sq. ft. private lanai (624 sq. ft. total living area).',
-      'Step onto your private covered 67 sq. ft. lanai to enjoy warm trade wind breezes and watch the morning surf roll into Waikiki. Inside, the cool, air-conditioned living space is furnished with comfortable seating, high-speed Wi-Fi, and a Smart HD TV for unwinding after a day on the sand.',
+      'Welcome to Unit #3609-T2 at Waikiki Banyan, managed with care by Plumeria Vacation Rentals. Located on the 36th floor of Tower 2 (Makai/Diamond Head Tower), this penthouse-tier 1-bedroom suite offers 557 sq. ft. of interior living space plus a 67 sq. ft. private lanai (624 sq. ft. total living area). Authorized Short-Term Rental License by the City and County of Honolulu.',
+      'Step onto your private covered 67 sq. ft. lanai to enjoy warm trade wind breezes and watch the morning surf roll into Waikiki. Inside, the cool, Fully Airconditioned living space is furnished with comfortable seating, high-speed Wi-Fi, and a Smart HD TV for unwinding after a day on the sand.',
       'The full kitchen is equipped with full-sized appliances, cookware, dinnerware, and coffee makers, giving you the flexibility to prepare tropical breakfasts or dine in with fresh island ingredients—saving families $200+ per day over expensive restaurant dining.',
-      'Unlike ordinary Waikiki vacation rentals with cramped rooms or zero amenities, guests of Unit #3609-T2 receive full access to Waikiki Banyan’s expansive 1-acre 6th-floor recreation deck: large heated swimming pool, two jet hot tubs, dry sauna, BBQ grilling stations, and tennis/pickleball courts—with zero mandatory resort fees.',
+      'Unlike ordinary Waikiki vacation rentals with cramped rooms or zero amenities, guests of Unit #3609-T2 receive full access to Waikiki Banyan’s expansive 1-acre 6th-floor recreation deck: large heated swimming pool, two jet hot tubs, dry sauna, BBQ grilling stations, and tennis/pickleball courts—with zero mandatory Resort fees.',
     ],
     sleepingArrangements: [
       {
         room: 'Master Bedroom',
         beds: '2 Full/Double Beds',
-        description: 'Plush supportive mattresses, tropical linens, air conditioning, and closet storage.',
+        description: 'Plush supportive mattresses, tropical linens, Fully Airconditioned comfort, and closet storage.',
       },
       {
         room: 'Living Room',
@@ -75,11 +75,11 @@ export const PROPERTIES: Property[] = [
     ],
     keyAmenities: [
       'Free Covered Parking',
-      'Full Chef Kitchen',
+      'Full kitchen',
       '1 Block to Beach',
       'Pacific Ocean & Sunset Vistas',
       'Private 36th-Fl Lanai',
-      'Air Conditioning & Fast Wi-Fi',
+      'Fully Airconditioned',
       'Banyan Heated Pool & 2 Spas',
       'Beach Chairs & Towels',
     ],
@@ -91,7 +91,7 @@ export const PROPERTIES: Property[] = [
           '557 sq. ft. interior + 67 sq. ft. private lanai (624 sq. ft. total)',
           'High 36th-floor penthouse tier elevation',
           'Private covered lanai with patio chairs & table',
-          'Air conditioning system in unit',
+          'Fully Airconditioned comfort throughout suite',
           'High-speed wireless internet (Wi-Fi)',
           'Smart HD TV with streaming capabilities',
           'Iron & ironing board, hair dryer',
@@ -136,7 +136,10 @@ export const PROPERTIES: Property[] = [
     houseRules: [
       'Check-in: 2:00 PM / Check-out: 12:00 PM (early in & late checkout with advance approval)',
       'Covered garage parking included ($0 extra fee; follow Waikiki Banyan garage rules)',
-      'Base rate: $300/night; Plumeria does not charge separate resort or amenity fees',
+      'Base rate: $199/night (Special Promotion); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
+      'Cleaning fee: $250 for 1–2 nights; Waived ($0) for stays 3 nights or more',
+      'Length of stay discounts: 5 days (5%), 10 days (10%), 15 days (15%), 20 days (20%), 25 days (25%), 30 days (30%)',
+      'Taxes (18.50% total: GET 4.5%, TAT 11%, OTAT 3%): Formula = TAX + Base + Cleaning Fee',
       'Suite Separation: A booking for #3609-T2 does not provide access to #3205-T2, and vice versa',
       'In-Unit Quiet Hours: 10:00 PM – 7:00 AM (Rec Deck: 10:00 PM – 6:00 AM)',
       'Strictly 100% Smoke-Free (unit, lanai, and common areas within 20ft)',
@@ -155,8 +158,8 @@ export const PROPERTIES: Property[] = [
   {
     id: 'wb-3205-t2',
     slug: 'waikiki-banyan-3205-t2',
-    name: 'Waikiki Banyan #3205-T2',
-    unitNumber: '3205-T2',
+    name: 'Waikiki Banyan #3205',
+    unitNumber: '3205',
     tagline: 'High-Floor 180° Diamond Head & Mountain View Suite · Tower 2 Floor 32',
     tower: 'Tower 2 (Makai/Diamond Head)',
     floorLevel: '32nd Floor (High Floor)',
@@ -211,7 +214,7 @@ export const PROPERTIES: Property[] = [
       {
         url: '/images/properties/wb-3205-t2/unit-3205-07.webp',
         fallbackUrl: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1400&q=80',
-        caption: 'Fully equipped chef’s kitchen featuring white raised-panel cabinetry, dark speckled countertops, electric cooktop, microwave, coffee maker & double sink',
+        caption: 'Fully equipped full kitchen featuring white raised-panel cabinetry, dark speckled countertops, electric cooktop, microwave, coffee maker & double sink',
         category: 'kitchen',
       },
       {
@@ -246,12 +249,12 @@ export const PROPERTIES: Property[] = [
       },
     ],
     shortDescription:
-      'High on the 32nd floor of Tower 2 at Waikiki Banyan, Unit #3205-T2 offers 557 sq. ft. of comfortable living space plus a 67 sq. ft. private lanai (624 sq. ft. total). While not beachfront, it commands spectacular 180-degree panoramic views of iconic Diamond Head Mountain and the lush Koʻolau mountain range, full chef kitchen, 1-acre resort deck access, and is just 1 block to Kuhio Beach with $0 resort fees.',
+      'High on the 32nd floor of Tower 2 at Waikiki Banyan, Unit #3205-T2 offers 557 sq. ft. of comfortable living space plus a 67 sq. ft. private lanai (624 sq. ft. total). While not beachfront, it commands spectacular 180-degree panoramic views of iconic Diamond Head Mountain and the lush Koʻolau mountain range, Full kitchen, Fully Airconditioned comfort, 1-acre resort deck access, and is just 1 block to Kuhio Beach with $0 Resort fees. Authorized Short-Term Rental License by the City and County of Honolulu.',
     fullDescription: [
-      'Experience the magic of Honolulu from Unit #3205-T2 at Waikiki Banyan, hosted by Plumeria Vacation Rentals. Located on the 32nd floor of Tower 2 (Makai/Diamond Head Tower), this high-floor suite features 557 sq. ft. of interior living space paired with a 67 sq. ft. private covered lanai (624 sq. ft. total living area).',
+      'Experience the magic of Honolulu from Unit #3205-T2 at Waikiki Banyan, hosted by Plumeria Vacation Rentals. Located on the 32nd floor of Tower 2 (Makai/Diamond Head Tower), this high-floor suite features 557 sq. ft. of interior living space paired with a 67 sq. ft. private covered lanai (624 sq. ft. total living area). Authorized Short-Term Rental License by the City and County of Honolulu.',
       'While the property is not beachfront, its elevated 32nd-floor vantage point frames breathtaking 180-degree panoramic views of world-famous Diamond Head Mountain and the dramatic Koʻolau mountain peaks, providing peaceful seclusion away from noisy beachfront traffic.',
-      'Wake up with the morning golden glow illuminating Diamond Head and sip your morning Kona coffee on your private 67 sq. ft. lanai. The open living room is equipped with air conditioning, comfortable furnishings, high-speed Wi-Fi, and versatile accordion doors for optional bedroom privacy.',
-      'Prepare delicious meals in the full kitchen equipped with a breakfast bar island, full-size refrigerator, oven, stove, microwave, and cookware—allowing your group to save significantly over standard hotel rooms. When you are ready for the sand and surf, the calm waters of Kuhio Beach are just 1 flat block away (approx. 3-minute walk), plus full access to Waikiki Banyan’s 1-acre recreation deck with $0 mandatory resort fees.',
+      'Wake up with the morning golden glow illuminating Diamond Head and sip your morning Kona coffee on your private 67 sq. ft. lanai. The open living room is Fully Airconditioned with comfortable furnishings, high-speed Wi-Fi, and versatile accordion doors for optional bedroom privacy.',
+      'Prepare delicious meals in the full kitchen equipped with a breakfast bar island, full-size refrigerator, oven, stove, microwave, and cookware—allowing your group to save significantly over standard hotel rooms. When you are ready for the sand and surf, the calm waters of Kuhio Beach are just 1 flat block away (approx. 3-minute walk), plus full access to Waikiki Banyan’s 1-acre recreation deck with $0 Resort fees.',
     ],
     sleepingArrangements: [
       {
@@ -267,12 +270,12 @@ export const PROPERTIES: Property[] = [
     ],
     keyAmenities: [
       'Free Covered Parking',
-      'Full Chef Kitchen',
+      'Full kitchen',
       '1 Block to Beach',
       '180° Diamond Head Views',
       'Private 32nd-Fl Lanai',
+      'Fully Airconditioned',
       'Breakfast Bar Island',
-      'Emerald Tile Shower',
       'Banyan Heated Pool & 2 Spas',
     ],
     fullAmenities: [
@@ -285,7 +288,7 @@ export const PROPERTIES: Property[] = [
           '180-degree panoramic views of Diamond Head Mountain and Koʻolau range',
           'Private covered 67 sq. ft. lanai with 2 wooden armchairs, red cushions & drink table',
           'Versatile accordion partition wall for open-concept living or bedroom privacy',
-          'In-unit air conditioning system',
+          'Fully Airconditioned comfort throughout suite',
           'High-speed wireless internet (Wi-Fi)',
           'Wall-mounted flat-screen TV with streaming apps',
           'Iron, ironing board, and hair dryer',
@@ -340,7 +343,10 @@ export const PROPERTIES: Property[] = [
     houseRules: [
       'Check-in: 2:00 PM / Check-out: 12:00 PM (early in & late checkout with advance approval)',
       'Covered garage parking included ($0 extra fee; follow Waikiki Banyan garage rules)',
-      'Base rate: $300/night; Plumeria does not charge separate resort or amenity fees',
+      'Base rate: $199/night (Special Promotion); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
+      'Cleaning fee: $250 for 1–2 nights; Waived ($0) for stays 3 nights or more',
+      'Length of stay discounts: 5 days (5%), 10 days (10%), 15 days (15%), 20 days (20%), 25 days (25%), 30 days (30%)',
+      'Taxes (18.50% total: GET 4.5%, TAT 11%, OTAT 3%): Formula = TAX + Base + Cleaning Fee',
       'Suite Separation: A booking for #3205-T2 does not provide access to #3609-T2, and vice versa',
       'In-Unit Quiet Hours: 10:00 PM – 7:00 AM (Rec Deck: 10:00 PM – 6:00 AM)',
       'Strictly 100% Smoke-Free (unit, lanai, and common areas within 20ft)',

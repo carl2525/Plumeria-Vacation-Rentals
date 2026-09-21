@@ -15,7 +15,14 @@ import {
   ExternalLink,
   Sparkles,
   Tag,
+  ShieldCheck,
+  Info,
+  Clock,
+  Car,
+  Utensils,
+  Eye,
 } from 'lucide-react';
+import { PlumeriaSymbolLogo } from '../brand/PlumeriaSymbolLogo';
 import { PROPERTIES } from '../../data/properties';
 import { SITE_CONFIG } from '../../config/site';
 import {
@@ -23,6 +30,12 @@ import {
   buildInquiryEmailText,
   openInquiryMailto,
 } from '../../utils/mailto';
+import {
+  calculateStayPricing,
+  formatCurrency,
+  BASE_NIGHTLY_RATE,
+  TAX_RATES,
+} from '../../utils/pricing';
 
 interface InquiryFormProps {
   initialPropertyId?: string;
@@ -65,6 +78,8 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
     if (isNaN(start) || isNaN(end) || end <= start) return 0;
     return Math.round((end - start) / (1000 * 60 * 60 * 24));
   }, [formData.checkIn, formData.checkOut]);
+
+  const pricing = useMemo(() => calculateStayPricing(nights), [nights]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -126,32 +141,154 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
     const suiteName = selectedProp ? `${selectedProp.name} (${selectedProp.viewType})` : 'Waikiki Banyan Suite';
 
     return (
-      <div className="bg-[#F9F7F2] border border-[#E8DCC6] rounded-3xl p-4 sm:p-8 text-center space-y-4 sm:space-y-6 animate-fade-in shadow-xs">
-        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#8CA58A]/20 text-[#1A3B34] rounded-full flex items-center justify-center mx-auto shadow-xs border border-[#8CA58A]/30">
-          <CheckCircle2 className="w-7 h-7 sm:w-9 sm:h-9 text-[#1A3B34]" />
-        </div>
+      <div className="space-y-4 sm:space-y-5 animate-fade-in text-left">
+        {/* Luxury Voucher Header Card */}
+        <div className="bg-gradient-to-br from-[#1A3B34] via-[#204940] to-[#142D27] text-white p-4 sm:p-6 rounded-3xl border border-[#C59B4B]/50 shadow-md relative overflow-hidden">
+          <div className="absolute -right-8 -bottom-8 w-36 h-36 bg-[#C59B4B]/10 rounded-full blur-2xl pointer-events-none" />
+          
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-white/15 relative z-10">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/10 p-1.5 flex items-center justify-center border border-white/20 shadow-xs">
+                <PlumeriaSymbolLogo className="w-full h-full" variant="light" />
+              </div>
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F6E7A7] block">
+                  Direct Booking Inquiry
+                </span>
+                <h3 className="font-serif text-lg sm:text-2xl font-bold text-white tracking-wide">
+                  Mahalo, {formData.firstName || 'Guest'}!
+                </h3>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 self-start sm:self-auto">
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-[#C59B4B] text-[#1A3B34] shadow-xs">
+                $199 / Nt Promo Rate
+              </span>
+              <span className="px-2 py-1 rounded-full text-[10px] font-semibold bg-white/15 text-[#F6E7A7] border border-white/20">
+                Tower 2
+              </span>
+            </div>
+          </div>
 
-        <div className="space-y-1.5 sm:space-y-2">
-          <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#C59B4B] block">
-            Inquiry Prepared · 15% Discount Attached
-          </span>
-          <h3 className="font-serif text-xl sm:text-3xl font-bold text-[#1A3B34]">
-            Mahalo, {formData.firstName}!
-          </h3>
-          <p className="text-[#1A3B34]/85 text-xs sm:text-sm max-w-md mx-auto leading-relaxed font-light">
-            We’ve opened your email app with a pre-filled booking request for <strong className="text-[#1A3B34] font-semibold">{suiteName}</strong> ({formData.checkIn} to {formData.checkOut}). Your inquiry includes the <strong className="text-[#1A3B34] font-semibold">15% Direct Website Discount</strong> ($255/night direct rate applied upon host acceptance).
+          <p className="text-white/85 text-xs sm:text-sm pt-3 leading-relaxed font-light relative z-10">
+            Your booking inquiry has been prepared with our special <strong className="font-semibold text-[#F6E7A7]">Promotional $199/Night Rate (All Units)</strong> and <strong className="font-semibold text-white">$0 Resort Fees</strong>. An email draft has been generated for your email application.
           </p>
         </div>
 
-        {/* Primary Mailto Action Buttons */}
+        {/* Stay Summary Voucher Grid */}
+        <div className="bg-[#F9F7F2] border border-[#E8DCC6] rounded-2xl p-3.5 sm:p-5 shadow-2xs space-y-3">
+          <div className="flex items-center justify-between gap-2 border-b border-[#E8DCC6]/80 pb-2.5">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#1A3B34]">
+              <Sparkles className="w-4 h-4 text-[#C59B4B]" />
+              <span className="uppercase tracking-wider text-[11px]">Inquiry Summary Voucher</span>
+            </div>
+            <span className="text-[10.5px] font-medium text-[#1A3B34]/60">
+              City & County of Honolulu Licensed STR
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-xs">
+            {/* Suite */}
+            <div className="bg-white p-2.5 sm:p-3 rounded-xl border border-[#E8DCC6]/70">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#1A3B34]/50 block mb-0.5">
+                Suite
+              </span>
+              <p className="font-semibold text-[#1A3B34] truncate text-xs sm:text-sm">
+                {suiteName}
+              </p>
+              <span className="text-[10px] text-[#8CA58A] font-medium">Tower 2 High Floor</span>
+            </div>
+
+            {/* Dates */}
+            <div className="bg-white p-2.5 sm:p-3 rounded-xl border border-[#E8DCC6]/70">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#1A3B34]/50 block mb-0.5">
+                Dates
+              </span>
+              <p className="font-semibold text-[#1A3B34] text-xs sm:text-sm truncate">
+                {formData.checkIn || 'TBD'} → {formData.checkOut || 'TBD'}
+              </p>
+              <span className="text-[10px] text-[#C59B4B] font-bold">
+                {nights > 0 ? `${nights} Nights` : 'Flexible Dates'}
+              </span>
+            </div>
+
+            {/* Guests */}
+            <div className="bg-white p-2.5 sm:p-3 rounded-xl border border-[#E8DCC6]/70">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#1A3B34]/50 block mb-0.5">
+                Party
+              </span>
+              <p className="font-semibold text-[#1A3B34] text-xs sm:text-sm">
+                {formData.guests} {Number(formData.guests) === 1 ? 'Guest' : 'Guests'}
+              </p>
+              <span className="text-[10px] text-[#1A3B34]/60">Up to 4–5 max</span>
+            </div>
+
+            {/* Total Estimate */}
+            <div className="bg-white p-2.5 sm:p-3 rounded-xl border border-[#C59B4B]/40 bg-gradient-to-br from-white to-[#F9F7F2]">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#C59B4B] block mb-0.5">
+                Estimated Total
+              </span>
+              <p className="font-serif font-bold text-sm sm:text-base text-[#1A3B34]">
+                {nights > 0 ? formatCurrency(pricing.grandTotal) : '$199 / nt'}
+              </p>
+              <span className="text-[9.5px] text-[#1A3B34]/60 block truncate">
+                Formula: Base + Clean + Tax
+              </span>
+            </div>
+          </div>
+
+          {/* Included Amenities Badge Row */}
+          <div className="flex flex-wrap items-center justify-between gap-1.5 pt-2 border-t border-[#E8DCC6]/70 text-[10.5px] text-[#1A3B34]/80">
+            <span className="inline-flex items-center gap-1 font-semibold text-emerald-800">
+              <Check className="w-3.5 h-3.5 text-emerald-600" />
+              $0 Mandatory Resort Fees
+            </span>
+            <span className="inline-flex items-center gap-1 font-semibold text-emerald-800">
+              <Car className="w-3.5 h-3.5 text-[#C59B4B]" />
+              Free Covered Garage Parking
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <Utensils className="w-3.5 h-3.5 text-[#8CA58A]" />
+              Full Kitchen in Suite
+            </span>
+          </div>
+        </div>
+
+        {/* Verification & Final Computation Notice Card */}
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-50/70 via-[#F9F7F2] to-amber-50/70 border border-[#C59B4B]/50 text-left space-y-1.5 shadow-2xs">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#1A3B34]">
+              <ShieldCheck className="w-4 h-4 text-[#C59B4B] shrink-0" />
+              <span>Final Details, Computation & Email Verification</span>
+            </div>
+            <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-[#1A3B34] text-[#F6E7A7]">
+              Notice
+            </span>
+          </div>
+          <p className="text-[11px] sm:text-xs text-[#1A3B34]/85 leading-relaxed font-light">
+            Your final reservation details and verified cost computation will be sent directly to{' '}
+            <strong className="font-semibold text-[#1A3B34]">
+              {formData.email || 'your email'}
+            </strong>
+            .
+          </p>
+          <div className="flex items-start gap-1.5 pt-1 text-[11px] sm:text-xs text-[#1A3B34]/80 leading-relaxed font-light border-t border-[#C59B4B]/20">
+            <Info className="w-3.5 h-3.5 text-[#8CA58A] shrink-0 mt-0.5" />
+            <span>
+              <strong className="font-semibold text-[#1A3B34]">Next Steps:</strong> Please monitor your email inbox. Our host team may require further guest/stay verification via email once your inquiry is received before your booking is finalized.
+            </span>
+          </div>
+        </div>
+
+        {/* Primary Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 pt-1">
           <a
             href={mailtoUrl}
             id="mailto-success-open-btn"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#1A3B34] text-white hover:bg-[#224D44] transition-all shadow-md cursor-pointer border border-[#C59B4B]/30 min-h-[44px]"
+            className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider bg-[#1A3B34] text-white hover:bg-[#224D44] transition-all shadow-md cursor-pointer border border-[#C59B4B]/40 min-h-[48px]"
           >
             <Mail className="w-4 h-4 text-[#F6E7A7] shrink-0" />
-            <span>Open in Email App (mailto)</span>
+            <span>Open Email Client to Send (mailto)</span>
             <ExternalLink className="w-3.5 h-3.5 text-white/60 shrink-0" />
           </a>
 
@@ -159,47 +296,56 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             type="button"
             id="copy-inquiry-details-btn"
             onClick={handleCopy}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-3.5 rounded-full text-xs font-semibold bg-white border border-[#E8DCC6] text-[#1A3B34] hover:bg-[#E8DCC6]/40 transition-colors shadow-2xs cursor-pointer min-h-[44px]"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl text-xs font-semibold bg-white border border-[#E8DCC6] text-[#1A3B34] hover:bg-[#E8DCC6]/40 transition-colors shadow-2xs cursor-pointer min-h-[48px]"
           >
             {copied ? (
               <>
-                <Check className="w-4 h-4 text-[#8CA58A] shrink-0" />
-                <span className="text-[#1A3B34] font-bold">Copied to Clipboard!</span>
+                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="text-emerald-700 font-bold">Copied Styled Inquiry!</span>
               </>
             ) : (
               <>
                 <Copy className="w-4 h-4 text-[#C59B4B] shrink-0" />
-                <span>Copy Inquiry Details</span>
+                <span>Copy Formatted Inquiry Text</span>
               </>
             )}
           </button>
         </div>
 
-        {/* Inquiry Preview Box */}
-        <div className="text-left bg-white rounded-2xl p-3.5 sm:p-4 border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1.5 shadow-2xs">
-          <div className="flex items-center justify-between pb-2 border-b border-[#E8DCC6]/60 text-[10px]">
-            <span className="font-bold uppercase tracking-wider text-[#1A3B34]/60 truncate mr-2">
-              Recipient: {SITE_CONFIG.email}
-            </span>
-            <span className="text-[#8CA58A] font-semibold shrink-0">Subject: Stay Inquiry</span>
+        {/* Formatted Email Preview Window */}
+        <div className="text-left bg-white rounded-2xl border border-[#E8DCC6] text-xs text-[#1A3B34]/85 shadow-2xs overflow-hidden">
+          <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#F9F7F2] border-b border-[#E8DCC6] text-[10.5px]">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
+              <span className="font-bold text-[#1A3B34] truncate">
+                To: {SITE_CONFIG.email}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0 text-[#8CA58A] font-semibold text-[10px]">
+              <Eye className="w-3 h-3 text-[#8CA58A]" />
+              <span>Inquiry Email Preview</span>
+            </div>
           </div>
-          <pre className="whitespace-pre-wrap break-words font-sans text-[11px] sm:text-xs text-[#1A3B34]/85 leading-relaxed pt-1 max-h-40 overflow-y-auto custom-scrollbar">
-            {formattedEmailBody}
-          </pre>
+          <div className="p-3.5 max-h-52 overflow-y-auto custom-scrollbar font-mono text-[11px] leading-relaxed text-[#1A3B34]/90 bg-neutral-50/50">
+            <pre className="whitespace-pre-wrap break-words font-mono">
+              {formattedEmailBody}
+            </pre>
+          </div>
         </div>
 
-        <div className="pt-1 text-[11px] sm:text-xs text-[#1A3B34]/70 space-y-1">
+        {/* Host Support & Reset */}
+        <div className="pt-2 text-center text-xs text-[#1A3B34]/70 space-y-1">
           <p>
-            Prefer calling or texting? Plumeria host team:{' '}
+            Prefer calling or texting? Plumeria direct line:{' '}
             <a href="tel:+18086719191" className="font-semibold text-[#1A3B34] hover:underline whitespace-nowrap">
               {SITE_CONFIG.phone}
             </a>
           </p>
           <button
             onClick={() => setStatus('idle')}
-            className="text-[11px] font-semibold text-[#8CA58A] hover:underline cursor-pointer pt-1 block mx-auto"
+            className="text-[11px] font-semibold text-[#8CA58A] hover:underline cursor-pointer pt-1 inline-block"
           >
-            ← Modify Details or Submit Another Inquiry
+            ← Modify Dates / Edit Inquiry
           </button>
         </div>
       </div>
@@ -219,24 +365,24 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         </div>
       )}
 
-      {/* Unified Mobile-Friendly 15% Booking Special & Direct Contact Card */}
+      {/* Unified Mobile-Friendly Direct Host Value & Contact Card */}
       <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-[#1A3B34] to-[#244E45] text-white border border-[#C59B4B]/35 shadow-xs space-y-2.5">
         <div className="flex items-start gap-2.5 sm:gap-3">
           <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#C59B4B] text-[#1A3B34] flex flex-col items-center justify-center shrink-0 shadow-2xs font-black">
-            <span className="text-[11px] sm:text-xs leading-none">15%</span>
-            <span className="text-[7.5px] sm:text-[8px] uppercase tracking-tight leading-none mt-0.5">OFF</span>
+            <span className="text-[11px] sm:text-xs leading-none">$199</span>
+            <span className="text-[7.5px] sm:text-[8px] uppercase tracking-tight leading-none mt-0.5">PROMO</span>
           </div>
           <div className="space-y-0.5 flex-1 min-w-0">
             <div className="flex items-center gap-1.5 flex-wrap">
               <span className="font-serif font-bold text-xs sm:text-sm text-[#F6E7A7]">
-                Direct Website Booking Discount
+                Special Rate Promotion · All Units
               </span>
               <span className="px-1.5 py-0.2 text-[8.5px] sm:text-[9px] font-bold uppercase rounded bg-white/20 text-white whitespace-nowrap">
-                Save $45/night
+                $0 Resort Fees
               </span>
             </div>
             <p className="text-[11px] text-white/85 leading-tight sm:leading-relaxed font-light">
-              Receive <strong>15% off standard nightly rates ($255/nt)</strong> + $0 resort fees and free covered garage parking when accepted by host!
+              Enjoy our limited-time <strong>$199/night promo rate</strong>, free covered parking pass, and incremental stay discounts for longer trips upon host acceptance!
             </p>
           </div>
         </div>
@@ -255,7 +401,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               Airbnb Listed
             </span>
             <a
-              href={`mailto:${SITE_CONFIG.email}?subject=Booking%20Inquiry%20-%20Waikiki%20Banyan%20(15%25%20Direct%20Discount)`}
+              href={`mailto:${SITE_CONFIG.email}?subject=Booking%20Inquiry%20-%20Waikiki%20Banyan%20(Direct%20Booking)`}
               className="inline-flex items-center gap-1 text-[10.5px] font-semibold text-[#F6E7A7] hover:underline"
             >
               <span>Email Directly</span>
@@ -392,45 +538,95 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         </div>
       </div>
 
-      {/* Dynamic 15% Discount Calculation Box when dates are selected */}
+      {/* Transparent Rate, Cleaning Fee, & Tax Breakdown */}
       {nights > 0 && (
-        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#C59B4B]/50 shadow-2xs space-y-2 animate-fade-in">
-          <div className="flex items-center justify-between gap-2">
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-[#F9F7F2] border border-[#C59B4B]/50 shadow-xs space-y-3 animate-fade-in text-xs">
+          <div className="flex items-center justify-between gap-2 pb-2 border-b border-[#E8DCC6]">
             <div className="flex items-center gap-1.5 min-w-0">
-              <Sparkles className="w-3.5 h-3.5 text-[#C59B4B] shrink-0" />
-              <span className="font-serif font-bold text-xs sm:text-sm text-[#1A3B34] truncate">
-                15% Discount ({nights} {nights === 1 ? 'Night' : 'Nights'})
+              <Sparkles className="w-4 h-4 text-[#C59B4B] shrink-0" />
+              <span className="font-serif font-bold text-sm text-[#1A3B34] truncate">
+                Pricing Estimate ({nights} {nights === 1 ? 'Night' : 'Nights'})
               </span>
             </div>
-            <span className="px-2 py-0.5 rounded-full text-[9.5px] sm:text-[10px] font-extrabold uppercase bg-[#C59B4B] text-[#1A3B34] shrink-0 whitespace-nowrap">
-              Save ${nights * 45}
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-[#1A3B34] text-[#F6E7A7] shrink-0">
+              $199 / Night Promo
             </span>
           </div>
 
-          <div className="grid grid-cols-3 gap-1.5 sm:gap-2 text-center">
-            <div className="p-1.5 sm:p-2 rounded-xl bg-white border border-[#E8DCC6]">
-              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-[#1A3B34]/50 block leading-tight">Standard</span>
-              <span className="font-medium text-[#1A3B34]/50 line-through text-xs sm:text-sm">${nights * 300}</span>
-              <span className="text-[8px] sm:text-[9px] text-[#1A3B34]/50 block">($300/nt)</span>
+          <div className="space-y-1.5 text-[#1A3B34]/90">
+            {/* Base room */}
+            <div className="flex items-center justify-between">
+              <span>Base Rate (${BASE_NIGHTLY_RATE} × {nights} {nights === 1 ? 'nt' : 'nts'}):</span>
+              <span className="font-semibold">{formatCurrency(pricing.grossRoomTotal)}</span>
             </div>
-            <div className="p-1.5 sm:p-2 rounded-xl bg-[#1A3B34] text-white border border-[#C59B4B]/40">
-              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-[#F6E7A7] block leading-tight">Your Rate</span>
-              <span className="font-bold text-xs sm:text-base text-white">${nights * 255}</span>
-              <span className="text-[8px] sm:text-[9px] text-[#F6E7A7] block font-medium">($255/nt)</span>
+
+            {/* Incremental Stay Discount */}
+            {pricing.discountPercent > 0 && (
+              <div className="flex items-center justify-between text-emerald-800 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-200/60 font-medium">
+                <span>{pricing.discountPercent}% Extended Stay Discount ({nights}+ days):</span>
+                <span className="font-bold">-{formatCurrency(pricing.discountAmount)}</span>
+              </div>
+            )}
+
+            {/* Cleaning Fee */}
+            <div className="flex items-center justify-between pt-1 border-t border-[#E8DCC6]/60">
+              <div>
+                <span>Cleaning Fee:</span>
+                <span className="block text-[10px] text-[#1A3B34]/60">
+                  {pricing.isCleaningFeeWaived ? 'Waived for 3+ nights stay' : '$250 short stay fee (1–2 nights)'}
+                </span>
+              </div>
+              <span className="font-semibold">
+                {pricing.cleaningFee > 0 ? (
+                  formatCurrency(pricing.cleaningFee)
+                ) : (
+                  <span className="text-emerald-700 font-bold">$0 (Waived)</span>
+                )}
+              </span>
             </div>
-            <div className="p-1.5 sm:p-2 rounded-xl bg-[#8CA58A]/20 border border-[#8CA58A]/30">
-              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-[#1A3B34] block leading-tight">You Save</span>
-              <span className="font-bold text-xs sm:text-base text-[#1A3B34]">${nights * 45}</span>
-              <span className="text-[8px] sm:text-[9px] text-[#1A3B34]/70 block font-medium">15% Off</span>
+
+            {/* Taxes breakdown */}
+            <div className="pt-1.5 border-t border-[#E8DCC6]/60 space-y-1">
+              <div className="flex items-center justify-between font-semibold text-[#1A3B34]">
+                <span>Taxes (18.50% Total):</span>
+                <span>{formatCurrency(pricing.totalTaxes)}</span>
+              </div>
+              <div className="pl-2 space-y-0.5 text-[10.5px] text-[#1A3B34]/70">
+                <div className="flex items-center justify-between">
+                  <span>• GET (General Excise Tax) 4.5%</span>
+                  <span>{formatCurrency(pricing.taxGet)}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span>• TAT (Transient Accommodations Tax) 11%</span>
+                  <span>{formatCurrency(pricing.taxTat)}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span>• OTAT (Oʻahu Accommodations Tax) 3%</span>
+                  <span>{formatCurrency(pricing.taxOtat)}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Total formula */}
+            <div className="pt-2 border-t border-[#1A3B34]/20 flex items-center justify-between font-bold text-sm text-[#1A3B34]">
+              <div>
+                <span className="block font-serif text-sm sm:text-base">Estimated Total:</span>
+                <span className="block text-[9.5px] font-normal text-[#1A3B34]/60">
+                  Formula: Base + Cleaning Fee + Taxes
+                </span>
+              </div>
+              <span className="font-serif text-base sm:text-lg text-[#1A3B34]">
+                {formatCurrency(pricing.grandTotal)}
+              </span>
             </div>
           </div>
 
-          <div className="text-[10px] sm:text-[11px] text-[#1A3B34]/80 flex flex-wrap items-center justify-center sm:justify-between gap-1 sm:gap-1.5 pt-1.5 border-t border-[#E8DCC6] text-center">
-            <span>✨ $0 Mandatory Resort Fees</span>
+          <div className="text-[10px] sm:text-[11px] text-[#1A3B34]/80 flex flex-wrap items-center justify-center sm:justify-between gap-1 sm:gap-1.5 pt-2 border-t border-[#E8DCC6] text-center">
+            <span>✨ $0 Resort fees</span>
             <span className="hidden xs:inline">•</span>
             <span>🚗 Free Covered Parking</span>
             <span className="hidden xs:inline">•</span>
-            <span className="text-[#8CA58A] font-semibold">Applied upon host acceptance</span>
+            <span className="text-emerald-800 font-semibold">Honolulu Licensed STR</span>
           </div>
         </div>
       )}
@@ -503,34 +699,61 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         </div>
       </div>
 
-      {/* Submit Button */}
+      {/* Verification & Final Computation Notice */}
+      <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-50/70 via-[#F9F7F2] to-amber-50/70 border border-[#C59B4B]/40 text-[#1A3B34] flex items-start gap-3 shadow-2xs">
+        <div className="w-8 h-8 rounded-xl bg-[#C59B4B]/15 text-[#C59B4B] flex items-center justify-center shrink-0 mt-0.5">
+          <ShieldCheck className="w-4 h-4 text-[#C59B4B]" />
+        </div>
+        <div className="space-y-0.5 text-[11px] sm:text-xs leading-relaxed font-light flex-1 min-w-0">
+          <div className="flex items-center gap-1.5 flex-wrap font-semibold text-[#1A3B34]">
+            <span>Final Details & Computation via Email</span>
+            <span className="px-1.5 py-0.2 rounded text-[9px] bg-[#1A3B34] text-[#F6E7A7] font-bold uppercase tracking-wider">
+              Verification Notice
+            </span>
+          </div>
+          <p className="text-[#1A3B34]/80">
+            Final reservation details and verified cost computation will be sent to your email. Please note that further identity and stay verification may be required in the email once your inquiry is sent.
+          </p>
+        </div>
+      </div>
+
+      {/* Stylized Send Email Inquiry CTA Button */}
       <button
         type="submit"
         id="inquiry-submit-btn"
         disabled={status === 'submitting'}
-        className="w-full py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 cursor-pointer border border-[#C59B4B]/30 min-h-[46px]"
+        className="group relative overflow-hidden w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-2xl bg-gradient-to-r from-[#1A3B34] via-[#204940] to-[#1A3B34] hover:from-[#204940] hover:to-[#28594E] text-white font-semibold text-xs sm:text-sm shadow-md hover:shadow-xl transition-all duration-300 disabled:opacity-50 cursor-pointer border border-[#C59B4B]/40 min-h-[52px]"
       >
-        {status === 'submitting' ? (
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin shrink-0" />
-            <span>Preparing Your 15% Discount Inquiry...</span>
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 text-left">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/15">
+              <Mail className="w-4 h-4 text-[#F6E7A7]" />
+            </div>
+            <div className="min-w-0">
+              <span className="block font-bold text-white tracking-wide text-xs sm:text-sm truncate">
+                {status === 'submitting'
+                  ? 'Preparing Your Stay Inquiry...'
+                  : nights > 0
+                  ? `Send Inquiry · ${formatCurrency(pricing.grandTotal)} Total (${nights} nts)`
+                  : 'Send Booking Inquiry · Promo $199/nt'}
+              </span>
+              <span className="block text-[10px] text-[#F6E7A7]/90 font-normal truncate">
+                $199/nt Promo Rate · All Units · $0 Resort Fees · Free Covered Parking
+              </span>
+            </div>
           </div>
-        ) : (
-          <>
-            <Mail className="w-4 h-4 text-[#F6E7A7] shrink-0" />
-            <span className="truncate">
-              {nights > 0
-                ? `Send Inquiry · Save 15% ($${nights * 255})`
-                : 'Send Inquiry · Request 15% Website Discount'}
-            </span>
-          </>
-        )}
+
+          <div className="flex items-center gap-1.5 shrink-0 text-[#F6E7A7] font-bold text-xs pl-2 group-hover:translate-x-0.5 transition-transform">
+            <span className="hidden sm:inline">Send</span>
+            <Send className="w-4 h-4" />
+          </div>
+        </div>
       </button>
 
       <div className="text-[10.5px] sm:text-[11px] text-[#1A3B34]/65 text-center pt-0.5 space-y-0.5">
-        <p>Direct inquiry to host · 15% discount applied upon booking acceptance · $0 resort fees</p>
+        <p>Direct host inquiry via mailto · Final computation sent in email · May require email verification</p>
         <p className="text-[9.5px] sm:text-[10px] text-[#1A3B34]/60">
-          By inquiring or booking, guests agree to follow the Waikiki Banyan Building Rules.
+          Authorized Short-Term Rental · City and County of Honolulu · Waikiki Banyan Tower 2
         </p>
       </div>
     </form>

@@ -53,7 +53,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
 
         {/* Clean Supporting Copy with crisp text-shadow */}
         <p className="max-w-2xl mx-auto text-[13.5px] sm:text-lg text-[#1A3B34] font-medium leading-relaxed [text-shadow:_0_1px_3px_rgba(255,255,255,0.95),_0_2px_10px_rgba(255,255,255,0.85)] px-1 sm:px-0">
-          Spacious 1-bedroom condo suites with full chef kitchens, private lanais, and free covered garage parking—just 1 block to calm Kuhio Beach with $0 resort fees.
+          Spacious 1-bedroom condo suites with Full kitchens, private lanais, and free covered garage parking—just 1 block to calm Kuhio Beach with $0 resort fees.
         </p>
 
         {/* Mobile View: Balanced 2x2 Bento Highlight Grid with full text fit */}
@@ -90,7 +90,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
               <Sparkles className="w-3 h-3 text-[#F6E7A7]" />
             </div>
             <span className="font-serif font-bold text-[10.5px] xs:text-[11px] text-[#F6E7A7] leading-tight whitespace-nowrap">
-              15% Direct Off
+              $199 Promo Rate
             </span>
           </div>
         </div>
@@ -127,7 +127,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#1A3B34] border border-[#C59B4B]/50 rounded-full text-xs text-[#F6E7A7] shadow-xs">
             <Sparkles className="w-3 h-3 text-[#F6E7A7] shrink-0" />
             <span className="font-serif font-bold tracking-tight whitespace-nowrap">
-              15% Off Direct Booking
+              $199 Promo · $0 Resort Fees
             </span>
           </div>
         </div>
@@ -163,7 +163,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
                 className="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#F9F7F2] border border-[#C59B4B] text-[#1A3B34] py-2.5 px-2 rounded-full font-bold text-xs shadow-xs active:scale-[0.98] transition-transform cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#C59B4B]" />
-                <span>Direct Save 15%</span>
+                <span>Direct Inquiry</span>
               </button>
             </div>
           </div>
@@ -196,7 +196,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
               className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#F9F7F2] border border-[#1A3B34]/20 text-[#1A3B34] px-7 py-3.5 sm:py-4 rounded-full font-bold text-sm tracking-wide shadow-xs transition-all duration-200 cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-[#C59B4B]" />
-              <span>Direct Inquiry (Save 15%)</span>
+              <span>Direct Booking Inquiry</span>
             </button>
           </div>
         </div>

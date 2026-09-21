@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Check,
   X,
@@ -14,23 +14,24 @@ import {
   ShieldCheck,
   ArrowRight,
   Key,
-  Umbrella,
   Eye,
   Table as TableIcon,
   LayoutGrid
 } from 'lucide-react';
 import { SITE_CONFIG } from '../../config/site';
+import { calculateStayPricing, TAX_RATES } from '../../utils/pricing';
 
 interface FullCompetitorComparisonProps {
   onBookStay?: () => void;
   onExploreRentals?: () => void;
+  onNavigate?: (path: string) => void;
 }
 
-type ComparisonCategory = 'banyan' | 'hotels' | 'calculator';
+type ComparisonCategory = 'hotels' | 'banyan' | 'calculator';
 
 interface ComparisonFeature {
   feature: string;
-  category: 'banyan' | 'hotels';
+  category: 'hotels' | 'banyan';
   plumeria: {
     title: string;
     description: string;
@@ -56,77 +57,241 @@ interface ComparisonFeature {
 export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> = ({
   onBookStay,
   onExploreRentals,
+  onNavigate,
 }) => {
-  const [activeCategory, setActiveCategory] = useState<ComparisonCategory>('banyan');
+  // Compare Hotel first, before the aston
+  const [activeCategory, setActiveCategory] = useState<ComparisonCategory>('hotels');
   const [mobileViewStyle, setMobileViewStyle] = useState<'cards' | 'table'>('cards');
   const [stayNights, setStayNights] = useState<number>(5);
-  const [calculatorMode, setCalculatorMode] = useState<'banyan' | 'hotels'>('banyan');
+  const [calculatorMode, setCalculatorMode] = useState<'hotels' | 'banyan'>('hotels');
 
-  // Plumeria standard verified base rate
-  const plumeriaNightly = 300;
-  const plumeriaDirectNightly = 255; // 15% discount for accepted direct website bookings
-  const plumeriaResortFee = 0;
-  const plumeriaParking = 0;
-  const plumeriaDiningDaily = 65; // with full kitchen & 12 outdoor BBQ grills
+  // Competitor pricing benchmarks
+  // Hawaii taxes: 18.50% total (GET 4.5% + TAT 11% + OTAT 3%) on room + mandatory resort fees
+  // Hawaii GET tax: 4.712% on parking
+  const LODGING_TAX_RATE = 0.185;
+  const PARKING_TAX_RATE = 0.04712;
 
-  // Aston at Waikiki Banyan (Hotel pool operator in same building)
+  // Hilton Hawaiian Village 1-Bedroom Suite
+  const hiltonNightly = 850;
+  const hiltonResortFee = 65;
+  const hiltonRoomTaxDaily = Math.round((hiltonNightly + hiltonResortFee) * LODGING_TAX_RATE);
+  const hiltonParking = 69;
+  const hiltonParkingTaxDaily = Math.round(hiltonParking * PARKING_TAX_RATE);
+  const hiltonDailyStayTotal = hiltonNightly + hiltonResortFee + hiltonRoomTaxDaily + hiltonParking + hiltonParkingTaxDaily;
+  const hiltonTotal = hiltonDailyStayTotal * stayNights;
+
+  // Sheraton Waikiki 1-Bedroom Ocean Suite
+  const sheratonNightly = 980;
+  const sheratonResortFee = 61;
+  const sheratonRoomTaxDaily = Math.round((sheratonNightly + sheratonResortFee) * LODGING_TAX_RATE);
+  const sheratonParking = 55;
+  const sheratonParkingTaxDaily = Math.round(sheratonParking * PARKING_TAX_RATE);
+  const sheratonDailyStayTotal = sheratonNightly + sheratonResortFee + sheratonRoomTaxDaily + sheratonParking + sheratonParkingTaxDaily;
+  const sheratonTotal = sheratonDailyStayTotal * stayNights;
+
+  // Aston at Waikiki Banyan (hotel pool operator in same complex)
   const astonNightly = 275;
-  const astonAmenityFee = 38; // published mandatory daily hospitality fee ($32 + tax = $37.74/day)
-  const astonParking = 43; // official published Aston self-parking rate ($43/day + tax; $230/week)
-  const astonDiningDaily = 150; // standard dining out in Waikiki
+  const astonResortFee = 38;
+  const astonRoomTaxDaily = Math.round((astonNightly + astonResortFee) * LODGING_TAX_RATE);
+  const astonParking = 43;
+  const astonParkingTaxDaily = Math.round(astonParking * PARKING_TAX_RATE);
+  const astonDailyStayTotal = astonNightly + astonResortFee + astonRoomTaxDaily + astonParking + astonParkingTaxDaily;
+  const astonTotal = astonDailyStayTotal * stayNights;
 
-  // Generic Waikiki Airbnb / Absentee host
+  // Generic Waikiki Airbnb
   const genericAirbnbNightly = 240;
-  const genericAirbnbFee = 35; // amortized cleaning ($180) + Airbnb guest platform fees
-  const genericAirbnbParking = 43; // Waikiki Banyan public garage rate ($43/day - rarely included by individual hosts)
-  const genericAirbnbDiningDaily = 110;
+  const genericAirbnbFee = 35;
+  const genericAirbnbRoomTaxDaily = Math.round((genericAirbnbNightly + genericAirbnbFee) * LODGING_TAX_RATE);
+  const genericAirbnbParking = 43;
+  const genericAirbnbParkingTaxDaily = Math.round(genericAirbnbParking * PARKING_TAX_RATE);
+  const genericDailyStayTotal = genericAirbnbNightly + genericAirbnbFee + genericAirbnbRoomTaxDaily + genericAirbnbParking + genericAirbnbParkingTaxDaily;
+  const genericTotal = genericDailyStayTotal * stayNights;
 
-  // Mega-resort suites (Hilton & Sheraton)
-  // Hilton Hawaiian Village 1-Bedroom Suite (Diamond Head / Tapa / Rainbow Towers)
-  const hiltonNightly = 850; // verified realistic 1-bedroom suite rate (standard 320 sq. ft. hotel rooms average $360)
-  const hiltonResortFee = 60; // published mandatory daily resort charge ($55 + tax = ~$64.88)
-  const hiltonParking = 69; // published self-parking rate ($69/day; valet $79/day)
-  const hiltonDiningDaily = 220; // resort dining for family
+  // Plumeria pricing via centralized calculation (formula: Total = TAX + Base + Cleaning Fee)
+  const plumeriaPricing = calculateStayPricing(stayNights);
 
-  // Sheraton Waikiki 1-Bedroom Ocean Suite (Kai / Malia / Ohana Suite)
-  const sheratonNightly = 980; // verified 1-bedroom ocean suite rate (standard hotel rooms average $450)
-  const sheratonResortFee = 52; // published mandatory daily resort charge ($52 + tax = ~$61.34)
-  const sheratonParking = 55; // published self-parking rate ($55/day; valet $65/day)
-  const sheratonDiningDaily = 220;
+  // 1. Hotel Comparison Features (Hotel first) - Simple, clear, concise
+  const hotelFeatures: ComparisonFeature[] = [
+    {
+      feature: 'Nightly Suite Rate',
+      category: 'hotels',
+      plumeria: {
+        title: '$199 / Night (Special Promo)',
+        description: 'True 1-bedroom high-floor suite. 5%–30% tiered stay discounts.',
+        isSuperior: true,
+        badge: '$199 Promo Rate',
+      },
+      competitor1: {
+        name: 'Hilton Hawaiian Village',
+        title: '$650 – $1,450+ / Night',
+        description: 'Hotel suite pricing with no kitchen.',
+        isSuperior: false,
+        badge: 'Resort Markup',
+      },
+      competitor2: {
+        name: 'Sheraton Waikiki',
+        title: '$850 – $1,650+ / Night',
+        description: 'Standard rooms start at $450/nt with no kitchen.',
+        isSuperior: false,
+        badge: 'Luxury Surcharge',
+      },
+    },
+    {
+      feature: 'Resort Fees',
+      category: 'hotels',
+      plumeria: {
+        title: '$0 Resort Fees (Never Charged)',
+        description: 'Full access to heated pool, 2 jet hot tubs, sauna, tennis/pickleball & BBQ grills.',
+        isSuperior: true,
+        badge: '$0 Resort Fees',
+      },
+      competitor1: {
+        name: 'Hilton Hawaiian Village',
+        title: '+$65 / Night Mandatory',
+        description: 'Adds $325+ per 5-night stay on top of room rate.',
+        isSuperior: false,
+      },
+      competitor2: {
+        name: 'Sheraton Waikiki',
+        title: '+$61 / Night Mandatory',
+        description: 'Adds $305+ per 5-night stay on top of room rate.',
+        isSuperior: false,
+      },
+    },
+    {
+      feature: 'Covered Garage Parking',
+      category: 'hotels',
+      plumeria: {
+        title: 'FREE Dedicated Parking Pass ($0)',
+        description: 'Dedicated covered garage pass with unlimited in-and-out privileges and $0 tax.',
+        isSuperior: true,
+        badge: 'Saves $275–$360',
+      },
+      competitor1: {
+        name: 'Hilton Hawaiian Village',
+        title: '$69 / Day + Tax',
+        description: 'Subject to GET tax (~$72/day). Adds $360+ per 5-night stay.',
+        isSuperior: false,
+      },
+      competitor2: {
+        name: 'Sheraton Waikiki',
+        title: '$55 / Day + Tax',
+        description: 'Subject to GET tax (~$58/day). Adds $290+ per 5-night stay.',
+        isSuperior: false,
+      },
+    },
+    {
+      feature: 'Kitchen Setup',
+      category: 'hotels',
+      plumeria: {
+        title: 'Full Kitchen in Suite',
+        description: 'Full-size refrigerator, oven, stove, microwave, coffee maker & cookware inside your suite.',
+        isSuperior: true,
+        badge: 'Full Kitchen',
+      },
+      competitor1: {
+        name: 'Hilton Hawaiian Village',
+        title: 'No Kitchen (Mini-Fridge Only)',
+        description: 'No cooking facilities or kitchenware in standard suites. Must dine out for all meals.',
+        isSuperior: false,
+      },
+      competitor2: {
+        name: 'Sheraton Waikiki',
+        title: 'No Kitchen (Wet Bar Only)',
+        description: 'Wet bar only. No cooking range, oven, or kitchen appliances.',
+        isSuperior: false,
+      },
+    },
+    {
+      feature: 'Air Conditioning & Comfort',
+      category: 'hotels',
+      plumeria: {
+        title: 'Fully Airconditioned',
+        description: 'Fully airconditioned comfort, modern coastal furniture, and high-speed Wi-Fi.',
+        isSuperior: true,
+        badge: 'Fully Airconditioned',
+      },
+      competitor1: {
+        name: 'Hilton Hawaiian Village',
+        title: 'Central Hotel AC',
+        description: 'Standard hotel central cooling system.',
+        isSuperior: false,
+      },
+      competitor2: {
+        name: 'Sheraton Waikiki',
+        title: 'Central Hotel AC',
+        description: 'Standard hotel central cooling system.',
+        isSuperior: false,
+      },
+    },
+    {
+      feature: 'Beach Gear & Proximity',
+      category: 'hotels',
+      plumeria: {
+        title: '1 Block to Beach + Free Beach Gear',
+        description: '3-minute walk to Kuhio Beach. Beach chairs, boogie boards & beach towels included.',
+        isSuperior: true,
+        badge: 'Beach Gear ($0)',
+      },
+      competitor1: {
+        name: 'Hilton Hawaiian Village',
+        title: 'Beachfront (Gear Costs Extra)',
+        description: 'Direct sand access, but chairs rent for $80+/day.',
+        isSuperior: false,
+      },
+      competitor2: {
+        name: 'Sheraton Waikiki',
+        title: 'Oceanfront Seawall',
+        description: 'Seawall edge with narrow beach section.',
+        isSuperior: false,
+      },
+    },
+    {
+      feature: 'Short-Term Rental License',
+      category: 'hotels',
+      plumeria: {
+        title: 'Authorized Honolulu STR License',
+        description: 'Authorized Short-Term Rental License by the City and County of Honolulu in Waikiki Resort zone.',
+        isSuperior: true,
+        badge: 'City Authorized STR',
+      },
+      competitor1: {
+        name: 'Hilton Hawaiian Village',
+        title: 'Commercial Hotel',
+        description: 'Standard commercial resort operation.',
+        isSuperior: true,
+      },
+      competitor2: {
+        name: 'Sheraton Waikiki',
+        title: 'Commercial Hotel',
+        description: 'Standard commercial resort operation.',
+        isSuperior: true,
+      },
+    },
+  ];
 
-  const calculateTotal = (nightly: number, fee: number, parking: number, dining: number) => {
-    return (nightly + fee + parking + dining) * stayNights;
-  };
-
-  const plumeriaTotal = calculateTotal(plumeriaNightly, plumeriaResortFee, plumeriaParking, plumeriaDiningDaily);
-  const plumeriaDirectTotal = calculateTotal(plumeriaDirectNightly, plumeriaResortFee, plumeriaParking, plumeriaDiningDaily);
-  const astonTotal = calculateTotal(astonNightly, astonAmenityFee, astonParking, astonDiningDaily);
-  const genericTotal = calculateTotal(genericAirbnbNightly, genericAirbnbFee, genericAirbnbParking, genericAirbnbDiningDaily);
-  const hiltonTotal = calculateTotal(hiltonNightly, hiltonResortFee, hiltonParking, hiltonDiningDaily);
-  const sheratonTotal = calculateTotal(sheratonNightly, sheratonResortFee, sheratonParking, sheratonDiningDaily);
-
-  // Comparison Data: Plumeria vs Aston at Waikiki Banyan & Generic Waikiki Airbnbs
+  // 2. Aston at Waikiki Banyan Comparison Features - Simple, clear, concise
   const banyanFeatures: ComparisonFeature[] = [
     {
-      feature: 'Guaranteed Unit & Floor Level',
+      feature: 'Guaranteed Suite & Floor',
       category: 'banyan',
       plumeria: {
         title: 'Guaranteed High-Floor (Floors 32 & 36)',
-        description: 'You get the exact designer suite booked in Tower 2 with sweeping 180° Koʻolau mountains, Ala Wai canal, and ocean horizon views. Whisper-quiet high above traffic.',
+        description: 'Exact suite booked in Tower 2 with panoramic Diamond Head, mountain, and ocean views.',
         isSuperior: true,
-        badge: 'Guaranteed View & Suite',
+        badge: 'Guaranteed High Floor',
       },
       competitor1: {
         name: 'Aston at Waikiki Banyan',
-        title: 'Room Lottery / Assigned at Check-in',
-        description: 'Random pool unit assigned on arrival. Often placed on lower floors (5–12) facing the loud concrete parking structure, alleyway trash chutes, or noisy Kuhio Ave.',
+        title: 'Random Pool Unit at Check-in',
+        description: 'Assigned on arrival. Often placed on lower floors (5–12) facing parking or street noise.',
         isSuperior: false,
         badge: 'No Floor Guarantee',
       },
       competitor2: {
         name: 'Generic Waikiki Airbnb Hosts',
-        title: 'Varies Widely / Low-Mid Floors',
-        description: 'Many units are on lower noisy levels or face adjacent building concrete walls. Photos often disguise obstructed or unrenovated views.',
+        title: 'Varies Widely / Lower Floors',
+        description: 'Floor levels and views vary unpredictably.',
         isSuperior: false,
       },
     },
@@ -135,321 +300,138 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
       category: 'banyan',
       plumeria: {
         title: 'FREE Dedicated Parking Pass ($0)',
-        description: 'Complimentary electronic pass for the Waikiki Banyan covered multi-story garage. Unlimited in-and-out privileges included for your entire stay.',
+        description: 'Dedicated pass for Waikiki Banyan garage included with unlimited in/out access.',
         isSuperior: true,
-        badge: 'Saves $215–$300/Stay',
+        badge: 'Saves $215–$300',
       },
       competitor1: {
         name: 'Aston at Waikiki Banyan',
         title: '$43 / Day Mandatory Parking',
-        description: 'Aston does NOT include parking! Guests must pay the official $43+ tax per day ($230/week) to park in the exact same garage ($215+ extra on a 5-night stay).',
+        description: 'Aston charges $43+ tax per day ($215+ extra for 5 nights) for the exact same garage.',
         isSuperior: false,
         badge: '+$215 Extra (5 Nts)',
       },
       competitor2: {
         name: 'Generic Waikiki Airbnb Hosts',
-        title: 'Rarely Included / $43 Public Rate',
-        description: 'Most individual Airbnb hosts do not own deeded stalls. Guests are forced to pay the $43/day public garage rate ($230/week) or search for scarce street parking.',
+        title: '$43 / Day Public Rate',
+        description: 'Most individual hosts do not provide parking stalls.',
         isSuperior: false,
       },
     },
     {
-      feature: 'Mandatory Daily Amenity / Resort Fees',
+      feature: 'Resort Fees & Pricing',
       category: 'banyan',
       plumeria: {
-        title: '$0 Fees · 15% Off Direct Booking',
-        description: 'Standard flat rate $300/night, or save 15% ($255/night) when inquiring on our website on accepted bookings. Complete access to the 1-acre 6th-floor recreation deck, heated pool, 2 jet hot tubs, sauna, and tennis/pickleball court with zero daily checkout fees.',
+        title: '$199 Promo Rate · $0 Resort Fees',
+        description: 'Formula: Total = TAX (18.5%) + Base + Cleaning Fee ($0 for 3+ nights). 5% to 30% stay discounts.',
         isSuperior: true,
-        badge: 'Save 15% Direct ($255/nt)',
+        badge: '$0 Resort Fees',
       },
       competitor1: {
         name: 'Aston at Waikiki Banyan',
-        title: '+$37.74 / Night Mandatory Fee',
-        description: 'Aston levies an official daily Hospitality/Amenity Fee ($32 + tax = $37.74/day) on top of the room rate. For a 5-night stay, this adds ~$190 to your final bill.',
+        title: '+$38 / Night Mandatory Resort Fee',
+        description: 'Aston levies mandatory resort fee on top of room rate (~$190 on a 5-night stay).',
         isSuperior: false,
-        badge: '+$190 Surcharge',
+        badge: '+$190 Fee',
       },
       competitor2: {
         name: 'Generic Waikiki Airbnb Hosts',
-        title: 'High Cleaning & Booking Fees',
-        description: 'While resort fees may be absent, generic hosts frequently tack on $200–$300 cleaning fees plus 14% platform guest service markups.',
+        title: 'High Cleaning & Service Fees',
+        description: 'High cleaning fees ($200–$300) plus 14% platform guest markups.',
         isSuperior: false,
       },
     },
     {
-      feature: 'Interior Modernization & Air Conditioning',
+      feature: 'Air Conditioning & Interiors',
       category: 'banyan',
       plumeria: {
-        title: 'Designer Renovation & Split-System AC',
-        description: 'Fresh coastal design, whisper-quiet split-unit AC, luxury plush king & queen bedding, 55" 4K smart TVs with streaming, and modern rainfall shower.',
+        title: 'Fully Airconditioned & Modern',
+        description: 'Fully Airconditioned suite with modern coastal furnishings, 55" 4K Smart TV, and renovated bathroom.',
         isSuperior: true,
-        badge: 'Modern Comfort',
+        badge: 'Fully Airconditioned',
       },
       competitor1: {
         name: 'Aston at Waikiki Banyan',
-        title: '1980s Vintage Hotel Pool Units',
-        description: 'Older unrenovated rental pool inventory. Vintage rattan furniture, worn carpeting, and loud box wall air conditioners that rumble through the night.',
+        title: 'Older Hotel Pool Inventory',
+        description: 'Vintage rental pool units with dated furnishings and louder box wall AC units.',
         isSuperior: false,
-        badge: 'Dated Interiors',
       },
       competitor2: {
         name: 'Generic Waikiki Airbnb Hosts',
-        title: 'Hit-or-Miss Interior Upkeep',
-        description: 'Inconsistent upkeep, sagging sofa beds, and window AC units that struggle during humid Honolulu afternoons.',
+        title: 'Inconsistent Upkeep',
+        description: 'Older window units that struggle during humid Honolulu afternoons.',
         isSuperior: false,
       },
     },
     {
-      feature: 'Kitchen & Meal Capabilities',
+      feature: 'Kitchen Capabilities',
       category: 'banyan',
       plumeria: {
-        title: 'Full Gourmet Chef Kitchen',
-        description: '4-burner stove, full oven, full-size refrigerator/freezer, microwave, rice cooker, coffee maker, cookware, plus 12 outdoor gas BBQ grills on 6th floor.',
+        title: 'Full kitchen in Suite',
+        description: 'Full-size refrigerator, oven, stove, microwave, coffee maker & cookware inside your private suite.',
         isSuperior: true,
-        badge: 'Cook & Save $150+/Day',
+        badge: 'Full kitchen',
       },
       competitor1: {
         name: 'Aston at Waikiki Banyan',
-        title: 'Standard Basic Kitchen',
-        description: 'Kitchenette or older kitchen with minimal mismatched utensils and basic cookware.',
+        title: 'Basic Kitchenette',
+        description: 'Older kitchen with minimal basic utensils.',
         isSuperior: false,
       },
       competitor2: {
         name: 'Generic Waikiki Airbnb Hosts',
         title: 'Basic / Incomplete Cookware',
-        description: 'Frequently missing basic essentials, dull knives, or lacking proper cooking gear for family meals.',
+        description: 'Frequently missing essential cookware or dining supplies.',
         isSuperior: false,
       },
     },
     {
-      feature: 'Complimentary In-Unit Beach Gear',
+      feature: 'Beach Gear Included',
       category: 'banyan',
       plumeria: {
-        title: 'Deluxe Tommy Bahama Beach Set ($0)',
-        description: 'Lightweight backpack beach chairs, matching umbrella, boogie boards, plush oversized beach towels, and insulated cooler tote provided inside your suite.',
+        title: 'Beach Gear Included ($0)',
+        description: 'Backpack beach chairs, boogie boards, plush beach towels & cooler tote inside suite.',
         isSuperior: true,
-        badge: '$150+ Beach Rental Savings',
+        badge: 'Free Gear',
       },
       competitor1: {
         name: 'Aston at Waikiki Banyan',
-        title: 'No Beach Gear Provided',
-        description: 'Pool towels only. Beach chairs and umbrellas must be rented separately at Kuhio Beach concession stands for $60–$80/day.',
+        title: 'No Beach Gear',
+        description: 'Pool towels only. Beach rentals cost $60–$80/day on the sand.',
         isSuperior: false,
       },
       competitor2: {
         name: 'Generic Waikiki Airbnb Hosts',
-        title: 'Missing or Broken Gear',
-        description: 'Often sparse, rusted, or broken chairs left behind by previous guests.',
+        title: 'Sparse or Missing',
+        description: 'Often broken or missing items left by previous guests.',
         isSuperior: false,
       },
     },
     {
-      feature: 'Check-In & Guest Hospitality',
+      feature: 'Short-Term Rental License',
       category: 'banyan',
       plumeria: {
-        title: 'Keyless Digital Smart Lock + Local Host',
-        description: 'Direct keypad access with personalized code (no lobby queues). Responsive local on-island Superhost available 24/7 for tips and immediate assistance.',
+        title: 'Authorized Honolulu STR License',
+        description: 'Authorized Short-Term Rental License by the City and County of Honolulu for legal peace of mind.',
         isSuperior: true,
-        badge: 'No Front Desk Lines',
+        badge: 'Honolulu Licensed STR',
       },
       competitor1: {
         name: 'Aston at Waikiki Banyan',
-        title: 'Lobby Front Desk Queues',
-        description: 'Standard hotel front desk. Long check-in lines (often 30–45 minute waits during peak 3:00 PM mainland flight arrivals).',
-        isSuperior: false,
-      },
-      competitor2: {
-        name: 'Generic Waikiki Airbnb Hosts',
-        title: 'Remote Call Centers / Absentee Hosts',
-        description: 'Remote owners or outsourced call centers in different timezones with slow response times if door codes or WiFi fail.',
-        isSuperior: false,
-      },
-    },
-    {
-      feature: 'Legal Permitting & City Compliance',
-      category: 'banyan',
-      plumeria: {
-        title: '100% Legally Permitted Resort Zone',
-        description: 'Waikiki Banyan is located in the City & County of Honolulu designated Waikiki Resort Hotel District. Fully compliant short-term rental with zero risk of cancellation.',
-        isSuperior: true,
-        badge: '100% Legal & Protected',
-      },
-      competitor1: {
-        name: 'Aston at Waikiki Banyan',
-        title: 'Legal Hotel Operation',
-        description: 'Operates legally within the Waikiki resort precinct.',
+        title: 'Hotel Pool Operation',
+        description: 'Operates as hotel rental pool.',
         isSuperior: true,
       },
       competitor2: {
         name: 'Generic Waikiki Airbnb Hosts',
-        title: 'Some Unregistered Units Risk Fines',
-        description: 'Off-resort Waikiki rentals outside designated resort precincts face strict city enforcement, heavy fines, or sudden booking cancellations.',
+        title: 'Unregistered Units Risk Penalties',
+        description: 'Unregistered rentals outside resort districts face city penalties or cancellation.',
         isSuperior: false,
       },
     },
   ];
 
-  // Comparison Data: Plumeria vs Mega-Resorts (Hilton & Sheraton)
-  const hotelFeatures: ComparisonFeature[] = [
-    {
-      feature: 'Typical Nightly Suite Rate',
-      category: 'hotels',
-      plumeria: {
-        title: '$300 / Night ($255 Direct)',
-        description: 'Transparent $300/night flat rate, or save 15% ($255/night) when inquiring directly through our website upon accepted booking. True 1-bedroom suite sleeping up to 5 with 3 beds.',
-        isSuperior: true,
-        badge: 'Save 65%–80%',
-      },
-      competitor1: {
-        name: 'Hilton Hawaiian Village',
-        title: '$650 – $1,450+ / Night',
-        description: '1-Bedroom suites across Diamond Head, Tapa, and Rainbow Towers. (Even basic 320 sq. ft. standard rooms with no kitchen run $320–$450/nt).',
-        isSuperior: false,
-        badge: 'Resort Suite Pricing',
-      },
-      competitor2: {
-        name: 'Sheraton Waikiki',
-        title: '$850 – $1,650+ / Night',
-        description: 'Kai Oceanfront / Malia 1-bedroom suites. (Even standard hotel rooms with no separate bedroom run $380–$550/nt).',
-        isSuperior: false,
-        badge: 'Luxury Suite Markup',
-      },
-    },
-    {
-      feature: 'Mandatory Daily Resort Fee',
-      category: 'hotels',
-      plumeria: {
-        title: '$0 Zero Resort Fees',
-        description: 'Full access to 1-acre resort deck, heated pool, 2 spas, sauna, tennis court, and BBQ grills.',
-        isSuperior: true,
-        badge: '$0 Resort Fee',
-      },
-      competitor1: {
-        name: 'Hilton Hawaiian Village',
-        title: '+$55 – $65 / Night Mandatory',
-        description: 'Official Daily Resort Charge ($55+ tax = ~$64.88/nt) adding $275–$325+ to a 5-night stay just for basic pool and WiFi access.',
-        isSuperior: false,
-      },
-      competitor2: {
-        name: 'Sheraton Waikiki',
-        title: '+$52 – $61 / Night Mandatory',
-        description: 'Official Daily Resort Charge ($52+ tax = ~$61.34/nt) adding $260–$305+ to a 5-night stay regardless of whether you use all amenities.',
-        isSuperior: false,
-      },
-    },
-    {
-      feature: 'Parking Rate',
-      category: 'hotels',
-      plumeria: {
-        title: 'FREE Covered Garage Parking ($0)',
-        description: 'Pass included with dedicated building garage. Unlimited in-and-out access.',
-        isSuperior: true,
-        badge: 'Saves $275–$360',
-      },
-      competitor1: {
-        name: 'Hilton Hawaiian Village',
-        title: '$69 / Day Self ($79 Valet)',
-        description: 'Official garage rate ($69/day self, $79/day valet) adds $345–$395 to your 5-night vacation budget.',
-        isSuperior: false,
-      },
-      competitor2: {
-        name: 'Sheraton Waikiki',
-        title: '$55 / Day Self ($65 Valet)',
-        description: 'Official garage rate ($55/day self, $65/day valet) adds $275–$325 to your 5-night vacation budget.',
-        isSuperior: false,
-      },
-    },
-    {
-      feature: 'Total Living Space & Lanai',
-      category: 'hotels',
-      plumeria: {
-        title: '624 Sq. Ft. Total (Suite + Lanai)',
-        description: '557 sq. ft. interior with real privacy doors, full living room, plus 67 sq. ft. private mountain/ocean lanai.',
-        isSuperior: true,
-        badge: 'Spacious Suite Living',
-      },
-      competitor1: {
-        name: 'Hilton Hawaiian Village',
-        title: '~500 – 620 sq. ft.',
-        description: 'Standard suite floor plan with single king or double queen.',
-        isSuperior: false,
-      },
-      competitor2: {
-        name: 'Sheraton Waikiki',
-        title: '~600 – 720 sq. ft.',
-        description: 'Oceanfront suite with sitting room.',
-        isSuperior: false,
-      },
-    },
-    {
-      feature: 'Kitchen & Dining Setup',
-      category: 'hotels',
-      plumeria: {
-        title: 'Full Chef Kitchen + 12 BBQ Grills',
-        description: 'Stove, oven, full fridge, microwave, rice cooker, coffee maker, dishes. Enjoy sunset BBQs.',
-        isSuperior: true,
-        badge: 'Save $150–$250/Day',
-      },
-      competitor1: {
-        name: 'Hilton Hawaiian Village',
-        title: 'No Kitchen (Mini-Fridge Only)',
-        description: 'Empty mini-fridge & Keurig only. All meals must be purchased at resort restaurants.',
-        isSuperior: false,
-      },
-      competitor2: {
-        name: 'Sheraton Waikiki',
-        title: 'No Kitchen (Wet Bar Only)',
-        description: 'Wet bar with mini-fridge only. No cooking appliances allowed in room.',
-        isSuperior: false,
-      },
-    },
-    {
-      feature: 'Recreation Deck & Amenities',
-      category: 'hotels',
-      plumeria: {
-        title: 'Oʻahu’s Largest 1-Acre 6th-Floor Deck',
-        description: 'Large heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball court, 12 gas BBQ pavilions, playground, and café.',
-        isSuperior: true,
-        badge: '1-Acre Recreation Oasis',
-      },
-      competitor1: {
-        name: 'Hilton Hawaiian Village',
-        title: 'Resort Pools & Lagoon',
-        description: 'Crowded pool decks, competitive morning towel reservations, no sports courts or guest BBQ grills.',
-        isSuperior: false,
-      },
-      competitor2: {
-        name: 'Sheraton Waikiki',
-        title: 'Infinity Pool & Family Pool',
-        description: 'Popular infinity pool with daybed rental fees ($150–$350). No tennis courts or barbecue stations.',
-        isSuperior: false,
-      },
-    },
-    {
-      feature: 'Beach Proximity & Gear',
-      category: 'hotels',
-      plumeria: {
-        title: '1 Block to Kuhio Beach + Free Gear',
-        description: '3-minute flat walk to calm lagoon. Complimentary Tommy Bahama backpack beach chairs, umbrella, boogie boards, towels.',
-        isSuperior: true,
-        badge: 'Free In-Unit Gear',
-      },
-      competitor1: {
-        name: 'Hilton Hawaiian Village',
-        title: 'Direct Beachfront (Kahanamoku)',
-        description: 'Direct sand access, but beach chairs/umbrellas cost $80+/day to rent.',
-        isSuperior: false,
-      },
-      competitor2: {
-        name: 'Sheraton Waikiki',
-        title: 'Direct Oceanfront Seawall',
-        description: 'Oceanfront edge; narrow beach section with limited lounge chairs.',
-        isSuperior: false,
-      },
-    },
-  ];
-
-  const currentFeatures = activeCategory === 'banyan' ? banyanFeatures : hotelFeatures;
+  const currentFeatures = activeCategory === 'hotels' ? hotelFeatures : banyanFeatures;
 
   return (
     <div id="full-comparison" className="space-y-8 scroll-mt-24">
@@ -457,7 +439,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1A3B34] text-[#F6E7A7] border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.18em] shadow-2xs">
           <Award className="w-3.5 h-3.5 text-[#C59B4B]" />
-          <span>Complete Competitor Breakdown & Calculator</span>
+          <span>Competitor Breakdown & Trip Savings Calculator</span>
         </div>
 
         <h3 className="font-serif text-2xl sm:text-4xl font-bold text-[#1A3B34] leading-tight tracking-tight">
@@ -466,24 +448,12 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
         </h3>
 
         <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">
-          Compare our guaranteed high-floor Tower 2 suites at <strong className="text-[#1A3B34] font-semibold">$300/night</strong> with free covered parking and $0 resort fees against building hotel operators like <strong className="text-[#1A3B34] font-semibold">Aston at Waikiki Banyan</strong> and prominent Waikiki mega-resorts like <strong className="text-[#1A3B34] font-semibold">Hilton Hawaiian Village & Sheraton Waikiki</strong>.
+          Compare our guaranteed high-floor Tower 2 suites at <strong className="text-[#1A3B34] font-semibold">$199/night promo rate</strong> with free covered parking and $0 Resort fees against prominent Waikiki hotel suites and on-site building rental pools.
         </p>
 
-        {/* Category Tabs: Mobile friendly & wraps cleanly */}
+        {/* Category Tabs: Compare Hotel First */}
         <div className="pt-2 flex items-center justify-center">
           <div className="inline-flex flex-wrap sm:flex-nowrap p-1.5 bg-white rounded-2xl sm:rounded-full border border-[#E8DCC6] shadow-2xs gap-1 max-w-full justify-center">
-            <button
-              type="button"
-              onClick={() => setActiveCategory('banyan')}
-              className={`px-4 sm:px-5 py-2 rounded-xl sm:rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                activeCategory === 'banyan'
-                  ? 'bg-[#1A3B34] text-[#F6E7A7] shadow-xs'
-                  : 'text-[#1A3B34]/75 hover:text-[#1A3B34] hover:bg-[#F9F7F2]'
-              }`}
-            >
-              vs. Aston & Banyan Rentals
-            </button>
-
             <button
               type="button"
               onClick={() => setActiveCategory('hotels')}
@@ -494,6 +464,18 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
               }`}
             >
               vs. Hilton & Sheraton Suites
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveCategory('banyan')}
+              className={`px-4 sm:px-5 py-2 rounded-xl sm:rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                activeCategory === 'banyan'
+                  ? 'bg-[#1A3B34] text-[#F6E7A7] shadow-xs'
+                  : 'text-[#1A3B34]/75 hover:text-[#1A3B34] hover:bg-[#F9F7F2]'
+              }`}
+            >
+              vs. Aston at Waikiki Banyan
             </button>
 
             <button
@@ -512,18 +494,18 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
       </div>
 
       {/* Comparison Tables / Cards */}
-      {(activeCategory === 'banyan' || activeCategory === 'hotels') && (
+      {(activeCategory === 'hotels' || activeCategory === 'banyan') && (
         <div className="space-y-6">
           {/* Sub-Banner */}
           <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="space-y-0.5">
               <span className="text-xs font-bold text-[#C59B4B] uppercase tracking-wider">
-                {activeCategory === 'banyan' ? 'Direct Building Operator Comparison' : 'Luxury Hotel Suite Comparison'}
+                {activeCategory === 'hotels' ? 'Luxury Hotel Suite Comparison' : 'Direct Building Operator Comparison'}
               </span>
               <p className="text-xs sm:text-sm text-[#1A3B34]/80">
-                {activeCategory === 'banyan'
-                  ? 'Plumeria (Floors 32 & 36, $300/nt flat, $0 fee, Free Parking) vs. Aston Hotel Pool & Generic Airbnb hosts.'
-                  : 'Plumeria 1-Bedroom Suites vs. Published 1-Bedroom Suite Rack Rates at Hilton Hawaiian Village and Sheraton Waikiki.'}
+                {activeCategory === 'hotels'
+                  ? 'Plumeria ($199/nt promo, $0 Resort fees, Free Parking, Full kitchen) vs. Hilton Hawaiian Village & Sheraton Waikiki.'
+                  : 'Plumeria (Floors 32 & 36, $199/nt promo, $0 Resort fees, Free Parking) vs. Aston Hotel Pool & Generic Airbnb hosts.'}
               </p>
             </div>
 
@@ -577,7 +559,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                   <div className="p-3.5 rounded-xl bg-[#1A3B34]/5 border border-[#1A3B34]/15 space-y-1">
                     <div className="flex items-center gap-1.5 text-emerald-800 font-bold text-xs">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Plumeria at Waikiki Banyan ($300/nt)</span>
+                      <span>Plumeria at Waikiki Banyan ($199/nt Promo)</span>
                     </div>
                     <h5 className="font-serif text-sm font-bold text-[#1A3B34]">
                       {item.plumeria.title}
@@ -649,13 +631,13 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                     <th className="p-4 lg:p-5 bg-[#1A3B34] text-white w-1/3 relative">
                       <div className="space-y-1">
                         <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#C59B4B] text-[#1A3B34] text-[10px] font-bold uppercase tracking-wider">
-                          Our Best Value ($300/nt)
+                          $199 Promo · $0 Resort Fees
                         </div>
                         <h4 className="font-serif text-base lg:text-lg font-bold text-[#F6E7A7]">
                           Plumeria at Waikiki Banyan
                         </h4>
                         <p className="text-[11px] text-white/80 font-light">
-                          High-Floor Tower 2 Suites (#3609 & #3205)
+                          Tower 2 Suites (#3609 & #3205) · Honolulu Licensed STR
                         </p>
                       </div>
                     </th>
@@ -663,13 +645,13 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                     <th className="p-4 lg:p-5 text-xs font-semibold text-[#1A3B34] w-1/5 border-l border-[#E8DCC6]">
                       <div className="space-y-1">
                         <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">
-                          {activeCategory === 'banyan' ? 'Banyan Hotel Operator' : 'Beachfront Mega-Resort'}
+                          {activeCategory === 'hotels' ? 'Beachfront Resort' : 'Banyan Hotel Operator'}
                         </span>
                         <h5 className="font-serif text-sm lg:text-base font-bold text-[#1A3B34]">
-                          {activeCategory === 'banyan' ? 'Aston at Waikiki Banyan' : 'Hilton Hawaiian Village'}
+                          {activeCategory === 'hotels' ? 'Hilton Hawaiian Village' : 'Aston at Waikiki Banyan'}
                         </h5>
                         <p className="text-[11px] text-[#1A3B34]/70 font-light">
-                          {activeCategory === 'banyan' ? 'Hotel Rental Pool' : 'Rainbow / Aliʻi Suites'}
+                          {activeCategory === 'hotels' ? '1-Bedroom Suites' : 'Hotel Rental Pool'}
                         </p>
                       </div>
                     </th>
@@ -677,13 +659,13 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                     <th className="p-4 lg:p-5 text-xs font-semibold text-[#1A3B34] w-1/5 border-l border-[#E8DCC6]">
                       <div className="space-y-1">
                         <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">
-                          {activeCategory === 'banyan' ? 'Generic Short-Term Rental' : 'Beachfront Mega-Resort'}
+                          {activeCategory === 'hotels' ? 'Oceanfront Resort' : 'Generic Short-Term Rental'}
                         </span>
                         <h5 className="font-serif text-sm lg:text-base font-bold text-[#1A3B34]">
-                          {activeCategory === 'banyan' ? 'Generic Airbnb / VRBO Hosts' : 'Sheraton Waikiki'}
+                          {activeCategory === 'hotels' ? 'Sheraton Waikiki' : 'Generic Airbnb / VRBO Hosts'}
                         </h5>
                         <p className="text-[11px] text-[#1A3B34]/70 font-light">
-                          {activeCategory === 'banyan' ? 'Off-Island Property Managers' : 'Kai Oceanfront Suites'}
+                          {activeCategory === 'hotels' ? 'Kai Oceanfront Suites' : 'Off-Island Hosts'}
                         </p>
                       </div>
                     </th>
@@ -769,7 +751,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
               Calculate Your True Vacation Savings
             </h4>
             <p className="text-xs sm:text-sm text-[#1A3B34]/75 font-light">
-              Compare Plumeria ($300/night with free parking & $0 fees) against building hotel operators or beachfront mega-resorts for any stay duration.
+              Compare Plumeria ($199 promo rate, $0 Resort fees, Free Parking, and $0 Cleaning Fee for 3+ nights) against Waikiki hotel suites and on-site hotel pools.
             </p>
           </div>
 
@@ -781,17 +763,6 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
               <div className="flex gap-2">
                 <button
                   type="button"
-                  onClick={() => setCalculatorMode('banyan')}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    calculatorMode === 'banyan'
-                      ? 'bg-[#1A3B34] text-[#F6E7A7] shadow-xs'
-                      : 'bg-[#F9F7F2] text-[#1A3B34] border border-[#E8DCC6] hover:border-[#C59B4B]'
-                  }`}
-                >
-                  Aston & Banyan Rentals
-                </button>
-                <button
-                  type="button"
                   onClick={() => setCalculatorMode('hotels')}
                   className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     calculatorMode === 'hotels'
@@ -801,6 +772,17 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                 >
                   Hilton & Sheraton Suites
                 </button>
+                <button
+                  type="button"
+                  onClick={() => setCalculatorMode('banyan')}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    calculatorMode === 'banyan'
+                      ? 'bg-[#1A3B34] text-[#F6E7A7] shadow-xs'
+                      : 'bg-[#F9F7F2] text-[#1A3B34] border border-[#E8DCC6] hover:border-[#C59B4B]'
+                  }`}
+                >
+                  Aston & Banyan Rentals
+                </button>
               </div>
             </div>
 
@@ -809,7 +791,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                 Length of Stay: <span className="text-sm text-[#C59B4B] font-serif font-bold">{stayNights} Nights</span>
               </label>
               <div className="flex flex-wrap gap-1.5">
-                {[3, 4, 5, 7, 10, 14].map((n) => (
+                {[1, 2, 3, 5, 7, 10, 15, 20, 30].map((n) => (
                   <button
                     key={n}
                     type="button"
@@ -839,30 +821,49 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                     Plumeria at Waikiki Banyan
                   </h5>
                   <p className="text-xs text-white/80 font-light">
-                    High Floor Tower 2 Suite · Full Kitchen · Free Parking
+                    Honolulu Licensed STR · Full kitchen · Free Parking · Fully Airconditioned
                   </p>
                 </div>
 
                 <div className="py-2 border-y border-white/15 space-y-1.5 text-xs text-white/85">
                   <div className="flex justify-between">
-                    <span>Suite Rate ({stayNights} nights @ $300):</span>
-                    <span className="font-semibold">${plumeriaNightly * stayNights}</span>
+                    <span>Base Rate ({stayNights} nts @ $199):</span>
+                    <span className="font-semibold">${plumeriaPricing.grossRoomTotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-[#F6E7A7] font-semibold bg-white/10 px-2 py-1 rounded">
-                    <span>Direct Website Special (15% Off):</span>
-                    <span>${plumeriaDirectNightly * stayNights}</span>
-                  </div>
-                  <div className="flex justify-between text-emerald-300 font-medium">
-                    <span>Amenity / Resort Fee:</span>
-                    <span>$0 Included</span>
-                  </div>
-                  <div className="flex justify-between text-emerald-300 font-medium">
-                    <span>Covered Parking Pass:</span>
-                    <span>$0 FREE Included</span>
-                  </div>
+
+                  {plumeriaPricing.discountAmount > 0 && (
+                    <div className="flex justify-between text-emerald-300 font-semibold bg-white/10 px-2 py-1 rounded">
+                      <span>Stay Discount ({plumeriaPricing.discountPercent}% Off):</span>
+                      <span>-${Math.round(plumeriaPricing.discountAmount).toLocaleString()}</span>
+                    </div>
+                  )}
+
                   <div className="flex justify-between">
-                    <span>Kitchen Groceries / BBQs:</span>
-                    <span className="font-semibold">${plumeriaDiningDaily * stayNights}</span>
+                    <span>Cleaning Fee:</span>
+                    <span className={plumeriaPricing.cleaningFee === 0 ? 'text-emerald-300 font-semibold' : 'font-semibold'}>
+                      {plumeriaPricing.cleaningFee === 0 ? '$0 (Waived for 3+ Nts)' : `$${plumeriaPricing.cleaningFee}`}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between text-[#F6E7A7]">
+                    <span>Hawaii Taxes (18.50% total):</span>
+                    <span className="font-semibold">${Math.round(plumeriaPricing.totalTaxes).toLocaleString()}</span>
+                  </div>
+                  <div className="text-[10px] text-white/60 pl-2">
+                    GET 4.5% (${Math.round(plumeriaPricing.taxGet)}) + TAT 11% (${Math.round(plumeriaPricing.taxTat)}) + OTAT 3% (${Math.round(plumeriaPricing.taxOtat)})
+                  </div>
+
+                  <div className="flex justify-between text-emerald-300 font-medium pt-1">
+                    <span>Resort Fees:</span>
+                    <span>$0 (Never Charged)</span>
+                  </div>
+                  <div className="flex justify-between text-emerald-300 font-medium">
+                    <span>Covered Garage Parking:</span>
+                    <span>$0 FREE Included ($0 Tax)</span>
+                  </div>
+                  <div className="flex justify-between text-emerald-200 text-[11px] pt-0.5">
+                    <span>Kitchen Setup:</span>
+                    <span>Full Kitchen in Suite</span>
                   </div>
                 </div>
               </div>
@@ -870,20 +871,24 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
               <div className="pt-4 mt-4 border-t border-white/20">
                 <div className="flex items-baseline justify-between">
                   <div>
-                    <span className="text-xs text-white/70 block">Direct Website Rate (15% Off):</span>
+                    <span className="text-[11px] text-white/70 block">Total Stay (TAX + Base + Cleaning):</span>
                     <div className="font-serif text-2xl sm:text-3xl font-extrabold text-[#F6E7A7]">
-                      ${plumeriaDirectTotal.toLocaleString()}
+                      ${Math.round(plumeriaPricing.grandTotal).toLocaleString()}
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-white/60 block line-through">${plumeriaTotal.toLocaleString()}</span>
                     <span className="text-[11px] text-emerald-300 font-bold block">
-                      Save ${(45 * stayNights)} Direct
+                      {stayNights >= 3 ? 'Cleaning Fee Waived' : '1–2 Nt Stay'}
                     </span>
+                    {plumeriaPricing.discountPercent > 0 && (
+                      <span className="text-[10px] text-white/70 block">
+                        {plumeriaPricing.discountPercent}% Extended Stay Discount
+                      </span>
+                    )}
                   </div>
                 </div>
                 <span className="text-[11px] text-[#F6E7A7] font-semibold block mt-1">
-                  15% discount on accepted direct website bookings
+                  Transparent formula: Total = TAX + Base + Cleaning Fee
                 </span>
               </div>
             </div>
@@ -893,12 +898,12 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
               <div className="space-y-4">
                 <div>
                   <h5 className="font-serif text-lg sm:text-xl font-bold text-[#1A3B34]">
-                    {calculatorMode === 'banyan' ? 'Aston at Waikiki Banyan' : 'Hilton Hawaiian Village'}
+                    {calculatorMode === 'hotels' ? 'Hilton Hawaiian Village' : 'Aston at Waikiki Banyan'}
                   </h5>
                   <p className="text-xs text-[#1A3B34]/70 font-light">
-                    {calculatorMode === 'banyan'
-                      ? 'Hotel Rental Pool · Random Floor Assignment'
-                      : 'Rainbow / Aliʻi Tower 1-Bedroom Suite'}
+                    {calculatorMode === 'hotels'
+                      ? '1-Bedroom Suite · No Kitchen'
+                      : 'Hotel Rental Pool · Random Floor'}
                   </p>
                 </div>
 
@@ -906,33 +911,40 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                   <div className="flex justify-between">
                     <span>Room ({stayNights} nights):</span>
                     <span className="font-semibold text-neutral-900">
-                      ${(calculatorMode === 'banyan' ? astonNightly : hiltonNightly) * stayNights}
+                      ${((calculatorMode === 'hotels' ? hiltonNightly : astonNightly) * stayNights).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between text-red-600">
-                    <span>Mandatory Amenity/Resort Fee:</span>
-                    <span>+${(calculatorMode === 'banyan' ? astonAmenityFee : hiltonResortFee) * stayNights}</span>
+                    <span>Mandatory Resort Fees:</span>
+                    <span>+${((calculatorMode === 'hotels' ? hiltonResortFee : astonResortFee) * stayNights).toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-[#8A5A1C]">
+                    <span>Hawaii Taxes (GET 4.5% + TAT 11% + OTAT 3% = 18.50%):</span>
+                    <span className="font-semibold">+${((calculatorMode === 'hotels' ? hiltonRoomTaxDaily : astonRoomTaxDaily) * stayNights).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-red-600">
-                    <span>Garage Parking ({stayNights} days):</span>
-                    <span>+${(calculatorMode === 'banyan' ? astonParking : hiltonParking) * stayNights}</span>
+                    <span>Garage Parking + Tax:</span>
+                    <span>+${((calculatorMode === 'hotels' ? (hiltonParking + hiltonParkingTaxDaily) : (astonParking + astonParkingTaxDaily)) * stayNights).toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Dining / Restaurants:</span>
-                    <span className="font-semibold">
-                      ${(calculatorMode === 'banyan' ? astonDiningDaily : hiltonDiningDaily) * stayNights}
-                    </span>
+                  <div className="flex justify-between text-neutral-500 pt-0.5">
+                    <span>Kitchen Setup:</span>
+                    <span>{calculatorMode === 'hotels' ? 'No kitchen in suite' : 'Basic older kitchenette'}</span>
                   </div>
                 </div>
               </div>
 
               <div className="pt-4 mt-4 border-t border-[#E8DCC6]">
-                <span className="text-xs text-[#1A3B34]/70 block">Estimated All-In Total:</span>
+                <span className="text-xs text-[#1A3B34]/70 block">Total Stay (Room + Taxes + Resort Fees + Parking):</span>
                 <div className="font-serif text-xl sm:text-2xl font-bold text-red-600">
-                  ${(calculatorMode === 'banyan' ? astonTotal : hiltonTotal).toLocaleString()}
+                  ${Math.round(calculatorMode === 'hotels' ? hiltonTotal : astonTotal).toLocaleString()}
                 </div>
                 <span className="text-xs text-red-700 font-medium block mt-1">
-                  +${((calculatorMode === 'banyan' ? astonTotal : hiltonTotal) - plumeriaTotal).toLocaleString()} more than Plumeria
+                  +${Math.round((calculatorMode === 'hotels' ? hiltonTotal : astonTotal) - plumeriaPricing.grandTotal).toLocaleString()} more than Plumeria stay
+                </span>
+                <span className="text-[10px] text-neutral-500 block mt-0.5">
+                  {calculatorMode === 'hotels'
+                    ? 'Room, taxes, and fees alone cost significantly more'
+                    : 'Exact same complex, yet $38 resort fees + $45 parking/day add up'}
                 </span>
               </div>
             </div>
@@ -942,12 +954,12 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
               <div className="space-y-4">
                 <div>
                   <h5 className="font-serif text-lg sm:text-xl font-bold text-[#1A3B34]">
-                    {calculatorMode === 'banyan' ? 'Generic Waikiki Airbnb' : 'Sheraton Waikiki'}
+                    {calculatorMode === 'hotels' ? 'Sheraton Waikiki' : 'Generic Waikiki Airbnb'}
                   </h5>
                   <p className="text-xs text-[#1A3B34]/70 font-light">
-                    {calculatorMode === 'banyan'
-                      ? 'Off-Island Host · Parking Not Included'
-                      : 'Kai Oceanfront Suite / Malia Suite'}
+                    {calculatorMode === 'hotels'
+                      ? 'Oceanfront Suite · No Kitchen'
+                      : 'Off-Island Host · Parking Extra'}
                   </p>
                 </div>
 
@@ -955,51 +967,92 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                   <div className="flex justify-between">
                     <span>Room ({stayNights} nights):</span>
                     <span className="font-semibold text-neutral-900">
-                      ${(calculatorMode === 'banyan' ? genericAirbnbNightly : sheratonNightly) * stayNights}
+                      ${((calculatorMode === 'hotels' ? sheratonNightly : genericAirbnbNightly) * stayNights).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between text-neutral-700">
-                    <span>{calculatorMode === 'banyan' ? 'Cleaning & Service Fees:' : 'Resort Fees:'}</span>
+                    <span>{calculatorMode === 'hotels' ? 'Resort Fees:' : 'Cleaning & Service Fees:'}</span>
                     <span className="text-red-600">
-                      +${(calculatorMode === 'banyan' ? genericAirbnbFee : sheratonResortFee) * stayNights}
+                      +${((calculatorMode === 'hotels' ? sheratonResortFee : genericAirbnbFee) * stayNights).toLocaleString()}
                     </span>
+                  </div>
+                  <div className="flex justify-between text-[#8A5A1C]">
+                    <span>Hawaii Taxes (GET 4.5% + TAT 11% + OTAT 3% = 18.50%):</span>
+                    <span className="font-semibold">+${((calculatorMode === 'hotels' ? sheratonRoomTaxDaily : genericAirbnbRoomTaxDaily) * stayNights).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-red-600">
-                    <span>Parking ({stayNights} days):</span>
-                    <span>+${(calculatorMode === 'banyan' ? genericAirbnbParking : sheratonParking) * stayNights}</span>
+                    <span>Garage Parking + Tax:</span>
+                    <span>+${((calculatorMode === 'hotels' ? (sheratonParking + sheratonParkingTaxDaily) : (genericAirbnbParking + genericAirbnbParkingTaxDaily)) * stayNights).toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Estimated Dining:</span>
-                    <span className="font-semibold">
-                      ${(calculatorMode === 'banyan' ? genericAirbnbDiningDaily : sheratonDiningDaily) * stayNights}
-                    </span>
+                  <div className="flex justify-between text-neutral-500 pt-0.5">
+                    <span>Kitchen Setup:</span>
+                    <span>{calculatorMode === 'hotels' ? 'Wet bar only (no range/oven)' : 'Variable cookware quality'}</span>
                   </div>
                 </div>
               </div>
 
               <div className="pt-4 mt-4 border-t border-[#E8DCC6]">
-                <span className="text-xs text-[#1A3B34]/70 block">Estimated All-In Total:</span>
+                <span className="text-xs text-[#1A3B34]/70 block">Total Stay (Room + Taxes + Fees + Parking):</span>
                 <div className="font-serif text-xl sm:text-2xl font-bold text-red-600">
-                  ${(calculatorMode === 'banyan' ? genericTotal : sheratonTotal).toLocaleString()}
+                  ${Math.round(calculatorMode === 'hotels' ? sheratonTotal : genericTotal).toLocaleString()}
                 </div>
                 <span className="text-xs text-red-700 font-medium block mt-1">
-                  +${((calculatorMode === 'banyan' ? genericTotal : sheratonTotal) - plumeriaTotal).toLocaleString()} more than Plumeria
+                  +${Math.round((calculatorMode === 'hotels' ? sheratonTotal : genericTotal) - plumeriaPricing.grandTotal).toLocaleString()} more than Plumeria stay
+                </span>
+                <span className="text-[10px] text-neutral-500 block mt-0.5">
+                  {calculatorMode === 'hotels'
+                    ? '$61 resort fee + $58/day parking add hundreds to stay'
+                    : 'Hidden host fees and unbundled parking increase total cost'}
                 </span>
               </div>
             </div>
           </div>
 
+          {/* Quick link to Nearby Dinings */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#C59B4B]/30 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="p-1.5 rounded-lg bg-[#C59B4B]/15 text-[#8A5A1C]">
+                  <Utensils className="w-4 h-4" />
+                </span>
+                <span className="font-serif text-sm sm:text-base font-bold text-[#1A3B34]">
+                  Where to Eat: Calculated Nearby Dinings & Pricing
+                </span>
+              </div>
+              <p className="text-xs text-[#1A3B34]/75 font-light">
+                Discover 11 real nearby spots around Waikiki Banyan with itemized meal prices and our interactive dining budget estimator on the Explore page.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                if (onNavigate) {
+                  onNavigate('/explore');
+                } else {
+                  window.location.hash = '#/explore';
+                }
+              }}
+              className="px-4 py-2 rounded-xl bg-[#1A3B34] text-[#F6E7A7] text-xs font-semibold hover:bg-[#234E45] transition-colors shrink-0 cursor-pointer flex items-center gap-1.5 shadow-xs"
+            >
+              <span>Explore Dining Guide & Prices</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
           {/* Real Data Grounding Note */}
-          <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1">
-            <span className="font-semibold text-[#1A3B34] block">How This Data is Calculated & Verified:</span>
+          <div className="p-4 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1.5">
+            <span className="font-semibold text-[#1A3B34] block text-sm">How This Comparative Pricing is Grounded:</span>
             <p className="font-light leading-relaxed">
-              • <strong>Plumeria at Waikiki Banyan:</strong> $300/night flat base rate, $0 mandatory amenity or resort fees, and 1 complimentary dedicated covered parking pass ($0). Dining assumes light meal preparation/breakfast in your full kitchen + 12 on-site BBQ grills (~$65/day).
+              • <strong>Plumeria at Waikiki Banyan:</strong> $199/night promotional rate across all units, $0 Resort fees, $0 parking pass. Cleaning fee is $250 for 1–2 nights and waived ($0) for 3+ nights. Tiered stay discounts apply incrementally (5 days: 5%, 10 days: 10%, 15 days: 15%, 20 days: 20%, 25 days: 25%, 30 days: 30%). Hawaii Taxes: GET 4.5%, TAT 11%, OTAT 3% (18.50% total applied to Base + Cleaning Fee).
             </p>
             <p className="font-light leading-relaxed">
-              • <strong>Aston at Waikiki Banyan (same building):</strong> $275/night average 1-bedroom suite rate + Aston’s published mandatory Hospitality/Amenity fee ($32 + tax = $37.74/day) + Aston’s published $43/day self-parking fee ($230/wk).
+              • <strong>Hawaii Taxes (GET, TAT, OTAT):</strong> Full Hawaii taxes (18.50% total: GET 4.5%, TAT 11%, OTAT 3%) are applied across competitor room rates and mandatory resort fees, giving you an accurate, true comparison.
             </p>
             <p className="font-light leading-relaxed">
-              • <strong>Hilton Hawaiian Village & Sheraton Waikiki:</strong> Figures reflect actual 1-Bedroom Suites ($650–$1,450+/nt) with mandatory resort charges ($55–$65/nt) and parking ($55–$69/day). <em>Note:</em> Even standard 320 sq. ft. single hotel rooms with no kitchen total $450–$620/night all-in with mandatory fees!
+              • <strong>Taxed Hotel Parking:</strong> Hawaii hotels and garages apply Hawaii General Excise Tax (GET 4.712%) to parking fees ($69/day at Hilton, $55/day at Sheraton, $43/day at Aston). Plumeria includes a complimentary dedicated covered parking pass ($0 fee, $0 tax).
+            </p>
+            <p className="font-light leading-relaxed">
+              • <strong>Nearby Dinings & Kitchen Flexibility:</strong> Having a Full kitchen provides the flexibility to brew morning Kona coffee or prepare snacks, while being steps away from Waikiki's favorite dining spots. Explore the dedicated guide with local meal pricing on the Explore Waikiki page.
             </p>
           </div>
         </div>
@@ -1010,11 +1063,11 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
         <div className="flex items-center gap-2 text-[#1A3B34]">
           <Info className="w-4 h-4 text-[#C59B4B] shrink-0" />
           <h5 className="font-serif text-sm sm:text-base font-bold">
-            Transparent Travel References & Legal Resort Zoning Compliance
+            Authorized Short-Term Rental License & Legal Resort Zoning
           </h5>
         </div>
         <p className="text-xs text-[#1A3B34]/75 font-light leading-relaxed">
-          Waikiki Banyan (201 ʻOhua Avenue) is located in the official City & County of Honolulu <strong>Waikiki Resort Hotel District</strong>, legally permitting short-term vacation rentals under 30 days without municipal zoning violation risks. Published figures reflect verified published resort fees, hotel parking tariffs, and average seasonal rates across Waikiki.
+          Waikiki Banyan is located in the official City & County of Honolulu <strong>Waikiki Resort Hotel District</strong>, and our suites hold an authorized Short-Term Rental License authorized by the City and County of Honolulu, providing complete compliance and zero cancellation risk.
         </p>
         <div className="pt-2 border-t border-[#E8DCC6]/60 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#1A3B34]/80">
           <span className="font-semibold text-[#1A3B34]">Verified Sources:</span>
@@ -1024,7 +1077,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-[#C59B4B] hover:text-[#996D28] font-medium transition-colors"
           >
-            <span>Aston Waikiki Banyan Fees ($32+tax fee, $43 parking)</span>
+            <span>Aston Waikiki Banyan Fees ($38 resort fee, $43 parking)</span>
             <ExternalLink className="w-3 h-3" />
           </a>
           <a
@@ -1042,7 +1095,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-neutral-600 hover:text-neutral-900 transition-colors"
           >
-            <span>Honolulu DPP Resort Zoning</span>
+            <span>Honolulu DPP Short-Term Rental Licensing</span>
             <ExternalLink className="w-3 h-3" />
           </a>
           <a

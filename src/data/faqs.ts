@@ -6,21 +6,21 @@ export const FAQS: FAQItem[] = [
     category: 'Waikiki Banyan',
     question: 'Why is Waikiki Banyan better than other vacation rentals and hotels in Waikiki?',
     answer:
-      'Waikiki Banyan is widely regarded by frequent visitors as the best vacation rental destination in Honolulu. Unlike cramped 280 sq. ft. hotel rooms or standard condo rentals with minimal amenities, Waikiki Banyan offers: (1) Oʻahu’s largest 1-acre 6th-floor resort recreation deck with a heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball courts, and 12 gas BBQ grills; (2) Full chef-ready kitchens with full-sized refrigerators, stoves, ovens, and cookware—saving families $200+ per day on dining; (3) Spacious 557 sq. ft. 1-bedroom layouts with 67 sq. ft. private lanais (624 sq. ft. total) framing 180° Diamond Head and mountain vistas that comfortably sleep up to 4–5 guests; (4) Flat 1-block (3-minute) stroll to calm Kuhio Beach (offering quiet seclusion without beachfront traffic noise); and (5) $0 mandatory resort fees.',
+      'Waikiki Banyan is widely regarded by frequent visitors as the best vacation rental destination in Honolulu. Authorized Short-Term Rental License by the City and County of Honolulu. Unlike cramped 280 sq. ft. hotel rooms or standard condo rentals with minimal amenities, Waikiki Banyan offers: (1) Oʻahu’s largest 1-acre 6th-floor resort recreation deck with a heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball courts, and 12 gas BBQ grills; (2) Full kitchens with full-sized refrigerators, stoves, ovens, and cookware—saving around $200 per person ($800 per day for a family of four) compared to dining out in Waikiki; (3) Spacious 557 sq. ft. 1-bedroom layouts with 67 sq. ft. private lanais (624 sq. ft. total) framing 180° Diamond Head and mountain vistas that comfortably sleep up to 4–5 guests; (4) Flat 1-block (3-minute) stroll to calm Kuhio Beach; and (5) $0 Resort fees.',
   },
   {
     id: 'faq-resort-fees',
     category: 'Booking & Policies',
     question: 'Are there mandatory daily resort fees or parking fees?',
     answer:
-      'No! Plumeria Vacation Rentals does not charge a separate resort or amenity fee. Furthermore, covered on-site garage parking is included with your stay from check-in through checkout. Your base rate is $300 per night (unless a different rate is displayed or quoted for your dates), and all cleaning fees and taxes are disclosed before payment.',
+      'No! Plumeria Vacation Rentals does not charge a separate Resort fee ($0 Resort fees). Furthermore, covered on-site garage parking is included with your stay from check-in through checkout. Your promotional base rate is currently $199 per night across all units. Transparent pricing: TAX (18.50%: GET 4.5% + TAT 11% + OTAT 3%) + Base + Cleaning Fee ($250 for 1–2 night stays, waived for 3+ nights, with tiered discounts up to 30% for extended stays).',
   },
   {
     id: 'faq-competitor-pricing',
     category: 'Booking & Policies',
-    question: 'How does Plumeria compare in price to Aston at Waikiki Banyan and Waikiki hotels?',
+    question: 'How does Plumeria compare in price to Waikiki hotels and Aston at Waikiki Banyan?',
     answer:
-      'Even inside the exact same Waikiki Banyan building, booking with Plumeria saves you $700+ on a typical 5-night stay compared to Aston at Waikiki Banyan. Aston charges a mandatory daily Hospitality/Amenity fee ($32 + tax = $37.74/day) plus $43/day for parking ($400+ extra in mandatory fees alone), while Plumeria includes covered parking and 1-acre deck access with $0 resort fees, plus guaranteed top-floor Tower 2 placement (32nd or 36th floor). Compared to Waikiki beachfront resorts like Hilton Hawaiian Village or Sheraton Waikiki (where 1-bedroom suites cost $750–$1,450+/night, daily resort charges run $55–$65/day, and parking is $55–$69/day), Plumeria saves traveling families $4,000+ per stay with full gourmet chef kitchens and in-unit beach gear.',
+      'Compared to Waikiki hotels like Hilton Hawaiian Village or Sheraton Waikiki (where 1-bedroom suites cost $750–$1,450+/night, daily resort charges run $55–$65/day, and parking is $69/day plus tax), Plumeria saves traveling families thousands of dollars with our $199/night promo rate across all units, $0 Resort fees, free covered parking, and Full kitchens. Even compared to Aston at Waikiki Banyan in the same building (which charges a mandatory daily Resort fee of $32 + tax plus $43/day for parking), Plumeria saves you hundreds of dollars with transparent direct pricing and top-floor Tower 2 placement.',
   },
   {
     id: 'faq-location',
@@ -55,7 +55,7 @@ export const FAQS: FAQItem[] = [
     category: 'Booking & Policies',
     question: 'What are the check-in and checkout times, and is late checkout available?',
     answer:
-      'Check-in is at 2:00 PM and checkout is at 12:00 PM (enjoy a relaxed final morning!). Contactless keyless keypad entry is provided. Early check-in and late checkout require advance approval and are subject to availability. Late checkout fee schedule: Until 1:00 PM ($50), Until 2:00 PM ($100), Until 3:00 PM ($150), and After 3:00 PM (up to $300, equivalent to base rate for another night).',
+      'Check-in is at 2:00 PM and checkout is at 12:00 PM (enjoy a relaxed final morning!). Contactless keyless keypad entry is provided. Early check-in and late checkout require advance approval and are subject to availability. Late checkout fee schedule: Until 1:00 PM ($50), Until 2:00 PM ($100), Until 3:00 PM ($150), and After 3:00 PM (up to $199, equivalent to base rate for another night).',
   },
   {
     id: 'faq-cancellation',
@@ -111,6 +111,6 @@ export const FAQS: FAQItem[] = [
     category: 'Booking & Policies',
     question: 'How do I check availability or book a stay?',
     answer:
-      'Our primary listings are hosted on Airbnb, where you can view verified guest reviews, calendar availability, and reserve your stay. You can also submit a direct booking inquiry right here on our website to check dates, ask custom questions, or request direct booking rates with $0 mandatory resort fees. We can also be reached directly at (808) 671-9191 or plumeria.vacationrentals808@gmail.com.',
+      'Our primary listings are hosted on Airbnb, where you can view verified guest reviews, calendar availability, and reserve your stay. You can also submit a direct booking inquiry right here on our website to check dates, ask custom questions, or request direct booking rates with $0 resort fees. Final reservation details and verified cost computation will be sent via email, and further identity or stay verification may be required in the email once your inquiry is received. We can also be reached directly at (808) 671-9191 or plumeria.vacationrentals808@gmail.com.',
   },
 ];

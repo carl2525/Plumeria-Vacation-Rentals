@@ -92,14 +92,14 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
           </button>
         </div>
 
-        {/* 15% Website Direct Discount Bar */}
+        {/* Direct Rate & Licensed STR Bar */}
         <div className="bg-[#1A3B34] text-white px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between text-xs border-b border-[#C59B4B]/30 shrink-0">
           <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <span className="px-1.5 py-0.5 rounded bg-[#C59B4B] text-[#1A3B34] text-[9.5px] sm:text-[10px] font-black uppercase tracking-wider shrink-0">
-              15% OFF
+              $199 / NT PROMO
             </span>
             <span className="font-semibold text-white text-[11px] sm:text-xs truncate">
-              Direct Special: Save 15%
+              Special Promo Rate · All Units
             </span>
           </div>
           <span className="flex items-center gap-1 text-[#F6E7A7] text-[10px] sm:text-[11px] font-medium shrink-0 ml-2">

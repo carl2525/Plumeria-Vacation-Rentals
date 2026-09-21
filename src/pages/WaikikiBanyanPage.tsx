@@ -296,6 +296,7 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
         <FullCompetitorComparison
           onBookStay={() => onInquireProperty()}
           onExploreRentals={() => onNavigate('/rentals')}
+          onNavigate={onNavigate}
         />
 
         {/* Editorial Summary: Why Waikiki Banyan stands above other vacation rentals */}
@@ -409,7 +410,7 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
                 </div>
                 <div>
                   <span className="font-bold text-[#F6E7A7] block text-sm">🏊 Heated Resort Pool</span>
-                  <p className="text-white/75 text-xs">Spacious sundeck with sun loungers, umbrellas & palm trees</p>
+                  <p className="text-white/75 text-xs">Spacious sundeck with sun loungers, shaded seating & palm trees</p>
                 </div>
               </div>
 
@@ -680,7 +681,7 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
               onClick={() => onNavigate('/rental-policy')}
               className="hover:text-[#C59B4B] transition-colors cursor-pointer font-medium"
             >
-              Direct Rental Policy (15% Off)
+              Direct Rental Policy
             </button>
             <span className="text-[#1A3B34]/30">•</span>
             <button

@@ -35,7 +35,7 @@ export const WhyBookWithPlumeria: React.FC<WhyBookWithPlumeriaProps> = ({ onNavi
                 Twice the Living Space
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-                557 sq. ft. true 1-bedroom suite + 67 sq. ft. private lanai (624 sq. ft. total) with closing doors, full chef’s kitchen, and separate living room (sleeps up to 5 with 3 beds) vs cramped 280 sq. ft. hotel rooms.
+                557 sq. ft. true 1-bedroom suite + 67 sq. ft. private lanai (624 sq. ft. total) with closing doors, Full kitchen, and separate living room (sleeps up to 5 with 3 beds) vs cramped 280 sq. ft. hotel rooms.
               </p>
             </div>
             {onNavigate && (
@@ -127,10 +127,10 @@ export const WhyBookWithPlumeria: React.FC<WhyBookWithPlumeriaProps> = ({ onNavi
         <div className="mt-12 p-5 sm:p-6 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
             <h4 className="font-serif text-base font-bold text-[#1A3B34]">
-              Comparing to Hilton, Sheraton, or Aston at Waikiki Banyan?
+              Comparing Plumeria to Sheraton or Hilton?
             </h4>
             <p className="text-xs sm:text-sm text-[#1A3B34]/75 font-light">
-              See why our high-floor Tower 2 suites with free parking and $0 amenity fees beat hotel suites and other Waikiki vacation rentals.
+              See why our high-floor Tower 2 suites with free parking and $0 resort fees save you $3,800+ compared to Sheraton and Hilton.
             </p>
           </div>
           <button

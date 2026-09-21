@@ -68,22 +68,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           scrolled ? 'shadow-sm' : ''
         }`}
       >
-        {/* Direct Website Booking 15% Discount Announcement Bar */}
+        {/* Direct Website Booking Transparent Pricing Announcement Bar */}
         <div className="bg-[#1A3B34] text-[#F9F7F2] text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 text-center border-b border-[#C59B4B]/30 flex items-center justify-center gap-1.5 sm:gap-2">
           <span className="px-1.5 py-0.5 rounded bg-[#C59B4B] text-[#1A3B34] font-black text-[9px] uppercase tracking-wider shrink-0">
-            15% OFF
+            PROMOTION
           </span>
           <span className="sm:hidden text-[11px] font-medium truncate">
-            Direct Inquiries: Save 15% + $0 Resort Fees
+            $199 Promo Rate · All Units · $0 Resort Fees · Free Parking
           </span>
           <span className="hidden sm:inline">
-            Inquire & receive 15% discount on accepted bookings directly on our website!
+            Direct Inquiries: $199/night promo rate in all units · $0 Resort fees · Free covered garage parking pass!
           </span>
           <button
             onClick={() => onOpenInquiry()}
             className="underline text-[#F6E7A7] font-semibold hover:text-white cursor-pointer ml-1 text-[11px] sm:text-xs shrink-0 whitespace-nowrap"
           >
-            Claim Offer
+            Inquire Now
           </button>
         </div>
 
@@ -151,7 +151,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="inline-flex items-center gap-1.5 px-3.5 xl:px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-xs transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer bg-[#1A3B34] hover:bg-[#224D44] text-white border border-[#C59B4B]/30 hover:border-[#C59B4B]/60 whitespace-nowrap"
             >
               <Calendar className="w-3.5 h-3.5 text-[#F6E7A7]" />
-              <span>Inquire & Save 15%</span>
+              <span>Inquire to Book</span>
             </button>
           </div>
 
@@ -160,9 +160,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="mobile-quick-book-btn"
               onClick={() => onOpenInquiry()}
-              className="inline-flex items-center gap-1 rounded-full text-xs font-bold uppercase tracking-wider px-3 py-1.5 transition-colors cursor-pointer bg-[#1A3B34] text-white shadow-xs"
+              className="inline-flex items-center gap-1.5 rounded-full text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 transition-colors cursor-pointer bg-[#1A3B34] text-white shadow-xs"
             >
-              <span className="text-[10px] font-black text-[#F6E7A7] bg-white/20 px-1 py-0.2 rounded">15%</span>
+              <Calendar className="w-3.5 h-3.5 text-[#F6E7A7]" />
               <span>Inquire</span>
             </button>
             <button
@@ -248,10 +248,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full py-3.5 px-4 rounded-2xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer border border-[#C59B4B]/30"
               >
                 <Calendar className="w-4 h-4 text-[#F6E7A7]" />
-                <span>Inquire & Save 15%</span>
+                <span>Inquire to Book</span>
               </button>
               <p className="text-[11px] text-center text-[#1A3B34]/70 font-medium">
-                15% discount on accepted website inquiries · $0 resort fees
+                $199/nt promo rate · $0 resort fees · Free parking pass
               </p>
 
               <div className="text-xs text-[#1A3B34]/75 space-y-1.5 pt-2">

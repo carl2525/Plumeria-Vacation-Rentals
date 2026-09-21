@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { WAIKIKI_DESTINATIONS } from '../data/waikikiGuide';
 import {
   Compass,
   MapPin,
   Sparkles,
+  Utensils,
+  ArrowDown,
+  ArrowRight,
+  DollarSign,
 } from 'lucide-react';
 import { PlumeriaSymbolLogo } from '../components/brand/PlumeriaSymbolLogo';
 import { AppImage } from '../components/common/AppImage';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { InlineLink } from '../components/common/InlineLink';
+import { NearbyDiningsGuide } from '../components/dining/NearbyDiningsGuide';
 
 interface ExplorePageProps {
   onNavigate: (path: string) => void;
@@ -21,11 +26,31 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
+  // Detect hash changes like #dining or #nearby-dining-guide
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash.includes('dining')) {
+        setSelectedCategory('dining');
+        setTimeout(() => {
+          const el = document.getElementById('nearby-dining-guide');
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 120);
+      }
+    };
+
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
   const categories = [
     { id: 'all', label: 'All Waikiki & Oʻahu' },
+    { id: 'dining', label: 'Nearby Dinings & Pricing Guide', icon: Utensils, isSpecial: true },
     { id: 'beaches', label: 'Beaches & Ocean' },
     { id: 'activities', label: 'Surfing & Recreation' },
-    { id: 'dining', label: 'Dining & Island Cafes' },
     { id: 'nature', label: 'Diamond Head & Hikes' },
     { id: 'shopping', label: 'Shopping & Nightlife' },
   ];
@@ -34,6 +59,18 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
     selectedCategory === 'all'
       ? WAIKIKI_DESTINATIONS
       : WAIKIKI_DESTINATIONS.filter((item) => item.category === selectedCategory);
+
+  const scrollToDining = () => {
+    if (selectedCategory !== 'all' && selectedCategory !== 'dining') {
+      setSelectedCategory('dining');
+    }
+    setTimeout(() => {
+      const el = document.getElementById('nearby-dining-guide');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
 
   return (
     <div className="relative pt-28 sm:pt-32 pb-24 bg-[#F9F7F2] min-h-screen overflow-hidden">
@@ -64,101 +101,171 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
             </InlineLink>
             .
           </p>
+
+          {/* Quick Anchor Link to Dining Guide */}
+          <div className="pt-2 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={scrollToDining}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-[#1A3B34] text-[#F6E7A7] hover:bg-[#234E45] transition-all cursor-pointer shadow-xs"
+            >
+              <Utensils className="w-3.5 h-3.5" />
+              <span>Jump to Calculated Nearby Dinings & Pricing Guide</span>
+              <ArrowDown className="w-3.5 h-3.5" />
+            </button>
+            <span className="text-xs text-[#1A3B34]/70 font-light hidden sm:inline">
+              11 local spots · walking times · itemized meal calculator
+            </span>
+          </div>
         </div>
 
         {/* Filter Navigation */}
         <div className="bg-white p-4 sm:p-5 rounded-3xl border border-[#E8DCC6] shadow-xs flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-xs font-medium transition-colors cursor-pointer ${
-                  selectedCategory === cat.id
-                    ? 'bg-[#1A3B34] text-white shadow-xs'
-                    : 'bg-[#F9F7F2] text-[#1A3B34]/80 hover:bg-[#E8DCC6]/50 border border-[#E8DCC6]'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+            {categories.map((cat) => {
+              const Icon = cat.icon;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-4 py-2 rounded-full text-xs font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
+                    selectedCategory === cat.id
+                      ? 'bg-[#1A3B34] text-white shadow-xs'
+                      : cat.isSpecial
+                      ? 'bg-[#C59B4B]/15 text-[#8A5A1C] border border-[#C59B4B]/40 hover:bg-[#C59B4B]/25 font-semibold'
+                      : 'bg-[#F9F7F2] text-[#1A3B34]/80 hover:bg-[#E8DCC6]/50 border border-[#E8DCC6]'
+                  }`}
+                >
+                  {Icon && <Icon className="w-3.5 h-3.5" />}
+                  <span>{cat.label}</span>
+                </button>
+              );
+            })}
           </div>
 
           <span className="text-xs text-[#1A3B34]/60 font-medium px-2">
-            Showing {filteredItems.length} curated destinations
+            {selectedCategory === 'dining'
+              ? 'Showing Curated Dining & Pricing Guide'
+              : `Showing ${filteredItems.length} curated destinations`}
           </span>
         </div>
 
-        {/* Destination Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-          {filteredItems.map((item) => (
-            <article
-              key={item.id}
-              className="bg-white rounded-3xl overflow-hidden border border-[#E8DCC6] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col h-full group"
-            >
-              {/* Image & Badges */}
-              <div className="relative aspect-16/10 overflow-hidden bg-[#1A3B34]/10 shrink-0">
-                <AppImage
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        {/* VIEW 1: Dedicated Dining Guide View */}
+        {selectedCategory === 'dining' && (
+          <div className="space-y-8 animate-fadeIn">
+            <NearbyDiningsGuide />
+          </div>
+        )}
 
-                <div className="absolute top-3.5 left-3.5">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/90 backdrop-blur-md text-[#1A3B34] whitespace-nowrap shadow-sm">
-                    {item.categoryLabel}
-                  </span>
-                </div>
+        {/* VIEW 2: General Destinations (When not viewing dining-only) */}
+        {selectedCategory !== 'dining' && (
+          <div className="space-y-12">
+            {/* Destination Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+              {filteredItems.map((item) => (
+                <article
+                  key={item.id}
+                  className="bg-white rounded-3xl overflow-hidden border border-[#E8DCC6] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col h-full group"
+                >
+                  {/* Image & Badges */}
+                  <div className="relative aspect-16/10 overflow-hidden bg-[#1A3B34]/10 shrink-0">
+                    <AppImage
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-                <div className="absolute bottom-3 left-3.5 right-3.5 text-white flex items-center justify-between text-xs">
-                  <span className="flex items-center gap-1 font-medium drop-shadow-sm">
-                    <MapPin className="w-3.5 h-3.5 text-[#C59B4B]" />
-                    <span>{item.distanceFromBanyan}</span>
-                  </span>
-                </div>
-              </div>
-
-              {/* Content Body */}
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div className="space-y-3">
-                  <h3 className="font-serif text-xl font-bold text-[#1A3B34] group-hover:text-[#C59B4B] transition-colors leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed font-light">
-                    {item.description}
-                  </p>
-
-                  {/* Highlights Pills directly below description */}
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {item.highlightPills.map((h, i) => (
-                      <span
-                        key={i}
-                        className="text-[11px] px-2.5 py-1 rounded-md bg-[#E8DCC6]/40 text-[#1A3B34] font-medium whitespace-nowrap"
-                      >
-                        ✓ {h}
+                    <div className="absolute top-3.5 left-3.5">
+                      <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/90 backdrop-blur-md text-[#1A3B34] whitespace-nowrap shadow-sm">
+                        {item.categoryLabel}
                       </span>
-                    ))}
-                  </div>
-                </div>
+                    </div>
 
-                {/* Local Tip */}
-                <div className="mt-auto pt-4">
-                  <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1">
-                    <span className="font-bold text-[#1A3B34] flex items-center gap-1.5 text-[11px]">
-                      <Sparkles className="w-3.5 h-3.5 text-[#C59B4B]" />
-                      <span className="text-[#8CA58A] font-semibold">Host Insider Tip</span>
-                    </span>
-                    <p className="text-[11px] leading-relaxed text-[#1A3B34]/75">
-                      {item.insiderTip}
-                    </p>
+                    <div className="absolute bottom-3 left-3.5 right-3.5 text-white flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1 font-medium drop-shadow-sm">
+                        <MapPin className="w-3.5 h-3.5 text-[#C59B4B]" />
+                        <span>{item.distanceFromBanyan}</span>
+                      </span>
+                    </div>
                   </div>
-                </div>
+
+                  {/* Content Body */}
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <h3 className="font-serif text-xl font-bold text-[#1A3B34] group-hover:text-[#C59B4B] transition-colors leading-snug">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed font-light">
+                        {item.description}
+                      </p>
+
+                      {/* Highlights Pills directly below description */}
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {item.highlightPills.map((h, i) => (
+                          <span
+                            key={i}
+                            className="text-[11px] px-2.5 py-1 rounded-md bg-[#E8DCC6]/40 text-[#1A3B34] font-medium whitespace-nowrap"
+                          >
+                            ✓ {h}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Local Tip */}
+                    <div className="mt-auto pt-4">
+                      <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1">
+                        <span className="font-bold text-[#1A3B34] flex items-center gap-1.5 text-[11px]">
+                          <Sparkles className="w-3.5 h-3.5 text-[#C59B4B]" />
+                          <span className="text-[#8CA58A] font-semibold">Host Insider Tip</span>
+                        </span>
+                        <p className="text-[11px] leading-relaxed text-[#1A3B34]/75">
+                          {item.insiderTip}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {/* When 'all' is active, embed the full Calculated Nearby Dinings & Pricing Guide */}
+            {selectedCategory === 'all' && (
+              <div className="pt-10 border-t border-[#E8DCC6]">
+                <NearbyDiningsGuide />
               </div>
-            </article>
-          ))}
-        </div>
+            )}
+
+            {/* When a specific subcategory is active (not 'all' and not 'dining'), provide a callout to the Dining Guide */}
+            {selectedCategory !== 'all' && selectedCategory !== 'dining' && (
+              <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#C59B4B]/40 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="p-2 rounded-xl bg-[#C59B4B]/15 text-[#8A5A1C]">
+                      <Utensils className="w-4 h-4" />
+                    </span>
+                    <h3 className="font-serif text-lg font-bold text-[#1A3B34]">
+                      Hungry while exploring? Check out the Nearby Dinings & Pricing Guide
+                    </h3>
+                  </div>
+                  <p className="text-xs text-[#1A3B34]/75 font-light">
+                    11 spots within walking distance of Waikiki Banyan with real dish pricing, walking times, and our interactive meal budget estimator.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedCategory('dining')}
+                  className="px-5 py-2.5 rounded-full bg-[#1A3B34] text-[#F6E7A7] text-xs font-semibold hover:bg-[#234E45] transition-colors shrink-0 cursor-pointer flex items-center gap-1.5 shadow-xs"
+                >
+                  <span>Open Dining & Pricing Guide</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Home Base Callout Banner */}
         <div className="bg-[#E8DCC6]/30 p-8 sm:p-10 rounded-3xl border border-[#C59B4B]/30 text-center max-w-3xl mx-auto space-y-4">

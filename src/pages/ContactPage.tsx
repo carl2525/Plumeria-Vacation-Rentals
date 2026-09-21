@@ -40,7 +40,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           </h1>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            Have questions about our Waikiki Banyan Tower 2 suites, rates, or dates? Connect with us directly to enjoy direct-host pricing (save 15%), personalized Hawaiian hospitality, and $0 hidden resort fees at Waikiki’s premier condo-resort.
+            Have questions about our Waikiki Banyan Tower 2 suites, rates, or dates? Connect with us directly to enjoy promotional host pricing ($199/nt promo in all units), personalized Hawaiian hospitality, and $0 hidden resort fees at Waikiki’s premier condo-resort. Authorized Short-Term Rental License by the City and County of Honolulu.
           </p>
 
           {/* Quick Cross-Navigation Links */}
@@ -239,7 +239,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     <ShieldCheck className="w-4 h-4 text-[#8CA58A] shrink-0" />
                     <div>
                       <span className="font-bold text-[#1A3B34] block">Direct Rental & Payment Policy</span>
-                      <span className="text-[11px] text-[#1A3B34]/70">$255/nt direct (15% off) · $0 resort fees · Free parking pass</span>
+                      <span className="text-[11px] text-[#1A3B34]/70">$199/nt promo · all units · $0 resort fees · Free parking pass</span>
                     </div>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-[#1A3B34]/60 shrink-0" />

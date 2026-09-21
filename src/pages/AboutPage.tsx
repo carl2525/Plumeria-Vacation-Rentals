@@ -36,9 +36,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             </InlineLink>
             —just 1 block from the ocean with{' '}
             <InlineLink to="/rental-policy" onNavigate={onNavigate}>
-              direct booking privileges (save 15%)
+              direct booking privileges
             </InlineLink>
-            .
+            . Authorized Short-Term Rental License by the City and County of Honolulu.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               <InlineLink to="/rentals" onNavigate={onNavigate}>
                 557 sq. ft. 1-bedroom suite with a 67 sq. ft. private lanai
               </InlineLink>{' '}
-              (624 sq. ft. total) framing 180° Diamond Head and mountain views, full chef kitchen, paired with Oʻahu’s largest{' '}
+              (624 sq. ft. total) framing 180° Diamond Head and mountain views, Full kitchen, paired with Oʻahu’s largest{' '}
               <InlineLink to="/waikiki-banyan" onNavigate={onNavigate}>
                 1-acre 6th-floor resort deck
               </InlineLink>{' '}
@@ -197,7 +197,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                       onClick={() => onNavigate('/rental-policy')}
                       className="text-xs font-bold text-[#1A3B34] hover:text-[#C59B4B] transition-colors inline-flex items-center gap-1 cursor-pointer"
                     >
-                      <span>Direct 15% Off Policy</span>
+                      <span>Direct Rental Policy</span>
                       <span>→</span>
                     </button>
                   )}

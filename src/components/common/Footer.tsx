@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
             </div>
 
             <p className="text-white/80 text-base leading-relaxed max-w-md font-light">
-              Experience the gold standard at Waikiki Banyan. With Oʻahu’s largest 1-acre resort deck, full chef kitchens, and 1-block beach proximity, it outclasses ordinary vacation rentals at every turn.
+              Experience the gold standard at Waikiki Banyan. Authorized Short-Term Rental License by the City & County of Honolulu. With Oʻahu’s largest 1-acre resort deck, Full kitchens, and 1-block beach proximity, it outclasses ordinary vacation rentals at every turn.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -117,7 +117,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                   onClick={() => onNavigate('/rental-policy')}
                   className="text-[#F6E7A7] hover:underline transition-colors cursor-pointer text-left font-semibold flex items-center gap-1.5"
                 >
-                  <span>Direct Rental Policy (Save 15%)</span>
+                  <span>Direct Rental Policy</span>
                 </button>
               </li>
               <li>

@@ -133,15 +133,14 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             ))}
           </div>
 
-          {/* Pricing & Direct 15% Discount Highlight */}
+          {/* Pricing & Direct Host Rate Highlight */}
           <div className="pt-2.5 pb-1 flex items-center justify-between border-t border-[#E8DCC6]/60">
             <div className="flex items-baseline gap-1.5">
-              <span className="font-serif text-lg font-bold text-[#1A3B34]">$255</span>
-              <span className="text-[11px] text-[#1A3B34]/60">/ night</span>
-              <span className="text-[11px] text-[#1A3B34]/40 line-through ml-1">$300</span>
+              <span className="font-serif text-lg font-bold text-[#1A3B34]">$199</span>
+              <span className="text-[11px] text-[#C59B4B] font-semibold">/ night promo</span>
             </div>
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#1A3B34] text-[#F6E7A7] text-[10px] font-bold uppercase tracking-wider border border-[#C59B4B]/30">
-              <span>Save 15% Direct</span>
+              <span>$0 Resort Fees</span>
             </span>
           </div>
         </div>
@@ -163,7 +162,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             className="flex-1 py-2.5 px-3 rounded-xl bg-[#1A3B34] hover:bg-[#2A5D52] text-white text-[11px] font-bold transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-xs border border-[#C59B4B]/30 whitespace-nowrap"
           >
             <Calendar className="w-3.5 h-3.5 text-[#F6E7A7] shrink-0" />
-            <span>Inquire & Save</span>
+            <span>Inquire to Book</span>
           </button>
         </div>
       </div>

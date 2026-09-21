@@ -28,15 +28,10 @@ interface PillarCardData {
   subtitle: string;
   plumeriaHighlight: string;
   plumeriaDesc: string;
-  competitorRow1: {
+  hotelComparison: {
     label: string;
     value: string;
-    isNegative?: boolean;
-  };
-  competitorRow2: {
-    label: string;
-    value: string;
-    isNegative?: boolean;
+    detail: string;
   };
   footerVerdict: string;
 }
@@ -56,82 +51,62 @@ export const HotelSuiteComparison: React.FC<HotelSuiteComparisonProps> = ({
     {
       id: 'rate-fees',
       icon: <DollarSign className="w-5 h-5 text-[#C59B4B]" />,
-      eyebrow: 'Nightly & Resort Fees',
-      title: '$300/Nt (or $255 Direct)',
-      subtitle: '$0 Fees · 15% Off Direct',
-      plumeriaHighlight: 'Direct: $255/nt (15% Off)',
-      plumeriaDesc: 'Inquire on our website to receive 15% off accepted bookings. Zero resort fees or surprise add-ons.',
-      competitorRow1: {
-        label: 'Aston at Banyan:',
-        value: '+$37.74/nt fee',
-        isNegative: true,
+      eyebrow: 'Base Rate & Resort Fees',
+      title: '$199 / Night (Promo)',
+      subtitle: '$0 Resort fees',
+      plumeriaHighlight: 'Promotional $199/nt',
+      plumeriaDesc: '$0 Resort fees. Total 5-night stay: ~$1,120 all-in with taxes & cleaning.',
+      hotelComparison: {
+        label: 'Sheraton & Hilton:',
+        value: '$750–$1,450/nt',
+        detail: 'Total 5-night stay: ~$4,800–$6,500+ (includes $55–$61/day resort fees)',
       },
-      competitorRow2: {
-        label: 'Hilton & Sheraton:',
-        value: 'Suites $750–$1,450+',
-        isNegative: true,
-      },
-      footerVerdict: 'Save $200–$4,500+ on suite & resort fees',
+      footerVerdict: 'Save $3,600+ on room & resort fees',
     },
     {
       id: 'parking',
       icon: <Car className="w-5 h-5 text-[#C59B4B]" />,
       eyebrow: 'Covered Garage Parking',
-      title: 'Free Dedicated Pass',
-      subtitle: '100% Included ($0)',
-      plumeriaHighlight: 'Building Garage Included',
-      plumeriaDesc: 'Unlimited in-and-out access pass for your entire staycation or island vacation.',
-      competitorRow1: {
-        label: 'Aston at Banyan:',
-        value: '$43/day charged',
-        isNegative: true,
+      title: 'Free Parking Pass',
+      subtitle: 'Included ($0)',
+      plumeriaHighlight: 'Covered Garage Included',
+      plumeriaDesc: 'Dedicated garage pass with unlimited in-and-out privileges for your stay.',
+      hotelComparison: {
+        label: 'Sheraton & Hilton:',
+        value: '$55–$72 / day',
+        detail: 'Total parking: $275–$360+ for 5 nights (plus parking tax)',
       },
-      competitorRow2: {
-        label: 'Hilton & Sheraton:',
-        value: '$55–$72/day',
-        isNegative: true,
-      },
-      footerVerdict: 'Save $215–$360 on parking alone (5 nights)',
+      footerVerdict: 'Save $275–$360 on parking (5 nights)',
     },
     {
       id: 'floor-guarantee',
       icon: <Eye className="w-5 h-5 text-[#C59B4B]" />,
       eyebrow: 'Floor & View Guarantee',
-      title: 'Guaranteed High Floors',
-      subtitle: 'Tower 2 (Floors 32 & 36)',
+      title: 'High Floor Guarantee',
+      subtitle: 'Tower 2 (Fl 32 & 36)',
       plumeriaHighlight: 'Exact Suite Confirmed',
-      plumeriaDesc: '180° mountain & ocean horizons; quiet retreat high above street noise.',
-      competitorRow1: {
-        label: 'Aston at Banyan:',
-        value: 'Room Floor (Fl 5–12)',
-        isNegative: true,
+      plumeriaDesc: 'Guaranteed 32nd & 36th floors with 180° mountain & ocean horizons.',
+      hotelComparison: {
+        label: 'Sheraton & Hilton:',
+        value: 'Random Unit',
+        detail: 'Standard bookings placed on low floors (floors 2–8) near street noise',
       },
-      competitorRow2: {
-        label: 'Generic Airbnbs:',
-        value: 'Low / blocked views',
-        isNegative: true,
-      },
-      footerVerdict: 'High-Rise; confirmed 32nd & 36th floors',
+      footerVerdict: 'High-rise retreat high above street noise',
     },
     {
       id: 'kitchen-gear',
       icon: <Utensils className="w-5 h-5 text-[#C59B4B]" />,
-      eyebrow: 'Kitchen & Beach Gear',
-      title: 'Full Chef Kitchen',
-      subtitle: '+ In-Unit Beach Gear',
-      plumeriaHighlight: 'Gourmet Kitchen & Gear',
-      plumeriaDesc: 'Stove, oven, fridge & 12 BBQ grills + Tommy Bahama chairs & umbrella.',
-      competitorRow1: {
-        label: 'Hotels (Hilton):',
+      eyebrow: 'Kitchen & Comfort',
+      title: 'Full Kitchen & AC',
+      subtitle: '624 Sq. Ft. Suite',
+      plumeriaHighlight: 'Full Kitchen + AC',
+      plumeriaDesc: 'Stove, oven, full fridge, microwave, whisper-quiet AC, and beach gear.',
+      hotelComparison: {
+        label: 'Sheraton & Hilton:',
         value: 'Mini-fridge only',
-        isNegative: true,
+        detail: 'Standard hotel rooms (~350 sq. ft.) with no stove; forces dining out',
       },
-      competitorRow2: {
-        label: 'Beach Rentals:',
-        value: '$80/day rental fee',
-        isNegative: true,
-      },
-      footerVerdict: 'Save $150–$250/day on dining & gear',
+      footerVerdict: 'Save $600+ preparing meals in suite',
     },
   ];
 
@@ -146,16 +121,16 @@ export const HotelSuiteComparison: React.FC<HotelSuiteComparisonProps> = ({
         <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1A3B34] text-[#F6E7A7] border border-[#C59B4B]/30 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-[#C59B4B]" />
-            <span>Honest Value Comparison · Sneak Peek</span>
+            <span>Honest Value Comparison</span>
           </div>
 
           <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold text-[#1A3B34] leading-[1.15] tracking-tight">
             Why Plumeria at Waikiki Banyan <br className="hidden sm:inline" />
-            <span className="text-[#C59B4B] italic font-medium">Beats Hotels & Other Vacation Rentals</span>
+            <span className="text-[#C59B4B] italic font-medium">Beats Sheraton & Hilton</span>
           </h2>
 
           <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed max-w-2xl mx-auto">
-            Spacious 624 sq. ft. 1-bedroom suites perched high on floors 32 & 36 in Tower 2 with full kitchens, private lanais, and free covered parking. Compare our transparent <strong className="text-[#1A3B34] font-semibold">$300/night</strong> standard rate (or <strong className="text-[#1A3B34] font-semibold">$255/night</strong> with our exclusive 15% direct website discount) with <strong className="text-[#1A3B34] font-semibold">$0 resort fees</strong> against building operators and Waikiki mega-resorts.
+            Spacious 624 sq. ft. 1-bedroom suites on floors 32 & 36 in Tower 2 with full kitchens, private lanais, and free covered parking. Compare our all-in <strong className="text-[#1A3B34] font-semibold">~$1,400 total</strong> with <strong className="text-[#1A3B34] font-semibold">$0 Resort fees</strong> against Sheraton Waikiki and Hilton Hawaiian Village ($4,800–$6,500+). Authorized Short-Term Rental License by the City and County of Honolulu.
           </p>
         </div>
 
@@ -191,7 +166,12 @@ export const HotelSuiteComparison: React.FC<HotelSuiteComparisonProps> = ({
                   <div className="w-4 h-4 rounded-full bg-emerald-600/15 flex items-center justify-center shrink-0 mt-0.5">
                     <Check className="w-3 h-3 text-emerald-700" />
                   </div>
-                  <div className="space-y-0.5">
+                  <div className="space-y-0.5 flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-1 leading-none mb-0.5">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">
+                        Plumeria Unit
+                      </span>
+                    </div>
                     <strong className="text-emerald-950 block font-semibold text-xs leading-tight">
                       {pillar.plumeriaHighlight}
                     </strong>
@@ -201,24 +181,31 @@ export const HotelSuiteComparison: React.FC<HotelSuiteComparisonProps> = ({
                   </div>
                 </div>
 
-                {/* Competitor Comparison Rows: Cleanly structured key-values */}
-                <div className="p-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] text-neutral-600 space-y-2 text-xs min-h-[4.25rem] flex flex-col justify-center">
-                  <div className="flex items-center justify-between gap-1 leading-tight">
-                    <span className="font-medium text-neutral-800 text-[11px] sm:text-xs truncate">
-                      {pillar.competitorRow1.label}
-                    </span>
-                    <span className="text-red-700 font-semibold text-[11px] sm:text-xs shrink-0 whitespace-nowrap">
-                      {pillar.competitorRow1.value}
+                {/* VS Comparison Divider: Visually bridges Plumeria vs Competitor Hotels */}
+                <div className="relative flex items-center justify-center py-0.5" aria-label="Versus Hotel Comparison">
+                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div className="w-full border-t border-[#E8DCC6]" />
+                  </div>
+                  <div className="relative flex items-center justify-center">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#1A3B34] text-[#F6E7A7] text-[9.5px] font-black uppercase tracking-widest border border-[#C59B4B]/40 shadow-2xs">
+                      VS
                     </span>
                   </div>
-                  <div className="flex items-center justify-between gap-1 leading-tight pt-1 border-t border-[#E8DCC6]/60">
-                    <span className="font-medium text-neutral-800 text-[11px] sm:text-xs truncate">
-                      {pillar.competitorRow2.label}
+                </div>
+
+                {/* Hotel Comparison Box: Clean single-row comparison without truncation */}
+                <div className="p-3 sm:p-3.5 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] space-y-1 min-h-[4.75rem] flex flex-col justify-center">
+                  <div className="flex items-center justify-between gap-2 leading-tight">
+                    <span className="font-semibold text-[#1A3B34] text-[11px] sm:text-xs">
+                      {pillar.hotelComparison.label}
                     </span>
-                    <span className="text-red-700 font-semibold text-[11px] sm:text-xs shrink-0 whitespace-nowrap">
-                      {pillar.competitorRow2.value}
+                    <span className="text-red-600 font-bold text-[11px] sm:text-xs shrink-0 whitespace-nowrap">
+                      {pillar.hotelComparison.value}
                     </span>
                   </div>
+                  <p className="text-[11px] text-neutral-500 leading-tight font-light">
+                    {pillar.hotelComparison.detail}
+                  </p>
                 </div>
               </div>
 
@@ -241,19 +228,16 @@ export const HotelSuiteComparison: React.FC<HotelSuiteComparisonProps> = ({
             <div className="lg:col-span-7 xl:col-span-8 space-y-3 sm:space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#F6E7A7] text-[11px] sm:text-xs font-semibold uppercase tracking-wider border border-white/10">
                 <Award className="w-3.5 h-3.5 text-[#C59B4B]" />
-                <span>5-Night Realistic Stay Comparison</span>
+                <span>5-Night All-In Total Cost Comparison</span>
               </div>
 
               <h3 className="font-serif text-xl sm:text-2xl lg:text-3xl font-bold leading-snug tracking-tight">
-                Spend ~$1,825 with Plumeria vs. <br className="hidden sm:inline" />
-                <span className="text-[#F6E7A7]">~$2,530 at Aston</span> or{' '}
-                <span className="text-amber-200/90 font-medium">~$6,000+ at Hilton Suites</span>
+                Spend ~$1,120 with Plumeria vs. <br className="hidden sm:inline" />
+                <span className="text-[#F6E7A7]">~$5,200+ at Sheraton & Hilton</span>
               </h3>
 
               <p className="text-xs sm:text-sm text-white/85 font-light leading-relaxed max-w-2xl">
-                Even within the exact same Waikiki Banyan building, booking with Plumeria saves you{' '}
-                <strong className="text-[#F6E7A7] font-semibold">$700+ on parking and mandatory amenity fees</strong>
-                , while guaranteeing Tower 2’s 32nd or 36th floors, full kitchen savings, and whisper-quiet split-AC comfort. (Or save $4,000+ compared to 1-bedroom beachfront hotel suites).
+                Save over $4,000 on a 5-night stay with our limited-time $199/night promo rate across all units. Enjoy a private 624 sq. ft. high-floor suite with free parking and a full kitchen—without the $55/day resort fees or $72/day valet parking charged by Sheraton and Hilton. Authorized Short-Term Rental License by the City and County of Honolulu.
               </p>
             </div>
 

@@ -43,7 +43,7 @@ export const PropertyGallery: React.FC = () => {
     {
       id: 'g-6',
       url: '/images/properties/wb-3205-t2/unit-3205-07.webp',
-      caption: 'Fully equipped chef’s kitchen with full refrigerator, electric range, microwave, and coffee maker',
+      caption: 'Fully equipped kitchen with full refrigerator, electric range, microwave, and coffee maker',
       category: 'interiors',
     },
     {

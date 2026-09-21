@@ -113,7 +113,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ onOpenInquiry, onNavigate }) =
               Why Waikiki Banyan Outclasses Other Vacation Rentals
             </h3>
             <p className="text-xs sm:text-sm text-[#1A3B34]/75 font-light leading-relaxed">
-              Oʻahu’s largest 1-acre 6th-floor resort deck (heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs), full chef-ready kitchens in every suite, private ocean-view lanais, 1 flat block to Kuhio Beach, and $0 mandatory resort fees.
+              Oʻahu’s largest 1-acre 6th-floor resort deck (heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs), Full kitchens in every suite, private ocean-view lanais, 1 flat block to Kuhio Beach, and $0 mandatory resort fees. Authorized Short-Term Rental License by the City and County of Honolulu.
             </p>
           </div>
           <button
@@ -221,7 +221,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ onOpenInquiry, onNavigate }) =
                                 onClick={() => onNavigate('/rental-policy')}
                                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer group"
                               >
-                                <span>View Direct Booking Terms (Save 15%)</span>
+                                <span>View Direct Booking Terms</span>
                                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                               </button>
                             );

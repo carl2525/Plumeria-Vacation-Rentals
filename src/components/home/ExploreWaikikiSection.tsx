@@ -145,6 +145,31 @@ export const ExploreWaikikiSection: React.FC<ExploreWaikikiSectionProps> = ({ on
           ))}
         </div>
 
+        {/* Dedicated Dining Callout when Dining filter is selected */}
+        {activeCategory === 'dining' && (
+          <div className="mt-8 p-6 sm:p-7 rounded-3xl bg-white border border-[#C59B4B]/40 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <span className="text-[11px] uppercase tracking-wider font-bold text-[#C59B4B]">
+                Interactive Meal Calculator & Neighborhood Guide
+              </span>
+              <h4 className="font-serif text-lg font-bold text-[#1A3B34]">
+                Explore 11 Curated Waikiki Banyan Dining Spots & Itemized Prices
+              </h4>
+              <p className="text-xs text-[#1A3B34]/75 font-light">
+                Calculate your party's exact dining budget, find 2-minute walks for morning Kona coffee, fresh poke bowls, and local bakeries on the Explore page.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={onExploreMore}
+              className="px-5 py-2.5 rounded-full bg-[#1A3B34] text-[#F6E7A7] text-xs font-semibold hover:bg-[#234E45] transition-colors shrink-0 cursor-pointer flex items-center gap-1.5 shadow-xs"
+            >
+              <span>View Calculated Dining Guide</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
+
         {/* Bottom Explorer Action */}
         <div className="mt-12 text-center">
           <button

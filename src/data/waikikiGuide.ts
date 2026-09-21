@@ -100,7 +100,7 @@ export const WAIKIKI_DESTINATIONS: WaikikiDestination[] = [
     distanceFromBanyan: '6 Blocks · 8 min stroll down Kalākaua Ave',
     image: '/images/destinations/waikiki-market-place.jpg',
     description:
-      'An open-air shopping and cultural destination built around a magnificent 160-year-old banyan tree. Features authentic Hawaiian cultural workshops, world-class retail boutiques, evening torch lighting, and the third-floor Grand Lanai showcasing celebrated chef-driven restaurants—just an easy 8-minute stroll down Kalākaua Ave.',
+      'An open-air shopping and cultural destination built around a magnificent 160-year-old banyan tree. Features authentic Hawaiian cultural workshops, world-class retail boutiques, evening torch lighting, and the third-floor Grand Lanai showcasing acclaimed open-air restaurants—just an easy 8-minute stroll down Kalākaua Ave.',
     insiderTip:
       'Arrive in the Queen’s Court central garden around sunset for the free nightly torch lighting and live traditional hula storytelling performance.',
     highlightPills: ['160-Year-Old Banyan Tree', 'Grand Lanai Dining', 'Free Nightly Hula & Torches', 'Open-Air Boutiques'],

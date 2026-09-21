@@ -39,7 +39,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onLearnMore, onNavig
               <InlineLink to="/rentals" onNavigate={onNavigate}>
                 private 1-bedroom suites
               </InlineLink>{' '}
-              with 67 sq. ft. private lanais (624 sq. ft. total), full chef-ready kitchens, free covered garage parking included ($45/night value), 180° Diamond Head and mountain vistas, paired with Oʻahu’s largest{' '}
+              with 67 sq. ft. private lanais (624 sq. ft. total), Full kitchens, free covered garage parking included ($45/night value), 180° Diamond Head and mountain vistas, paired with Oʻahu’s largest{' '}
               <InlineLink to="/waikiki-banyan" onNavigate={onNavigate}>
                 1-acre resort recreation deck
               </InlineLink>{' '}
