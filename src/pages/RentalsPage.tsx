@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { PROPERTIES } from '../data/properties';
 import { PropertyCard } from '../components/rentals/PropertyCard';
-import { Building2, Search, Calendar, ArrowRight } from 'lucide-react';
+import { Building2, Search, Calendar, ArrowRight, ExternalLink } from 'lucide-react';
 import { PlumeriaSymbolLogo } from '../components/brand/PlumeriaSymbolLogo';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
+import { SITE_CONFIG } from '../config/site';
 
 interface RentalsPageProps {
   onSelectProperty: (slug: string) => void;
@@ -69,9 +70,16 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
         <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#C59B4B]/35 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 sm:gap-6">
           <div className="space-y-2 sm:space-y-0 sm:flex sm:items-center sm:gap-3.5 flex-1 min-w-0">
             <div className="flex items-center gap-2 shrink-0">
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-[#FF385C] text-white shadow-2xs whitespace-nowrap">
-                Airbnb First
-              </span>
+              <a
+                href={SITE_CONFIG.airbnbUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-[#FF385C] hover:bg-[#E00B41] text-white shadow-2xs whitespace-nowrap transition-colors cursor-pointer"
+                title="View Plumeria listings on Airbnb"
+              >
+                <span>Airbnb First</span>
+                <ExternalLink className="w-2.5 h-2.5" />
+              </a>
               <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-[#1A3B34] text-[#F6E7A7] border border-[#C59B4B]/40 whitespace-nowrap">
                 Promo $199 Base
               </span>
@@ -80,14 +88,26 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
               Our primary listings are on <strong className="text-[#1A3B34] font-semibold">Airbnb</strong>. Inquire directly on our website to receive our special promotional base rate (<strong className="text-[#1A3B34] font-semibold">$199/night in all units</strong>), $0 Resort fees, waived cleaning fee on 3+ nights, and free garage parking.
             </p>
           </div>
-          <button
-            id="btn-rentals-direct-inquiry"
-            onClick={() => onInquireProperty('')}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:py-2.5 rounded-xl bg-[#1A3B34] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#224D44] transition-colors shrink-0 cursor-pointer shadow-xs border border-[#C59B4B]/30 whitespace-nowrap"
-          >
-            <Calendar className="w-3.5 h-3.5 text-[#F6E7A7] shrink-0" />
-            <span>Inquire to Book</span>
-          </button>
+          <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+            <a
+              id="btn-rentals-airbnb-redirect"
+              href={SITE_CONFIG.airbnbUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer shadow-xs whitespace-nowrap"
+            >
+              <span>Book on Airbnb</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+            <button
+              id="btn-rentals-direct-inquiry"
+              onClick={() => onInquireProperty('')}
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#1A3B34] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#224D44] transition-colors cursor-pointer shadow-xs border border-[#C59B4B]/30 whitespace-nowrap"
+            >
+              <Calendar className="w-3.5 h-3.5 text-[#F6E7A7] shrink-0" />
+              <span>Inquire to Book</span>
+            </button>
+          </div>
         </div>
 
         {/* Filter Bar Panel */}

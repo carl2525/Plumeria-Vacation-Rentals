@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { X, Sparkles } from 'lucide-react';
+import { X, Sparkles, ExternalLink } from 'lucide-react';
 import { InquiryForm } from './InquiryForm';
 import { PlumeriaSymbolLogo } from '../brand/PlumeriaSymbolLogo';
+import { SITE_CONFIG } from '../../config/site';
 
 interface InquiryModalProps {
   isOpen: boolean;
@@ -69,9 +70,16 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.18em] uppercase text-[#8CA58A] truncate">
                   Waikiki Banyan
                 </span>
-                <span className="px-1.5 py-0.2 rounded-full text-[8.5px] sm:text-[9px] font-bold uppercase bg-[#FF385C]/10 text-[#FF385C] border border-[#FF385C]/20 whitespace-nowrap">
-                  Airbnb Listed
-                </span>
+                <a
+                  href={SITE_CONFIG.airbnbUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2 py-0.5 rounded-full text-[8.5px] sm:text-[9px] font-bold uppercase bg-[#FF385C] hover:bg-[#E00B41] text-white whitespace-nowrap inline-flex items-center gap-1 transition-colors shadow-2xs cursor-pointer"
+                  title="View listings on Airbnb"
+                >
+                  <span>Airbnb Listed</span>
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </a>
               </div>
               <h2
                 id="inquiry-modal-title"
@@ -82,14 +90,26 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
             </div>
           </div>
 
-          <button
-            id="close-inquiry-modal-btn"
-            onClick={onClose}
-            className="p-2 sm:p-2.5 rounded-full text-[#1A3B34]/60 hover:text-[#1A3B34] hover:bg-[#1A3B34]/10 transition-colors cursor-pointer shrink-0 ml-2"
-            aria-label="Close modal"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2 shrink-0 ml-2">
+            <a
+              id="modal-airbnb-redirect-btn"
+              href={SITE_CONFIG.airbnbUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FF385C] hover:bg-[#E00B41] text-white text-[11px] font-bold uppercase tracking-wider transition-colors shadow-2xs cursor-pointer"
+            >
+              <span>Book on Airbnb</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            <button
+              id="close-inquiry-modal-btn"
+              onClick={onClose}
+              className="p-2 sm:p-2.5 rounded-full text-[#1A3B34]/60 hover:text-[#1A3B34] hover:bg-[#1A3B34]/10 transition-colors cursor-pointer"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Direct Rate & Licensed STR Bar */}

@@ -105,16 +105,28 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               </div>
 
               {/* Airbnb First Information Badge */}
-              <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#FF385C]/30 text-xs text-[#1A3B34]/85 space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase bg-[#FF385C] text-white">
-                    Airbnb Primary
-                  </span>
-                  <span className="font-semibold text-[#1A3B34]">Direct Inquiries Welcomed</span>
+              <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#FF385C]/30 text-xs text-[#1A3B34]/85 space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase bg-[#FF385C] text-white">
+                      Airbnb Primary
+                    </span>
+                    <span className="font-semibold text-[#1A3B34]">Direct Inquiries Welcomed</span>
+                  </div>
                 </div>
-                <p className="text-[11px] text-[#1A3B34]/75 leading-relaxed pt-0.5">
+                <p className="text-[11px] text-[#1A3B34]/75 leading-relaxed">
                   Our main listings are on Airbnb. You can submit this inquiry to check availability, ask questions, or inquire about direct booking rates with $0 resort fees.
                 </p>
+                <a
+                  id="contact-airbnb-redirect-btn"
+                  href={SITE_CONFIG.airbnbUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2 px-3 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
+                >
+                  <span>View Listings on Airbnb</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
               </div>
 
               <div className="space-y-4 text-xs sm:text-sm text-[#1A3B34]/80">

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Users, Bed, Bath, MapPin, Eye, Calendar, Check } from 'lucide-react';
+import { Users, Bed, Bath, MapPin, Eye, Calendar, Check, ExternalLink, Car } from 'lucide-react';
 import { Property } from '../../types';
 import { AppImage } from '../common/AppImage';
+import { SITE_CONFIG } from '../../config/site';
 
 interface PropertyCardProps {
   property: Property;
@@ -64,9 +65,17 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <span className="inline-flex items-center px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-[#1A3B34] text-[#F6E7A7] shadow-sm border border-[#C59B4B]/30 whitespace-nowrap">
               {property.unitNumber ? `Unit #${property.unitNumber}` : property.tower}
             </span>
-            <span className="inline-flex items-center px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-[#FF385C] text-white shadow-sm whitespace-nowrap">
-              Airbnb
-            </span>
+            <a
+              href={property.airbnbUrl || SITE_CONFIG.airbnbUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              title="View & Book on Airbnb"
+              className="inline-flex items-center gap-1 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-[#FF385C] hover:bg-[#E00B41] text-white shadow-sm whitespace-nowrap transition-colors cursor-pointer"
+            >
+              <span>Airbnb</span>
+              <ExternalLink className="w-2.5 h-2.5" />
+            </a>
           </div>
         </div>
 
@@ -134,14 +143,20 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           </div>
 
           {/* Pricing & Direct Host Rate Highlight */}
-          <div className="pt-2.5 pb-1 flex items-center justify-between border-t border-[#E8DCC6]/60">
-            <div className="flex items-baseline gap-1.5">
+          <div className="pt-2.5 pb-1 flex items-center justify-between gap-2 border-t border-[#E8DCC6]/60">
+            <div className="flex items-baseline gap-1.5 shrink-0">
               <span className="font-serif text-lg font-bold text-[#1A3B34]">$199</span>
               <span className="text-[11px] text-[#C59B4B] font-semibold">/ night promo</span>
             </div>
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#1A3B34] text-[#F6E7A7] text-[10px] font-bold uppercase tracking-wider border border-[#C59B4B]/30">
-              <span>$0 Resort Fees</span>
-            </span>
+            <div className="flex items-center gap-1.5 flex-wrap justify-end">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#8CA58A]/20 text-[#1A3B34] text-[10px] font-bold uppercase tracking-wider border border-[#8CA58A]/40 whitespace-nowrap">
+                <Car className="w-2.5 h-2.5 text-[#1A3B34] shrink-0" />
+                <span>Free Parking</span>
+              </span>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#1A3B34] text-[#F6E7A7] text-[10px] font-bold uppercase tracking-wider border border-[#C59B4B]/30 whitespace-nowrap">
+                <span>$0 Resort Fees</span>
+              </span>
+            </div>
           </div>
         </div>
 

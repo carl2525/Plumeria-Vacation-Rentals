@@ -16,8 +16,7 @@ export const PROPERTIES: Property[] = [
     bathrooms: 1,
     squareFeet: 557,
     lanaiSquareFeet: 67,
-    airbnbUrl:
-      'https://www.airbnb.com/rooms/1767420192344611400?guests=1&adults=1&s=67&unique_share_id=086ed1ef-5f90-49c9-84d5-ead36b679bef&source_impression_id=p3_1789256216_P3Fpxgx_Oqa41CRK',
+    airbnbUrl: 'https://www.airbnb.com',
     featured: true,
     heroImage: '/images/banyan/banyan-amenity-03.webp',
     gallery: [
@@ -170,8 +169,7 @@ export const PROPERTIES: Property[] = [
     bathrooms: 1,
     squareFeet: 557,
     lanaiSquareFeet: 67,
-    airbnbUrl:
-      'https://www.airbnb.com/rooms/1767420192344611400?guests=1&adults=1&s=67&unique_share_id=086ed1ef-5f90-49c9-84d5-ead36b679bef&source_impression_id=p3_1789256216_P3Fpxgx_Oqa41CRK',
+    airbnbUrl: 'https://www.airbnb.com',
     featured: true,
     heroImage: '/images/properties/wb-3205-t2/unit-3205-01.webp',
     gallery: [

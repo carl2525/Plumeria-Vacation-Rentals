@@ -26,8 +26,7 @@ export const SITE_CONFIG = {
   email: 'plumeria.vacationrentals808@gmail.com',
   phone: '(808) 671-9191',
   phoneRaw: '+18086719191',
-  airbnbUrl:
-    'https://www.airbnb.com/rooms/1767420192344611400?guests=1&adults=1&s=67&unique_share_id=086ed1ef-5f90-49c9-84d5-ead36b679bef&source_impression_id=p3_1789256216_P3Fpxgx_Oqa41CRK',
+  airbnbUrl: 'https://www.airbnb.com',
   address: {
     building: 'Waikiki Banyan',
     street: '201 ʻOhua Avenue',

@@ -23,7 +23,7 @@ export function resolvePropertyName(propertyId?: string, explicitName?: string):
   if (explicitName) return explicitName;
   if (!propertyId) return 'Any Available Waikiki Banyan Suite (Tower 2)';
   const match = PROPERTIES.find((p) => p.id === propertyId || p.slug === propertyId);
-  return match ? `${match.name} (${match.viewType})` : 'Waikiki Banyan Suite';
+  return match ? match.name : 'Waikiki Banyan Suite';
 }
 
 /**

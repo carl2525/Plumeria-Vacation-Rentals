@@ -138,7 +138,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
 
   if (status === 'success') {
     const selectedProp = PROPERTIES.find((p) => p.id === formData.preferredProperty);
-    const suiteName = selectedProp ? `${selectedProp.name} (${selectedProp.viewType})` : 'Waikiki Banyan Suite';
+    const suiteName = selectedProp ? selectedProp.name : 'Waikiki Banyan Suite';
 
     return (
       <div className="space-y-4 sm:space-y-5 animate-fade-in text-left">
@@ -397,9 +397,16 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             </span>
           </div>
           <div className="flex items-center gap-2 self-start xs:self-auto shrink-0">
-            <span className="px-1.5 py-0.2 rounded text-[8px] font-bold uppercase bg-[#FF385C] text-white">
-              Airbnb Listed
-            </span>
+            <a
+              href={SITE_CONFIG.airbnbUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-2 py-0.5 rounded text-[8.5px] font-bold uppercase bg-[#FF385C] hover:bg-[#E00B41] text-white transition-colors inline-flex items-center gap-1 shadow-2xs cursor-pointer"
+              title="View on Airbnb"
+            >
+              <span>Airbnb Listed</span>
+              <ExternalLink className="w-2.5 h-2.5" />
+            </a>
             <a
               href={`mailto:${SITE_CONFIG.email}?subject=Booking%20Inquiry%20-%20Waikiki%20Banyan%20(Direct%20Booking)`}
               className="inline-flex items-center gap-1 text-[10.5px] font-semibold text-[#F6E7A7] hover:underline"
@@ -672,7 +679,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               <option value="">Any Available Waikiki Banyan Suite</option>
               {PROPERTIES.map((p) => (
                 <option key={p.id} value={p.id}>
-                  {p.name} ({p.viewType})
+                  {p.name}
                 </option>
               ))}
             </select>
