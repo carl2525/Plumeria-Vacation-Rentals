@@ -27,7 +27,7 @@ export function resolvePropertyName(propertyId?: string, explicitName?: string):
 }
 
 /**
- * Builds formatted plain text inquiry body for email
+ * Builds formatted plain text inquiry body for email (optimized for high deliverability)
  */
 export function buildInquiryEmailText(params: MailtoInquiryParams): string {
   const guestName = [params.firstName, params.lastName].filter(Boolean).join(' ') || 'Prospective Guest';
@@ -41,9 +41,9 @@ export function buildInquiryEmailText(params: MailtoInquiryParams): string {
   const notesText = params.message && params.message.trim() ? params.message.trim() : 'No special requests submitted.';
 
   // Calculate nights and estimated pricing if dates provided
-  let rateDetail = `• Base Rate      : $199 / night (Promotional Host Website Rate)
-• Resort Fees    : $0.00 (Never charged · $0 Resort Fees)
-• Garage Parking : INCLUDED ($0.00 dedicated covered pass)`;
+  let rateDetail = `- Base Rate: $199 / night
+- Resort Fees: $0.00 (Never charged)
+- Covered Parking: Included ($0.00 dedicated pass)`;
 
   if (params.checkIn && params.checkOut) {
     const start = new Date(params.checkIn).getTime();
@@ -52,83 +52,54 @@ export function buildInquiryEmailText(params: MailtoInquiryParams): string {
       const nights = Math.round((end - start) / (1000 * 60 * 60 * 24));
       const pricing = calculateStayPricing(nights);
       const discountText = pricing.discountPercent > 0 ? ` (Includes ${pricing.discountPercent}% Stay Discount of -${formatCurrency(pricing.discountAmount)})` : '';
-      const cleaningText = pricing.isCleaningFeeWaived ? '$0.00 (Waived for 3+ nights)' : `${formatCurrency(pricing.cleaningFee)} (1-2 night stay)`;
-      const taxesText = `${formatCurrency(pricing.totalTaxes)} (18.50% Hawaii Lodging Taxes)`;
+      const cleaningText = pricing.isCleaningFeeWaived
+        ? '$0.00 (Waived for 3+ nights stay)'
+        : `${formatCurrency(pricing.cleaningFee)} (1-2 night stay)`;
+      const taxesText = `${formatCurrency(pricing.totalTaxes)} (18.5% Hawaii Taxes)`;
 
-      rateDetail = `• Stay Duration  : ${nights} Nights (${params.checkIn} to ${params.checkOut})
-• Base Rate      : $199 / night (${formatCurrency(pricing.grossRoomTotal)}${discountText})
-• Resort Fees    : $0.00 (Never charged · $0 Resort Fees)
-• Garage Parking : INCLUDED ($0.00 Dedicated Covered Garage Pass)
-• Cleaning Fee   : ${cleaningText}
-• Hawaii Taxes   : ${taxesText}
-──────────────────────────────────────────────────────────
-• ESTIMATED TOTAL: ${formatCurrency(pricing.grandTotal)}
-  (Formula: TAX + Base + Cleaning Fee = Grand Total)`;
+      rateDetail = `- Stay Duration: ${nights} Nights (${params.checkIn} to ${params.checkOut})
+- Base Rate: $199 / night (${formatCurrency(pricing.grossRoomTotal)}${discountText})
+- Resort Fees: $0.00 (Never charged)
+- Covered Parking: Included ($0.00 dedicated garage pass)
+- Cleaning Fee: ${cleaningText}
+- Hawaii Taxes: ${taxesText}
+- Estimated Total: ${formatCurrency(pricing.grandTotal)}`;
     }
   }
 
-  return `══════════════════════════════════════════════════════════
-       PLUMERIA VACATION RENTALS · WAIKIKI BANYAN
-          Direct Booking Inquiry & Stay Request
-       Honolulu Authorized Short-Term Rental Host
-══════════════════════════════════════════════════════════
+  return `Aloha Plumeria Vacation Rentals Team,
 
-Aloha Plumeria Vacation Rentals Team,
+I would like to inquire about reserving a stay at Waikiki Banyan:
 
-I am requesting a direct booking reservation at Waikiki Banyan with the $199/night promo rate, $0 resort fees, and free covered parking:
+RESERVATION DETAILS:
+- Suite: ${suiteName}
+- Check-In: ${checkInText} (2:00 PM HST)
+- Check-Out: ${checkOutText} (12:00 PM HST)
+- Guests: ${guestsText}
 
-┌─ 1. RESERVATION DETAILS ────────────────────────────────
-│ Preferred Suite : ${suiteName}
-│ Check-In Date   : ${checkInText} (2:00 PM HST)
-│ Check-Out Date  : ${checkOutText} (12:00 PM HST)
-│ Number of Guests: ${guestsText}
-└─────────────────────────────────────────────────────────
+ESTIMATED PRICING:
+${rateDetail}
 
-┌─ 2. ESTIMATED PRICING & INCLUDED VALUE ─────────────────
-${rateDetail.split('\n').map(line => `│ ${line}`).join('\n')}
-│
-│ Included Suite Amenities:
-│ • High-floor Tower 2 placement (Floors 32 or 36)
-│ • Fully Airconditioned suite & private lanai
-│ • Full kitchen (refrigerator, stove, oven, microwave)
-│ • 1-Acre 6th-Floor recreation deck (heated pool, hot tubs, BBQ)
-│ • Complimentary beach chairs, towels & cooler tote
-└─────────────────────────────────────────────────────────
+GUEST CONTACT INFORMATION:
+- Name: ${guestName}
+- Email: ${emailText}
+- Phone: ${phoneText}
 
-┌─ 3. GUEST CONTACT INFORMATION ──────────────────────────
-│ Lead Guest Name : ${guestName}
-│ Email Address   : ${emailText}
-│ Phone Number    : ${phoneText}
-└─────────────────────────────────────────────────────────
+SPECIAL REQUESTS / QUESTIONS:
+${notesText}
 
-┌─ 4. IMPORTANT RESERVATION & VERIFICATION NOTICE ────────
-│ • Final Details & Computation:
-│   Final reservation details, exact dates, and verified
-│   cost computation will be sent via return email.
-│
-│ • Identity & Stay Verification:
-│   Please note that further guest verification may be
-│   required via email once this inquiry is received
-│   before your stay is formally confirmed.
-└─────────────────────────────────────────────────────────
-
-┌─ 5. SPECIAL REQUESTS OR QUESTIONS ──────────────────────
-│ ${notesText}
-└─────────────────────────────────────────────────────────
-
-Mahalo nui loa,
+Mahalo,
 ${guestName}
 
-──────────────────────────────────────────────────────────
+---
 Plumeria Vacation Rentals at Waikiki Banyan
-201 ʻOhua Avenue, Tower 2, Honolulu, HI 96815
+201 Ohua Avenue, Tower 2, Honolulu, HI 96815
 Direct Host Phone: (808) 671-9191
-Website: plumeriavacationrentals.com
-══════════════════════════════════════════════════════════`;
+Website: https://plumeriavacationrentals.com`;
 }
 
 /**
- * Builds the subject line for the inquiry email
+ * Builds the subject line for the inquiry email (clean, spam-safe format)
  */
 export function buildInquirySubject(params: MailtoInquiryParams): string {
   const propIdentifier = params.preferredProperty || params.propertyId;
@@ -137,7 +108,7 @@ export function buildInquirySubject(params: MailtoInquiryParams): string {
   const guestName = [params.firstName, params.lastName].filter(Boolean).join(' ');
   const fromPart = guestName ? ` - ${guestName}` : '';
 
-  return `Stay Inquiry: ${suite}${dates} [$199/nt Promo]${fromPart}`;
+  return `Reservation Inquiry: ${suite}${dates}${fromPart}`;
 }
 
 /**

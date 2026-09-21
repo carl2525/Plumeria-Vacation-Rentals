@@ -96,11 +96,11 @@ export function calculateStayPricing(nights: number, customBaseRate: number = BA
   const isCleaningFeeWaived = safeNights >= CLEANING_FEE_WAIVED_NIGHTS;
 
   const taxableSubtotal = netRoomTotal + cleaningFee;
-  // Round all taxes and totals to solid whole numbers for clear readability
+  // Apply 18.5% tax directly to taxable subtotal (Base + Cleaning Fee)
+  const totalTaxes = Math.round(taxableSubtotal * TAX_RATES.TOTAL_DECIMAL);
   const taxGet = Math.round(taxableSubtotal * TAX_RATES.GET_DECIMAL);
   const taxTat = Math.round(taxableSubtotal * TAX_RATES.TAT_DECIMAL);
   const taxOtat = Math.round(taxableSubtotal * TAX_RATES.OTAT_DECIMAL);
-  const totalTaxes = taxGet + taxTat + taxOtat;
 
   const grandTotal = taxableSubtotal + totalTaxes;
 

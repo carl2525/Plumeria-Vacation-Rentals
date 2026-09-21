@@ -13,7 +13,7 @@ export const FAQS: FAQItem[] = [
     category: 'Booking & Policies',
     question: 'Are there mandatory daily resort fees or parking fees?',
     answer:
-      'No! Plumeria Vacation Rentals does not charge a separate Resort fee ($0 Resort fees). Furthermore, covered on-site garage parking is included with your stay from check-in through checkout. Your promotional base rate is currently $199 per night across all units. Transparent pricing: TAX (18.50%: GET 4.5% + TAT 11% + OTAT 3%) + Base + Cleaning Fee ($250 for 1–2 night stays, waived for 3+ nights, with tiered discounts up to 30% for extended stays).',
+      'No! Plumeria Vacation Rentals does not charge a separate Resort fee ($0 Resort fees). Furthermore, covered on-site garage parking is included with your stay from check-in through checkout. Your promotional base rate is currently $199 per night across all units. Transparent pricing: TAX (18.5%) + Base + Cleaning Fee ($250 for 1–2 night stays, waived for 3+ nights, with tiered discounts up to 30% for extended stays). Want to waive the cleaning fee? Simply book 3 nights or more!',
   },
   {
     id: 'faq-competitor-pricing',

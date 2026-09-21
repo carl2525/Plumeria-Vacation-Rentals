@@ -141,28 +141,64 @@ export const PricingCalculatorCard: React.FC<PricingCalculatorCardProps> = ({
         )}
 
         {/* Cleaning Fee */}
-        <div className="flex items-center justify-between pt-1 border-t border-[#E8DCC6]/60">
-          <div className="space-y-0.5">
-            <span className="font-medium text-[#1A3B34]">Cleaning Fee</span>
-            <span className="block text-[11px] text-[#1A3B34]/60">
-              {pricing.isCleaningFeeWaived ? (
-                <span className="text-emerald-700 font-semibold">
-                  ✓ Waived for 3+ nights (Standard $250 fee is $0)
-                </span>
+        <div className="pt-1 border-t border-[#E8DCC6]/60 space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <span className="font-medium text-[#1A3B34]">Cleaning Fee</span>
+              <span className="block text-[11px] text-[#1A3B34]/60">
+                {pricing.isCleaningFeeWaived ? (
+                  <span className="text-emerald-700 font-semibold">
+                    ✓ Waived for 3+ nights (Standard $250 fee is $0)
+                  </span>
+                ) : (
+                  <span className="text-amber-800">
+                    $250 fee for short stays (1–2 nights only)
+                  </span>
+                )}
+              </span>
+            </div>
+            <span className="font-semibold text-[#1A3B34]">
+              {pricing.cleaningFee > 0 ? (
+                formatCurrency(pricing.cleaningFee)
               ) : (
-                <span className="text-amber-800">
-                  $250 fee for short stays (1–2 nights only)
-                </span>
+                <span className="text-emerald-700 font-bold">$0 (Waived)</span>
               )}
             </span>
           </div>
-          <span className="font-semibold text-[#1A3B34]">
-            {pricing.cleaningFee > 0 ? (
-              formatCurrency(pricing.cleaningFee)
-            ) : (
-              <span className="text-emerald-700 font-bold">$0 (Waived)</span>
-            )}
-          </span>
+
+          {/* Want to waive cleaning fee banner */}
+          {nights < 3 ? (
+            <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200/80 flex items-start gap-2 text-xs text-amber-900">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <span className="font-bold block text-amber-950">
+                  Want to waive the cleaning fee? Book 3 nights or more!
+                </span>
+                <p className="text-[11px] text-amber-800 leading-snug">
+                  Stays of 1–2 nights incur a $250 cleaning fee. Book 3 nights or more and the cleaning fee is completely waived ($0 fee).
+                </p>
+                <button
+                  type="button"
+                  onClick={() => handleNightsChange(3)}
+                  className="mt-1 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#1A3B34] hover:bg-[#224D44] text-[#F6E7A7] font-bold text-[10.5px] uppercase tracking-wider transition-colors cursor-pointer"
+                >
+                  <span>Select 3 Nights & Save $250</span>
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-200/70 flex items-center justify-between text-xs text-emerald-900">
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span className="font-semibold text-[11px]">
+                  Cleaning fee waived! You saved $250 by booking 3+ nights.
+                </span>
+              </div>
+              <span className="px-2 py-0.5 rounded-md bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider">
+                $0 Fee
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Resort Fees & Parking */}
@@ -175,27 +211,15 @@ export const PricingCalculatorCard: React.FC<PricingCalculatorCardProps> = ({
           <span className="font-bold">Included ($0)</span>
         </div>
 
-        {/* Taxes Breakdown (18.50% Total) */}
-        <div className="pt-2 border-t border-[#E8DCC6] space-y-1.5">
-          <div className="flex items-center justify-between font-semibold text-[#1A3B34]">
-            <span>Hawaii Taxes (18.50% Total)</span>
-            <span>{formatCurrency(pricing.totalTaxes)}</span>
+        {/* Hawaii Taxes (18.5% Total) */}
+        <div className="pt-2 border-t border-[#E8DCC6] flex items-center justify-between text-xs sm:text-sm font-semibold text-[#1A3B34]">
+          <div className="space-y-0.5">
+            <span>Hawaii Taxes (18.5%)</span>
+            <span className="block text-[10.5px] font-normal text-[#1A3B34]/60">
+              Applied directly to Base Rate + Cleaning Fee
+            </span>
           </div>
-
-          <div className="pl-2 space-y-1 text-[11px] text-[#1A3B34]/70">
-            <div className="flex items-center justify-between">
-              <span>• GET (General Excise Tax) — 4.5%</span>
-              <span>{formatCurrency(pricing.taxGet)}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>• TAT (Transient Accommodations Tax) — 11%</span>
-              <span>{formatCurrency(pricing.taxTat)}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>• OTAT (Oʻahu Transient Accommodations Tax) — 3%</span>
-              <span>{formatCurrency(pricing.taxOtat)}</span>
-            </div>
-          </div>
+          <span>{formatCurrency(pricing.totalTaxes)}</span>
         </div>
 
         {/* Grand Total */}

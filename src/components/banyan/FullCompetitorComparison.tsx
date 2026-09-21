@@ -806,6 +806,24 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                   </button>
                 ))}
               </div>
+
+              {/* Want to waive cleaning fee tip */}
+              {stayNights < 3 ? (
+                <div className="p-2 rounded-xl bg-amber-50 border border-amber-200/80 text-[11px] text-amber-900 flex items-center justify-between gap-2 mt-2">
+                  <span><strong>Want to waive the cleaning fee?</strong> Book 3 nights or more ($0 cleaning fee instead of $250)!</span>
+                  <button
+                    type="button"
+                    onClick={() => setStayNights(3)}
+                    className="px-2.5 py-1 rounded bg-[#1A3B34] text-[#F6E7A7] text-[10px] font-bold uppercase tracking-wider whitespace-nowrap cursor-pointer hover:bg-[#224D44]"
+                  >
+                    Select 3 Nts
+                  </button>
+                </div>
+              ) : (
+                <div className="p-1.5 px-2.5 rounded-lg bg-emerald-50 text-[11px] text-emerald-900 border border-emerald-200/70 flex items-center gap-1.5 mt-2">
+                  <span>✓ <strong>Cleaning fee waived!</strong> You save $250 with 3+ nights.</span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -846,11 +864,8 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                   </div>
 
                   <div className="flex justify-between text-[#F6E7A7]">
-                    <span>Hawaii Taxes (18.50% total):</span>
+                    <span>Hawaii Taxes (18.5%):</span>
                     <span className="font-semibold">${Math.round(plumeriaPricing.totalTaxes).toLocaleString()}</span>
-                  </div>
-                  <div className="text-[10px] text-white/60 pl-2">
-                    GET 4.5% (${Math.round(plumeriaPricing.taxGet)}) + TAT 11% (${Math.round(plumeriaPricing.taxTat)}) + OTAT 3% (${Math.round(plumeriaPricing.taxOtat)})
                   </div>
 
                   <div className="flex justify-between text-emerald-300 font-medium pt-1">
@@ -919,7 +934,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                     <span>+${((calculatorMode === 'hotels' ? hiltonResortFee : astonResortFee) * stayNights).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-[#8A5A1C]">
-                    <span>Hawaii Taxes (GET 4.5% + TAT 11% + OTAT 3% = 18.50%):</span>
+                    <span>Hawaii Taxes (18.5%):</span>
                     <span className="font-semibold">+${((calculatorMode === 'hotels' ? hiltonRoomTaxDaily : astonRoomTaxDaily) * stayNights).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-red-600">
@@ -977,7 +992,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                     </span>
                   </div>
                   <div className="flex justify-between text-[#8A5A1C]">
-                    <span>Hawaii Taxes (GET 4.5% + TAT 11% + OTAT 3% = 18.50%):</span>
+                    <span>Hawaii Taxes (18.5%):</span>
                     <span className="font-semibold">+${((calculatorMode === 'hotels' ? sheratonRoomTaxDaily : genericAirbnbRoomTaxDaily) * stayNights).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-red-600">
@@ -1043,10 +1058,10 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
           <div className="p-4 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1.5">
             <span className="font-semibold text-[#1A3B34] block text-sm">How This Comparative Pricing is Grounded:</span>
             <p className="font-light leading-relaxed">
-              • <strong>Plumeria at Waikiki Banyan:</strong> $199/night promotional rate across all units, $0 Resort fees, $0 parking pass. Cleaning fee is $250 for 1–2 nights and waived ($0) for 3+ nights. Tiered stay discounts apply incrementally (5 days: 5%, 10 days: 10%, 15 days: 15%, 20 days: 20%, 25 days: 25%, 30 days: 30%). Hawaii Taxes: GET 4.5%, TAT 11%, OTAT 3% (18.50% total applied to Base + Cleaning Fee).
+              • <strong>Plumeria at Waikiki Banyan:</strong> $199/night promotional rate across all units, $0 Resort fees, $0 parking pass. Cleaning fee is $250 for 1–2 nights and waived ($0) for 3+ nights. Tiered stay discounts apply incrementally (5 days: 5%, 10 days: 10%, 15 days: 15%, 20 days: 20%, 25 days: 25%, 30 days: 30%). Hawaii Taxes: 18.5% total applied directly to Base + Cleaning Fee.
             </p>
             <p className="font-light leading-relaxed">
-              • <strong>Hawaii Taxes (GET, TAT, OTAT):</strong> Full Hawaii taxes (18.50% total: GET 4.5%, TAT 11%, OTAT 3%) are applied across competitor room rates and mandatory resort fees, giving you an accurate, true comparison.
+              • <strong>Hawaii Taxes:</strong> Full Hawaii taxes (18.5% total) are applied across competitor room rates and mandatory resort fees, giving you an accurate, true comparison.
             </p>
             <p className="font-light leading-relaxed">
               • <strong>Taxed Hotel Parking:</strong> Hawaii hotels and garages apply Hawaii General Excise Tax (GET 4.712%) to parking fees ($69/day at Hilton, $55/day at Sheraton, $43/day at Aston). Plumeria includes a complimentary dedicated covered parking pass ($0 fee, $0 tax).

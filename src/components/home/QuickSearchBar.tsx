@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, Users, Search, MapPin } from 'lucide-react';
+import { getTodayDateString, getNextDayDateString, isDateInPast } from '../../utils/date';
 
 interface QuickSearchBarProps {
   onSearch: (params: { checkIn: string; checkOut: string; guests: number }) => void;
@@ -10,9 +11,41 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(2);
 
+  const todayStr = getTodayDateString();
+  const minCheckOutStr = checkIn ? getNextDayDateString(checkIn, 1) : getNextDayDateString(todayStr, 1);
+
+  const handleCheckInChange = (newDate: string) => {
+    // Prevent selecting a past date
+    if (newDate && isDateInPast(newDate)) {
+      setCheckIn(todayStr);
+      if (checkOut && checkOut <= todayStr) {
+        setCheckOut(getNextDayDateString(todayStr, 1));
+      }
+      return;
+    }
+
+    setCheckIn(newDate);
+
+    // If checkOut is already chosen and is on or before the new checkIn, update checkOut
+    if (newDate && checkOut && checkOut <= newDate) {
+      setCheckOut(getNextDayDateString(newDate, 1));
+    }
+  };
+
+  const handleCheckOutChange = (newDate: string) => {
+    // If selected checkOut is before minCheckOutStr, enforce min
+    if (newDate && newDate < minCheckOutStr) {
+      setCheckOut(minCheckOutStr);
+      return;
+    }
+    setCheckOut(newDate);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch({ checkIn, checkOut, guests });
+    const safeCheckIn = checkIn && !isDateInPast(checkIn) ? checkIn : '';
+    const safeCheckOut = checkOut && (!safeCheckIn || checkOut > safeCheckIn) ? checkOut : '';
+    onSearch({ checkIn: safeCheckIn, checkOut: safeCheckOut, guests });
   };
 
   return (
@@ -52,8 +85,9 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
             <input
               type="date"
               id="search-checkin"
+              min={todayStr}
               value={checkIn}
-              onChange={(e) => setCheckIn(e.target.value)}
+              onChange={(e) => handleCheckInChange(e.target.value)}
               className="w-full text-xs sm:text-sm font-semibold text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer p-0 m-0"
             />
           </div>
@@ -74,8 +108,9 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
             <input
               type="date"
               id="search-checkout"
+              min={minCheckOutStr}
               value={checkOut}
-              onChange={(e) => setCheckOut(e.target.value)}
+              onChange={(e) => handleCheckOutChange(e.target.value)}
               className="w-full text-xs sm:text-sm font-semibold text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer p-0 m-0"
             />
           </div>

@@ -18,20 +18,11 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
   onNavigate,
 }) => {
   const [selectedView, setSelectedView] = useState<string>('all');
-  const [selectedTower, setSelectedTower] = useState<string>('all');
-  const [minGuests, setMinGuests] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const filteredProperties = PROPERTIES.filter((p) => {
     // View filter
     if (selectedView !== 'all' && p.viewType !== selectedView) return false;
-    // Tower filter
-    if (selectedTower !== 'all') {
-      if (selectedTower === 'tower1' && !p.tower.includes('Tower 1')) return false;
-      if (selectedTower === 'tower2' && !p.tower.includes('Tower 2')) return false;
-    }
-    // Guest filter
-    if (p.guestsMax < minGuests) return false;
     // Search query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
@@ -66,35 +57,18 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
           </p>
         </div>
 
-        {/* Airbnb First & Direct Inquiry Clarification Banner - Fully Responsive */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#C59B4B]/35 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 sm:gap-6">
-          <div className="space-y-2 sm:space-y-0 sm:flex sm:items-center sm:gap-3.5 flex-1 min-w-0">
-            <div className="flex items-center gap-2 shrink-0">
-              <a
-                href={SITE_CONFIG.airbnbUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-[#FF385C] hover:bg-[#E00B41] text-white shadow-2xs whitespace-nowrap transition-colors cursor-pointer"
-                title="View Plumeria listings on Airbnb"
-              >
-                <span>Airbnb First</span>
-                <ExternalLink className="w-2.5 h-2.5" />
-              </a>
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-[#1A3B34] text-[#F6E7A7] border border-[#C59B4B]/40 whitespace-nowrap">
-                Promo $199 Base
-              </span>
-            </div>
-            <p className="text-xs sm:text-sm text-[#1A3B34]/85 leading-relaxed">
-              Our primary listings are on <strong className="text-[#1A3B34] font-semibold">Airbnb</strong>. Inquire directly on our website to receive our special promotional base rate (<strong className="text-[#1A3B34] font-semibold">$199/night in all units</strong>), $0 Resort fees, waived cleaning fee on 3+ nights, and free garage parking.
-            </p>
-          </div>
-          <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+        {/* Simplified Airbnb & Direct Booking Banner */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E8DCC6] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-xs sm:text-sm text-[#1A3B34]/85 leading-relaxed max-w-2xl">
+            Our primary listings are on <strong className="text-[#1A3B34] font-semibold">Airbnb</strong>. Inquire directly on our website for our <strong className="text-[#1A3B34] font-semibold">$199/night</strong> promo rate, $0 resort fees, and free garage parking.
+          </p>
+          <div className="flex items-center gap-2.5 shrink-0">
             <a
               id="btn-rentals-airbnb-redirect"
               href={SITE_CONFIG.airbnbUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer shadow-xs whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#FF385C]/35 text-[#FF385C] hover:bg-[#FF385C]/5 text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer"
             >
               <span>Book on Airbnb</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -102,97 +76,71 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
             <button
               id="btn-rentals-direct-inquiry"
               onClick={() => onInquireProperty('')}
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#1A3B34] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#224D44] transition-colors cursor-pointer shadow-xs border border-[#C59B4B]/30 whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white text-xs font-semibold transition-colors shadow-2xs whitespace-nowrap cursor-pointer"
             >
-              <Calendar className="w-3.5 h-3.5 text-[#F6E7A7] shrink-0" />
+              <Calendar className="w-3.5 h-3.5 text-[#F6E7A7]" />
               <span>Inquire to Book</span>
             </button>
           </div>
         </div>
 
-        {/* Filter Bar Panel */}
-        <div className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#E8DCC6] shadow-xs space-y-4">
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4">
-            {/* Search Input */}
-            <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
-              <input
-                type="text"
-                placeholder="Search by view, features, or amenities..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm bg-[#F9F7F2] border border-[#E8DCC6] rounded-xl sm:rounded-2xl text-[#1A3B34] placeholder:text-[#1A3B34]/40 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
-              />
-            </div>
-
-            {/* Quick Filters */}
-            <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2 sm:gap-3">
-              {/* View Selector */}
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                <span className="text-xs font-semibold text-[#1A3B34]/70 hidden sm:inline">View:</span>
-                <select
-                  value={selectedView}
-                  onChange={(e) => setSelectedView(e.target.value)}
-                  className="w-full sm:w-auto px-3 py-2 text-xs font-medium bg-[#F9F7F2] border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none cursor-pointer"
-                >
-                  <option value="all">All Views</option>
-                  <option value="Ocean View">Ocean View</option>
-                  <option value="Mountain & City View">Mountain & City View</option>
-                  <option value="Diamond Head & Sunset">Diamond Head View</option>
-                  <option value="Partial Ocean & City">Partial Ocean</option>
-                </select>
-              </div>
-
-              {/* Tower Selector */}
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                <span className="text-xs font-semibold text-[#1A3B34]/70 hidden sm:inline">Tower:</span>
-                <select
-                  value={selectedTower}
-                  onChange={(e) => setSelectedTower(e.target.value)}
-                  className="w-full sm:w-auto px-3 py-2 text-xs font-medium bg-[#F9F7F2] border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none cursor-pointer"
-                >
-                  <option value="all">Both Towers</option>
-                  <option value="tower1">Tower 1 (Mauka/Ewa)</option>
-                  <option value="tower2">Tower 2 (Makai/Diamond Head)</option>
-                </select>
-              </div>
-
-              {/* Guests Selector */}
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                <span className="text-xs font-semibold text-[#1A3B34]/70 hidden sm:inline">Guests:</span>
-                <select
-                  value={minGuests}
-                  onChange={(e) => setMinGuests(Number(e.target.value))}
-                  className="w-full sm:w-auto px-3 py-2 text-xs font-medium bg-[#F9F7F2] border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none cursor-pointer"
-                >
-                  <option value={1}>1+ Guests</option>
-                  <option value={2}>2+ Guests</option>
-                  <option value={4}>4+ Guests</option>
-                  <option value={5}>5+ Guests</option>
-                  <option value={6}>6 Guests (Family)</option>
-                </select>
-              </div>
-
-              {/* Reset button */}
-              {(selectedView !== 'all' || selectedTower !== 'all' || minGuests > 1 || searchQuery) && (
-                <button
-                  onClick={() => {
-                    setSelectedView('all');
-                    setSelectedTower('all');
-                    setMinGuests(1);
-                    setSearchQuery('');
-                  }}
-                  className="text-xs text-[#C59B4B] hover:underline font-semibold py-1 px-2 cursor-pointer text-center sm:text-left"
-                >
-                  Reset Filters
-                </button>
-              )}
-            </div>
+        {/* Simplified Filter & Search Bar */}
+        <div className="bg-white p-3.5 sm:p-4 rounded-2xl border border-[#E8DCC6] shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+          {/* Search Input */}
+          <div className="relative flex-1 max-w-md">
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#1A3B34]/40" />
+            <input
+              type="text"
+              placeholder="Search features, views, or amenities..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-[#F9F7F2] border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/40 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
+            />
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-[#1A3B34]/60 pt-2 border-t border-[#E8DCC6]/60">
-            <span>Showing {filteredProperties.length} suites at Waikiki Banyan</span>
-            <span className="text-[#8CA58A] font-medium">All suites include private lanai & full kitchen</span>
+          {/* View Filter Pills */}
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+            <button
+              onClick={() => setSelectedView('all')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                selectedView === 'all'
+                  ? 'bg-[#1A3B34] text-white'
+                  : 'bg-[#F9F7F2] text-[#1A3B34]/70 hover:text-[#1A3B34] border border-[#E8DCC6]'
+              }`}
+            >
+              All Suites (2)
+            </button>
+            <button
+              onClick={() => setSelectedView('Ocean View')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                selectedView === 'Ocean View'
+                  ? 'bg-[#1A3B34] text-white'
+                  : 'bg-[#F9F7F2] text-[#1A3B34]/70 hover:text-[#1A3B34] border border-[#E8DCC6]'
+              }`}
+            >
+              Ocean & Mountain (3205)
+            </button>
+            <button
+              onClick={() => setSelectedView('Diamond Head & Sunset')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                selectedView === 'Diamond Head & Sunset'
+                  ? 'bg-[#1A3B34] text-white'
+                  : 'bg-[#F9F7F2] text-[#1A3B34]/70 hover:text-[#1A3B34] border border-[#E8DCC6]'
+              }`}
+            >
+              Diamond Head & Ocean (3609)
+            </button>
+            {(selectedView !== 'all' || searchQuery) && (
+              <button
+                onClick={() => {
+                  setSelectedView('all');
+                  setSearchQuery('');
+                }}
+                className="text-xs text-[#C59B4B] hover:underline font-semibold px-2 py-1 cursor-pointer"
+              >
+                Reset
+              </button>
+            )}
           </div>
         </div>
 
@@ -220,8 +168,6 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
             <button
               onClick={() => {
                 setSelectedView('all');
-                setSelectedTower('all');
-                setMinGuests(1);
                 setSearchQuery('');
               }}
               className="px-6 py-2.5 rounded-full text-xs font-semibold bg-[#1A3B34] text-white hover:bg-[#224D44] transition-colors cursor-pointer"

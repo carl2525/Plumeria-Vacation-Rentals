@@ -36,6 +36,7 @@ import {
   BASE_NIGHTLY_RATE,
   TAX_RATES,
 } from '../../utils/pricing';
+import { getTodayDateString, getNextDayDateString, isDateInPast } from '../../utils/date';
 
 interface InquiryFormProps {
   initialPropertyId?: string;
@@ -54,13 +55,20 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
   onSuccess,
   title,
 }) => {
+  const today = getTodayDateString();
+  const safeInitialCheckIn = initialCheckIn && !isDateInPast(initialCheckIn) ? initialCheckIn : '';
+  const safeInitialCheckOut =
+    initialCheckOut && safeInitialCheckIn && initialCheckOut > safeInitialCheckIn
+      ? initialCheckOut
+      : '';
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
-    checkIn: initialCheckIn,
-    checkOut: initialCheckOut,
+    checkIn: safeInitialCheckIn,
+    checkOut: safeInitialCheckOut,
     guests: initialGuests,
     preferredProperty: initialPropertyId,
     message: '',
@@ -69,6 +77,10 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [copied, setCopied] = useState(false);
+
+  const minCheckOutDate = formData.checkIn
+    ? getNextDayDateString(formData.checkIn, 1)
+    : getNextDayDateString(today, 1);
 
   // Compute number of nights and discount rate
   const nights = useMemo(() => {
@@ -88,6 +100,36 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleCheckInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newCheckIn = e.target.value;
+    if (newCheckIn && isDateInPast(newCheckIn)) {
+      setFormData((prev) => ({
+        ...prev,
+        checkIn: today,
+        checkOut: prev.checkOut && prev.checkOut <= today ? getNextDayDateString(today, 1) : prev.checkOut,
+      }));
+      return;
+    }
+
+    setFormData((prev) => {
+      const shouldAdjustCheckout = newCheckIn && prev.checkOut && prev.checkOut <= newCheckIn;
+      return {
+        ...prev,
+        checkIn: newCheckIn,
+        checkOut: shouldAdjustCheckout ? getNextDayDateString(newCheckIn, 1) : prev.checkOut,
+      };
+    });
+  };
+
+  const handleCheckOutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newCheckOut = e.target.value;
+    if (newCheckOut && newCheckOut < minCheckOutDate) {
+      setFormData((prev) => ({ ...prev, checkOut: minCheckOutDate }));
+      return;
+    }
+    setFormData((prev) => ({ ...prev, checkOut: newCheckOut }));
+  };
+
   const mailtoUrl = generateInquiryMailtoUrl(formData);
   const formattedEmailBody = buildInquiryEmailText(formData);
 
@@ -102,6 +144,11 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
 
     if (!formData.checkIn || !formData.checkOut) {
       setErrorMessage('Please select both Check-In and Check-Out dates.');
+      return;
+    }
+
+    if (formData.checkIn < today) {
+      setErrorMessage('Check-In date cannot be in the past.');
       return;
     }
 
@@ -519,9 +566,10 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               id="inquiry-checkIn"
               name="checkIn"
               required
+              min={today}
               value={formData.checkIn}
-              onChange={handleChange}
-              className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
+              onChange={handleCheckInChange}
+              className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A] cursor-pointer"
             />
           </div>
         </div>
@@ -537,13 +585,25 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               id="inquiry-checkOut"
               name="checkOut"
               required
+              min={minCheckOutDate}
               value={formData.checkOut}
-              onChange={handleChange}
-              className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
+              onChange={handleCheckOutChange}
+              className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A] cursor-pointer"
             />
           </div>
         </div>
       </div>
+
+      {/* Want to waive cleaning fee reminder when dates are not yet selected */}
+      {nights === 0 && (
+        <div className="p-2.5 rounded-xl bg-amber-50/80 border border-amber-200/80 text-[11px] text-amber-950 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+            <span><strong>Want to waive the cleaning fee?</strong> Book 3 nights or more for a $0 cleaning fee!</span>
+          </div>
+          <span className="text-[10px] font-bold text-amber-900 bg-amber-200/60 px-2 py-0.5 rounded-md shrink-0 whitespace-nowrap">Save $250</span>
+        </div>
+      )}
 
       {/* Transparent Rate, Cleaning Fee, & Tax Breakdown */}
       {nights > 0 && (
@@ -580,7 +640,11 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               <div>
                 <span>Cleaning Fee:</span>
                 <span className="block text-[10px] text-[#1A3B34]/60">
-                  {pricing.isCleaningFeeWaived ? 'Waived for 3+ nights stay' : '$250 short stay fee (1–2 nights)'}
+                  {pricing.isCleaningFeeWaived ? (
+                    <span className="text-emerald-700 font-semibold">✓ Waived for 3+ nights stay ($250 savings!)</span>
+                  ) : (
+                    <span className="text-amber-800 font-medium">$250 short stay fee (1–2 nights)</span>
+                  )}
                 </span>
               </div>
               <span className="font-semibold">
@@ -592,26 +656,25 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               </span>
             </div>
 
-            {/* Taxes breakdown */}
-            <div className="pt-1.5 border-t border-[#E8DCC6]/60 space-y-1">
-              <div className="flex items-center justify-between font-semibold text-[#1A3B34]">
-                <span>Taxes (18.50% Total):</span>
-                <span>{formatCurrency(pricing.totalTaxes)}</span>
-              </div>
-              <div className="pl-2 space-y-0.5 text-[10.5px] text-[#1A3B34]/70">
-                <div className="flex items-center justify-between">
-                  <span>• GET (General Excise Tax) 4.5%</span>
-                  <span>{formatCurrency(pricing.taxGet)}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>• TAT (Transient Accommodations Tax) 11%</span>
-                  <span>{formatCurrency(pricing.taxTat)}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>• OTAT (Oʻahu Accommodations Tax) 3%</span>
-                  <span>{formatCurrency(pricing.taxOtat)}</span>
+            {/* Want to waive cleaning fee incentive banner */}
+            {!pricing.isCleaningFeeWaived && (
+              <div className="p-2 rounded-xl bg-amber-50 border border-amber-200/90 text-[11px] text-amber-950 flex items-start gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-bold">Want to waive the cleaning fee?</span> Book 3 nights or more to get a <strong>$0 cleaning fee</strong> (saving you $250)!
                 </div>
               </div>
+            )}
+
+            {/* Hawaii Taxes (18.5% Total) - no breakdown */}
+            <div className="pt-1.5 border-t border-[#E8DCC6]/60 flex items-center justify-between font-semibold text-[#1A3B34]">
+              <div>
+                <span>Hawaii Taxes (18.5%):</span>
+                <span className="block text-[9.5px] font-normal text-[#1A3B34]/60">
+                  Applied to Base Rate + Cleaning Fee
+                </span>
+              </div>
+              <span>{formatCurrency(pricing.totalTaxes)}</span>
             </div>
 
             {/* Total formula */}
@@ -619,7 +682,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               <div>
                 <span className="block font-serif text-sm sm:text-base">Estimated Total:</span>
                 <span className="block text-[9.5px] font-normal text-[#1A3B34]/60">
-                  Formula: Base + Cleaning Fee + Taxes
+                  Formula: Base + Cleaning Fee + Taxes (18.5%)
                 </span>
               </div>
               <span className="font-serif text-base sm:text-lg text-[#1A3B34]">

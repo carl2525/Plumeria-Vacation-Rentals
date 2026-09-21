@@ -4,6 +4,7 @@ import { Footer } from './components/common/Footer';
 import { InquiryModal } from './components/common/InquiryModal';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { SEOHelper } from './components/common/SEOHelper';
+import { getTodayDateString, isDateInPast } from './utils/date';
 
 import { HomePage } from './pages/HomePage';
 import { RentalsPage } from './pages/RentalsPage';
@@ -77,9 +78,14 @@ export function App() {
     checkOut?: string,
     guests?: number
   ) => {
+    const safeCheckIn = checkIn && !isDateInPast(checkIn) ? checkIn : undefined;
+    const safeCheckOut =
+      checkOut && (!safeCheckIn || checkOut > safeCheckIn) && !isDateInPast(checkOut)
+        ? checkOut
+        : undefined;
     setInquiryPropertyId(propertyId);
-    setInquiryCheckIn(checkIn);
-    setInquiryCheckOut(checkOut);
+    setInquiryCheckIn(safeCheckIn);
+    setInquiryCheckOut(safeCheckOut);
     setInquiryGuests(guests);
     setInquiryModalOpen(true);
   };

@@ -25,6 +25,7 @@ import { SITE_CONFIG } from '../config/site';
 import { AppImage } from '../components/common/AppImage';
 import { generateInquiryMailtoUrl } from '../utils/mailto';
 import { calculateStayPricing, formatCurrency, BASE_NIGHTLY_RATE } from '../utils/pricing';
+import { getTodayDateString, getNextDayDateString, isDateInPast } from '../utils/date';
 
 interface PropertyDetailPageProps {
   slug: string;
@@ -46,11 +47,38 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 }) => {
   const property = PROPERTIES.find((p) => p.slug === slug) || PROPERTIES[0];
 
+  const today = getTodayDateString();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(2);
+
+  const minCheckOutDate = checkIn
+    ? getNextDayDateString(checkIn, 1)
+    : getNextDayDateString(today, 1);
+
+  const handleCheckInChange = (newDate: string) => {
+    if (newDate && isDateInPast(newDate)) {
+      setCheckIn(today);
+      if (checkOut && checkOut <= today) {
+        setCheckOut(getNextDayDateString(today, 1));
+      }
+      return;
+    }
+    setCheckIn(newDate);
+    if (newDate && checkOut && checkOut <= newDate) {
+      setCheckOut(getNextDayDateString(newDate, 1));
+    }
+  };
+
+  const handleCheckOutChange = (newDate: string) => {
+    if (newDate && newDate < minCheckOutDate) {
+      setCheckOut(minCheckOutDate);
+      return;
+    }
+    setCheckOut(newDate);
+  };
 
   const stickyNights = useMemo(() => {
     if (!checkIn || !checkOut) return 0;
@@ -91,7 +119,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onOpenInquiry(property.id, checkIn, checkOut, guests);
+    const safeCheckIn = checkIn && !isDateInPast(checkIn) ? checkIn : '';
+    const safeCheckOut = checkOut && (!safeCheckIn || checkOut > safeCheckIn) ? checkOut : '';
+    onOpenInquiry(property.id, safeCheckIn, safeCheckOut, guests);
   };
 
   const directMailtoUrl = generateInquiryMailtoUrl({
@@ -521,8 +551,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     </label>
                     <input
                       type="date"
+                      min={today}
                       value={checkIn}
-                      onChange={(e) => setCheckIn(e.target.value)}
+                      onChange={(e) => handleCheckInChange(e.target.value)}
                       className="w-full text-xs font-medium text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer"
                     />
                   </div>
@@ -533,12 +564,24 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     </label>
                     <input
                       type="date"
+                      min={minCheckOutDate}
                       value={checkOut}
-                      onChange={(e) => setCheckOut(e.target.value)}
+                      onChange={(e) => handleCheckOutChange(e.target.value)}
                       className="w-full text-xs font-medium text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer"
                     />
                   </div>
                 </div>
+
+                {/* Want to waive cleaning fee prompt when dates not yet selected */}
+                {stickyNights === 0 && (
+                  <div className="p-2.5 rounded-xl bg-amber-50/80 border border-amber-200/80 text-[11px] text-amber-950 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                      <span><strong>Want to waive the cleaning fee?</strong> Book 3 nights or more!</span>
+                    </div>
+                    <span className="text-[10px] font-bold text-amber-900 bg-amber-200/60 px-2 py-0.5 rounded-md shrink-0">Save $250</span>
+                  </div>
+                )}
 
                 {/* Sticky Nights Calculation Box */}
                 {stickyNights > 0 && (
@@ -568,10 +611,20 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                         </span>
                       </div>
                       <div className="flex justify-between text-white/70 text-[10px]">
-                        <span>Taxes (18.50% GET+TAT+OTAT):</span>
+                        <span>Hawaii Taxes (18.5%):</span>
                         <span>{formatCurrency(stickyPricing.totalTaxes)}</span>
                       </div>
                     </div>
+
+                    {stickyNights < 3 ? (
+                      <div className="p-2 rounded-xl bg-[#F6E7A7]/15 border border-[#F6E7A7]/30 text-[10.5px] text-[#F6E7A7] leading-snug">
+                        <strong>Want to waive the cleaning fee?</strong> Book 3 nights or more to get a <strong>$0 cleaning fee</strong> (saving you $250).
+                      </div>
+                    ) : (
+                      <div className="text-[10px] text-emerald-300 font-semibold flex items-center gap-1">
+                        <span>✓ Cleaning fee waived ($250 savings on 3+ nights)</span>
+                      </div>
+                    )}
 
                     <div className="pt-1.5 border-t border-white/20 flex items-baseline justify-between">
                       <span className="text-xs font-semibold text-white/90">Estimated Total:</span>
