@@ -28,9 +28,9 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
 
     if (cleanPath === '/') {
       meta = {
-        title: 'Plumeria Vacation Rentals | Waikiki Banyan Condo Rentals | No Resort Fees',
+        title: 'Waikiki Banyan Vacation Rentals | $199/Night Promo',
         description:
-          'Book direct Waikiki Banyan vacation rentals with Plumeria Vacation Rentals. 1-bedroom suites with Full kitchens, covered parking, 1-acre recreation deck, and $0 resort fees just 1 block to Kuhio Beach, Honolulu. Special $199 promo rate in all units.',
+          'Book Waikiki Banyan vacation rentals with our $199 per night promo. Enjoy comfortable condos, amazing amenities, and simple direct booking today.',
         canonicalUrl: 'https://plumeriavacationrentals.com',
         breadcrumbName: 'Home',
       };
