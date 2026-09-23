@@ -18,9 +18,9 @@ export const FAQS: FAQItem[] = [
   {
     id: 'faq-competitor-pricing',
     category: 'Booking & Policies',
-    question: 'How does Plumeria compare in price to Waikiki hotels and Aston at Waikiki Banyan?',
+    question: 'How does Plumeria compare in price to premier Waikiki resort hotels like Hyatt Regency and Hilton?',
     answer:
-      'Compared to Waikiki hotels like Hilton Hawaiian Village or Sheraton Waikiki (where 1-bedroom suites cost $750–$1,450+/night, daily resort charges run $55–$65/day, and parking is $69/day plus tax), Plumeria saves traveling families thousands of dollars with our $199/night promo rate across all units, $0 Resort fees, free covered parking, and Full kitchens. Even compared to Aston at Waikiki Banyan in the same building (which charges a mandatory daily Resort fee of $32 + tax plus $43/day for parking), Plumeria saves you hundreds of dollars with transparent direct pricing and top-floor Tower 2 placement.',
+      'Compared to premier Waikiki resort hotels like Hyatt Regency Waikiki or Hilton Hawaiian Village (where 1-bedroom suites cost $520–$1,450+/night, daily resort fees run $52–$65/day, and parking is $65–$69/day plus tax), Plumeria saves traveling families thousands of dollars with our $199/night promo rate across all units, $0 Resort fees, free covered parking pass, and Full kitchens. You receive a private high-floor suite in Tower 2 with full home conveniences and access to the 1-acre Waikiki Banyan recreation deck at a fraction of hotel suite pricing.',
   },
   {
     id: 'faq-location',
@@ -53,9 +53,9 @@ export const FAQS: FAQItem[] = [
   {
     id: 'faq-checkin',
     category: 'Booking & Policies',
-    question: 'What are the check-in and checkout times, and is late checkout available?',
+    question: 'What are the check-in and checkout times, and is early check-in or late checkout available?',
     answer:
-      'Check-in is at 2:00 PM and checkout is at 12:00 PM (enjoy a relaxed final morning!). Contactless keyless keypad entry is provided. Early check-in and late checkout require advance approval and are subject to availability. Late checkout fee schedule: Until 1:00 PM ($50), Until 2:00 PM ($100), Until 3:00 PM ($150), and After 3:00 PM (up to $199, equivalent to base rate for another night).',
+      'Standard check-in is at 4:00 PM (HST) and checkout is at 10:00 AM (HST). Contactless keyless keypad entry is provided directly at your suite door. Early check-in is available at $50 to $75 per hour, strictly upon the availability of the unit and completion of housekeeping turnaround (advance host request required). Late checkout is also subject to availability around incoming guest turnover: until 11:00 AM ($50), until 12:00 PM ($100), until 1:00 PM ($150), and after 1:00 PM up to the base nightly rate.',
   },
   {
     id: 'faq-cancellation',

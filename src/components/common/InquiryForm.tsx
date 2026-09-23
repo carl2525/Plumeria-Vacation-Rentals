@@ -322,7 +322,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
           <div className="flex items-start gap-1.5 pt-1 text-[11px] sm:text-xs text-[#1A3B34]/80 leading-relaxed font-light border-t border-[#C59B4B]/20">
             <Info className="w-3.5 h-3.5 text-[#8CA58A] shrink-0 mt-0.5" />
             <span>
-              <strong className="font-semibold text-[#1A3B34]">Next Steps:</strong> Please monitor your email inbox. Our host team may require further guest/stay verification via email once your inquiry is received before your booking is finalized.
+              <strong className="font-semibold text-[#1A3B34]">Inbox Delivery Tip:</strong> If your email app opens, tap <strong>Send</strong>. If you do not see a reply from our team within 12–24 hours, please check your <em>Spam or Junk</em> folder and mark it as &ldquo;Not Spam&rdquo;, or contact us directly at <a href={`mailto:${SITE_CONFIG.email}`} className="font-semibold underline text-[#1A3B34]">{SITE_CONFIG.email}</a>.
             </span>
           </div>
         </div>

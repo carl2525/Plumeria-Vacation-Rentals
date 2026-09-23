@@ -202,14 +202,14 @@ export const FAQPage: React.FC<FAQPageProps> = ({ onOpenInquiry, onNavigate }) =
                               </button>
                             );
                           }
-                          if (q.includes('fee') || q.includes('competitor') || q.includes('rate') || q.includes('aston') || q.includes('price')) {
+                          if (q.includes('fee') || q.includes('competitor') || q.includes('rate') || q.includes('hyatt') || q.includes('price')) {
                             return (
                               <button
                                 type="button"
                                 onClick={() => onNavigate('/waikiki-banyan#full-comparison')}
                                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer group"
                               >
-                                <span>Compare Plumeria vs. Aston & Waikiki Hotels</span>
+                                <span>Compare Plumeria vs. Waikiki Resort Hotels</span>
                                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                               </button>
                             );

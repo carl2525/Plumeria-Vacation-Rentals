@@ -268,10 +268,10 @@ export const RulesPage: React.FC<RulesPageProps> = ({
                   Check-In / Out
                 </span>
                 <span className="font-serif text-xl sm:text-2xl font-bold text-white block mt-0.5">
-                  2 PM / 12 PM
+                  4 PM / 10 AM
                 </span>
                 <span className="text-[11px] text-white/70 block mt-1">
-                  Late checkout options
+                  Early in & late out opt.
                 </span>
               </div>
 

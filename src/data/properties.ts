@@ -133,7 +133,7 @@ export const PROPERTIES: Property[] = [
       },
     ],
     houseRules: [
-      'Check-in: 2:00 PM / Check-out: 12:00 PM (early in & late checkout with advance approval)',
+      'Check-in: 4:00 PM / Check-out: 10:00 AM (early check-in $50–$75/hr upon availability & late checkout with advance host approval)',
       'Covered garage parking included ($0 extra fee; follow Waikiki Banyan garage rules)',
       'Base rate: $199/night (Special Promotion); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
       'Cleaning fee: $250 for 1–2 nights; Waived ($0) for stays 3 nights or more (Want to waive cleaning fee? Book 3 nights or more!)',
@@ -339,7 +339,7 @@ export const PROPERTIES: Property[] = [
       },
     ],
     houseRules: [
-      'Check-in: 2:00 PM / Check-out: 12:00 PM (early in & late checkout with advance approval)',
+      'Check-in: 4:00 PM / Check-out: 10:00 AM (early check-in $50–$75/hr upon availability & late checkout with advance host approval)',
       'Covered garage parking included ($0 extra fee; follow Waikiki Banyan garage rules)',
       'Base rate: $199/night (Special Promotion); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
       'Cleaning fee: $250 for 1–2 nights; Waived ($0) for stays 3 nights or more (Want to waive cleaning fee? Book 3 nights or more!)',

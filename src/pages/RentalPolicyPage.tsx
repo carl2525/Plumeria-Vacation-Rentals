@@ -240,92 +240,92 @@ export const RentalPolicyPage: React.FC<RentalPolicyPageProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
             {/* Card 1: Base Rate */}
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between">
+            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between min-w-0">
               <div className="space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#C59B4B] whitespace-nowrap">
-                    Promo Nightly Rate
+                <div className="flex items-center justify-between gap-1.5">
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#C59B4B] truncate">
+                    Promo Rate
                   </span>
-                  <span className="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#1A3B34] text-[#F6E7A7] whitespace-nowrap shrink-0">
-                    All Units Promo
+                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-[#1A3B34] text-[#F6E7A7] shrink-0">
+                    $0 Fees
                   </span>
                 </div>
-                <div className="flex items-baseline gap-1.5 whitespace-nowrap">
+                <div className="flex items-baseline gap-1.5">
                   <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34] leading-none">
                     $199
                   </span>
-                  <span className="text-xs font-normal text-[#C59B4B] font-semibold">/ night promo</span>
+                  <span className="text-xs text-[#C59B4B] font-semibold">/ night</span>
                 </div>
               </div>
-              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 whitespace-nowrap truncate" title="Special promotional rate in all units with zero hidden resort fees.">
-                Special promotional rate across all units with $0 resort fees.
+              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 leading-relaxed">
+                Promotional rate across all units with zero resort fees.
               </p>
             </div>
 
             {/* Card 2: Parking */}
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between">
+            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between min-w-0">
               <div className="space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#1A3B34]/65 whitespace-nowrap">
+                <div className="flex items-center justify-between gap-1.5">
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1A3B34]/65 truncate">
                     Garage Parking
                   </span>
-                  <span className="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#8CA58A]/20 text-[#1A3B34] whitespace-nowrap shrink-0">
-                    Included ($0)
+                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-[#8CA58A]/20 text-[#1A3B34] shrink-0">
+                    Included
                   </span>
                 </div>
-                <div className="flex items-baseline gap-1.5 whitespace-nowrap">
+                <div className="flex items-baseline gap-1.5">
                   <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34] leading-none">
-                    Covered Stall
+                    Free Stall
                   </span>
                 </div>
               </div>
-              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 whitespace-nowrap truncate" title="Dedicated on-site garage access from check-in to checkout.">
-                On-site garage stall from check-in to checkout.
+              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 leading-relaxed">
+                Dedicated on-site covered garage stall from check-in to checkout.
               </p>
             </div>
 
             {/* Card 3: Check-In / Out */}
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between">
+            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between min-w-0">
               <div className="space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#1A3B34]/65 whitespace-nowrap">
+                <div className="flex items-center justify-between gap-1.5">
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1A3B34]/65 truncate">
                     Check-In / Out
                   </span>
-                  <span className="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#E8DCC6]/50 text-[#1A3B34] whitespace-nowrap shrink-0">
-                    Keyless Entry
+                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-[#E8DCC6]/60 text-[#1A3B34] shrink-0">
+                    Keyless
                   </span>
                 </div>
-                <div className="flex items-baseline gap-1.5 whitespace-nowrap">
+                <div className="flex items-baseline gap-1.5">
                   <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34] leading-none">
-                    2 PM · 12 PM
+                    4 PM · 10 AM
                   </span>
                 </div>
               </div>
-              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 whitespace-nowrap truncate" title="Relaxed 12 PM checkout with late checkout options available.">
-                Relaxed 12 PM checkout; late options available.
+              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 leading-relaxed">
+                Standard 4 PM check-in / 10 AM checkout. Early in upon availability ($50–$75/hr).
               </p>
             </div>
 
             {/* Card 4: Cancellation */}
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between">
+            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between min-w-0">
               <div className="space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#1A3B34]/65 whitespace-nowrap">
+                <div className="flex items-center justify-between gap-1.5">
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1A3B34]/65 truncate">
                     Cancellation
                   </span>
-                  <span className="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#8CA58A]/20 text-[#1A3B34] whitespace-nowrap shrink-0">
+                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-[#8CA58A]/20 text-[#1A3B34] shrink-0">
                     100% Refund
                   </span>
                 </div>
-                <div className="flex items-baseline gap-1.5 whitespace-nowrap">
+                <div className="flex items-baseline gap-1.5">
                   <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34] leading-none">
                     14+ Days
                   </span>
                   <span className="text-xs font-normal text-[#1A3B34]/70">notice</span>
                 </div>
               </div>
-              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 whitespace-nowrap truncate" title="100% refund 14+ days prior; 50% refund at 7–13 days.">
-                100% refund 14+ days prior; 50% at 7–13 days.
+              <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 leading-relaxed">
+                100% refund up to 14 days prior; 50% refund at 7–13 days.
               </p>
             </div>
           </div>
@@ -499,40 +499,61 @@ export const RentalPolicyPage: React.FC<RentalPolicyPageProps> = ({
                         </div>
                       </div>
 
-                      {/* Special Visual: Late Checkout Fee Ladder for Section 2 */}
+                      {/* Special Visual: Early Check-In & Late Checkout Visual for Section 2 */}
                       {section.id === 'checkin-checkout' && (
-                        <div className="p-4 sm:p-5 rounded-2xl bg-[#E8DCC6]/30 border border-[#C59B4B]/30 space-y-3">
-                          <div className="flex items-center justify-between flex-wrap gap-2">
-                            <div className="flex items-center gap-2">
-                              <Clock className="w-4 h-4 text-[#C59B4B]" />
-                              <h3 className="font-serif text-sm font-bold text-[#1A3B34]">
-                                Late Checkout Tiered Fee Schedule
-                              </h3>
+                        <div className="space-y-3">
+                          {/* Early Check-In Feature Box */}
+                          <div className="p-4 sm:p-5 rounded-2xl bg-[#8CA58A]/10 border border-[#8CA58A]/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-2">
+                                <Clock className="w-4 h-4 text-[#8CA58A]" />
+                                <h3 className="font-serif text-sm font-bold text-[#1A3B34]">
+                                  Early Check-In Policy
+                                </h3>
+                                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-[#8CA58A]/20 text-[#1A3B34]">
+                                  $50 – $75 / Hour
+                                </span>
+                              </div>
+                              <p className="text-xs text-[#1A3B34]/80 font-light leading-relaxed">
+                                Standard check-in is at 4:00 PM HST. Early arrival is available at <strong>$50–$75 per hour</strong>, strictly upon the availability of the unit and completion of housekeeping turnaround. Please request in advance so our team can coordinate with cleaning staff.
+                              </p>
                             </div>
-                            <span className="text-[11px] text-[#1A3B34]/70 font-medium">
-                              Requires advance approval & subject to availability
-                            </span>
                           </div>
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center text-xs">
-                            <div className="bg-white p-3.5 rounded-xl border border-[#E8DCC6] shadow-2xs space-y-1">
-                              <span className="block text-[10px] uppercase tracking-wider text-[#1A3B34]/60 font-semibold">Until 1:00 PM</span>
-                              <span className="font-serif text-lg font-bold text-[#1A3B34] block">$50</span>
-                              <span className="text-[10px] text-[#1A3B34]/60 block">+1 hour extension</span>
+
+                          {/* Late Checkout Fee Ladder */}
+                          <div className="p-4 sm:p-5 rounded-2xl bg-[#E8DCC6]/30 border border-[#C59B4B]/30 space-y-3">
+                            <div className="flex items-center justify-between flex-wrap gap-2">
+                              <div className="flex items-center gap-2">
+                                <Clock className="w-4 h-4 text-[#C59B4B]" />
+                                <h3 className="font-serif text-sm font-bold text-[#1A3B34]">
+                                  Late Checkout Tiered Fee Schedule (Standard Checkout: 10:00 AM)
+                                </h3>
+                              </div>
+                              <span className="text-[11px] text-[#1A3B34]/70 font-medium">
+                                Requires advance approval & subject to availability
+                              </span>
                             </div>
-                            <div className="bg-white p-3.5 rounded-xl border border-[#E8DCC6] shadow-2xs space-y-1">
-                              <span className="block text-[10px] uppercase tracking-wider text-[#1A3B34]/60 font-semibold">Until 2:00 PM</span>
-                              <span className="font-serif text-lg font-bold text-[#1A3B34] block">$100</span>
-                              <span className="text-[10px] text-[#1A3B34]/60 block">+2 hour extension</span>
-                            </div>
-                            <div className="bg-white p-3.5 rounded-xl border border-[#E8DCC6] shadow-2xs space-y-1">
-                              <span className="block text-[10px] uppercase tracking-wider text-[#1A3B34]/60 font-semibold">Until 3:00 PM</span>
-                              <span className="font-serif text-lg font-bold text-[#1A3B34] block">$150</span>
-                              <span className="text-[10px] text-[#1A3B34]/60 block">+3 hour extension</span>
-                            </div>
-                            <div className="bg-white p-3.5 rounded-xl border border-[#E8DCC6] shadow-2xs space-y-1">
-                              <span className="block text-[10px] uppercase tracking-wider text-[#1A3B34]/60 font-semibold">After 3:00 PM</span>
-                              <span className="font-serif text-lg font-bold text-[#1A3B34] block">Up to $300</span>
-                              <span className="text-[10px] text-[#1A3B34]/60 block">(Base night rate)</span>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center text-xs">
+                              <div className="bg-white p-3.5 rounded-xl border border-[#E8DCC6] shadow-2xs space-y-1">
+                                <span className="block text-[10px] uppercase tracking-wider text-[#1A3B34]/60 font-semibold">Until 11:00 AM</span>
+                                <span className="font-serif text-lg font-bold text-[#1A3B34] block">$50</span>
+                                <span className="text-[10px] text-[#1A3B34]/60 block">+1 hour extension</span>
+                              </div>
+                              <div className="bg-white p-3.5 rounded-xl border border-[#E8DCC6] shadow-2xs space-y-1">
+                                <span className="block text-[10px] uppercase tracking-wider text-[#1A3B34]/60 font-semibold">Until 12:00 PM</span>
+                                <span className="font-serif text-lg font-bold text-[#1A3B34] block">$100</span>
+                                <span className="text-[10px] text-[#1A3B34]/60 block">+2 hour extension</span>
+                              </div>
+                              <div className="bg-white p-3.5 rounded-xl border border-[#E8DCC6] shadow-2xs space-y-1">
+                                <span className="block text-[10px] uppercase tracking-wider text-[#1A3B34]/60 font-semibold">Until 1:00 PM</span>
+                                <span className="font-serif text-lg font-bold text-[#1A3B34] block">$150</span>
+                                <span className="text-[10px] text-[#1A3B34]/60 block">+3 hour extension</span>
+                              </div>
+                              <div className="bg-white p-3.5 rounded-xl border border-[#E8DCC6] shadow-2xs space-y-1">
+                                <span className="block text-[10px] uppercase tracking-wider text-[#1A3B34]/60 font-semibold">After 1:00 PM</span>
+                                <span className="font-serif text-lg font-bold text-[#1A3B34] block">Up to $300</span>
+                                <span className="text-[10px] text-[#1A3B34]/60 block">(Base night rate)</span>
+                              </div>
                             </div>
                           </div>
                         </div>
