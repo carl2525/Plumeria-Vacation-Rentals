@@ -6,7 +6,7 @@ export const FAQS: FAQItem[] = [
     category: 'Waikiki Banyan',
     question: 'Why is Waikiki Banyan better than other vacation rentals and hotels in Waikiki?',
     answer:
-      'Waikiki Banyan is widely regarded by frequent visitors as the best vacation rental destination in Honolulu. Authorized Short-Term Rental License by the City and County of Honolulu. Unlike cramped 280 sq. ft. hotel rooms or standard condo rentals with minimal amenities, Waikiki Banyan offers: (1) Oʻahu’s largest 1-acre 6th-floor resort recreation deck with a heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball courts, and 12 gas BBQ grills; (2) Full kitchens with full-sized refrigerators, stoves, ovens, and cookware—saving around $200 per person ($800 per day for a family of four) compared to dining out in Waikiki; (3) Spacious 557 sq. ft. 1-bedroom layouts with 67 sq. ft. private lanais (624 sq. ft. total) framing 180° Diamond Head and mountain vistas that comfortably sleep up to 4–5 guests; (4) Flat 1-block (3-minute) stroll to calm Kuhio Beach; and (5) $0 Resort fees.',
+      'Waikiki Banyan is widely regarded by frequent visitors as the best vacation rental destination in Honolulu. Authorized Short-Term Rental License by the City and County of Honolulu. Unlike cramped 280 sq. ft. hotel rooms or standard condo rentals with minimal amenities, Waikiki Banyan offers: (1) Oʻahu’s largest 1-acre 6th-floor resort recreation deck with a heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball courts, and 12 gas BBQ grills; (2) Full kitchens with full-sized refrigerators, stoves, ovens, and cookware—saving around $200 per person ($800 per day for a family of four) compared to dining out in Waikiki; (3) Spacious 557 sq. ft. 1-bedroom layouts with 67 sq. ft. private lanais (624 sq. ft. total) framing 180° Diamond Head and mountain vistas that comfortably sleep up to 6 guests; (4) Flat 1-block (3-minute) stroll to calm Kuhio Beach; and (5) $0 Resort fees.',
   },
   {
     id: 'faq-resort-fees',
@@ -76,7 +76,7 @@ export const FAQS: FAQItem[] = [
     category: 'General',
     question: 'How many guests can each rental accommodate?',
     answer:
-      'Our 1-bedroom suites at Waikiki Banyan typically comfortably accommodate 4 to 5 guests (and up to 6 in our Family Suite configuration), utilizing the private master bedroom configuration plus a queen sleeper sofa in the living room.',
+      'Our 1-bedroom suites at Waikiki Banyan comfortably accommodate up to 6 guests, utilizing the private master bedroom configuration plus a sleeper sofa in the living room.',
   },
   {
     id: 'faq-kitchen-gear',
