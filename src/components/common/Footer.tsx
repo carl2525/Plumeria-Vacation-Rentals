@@ -130,6 +130,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
               </li>
               <li>
                 <button
+                  onClick={() => onNavigate('/parking')}
+                  className="text-white/75 hover:text-[#F6E7A7] transition-colors cursor-pointer text-left font-medium flex items-center gap-1.5"
+                >
+                  <span>Garage Parking Guide & Video</span>
+                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#C59B4B]/30 text-[#F6E7A7] font-semibold">Free</span>
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => onNavigate('/explore')}
                   className="text-white/75 hover:text-[#F6E7A7] transition-colors cursor-pointer text-left"
                 >

@@ -251,15 +251,22 @@ export const RulesPage: React.FC<RulesPageProps> = ({
                 </span>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-xs rounded-2xl p-4 border border-white/15">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#F6E7A7] block">
-                  Garage Parking
-                </span>
+              <div
+                onClick={() => onNavigate('/parking')}
+                className="bg-white/10 backdrop-blur-xs rounded-2xl p-4 border border-white/15 hover:bg-white/20 hover:border-[#F6E7A7]/40 transition-all cursor-pointer group"
+                title="View full parking location guide and video"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#F6E7A7] block">
+                    Garage Parking
+                  </span>
+                  <span className="text-[10px] font-semibold text-[#F6E7A7] group-hover:underline">Guide →</span>
+                </div>
                 <span className="font-serif text-xl sm:text-2xl font-bold text-white block mt-0.5">
                   Included
                 </span>
                 <span className="text-[11px] text-white/70 block mt-1">
-                  Covered on-site stall
+                  Covered parking & entry guide
                 </span>
               </div>
 

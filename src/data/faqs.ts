@@ -69,7 +69,7 @@ export const FAQS: FAQItem[] = [
     category: 'Waikiki Banyan',
     question: 'Is parking included with my stay at Waikiki Banyan?',
     answer:
-      'Yes! Covered garage parking at Waikiki Banyan is included with your Plumeria reservation from check-in through checkout ($0 extra charge). Guests must follow Waikiki Banyan garage rules (5 MPH speed limit, authorized stalls).',
+      'Yes! Covered garage parking at Waikiki Banyan is included with your Plumeria reservation from check-in through checkout ($0 extra charge). Guests must follow Waikiki Banyan garage rules (5 MPH speed limit, authorized parking spaces).',
   },
   {
     id: 'faq-occupancy',

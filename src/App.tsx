@@ -16,6 +16,7 @@ import { FAQPage } from './pages/FAQPage';
 import { ContactPage } from './pages/ContactPage';
 import { RulesPage } from './pages/RulesPage';
 import { RentalPolicyPage } from './pages/RentalPolicyPage';
+import { ParkingPage } from './pages/ParkingPage';
 
 export function App() {
   // Simple, robust client-side routing based on browser pathname or hash
@@ -37,8 +38,14 @@ export function App() {
       const hash = window.location.hash.replace(/^#/, '');
       if (hash && hash.startsWith('/')) {
         setCurrentPath(hash);
-      } else {
+      } else if (!hash) {
         setCurrentPath(window.location.pathname || '/');
+      } else {
+        // It is an in-page anchor like 'video-guide'
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     };
 
@@ -190,6 +197,22 @@ export function App() {
     ) {
       return (
         <RentalPolicyPage
+          onNavigate={navigate}
+          onOpenInquiry={() => handleOpenInquiry()}
+        />
+      );
+    }
+
+    if (
+      currentPath === '/parking' ||
+      currentPath === '/parking/' ||
+      currentPath === '/parking-location' ||
+      currentPath === '/parking-guide' ||
+      currentPath.startsWith('/parking#') ||
+      currentPath.startsWith('/parking?')
+    ) {
+      return (
+        <ParkingPage
           onNavigate={navigate}
           onOpenInquiry={() => handleOpenInquiry()}
         />

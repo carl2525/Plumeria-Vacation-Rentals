@@ -89,14 +89,14 @@ export const BUILDING_RULES: RuleCategory = {
       summary: "Parking is subject to the building's authorization system, posted garage rules, availability, and any parking terms provided with your reservation.",
       details: [
         'Garage speed limit is 5 mph. Drive slowly and watch for pedestrians.',
-        'Park only in marked, authorized stalls and display the required parking authorization or ticket.',
+        'Park only in marked, authorized parking spaces and display the required parking authorization or ticket.',
         'Unauthorized vehicles may be cited, charged, have parking privileges revoked, or be towed at the vehicle owner’s expense.',
-        'Parking stalls are generally unassigned unless otherwise specifically designated.',
+        'Parking spaces are generally unassigned unless otherwise specifically designated.',
         'Designated loading zones beside the ground-floor tower doors are for active loading/unloading only and may be used for a maximum of 15 minutes.',
         'Do not wash vehicles on the property or perform major vehicle repairs.',
         'Oversized or overheight vehicles are subject to special building rules and may require designated parking. Confirm before arrival if your vehicle is unusually large.',
       ],
-      importantNote: 'Parking note for vacation-rental guests: Your reservation’s parking benefit, if any, is determined by the listing/host and is separate from the building’s general parking rules. Do not assume that a visitor stall is your overnight vacation-rental parking space.',
+      importantNote: 'Parking note for vacation-rental guests: Your reservation’s parking benefit, if any, is determined by the listing/host and is separate from the building’s general parking rules. Do not assume that visitor parking is your overnight vacation-rental parking space.',
     },
     {
       id: 'banyan-pets',

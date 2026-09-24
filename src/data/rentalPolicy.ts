@@ -132,7 +132,7 @@ export const RENTAL_POLICY_SECTIONS: RentalPolicySection[] = [
     ],
     highlights: [
       { label: 'Garage Access', value: '100% Included', subtext: 'Valid from check-in (4:00 PM) to checkout (10:00 AM)' },
-      { label: 'Banyan Garage Rules', value: 'Must Follow', subtext: '5 MPH speed limit, park in authorized stalls, 15-min loading zones' },
+      { label: 'Banyan Garage Rules', value: 'Must Follow', subtext: '5 MPH speed limit, park in authorized parking spaces, 15-min loading zones' },
       { label: 'Parking Credentials', value: 'Safeguard Required', subtext: 'Actual replacement or building charges apply if lost or damaged' },
     ],
     importantData: [

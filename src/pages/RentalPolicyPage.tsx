@@ -263,7 +263,11 @@ export const RentalPolicyPage: React.FC<RentalPolicyPageProps> = ({
             </div>
 
             {/* Card 2: Parking */}
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#8CA58A]/50 transition-all flex flex-col justify-between min-w-0">
+            <div
+              onClick={() => onNavigate('/parking')}
+              className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E8DCC6] shadow-2xs hover:border-[#C59B4B] hover:shadow-xs transition-all flex flex-col justify-between min-w-0 cursor-pointer group"
+              title="Click to view step-by-step parking location guide and video"
+            >
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-1.5">
                   <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1A3B34]/65 truncate">
@@ -273,14 +277,15 @@ export const RentalPolicyPage: React.FC<RentalPolicyPageProps> = ({
                     Included
                   </span>
                 </div>
-                <div className="flex items-baseline gap-1.5">
+                <div className="flex items-baseline justify-between gap-1.5">
                   <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34] leading-none">
-                    Free Stall
+                    Free Parking
                   </span>
+                  <span className="text-xs font-semibold text-[#C59B4B] group-hover:underline">Guide →</span>
                 </div>
               </div>
               <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 leading-relaxed">
-                Dedicated on-site covered garage stall from check-in to checkout.
+                Dedicated on-site covered garage parking &amp; entry video guidelines.
               </p>
             </div>
 

@@ -88,6 +88,7 @@ export const SITE_CONFIG = {
     { label: 'Home', href: '/' },
     { label: 'Our Rentals', href: '/rentals' },
     { label: 'Waikiki Banyan', href: '/waikiki-banyan' },
+    { label: 'Parking Guide', href: '/parking' },
     { label: 'Explore Waikiki', href: '/explore' },
     { label: 'Rules / Policy', href: '/rules' },
     { label: 'FAQ', href: '/faq' },

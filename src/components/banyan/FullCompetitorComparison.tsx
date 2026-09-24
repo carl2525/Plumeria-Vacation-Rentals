@@ -314,7 +314,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
       competitor2: {
         name: 'Generic Waikiki Airbnb Hosts',
         title: '$43 / Day Public Rate',
-        description: 'Most individual hosts do not provide parking stalls.',
+        description: 'Most individual hosts do not provide parking.',
         isSuperior: false,
       },
     },

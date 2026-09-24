@@ -109,6 +109,14 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
         canonicalUrl: 'https://plumeriavacationrentals.com/#/contact',
         breadcrumbName: 'Contact Host',
       };
+    } else if (cleanPath === '/parking' || cleanPath === '/parking-location' || cleanPath === '/parking-guide') {
+      meta = {
+        title: 'Waikiki Banyan Parking Location & Entry Guidelines | Plumeria Vacation Rentals',
+        description:
+          'Step-by-step driving directions, garage entrance video walk-through, 6 ft height clearance guidelines, and landmarks for Waikiki Banyan Tower 2 in Honolulu, Hawaiʻi.',
+        canonicalUrl: 'https://plumeriavacationrentals.com/#/parking',
+        breadcrumbName: 'Parking Location & Entry Guide',
+      };
     }
 
     // 1. Update Document Title
