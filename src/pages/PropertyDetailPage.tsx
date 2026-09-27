@@ -280,7 +280,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">
                 <Bed className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
                 <span className="text-[11px] text-[#1A3B34]/60 block font-medium">Beds</span>
-                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">{property.bedrooms} Bed · {property.beds} Beds</span>
+                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">{property.bedrooms} Bedroom · {property.beds} Beds</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">
@@ -529,7 +529,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                       <span className="text-xs text-[#C59B4B] font-semibold">/ night promo</span>
                     </div>
                     <span className="text-[10px] text-[#8CA58A] font-bold block uppercase tracking-wider">
-                      Special Rate Promotion · All Units
+                      Special Rate Promotion · Valid until Oct 30 · All Units
                     </span>
                   </div>
                   <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60 px-2 py-1 rounded-md">
@@ -662,7 +662,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     <span>
                       {stickyNights > 0
                         ? `Inquire to Book (${formatCurrency(stickyPricing.grandTotal)} Total)`
-                        : 'Inquire to Book · $199/nt'}
+                        : 'Inquire to Book · $199/nt (Valid until Oct 30)'}
                     </span>
                   </button>
 

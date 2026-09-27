@@ -116,7 +116,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             </span>
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap px-2.5 border-l border-[#E8DCC6]">
               <Bed className="w-3.5 h-3.5 text-[#8CA58A] shrink-0" />
-              <span>{property.bedrooms} Bed</span>
+              <span>{property.bedrooms} Bedroom · {property.beds} Beds</span>
             </span>
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap px-2.5 border-l border-[#E8DCC6]">
               <Bath className="w-3.5 h-3.5 text-[#8CA58A] shrink-0" />
@@ -144,9 +144,12 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
           {/* Pricing & Direct Host Rate Highlight */}
           <div className="pt-2.5 pb-1 flex items-center justify-between gap-2 border-t border-[#E8DCC6]/60">
-            <div className="flex items-baseline gap-1.5 shrink-0">
-              <span className="font-serif text-lg font-bold text-[#1A3B34]">$199</span>
-              <span className="text-[11px] text-[#C59B4B] font-semibold">/ night promo</span>
+            <div>
+              <div className="flex items-baseline gap-1.5 shrink-0">
+                <span className="font-serif text-lg font-bold text-[#1A3B34]">$199</span>
+                <span className="text-[11px] text-[#C59B4B] font-semibold">/ night promo</span>
+              </div>
+              <span className="block text-[9.5px] text-[#1A3B34]/65 font-medium">Valid until Oct 30</span>
             </div>
             <div className="flex items-center gap-1.5 flex-wrap justify-end">
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#8CA58A]/20 text-[#1A3B34] text-[10px] font-bold uppercase tracking-wider border border-[#8CA58A]/40 whitespace-nowrap">

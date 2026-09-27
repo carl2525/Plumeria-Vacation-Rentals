@@ -258,7 +258,7 @@ export const RentalPolicyPage: React.FC<RentalPolicyPageProps> = ({
                 </div>
               </div>
               <p className="text-xs text-[#1A3B34]/75 font-light mt-3 pt-2.5 border-t border-[#E8DCC6]/50 leading-relaxed">
-                Promotional rate across all units with zero resort fees.
+                Promotional rate across all units (valid until Oct 30) with zero resort fees.
               </p>
             </div>
 

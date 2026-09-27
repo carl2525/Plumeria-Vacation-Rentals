@@ -41,7 +41,7 @@ export function buildInquiryEmailText(params: MailtoInquiryParams): string {
   const notesText = params.message && params.message.trim() ? params.message.trim() : 'None';
 
   // Calculate nights and estimated pricing if dates provided
-  let rateDetail = `• Standard Base Rate: $199 / night
+  let rateDetail = `• Promotional Base Rate: $199 / night (Valid until Oct 30)
 • Resort Fees: $0 (Never charged)
 • Covered Parking: Included ($0 dedicated garage pass)`;
 
@@ -58,7 +58,7 @@ export function buildInquiryEmailText(params: MailtoInquiryParams): string {
       const taxesText = `${formatCurrency(pricing.totalTaxes)} (18.5% Hawaii State Taxes)`;
 
       rateDetail = `• Stay Duration: ${nights} Nights (${params.checkIn} to ${params.checkOut})
-• Base Room Rate: $199 / night (${formatCurrency(pricing.grossRoomTotal)}${discountText})
+• Promotional Base Rate: $199 / night (Valid until Oct 30; ${formatCurrency(pricing.grossRoomTotal)}${discountText})
 • Resort Fees: $0 (Never charged)
 • Garage Parking: Included ($0 dedicated pass)
 • Cleaning Fee: ${cleaningText}

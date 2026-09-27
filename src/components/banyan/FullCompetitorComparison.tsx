@@ -116,10 +116,10 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
       feature: 'Nightly Suite Rate',
       category: 'hotels',
       plumeria: {
-        title: '$199 / Night (Special Promo)',
+        title: '$199 / Night (Promo Valid until Oct 30)',
         description: 'True 1-bedroom high-floor suite. 5%–30% tiered stay discounts.',
         isSuperior: true,
-        badge: '$199 Promo Rate',
+        badge: '$199 Promo (Until Oct 30)',
       },
       competitor1: {
         name: 'Hilton Hawaiian Village',
@@ -1059,7 +1059,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
           <div className="p-4 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1.5">
             <span className="font-semibold text-[#1A3B34] block text-sm">How This Comparative Pricing is Grounded:</span>
             <p className="font-light leading-relaxed">
-              • <strong>Plumeria at Waikiki Banyan:</strong> $199/night promotional rate across all units, $0 Resort fees, $0 parking pass. Cleaning fee is $250 for 1–2 nights and waived ($0) for 3+ nights. Tiered stay discounts apply incrementally (5 days: 5%, 10 days: 10%, 15 days: 15%, 20 days: 20%, 25 days: 25%, 30 days: 30%). Hawaii Taxes: 18.5% total applied directly to Base + Cleaning Fee.
+              • <strong>Plumeria at Waikiki Banyan:</strong> $199/night promotional rate across all units (valid until Oct 30), $0 Resort fees, $0 parking pass. Cleaning fee is $250 for 1–2 nights and waived ($0) for 3+ nights. Tiered stay discounts apply incrementally (5 days: 5%, 10 days: 10%, 15 days: 15%, 20 days: 20%, 25 days: 25%, 30 days: 30%). Hawaii Taxes: 18.5% total applied directly to Base + Cleaning Fee.
             </p>
             <p className="font-light leading-relaxed">
               • <strong>Hawaii Taxes:</strong> Full Hawaii taxes (18.5% total) are applied across competitor room rates and mandatory resort fees, giving you an accurate, true comparison.

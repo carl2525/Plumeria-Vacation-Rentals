@@ -119,7 +119,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
               $199 / NT PROMO
             </span>
             <span className="font-semibold text-white text-[11px] sm:text-xs truncate">
-              Special Promo Rate · All Units
+              Special Promo Rate · Valid until Oct 30
             </span>
           </div>
           <span className="flex items-center gap-1 text-[#F6E7A7] text-[10px] sm:text-[11px] font-medium shrink-0 ml-2">

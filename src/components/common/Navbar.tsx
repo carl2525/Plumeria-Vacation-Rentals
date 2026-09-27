@@ -74,10 +74,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             PROMOTION
           </span>
           <span className="sm:hidden text-[11px] font-medium truncate">
-            $199 Promo Rate · All Units · $0 Resort Fees · Free Parking
+            $199 Promo (Valid until Oct 30) · All Units · Free Parking
           </span>
           <span className="hidden sm:inline">
-            Direct Inquiries: $199/night promo rate in all units · $0 Resort fees · Free covered garage parking pass!
+            Direct Inquiries: $199/night promo rate in all units (Valid until Oct 30) · $0 Resort fees · Free covered garage parking pass!
           </span>
           <button
             onClick={() => onOpenInquiry()}
@@ -251,7 +251,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>Inquire to Book</span>
               </button>
               <p className="text-[11px] text-center text-[#1A3B34]/70 font-medium">
-                $199/nt promo rate · $0 resort fees · Free parking pass
+                $199/nt promo (valid until Oct 30) · $0 resort fees · Free parking pass
               </p>
 
               <div className="text-xs text-[#1A3B34]/75 space-y-1.5 pt-2">

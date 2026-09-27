@@ -424,12 +424,15 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               <span className="font-serif font-bold text-xs sm:text-sm text-[#F6E7A7]">
                 Special Rate Promotion · All Units
               </span>
+              <span className="px-1.5 py-0.2 text-[8.5px] sm:text-[9px] font-bold uppercase rounded bg-[#C59B4B] text-[#1A3B34] whitespace-nowrap">
+                Valid until Oct 30
+              </span>
               <span className="px-1.5 py-0.2 text-[8.5px] sm:text-[9px] font-bold uppercase rounded bg-white/20 text-white whitespace-nowrap">
                 $0 Resort Fees
               </span>
             </div>
             <p className="text-[11px] text-white/85 leading-tight sm:leading-relaxed font-light">
-              Enjoy our limited-time <strong>$199/night promo rate</strong>, free covered parking pass, and incremental stay discounts for longer trips upon host acceptance!
+              Enjoy our limited-time <strong>$199/night promo rate (valid until Oct 30)</strong>, free covered parking pass, and incremental stay discounts for longer trips upon host acceptance!
             </p>
           </div>
         </div>
@@ -616,7 +619,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               </span>
             </div>
             <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-[#1A3B34] text-[#F6E7A7] shrink-0">
-              $199 / Night Promo
+              $199 / Night Promo · Valid until Oct 30
             </span>
           </div>
 
@@ -808,7 +811,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                   : 'Send Booking Inquiry · Promo $199/nt'}
               </span>
               <span className="block text-[10px] text-[#F6E7A7]/90 font-normal truncate">
-                $199/nt Promo Rate · All Units · $0 Resort Fees · Free Covered Parking
+                $199/nt Promo (Valid until Oct 30) · All Units · $0 Resort Fees · Free Parking
               </span>
             </div>
           </div>

@@ -247,7 +247,7 @@ export const RulesPage: React.FC<RulesPageProps> = ({
                   $199<span className="text-xs font-normal text-white/75">/night</span>
                 </span>
                 <span className="text-[11px] text-white/70 block mt-1">
-                  $0 resort fee · All units
+                  Valid until Oct 30 · $0 fees
                 </span>
               </div>
 
