@@ -8,7 +8,6 @@ import {
   Home,
   User,
   Mail,
-  Phone,
   MessageSquare,
   Copy,
   Check,
@@ -516,43 +515,23 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         </div>
       </div>
 
-      {/* Email & Phone */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-        <div>
-          <label htmlFor="inquiry-email" className="block text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1">
-            Email Address <span className="text-rose-500">*</span>
-          </label>
-          <div className="relative">
-            <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#1A3B34]/40 pointer-events-none" />
-            <input
-              type="email"
-              id="inquiry-email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/35 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="inquiry-phone" className="block text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1">
-            Phone <span className="text-[#1A3B34]/40 text-[10px] font-normal">(Optional)</span>
-          </label>
-          <div className="relative">
-            <Phone className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#1A3B34]/40 pointer-events-none" />
-            <input
-              type="tel"
-              id="inquiry-phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="(555) 000-0000"
-              className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/35 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
-            />
-          </div>
+      {/* Email Address */}
+      <div>
+        <label htmlFor="inquiry-email" className="block text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#1A3B34]/80 mb-1">
+          Email Address <span className="text-rose-500">*</span>
+        </label>
+        <div className="relative">
+          <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#1A3B34]/40 pointer-events-none" />
+          <input
+            type="email"
+            id="inquiry-email"
+            name="email"
+            required
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="you@example.com"
+            className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] placeholder:text-[#1A3B34]/35 focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
+          />
         </div>
       </div>
 
