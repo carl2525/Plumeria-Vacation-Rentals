@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, Calendar, MapPin, Car, ExternalLink, Mountain, Maximize2, Award, Sparkles } from 'lucide-react';
+import { Compass, Calendar, MapPin, Car, ExternalLink, Mountain, Maximize2, Award, Sparkles, Waves } from 'lucide-react';
 import { PlumeriaSymbolLogo } from '../brand/PlumeriaSymbolLogo';
 import { AppImage } from '../common/AppImage';
 import { SITE_CONFIG } from '../../config/site';
@@ -60,10 +60,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
         <div className="grid grid-cols-2 gap-2 sm:hidden max-w-[340px] xs:max-w-sm mx-auto w-full pt-1">
           <div className="flex items-center gap-2 px-2.5 py-1.5 bg-white/95 backdrop-blur-md border border-[#E8DCC6] rounded-xl text-left shadow-2xs">
             <div className="w-5 h-5 rounded-md bg-[#7FB6D9]/20 text-[#1A3B34] flex items-center justify-center shrink-0 border border-[#7FB6D9]/40">
-              <Mountain className="w-3 h-3 text-[#1A3B34]" />
+              <Waves className="w-3 h-3 text-[#1A3B34]" />
             </div>
             <span className="font-serif font-bold text-[10.5px] xs:text-[11px] text-[#1A3B34] leading-tight whitespace-nowrap">
-              180° Mountain View
+              Beach|Mountain View
             </span>
           </div>
 
@@ -99,10 +99,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
         <div className="hidden sm:flex flex-wrap items-center justify-center gap-2 max-w-3xl mx-auto pt-0.5 w-full">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white/95 backdrop-blur-md border border-[#E8DCC6] rounded-full text-xs text-[#1A3B34] shadow-xs">
             <div className="w-4 h-4 rounded-sm bg-[#7FB6D9]/20 text-[#1A3B34] flex items-center justify-center shrink-0 border border-[#7FB6D9]/40">
-              <Mountain className="w-2.5 h-2.5 text-[#1A3B34]" />
+              <Waves className="w-2.5 h-2.5 text-[#1A3B34]" />
             </div>
             <span className="font-serif font-bold text-[#1A3B34] tracking-tight whitespace-nowrap">
-              180° Mountain View
+              180° Beach, Ocean & Mountain Views
             </span>
           </div>
 

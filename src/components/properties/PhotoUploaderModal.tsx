@@ -8,7 +8,7 @@ interface PhotoUploaderModalProps {
 }
 
 const PHOTO_SLOTS = [
-  { slot: 1, label: 'Lanai - Canal & Mountain View', standard: 'unit-3205-01.webp', rawNum: 1 },
+  { slot: 1, label: 'Lanai - Beach, Ocean & Mountain View', standard: 'unit-3205-01.webp', rawNum: 1 },
   { slot: 2, label: 'Living Room - Leather Couch & Red Rug', standard: 'unit-3205-02.webp', rawNum: 2 },
   { slot: 3, label: 'Lanai - Ocean & Diamond Head Angle', standard: 'unit-3205-03.webp', rawNum: 3 },
   { slot: 4, label: 'Suite View - Living into Bedroom', standard: 'unit-3205-04.webp', rawNum: 4 },

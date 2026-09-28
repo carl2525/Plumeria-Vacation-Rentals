@@ -28,7 +28,7 @@ export const TESTIMONIALS: Testimonial[] = [
     guestName: 'Elena & Marcus K.',
     guestLocation: 'Denver, CO',
     stayDate: 'Island Getaway',
-    propertyName: 'Waikiki Banyan Mountain & City View Suite',
+    propertyName: 'Waikiki Banyan Beach, Ocean & Mountain View Suite',
     quote:
       'We loved watching the morning rainbows over the Koʻolau mountains with our coffee. Clean, air-conditioned, comfortable beds, and super fast Wi-Fi for remote check-ins. We will definitely book with Plumeria again!',
     rating: 5,

@@ -49,10 +49,10 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           {/* Left View Badge: Responsive text and whitespace-nowrap prevents multi-line break */}
           <div className="min-w-0 shrink">
             <span className="inline-flex items-center px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white/95 backdrop-blur-md text-[#1A3B34] shadow-sm whitespace-nowrap border border-white/60">
-              {property.viewType === '180° Diamond Head & Mountain View' ? (
+              {property.viewType.includes('Mountain') ? (
                 <>
-                  <span className="sm:hidden">180° Mountain & Ocean</span>
-                  <span className="hidden sm:inline">180° Diamond Head & Mountain View</span>
+                  <span className="sm:hidden">Beach, Ocean & Mountain</span>
+                  <span className="hidden sm:inline">Beach, Ocean & Mountain View</span>
                 </>
               ) : (
                 property.viewType

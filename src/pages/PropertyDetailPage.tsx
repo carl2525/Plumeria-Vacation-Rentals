@@ -296,7 +296,10 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               </div>
 
               <div className="p-3 rounded-2xl bg-[#F9F7F2] col-span-2 sm:col-span-1">
-                <Mountain className="w-5 h-5 text-[#C59B4B] mx-auto mb-1" />
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Waves className="w-4 h-4 text-[#7FB6D9]" />
+                  <Mountain className="w-4 h-4 text-[#C59B4B]" />
+                </div>
                 <span className="text-[11px] text-[#1A3B34]/60 block font-medium">Vantage View</span>
                 <span className="text-xs sm:text-sm font-bold text-[#1A3B34] truncate block" title={property.viewType}>
                   {property.viewType}
@@ -304,13 +307,13 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               </div>
             </div>
 
-            {/* View & Seclusion Orientation Note */}
+            {/* View & Beach Orientation Note */}
             <div className="p-4 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] flex items-start gap-3">
-              <div className="w-8 h-8 rounded-xl bg-[#8CA58A]/20 flex items-center justify-center shrink-0 mt-0.5">
-                <Mountain className="w-4 h-4 text-[#1A3B34]" />
+              <div className="w-8 h-8 rounded-xl bg-[#7FB6D9]/25 flex items-center justify-center shrink-0 mt-0.5 border border-[#7FB6D9]/40">
+                <Waves className="w-4 h-4 text-[#1A3B34]" />
               </div>
               <p className="text-xs sm:text-sm text-[#1A3B34]/85 leading-relaxed font-light">
-                <strong className="text-[#1A3B34] font-semibold">Location & View Note:</strong> This suite is situated 1 flat block (approx. 3-minute walk) to Kuhio Beach. While not beachfront, its high-floor positioning grants breathtaking 180-degree panoramic views of Diamond Head Mountain and the Koʻolau mountain range, while insulating you from noisy shoreline crowds.
+                <strong className="text-[#1A3B34] font-semibold">Dual Beach & Mountain Vistas:</strong> From your private high-floor suite and lanai, take in breathtaking dual views of both the glistening Pacific Ocean & Waikiki Beach coastline to one side, seamlessly paired with iconic Diamond Head Crater and the lush green Koʻolau mountain ridgelines. You enjoy the best of both worlds—ocean horizons and majestic mountain scenery—all just 1 flat block (3-minute walk) from the sand.
               </p>
             </div>
 

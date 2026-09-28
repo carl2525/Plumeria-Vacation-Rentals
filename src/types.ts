@@ -63,6 +63,11 @@ export interface WaikikiDestination {
   description: string;
   insiderTip: string;
   highlightPills: string[];
+  backlinkUrl?: string;
+  backlinkLabel?: string;
+  backlinkDomain?: string;
+  requiresReservation?: boolean;
+  reservationDetails?: string;
 }
 
 export interface FAQItem {

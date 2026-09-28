@@ -123,7 +123,7 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
             </h1>
 
             <p className="text-base sm:text-lg text-[#1A3B34]/85 font-light leading-relaxed">
-              Consistently rated among the top Waikiki vacation rentals and condo rentals in Honolulu, <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan (201 ʻOhua Avenue)</strong> solves every headache of traveling to Oʻahu. Unlike ordinary Waikiki short term rentals, you enjoy the space and kitchen savings of a 557 sq. ft. private condo + 67 sq. ft. lanai paired with 180° Diamond Head & mountain views and Oʻahu’s largest 1-acre resort deck. Book direct in Waikiki with Plumeria Vacation Rentals for the best rates and zero resort fees.
+              Consistently rated among the top Waikiki vacation rentals and condo rentals in Honolulu, <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan (201 ʻOhua Avenue)</strong> solves every headache of traveling to Oʻahu. Unlike ordinary Waikiki short term rentals, you enjoy the space and kitchen savings of a 557 sq. ft. private condo + 67 sq. ft. lanai paired with sweeping beach, ocean, and Diamond Head mountain views and Oʻahu’s largest 1-acre resort deck. Book direct in Waikiki with Plumeria Vacation Rentals for the best rates and zero resort fees.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2 text-xs sm:text-sm text-[#1A3B34]/80">

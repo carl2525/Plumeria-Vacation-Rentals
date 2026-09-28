@@ -13,6 +13,7 @@ import {
   Calendar,
   Info,
   CheckCircle2,
+  ExternalLink,
 } from 'lucide-react';
 import {
   NEARBY_DINING_SPOTS,
@@ -293,102 +294,151 @@ export const NearbyDiningsGuide: React.FC<NearbyDiningsGuideProps> = ({
 
       {/* Dining Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filteredSpots.map((spot) => (
-          <div
-            key={spot.id}
-            className="rounded-3xl bg-white border border-[#E8DCC6] overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow group"
-          >
-            {/* Image & Badges */}
-            <div className="relative h-44 overflow-hidden bg-neutral-100">
-              <AppImage
-                src={spot.image}
-                alt={spot.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+        {filteredSpots.map((spot) => {
+          const handleSpotClick = () => {
+            if (spot.backlinkUrl) {
+              window.open(spot.backlinkUrl, '_blank', 'noopener,noreferrer');
+            }
+          };
 
-              {/* Walking time badge */}
-              <div className="absolute top-3 left-3 bg-[#1A3B34]/90 backdrop-blur-xs text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
-                <Clock className="w-3 h-3 text-[#F6E7A7]" />
-                <span>{spot.walkingMinutes === 0 ? 'On-Site' : `${spot.walkingMinutes} min walk`}</span>
-              </div>
+          return (
+            <article
+              key={spot.id}
+              onClick={handleSpotClick}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleSpotClick();
+                }
+              }}
+              className="rounded-3xl bg-white border border-[#E8DCC6] hover:border-[#C59B4B] overflow-hidden flex flex-col justify-between hover:shadow-xl transition-all duration-300 group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-[#C59B4B]/50"
+              title={`Click to open on Google Maps: ${spot.name}`}
+            >
+              {/* Image & Badges */}
+              <div className="relative h-44 overflow-hidden bg-neutral-100">
+                <AppImage
+                  src={spot.image}
+                  alt={spot.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-              {/* Price level badge */}
-              <div className="absolute top-3 right-3 bg-white/95 text-[#1A3B34] text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs">
-                <span>{spot.averageCostPerPerson}</span>
-              </div>
-
-              {/* Title & Cuisine overlay */}
-              <div className="absolute bottom-3 left-3 right-3 text-white">
-                <span className="text-[10px] uppercase font-bold tracking-wider text-[#F6E7A7] block">
-                  {spot.cuisine}
-                </span>
-                <h4 className="font-serif font-bold text-base sm:text-lg leading-snug drop-shadow-xs">
-                  {spot.name}
-                </h4>
-              </div>
-            </div>
-
-            {/* Content Body */}
-            <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-              <div className="space-y-3">
-                {/* Distance & Address */}
-                <div className="flex items-center gap-1.5 text-xs text-[#8A5A1C] font-medium">
-                  <MapPin className="w-3.5 h-3.5 shrink-0" />
-                  <span>{spot.distanceFromBanyan}</span>
+                {/* Walking time badge */}
+                <div className="absolute top-3 left-3 bg-[#1A3B34]/90 backdrop-blur-xs text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-[#F6E7A7]" />
+                  <span>{spot.walkingMinutes === 0 ? 'On-Site' : `${spot.walkingMinutes} min walk`}</span>
                 </div>
 
-                {/* Description */}
-                <p className="text-xs text-[#1A3B34]/80 font-light leading-relaxed">
-                  {spot.description}
-                </p>
-
-                {/* Popular Dishes with Exact Pricing */}
-                <div className="pt-2 border-t border-[#E8DCC6]/60 space-y-1.5">
-                  <span className="text-[10px] uppercase tracking-wider font-bold text-neutral-500 block">
-                    Popular Items & Pricing:
+                {/* Badges on right: Price level + Google Maps Indicator */}
+                <div className="absolute top-3 right-3 flex items-center gap-1.5">
+                  <span className="bg-white/95 text-[#1A3B34] text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs">
+                    {spot.averageCostPerPerson}
                   </span>
-                  <div className="space-y-1">
-                    {spot.popularItems.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between text-xs py-0.5"
-                      >
-                        <span className="text-neutral-700 truncate pr-2">
-                          {item.name}
-                        </span>
-                        <span className="font-semibold text-[#1A3B34] shrink-0 bg-[#F9F7F2] px-1.5 py-0.5 rounded text-[11px]">
-                          {item.price}
-                        </span>
-                      </div>
-                    ))}
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10.5px] font-semibold bg-[#1A3B34]/90 text-[#F6E7A7] backdrop-blur-md shadow-xs group-hover:bg-[#1A3B34] group-hover:text-white transition-colors border border-white/20">
+                    <MapPin className="w-3 h-3 text-[#F6E7A7]" />
+                    <span>Map</span>
+                    <ExternalLink className="w-2.5 h-2.5" />
+                  </span>
+                </div>
+
+                {/* Title & Cuisine overlay */}
+                <div className="absolute bottom-3 left-3 right-3 text-white">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#F6E7A7] block">
+                    {spot.cuisine}
+                  </span>
+                  <div className="flex items-center justify-between gap-1">
+                    <h4 className="font-serif font-bold text-base sm:text-lg leading-snug drop-shadow-xs group-hover:text-[#F6E7A7] transition-colors">
+                      {spot.name}
+                    </h4>
+                    <ExternalLink className="w-4 h-4 text-[#F6E7A7] shrink-0 opacity-80 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Body */}
+              <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                <div className="space-y-3">
+                  {/* Distance & Address */}
+                  <div className="flex items-center justify-between gap-2 text-xs">
+                    <span className="flex items-center gap-1.5 text-[#8A5A1C] font-medium">
+                      <MapPin className="w-3.5 h-3.5 shrink-0 text-[#C59B4B]" />
+                      <span>{spot.distanceFromBanyan}</span>
+                    </span>
+                    <span className="text-[11px] text-neutral-400 group-hover:text-[#8A5A1C] transition-colors font-medium">
+                      {spot.address.split(',')[0]}
+                    </span>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-xs text-[#1A3B34]/80 font-light leading-relaxed">
+                    {spot.description}
+                  </p>
+
+                  {/* Popular Dishes with Exact Pricing */}
+                  <div className="pt-2 border-t border-[#E8DCC6]/60 space-y-1.5">
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-neutral-500 block">
+                      Popular Items & Pricing:
+                    </span>
+                    <div className="space-y-1">
+                      {spot.popularItems.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-center justify-between text-xs py-0.5"
+                        >
+                          <span className="text-neutral-700 truncate pr-2">
+                            {item.name}
+                          </span>
+                          <span className="font-semibold text-[#1A3B34] shrink-0 bg-[#F9F7F2] px-1.5 py-0.5 rounded text-[11px]">
+                            {item.price}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Insider Tip Box */}
+                  <div className="p-2.5 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] text-[11px] text-[#1A3B34]/85 leading-relaxed flex items-start gap-1.5">
+                    <Info className="w-3.5 h-3.5 text-[#C59B4B] shrink-0 mt-0.5" />
+                    <span>
+                      <strong className="text-[#1A3B34] font-semibold">Tip: </strong>
+                      {spot.insiderTip}
+                    </span>
                   </div>
                 </div>
 
-                {/* Insider Tip Box */}
-                <div className="p-2.5 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] text-[11px] text-[#1A3B34]/85 leading-relaxed flex items-start gap-1.5">
-                  <Info className="w-3.5 h-3.5 text-[#C59B4B] shrink-0 mt-0.5" />
-                  <span>
-                    <strong className="text-[#1A3B34] font-semibold">Tip: </strong>
-                    {spot.insiderTip}
-                  </span>
+                {/* Card Footer: Tag pills & Direct Google Maps Backlink Button */}
+                <div className="pt-3 border-t border-[#E8DCC6]/60 flex items-center justify-between gap-2">
+                  <div className="flex flex-wrap gap-1 min-w-0">
+                    {spot.tags.slice(0, 2).map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[10px] px-2 py-0.5 rounded-md bg-[#F9F7F2] text-[#1A3B34]/70 font-medium truncate"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Direct Backlink Anchor */}
+                  <a
+                    href={spot.backlinkUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#1A3B34] group-hover:bg-[#234E45] text-white hover:bg-[#C59B4B]! hover:text-[#1A3B34]! transition-all shrink-0 shadow-2xs cursor-pointer"
+                    title={spot.backlinkLabel || `Open ${spot.name} in Google Maps`}
+                  >
+                    <MapPin className="w-3 h-3 text-[#F6E7A7]" />
+                    <span>Google Maps</span>
+                    <ExternalLink className="w-3 h-3 text-[#F6E7A7]" />
+                  </a>
                 </div>
               </div>
-
-              {/* Tag pills */}
-              <div className="pt-3 border-t border-[#E8DCC6]/60 flex flex-wrap gap-1">
-                {spot.tags.map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="text-[10px] px-2 py-0.5 rounded-md bg-[#F9F7F2] text-[#1A3B34]/70 font-medium"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </section>
   );

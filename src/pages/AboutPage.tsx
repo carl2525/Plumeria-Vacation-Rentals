@@ -61,7 +61,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               <InlineLink to="/rentals" onNavigate={onNavigate}>
                 557 sq. ft. 1-bedroom suite with a 67 sq. ft. private lanai
               </InlineLink>{' '}
-              (624 sq. ft. total) framing 180° Diamond Head and mountain views, Full kitchen, paired with Oʻahu’s largest{' '}
+              (624 sq. ft. total) framing dual beach, ocean, Diamond Head, and mountain views, Full kitchen, paired with Oʻahu’s largest{' '}
               <InlineLink to="/waikiki-banyan" onNavigate={onNavigate}>
                 1-acre 6th-floor resort deck
               </InlineLink>{' '}

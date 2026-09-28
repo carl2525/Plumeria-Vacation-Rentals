@@ -23,6 +23,8 @@ export interface DiningSpot {
   popularItems: MenuItem[];
   image: string;
   tags: string[];
+  backlinkUrl: string;
+  backlinkLabel?: string;
 }
 
 export interface DiningBudgetScenario {
@@ -64,6 +66,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
     tags: ['On-Site at Banyan', 'Kona Coffee', 'Acai Bowls', 'Zero Walk Time'],
+    backlinkUrl: 'https://maps.app.goo.gl/ZnwpSTprpu86XQHw6',
+    backlinkLabel: 'Google Maps · Banyan Breeze Coffee & Snack Shop',
   },
   {
     id: 'maguro-spot',
@@ -90,6 +94,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80',
     tags: ['2 Blocks Away', 'Fresh Local Ahi', 'Custom Bowls', 'Budget Friendly'],
+    backlinkUrl: 'https://maps.app.goo.gl/ysoDt1aAdNEFzWm88',
+    backlinkLabel: 'Google Maps · Maguro Spot',
   },
   {
     id: 'marugame-udon',
@@ -116,6 +122,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1618841557871-b4664fbf0cb3?auto=format&fit=crop&w=800&q=80',
     tags: ['7 Min Walk', 'Handmade Noodles', 'Top Waikiki Value', 'Kids Love It'],
+    backlinkUrl: 'https://maps.app.goo.gl/jGzq9m43pKeyxBuj8',
+    backlinkLabel: 'Google Maps · Marugame Udon Waikiki',
   },
   {
     id: 'musubi-cafe-iyasume',
@@ -142,10 +150,12 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80',
     tags: ['3 Min Walk', 'Beach Snack Essential', 'Under $5', 'Authentic Local'],
+    backlinkUrl: 'https://maps.app.goo.gl/r2BWbwbd8grYNkrA6',
+    backlinkLabel: 'Google Maps · Musubi Cafe IYASUME',
   },
   {
     id: 'me-bbq',
-    name: 'Me BBQ Waikiki',
+    name: 'ME BBQ Waikiki',
     cuisine: 'Hawaiian-Korean BBQ Plates',
     category: 'family-dinner',
     categoryLabel: 'Casual Lunch & Dinner',
@@ -168,6 +178,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
     tags: ['3 Min Walk', 'Huge Portions', 'Kalbi & Katsu', 'Great for Families'],
+    backlinkUrl: 'https://maps.app.goo.gl/2HVWR3WvFfrwDcSQA',
+    backlinkLabel: 'Google Maps · ME BBQ Waikiki',
   },
   {
     id: 'teddys-bigger-burgers',
@@ -194,6 +206,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80',
     tags: ['5 Min Walk', 'Hawaii’s Best Burger', 'Casual Patio', 'Family Friendly'],
+    backlinkUrl: 'https://maps.app.goo.gl/tMeRGKr9fdqDsquK9',
+    backlinkLabel: 'Google Maps · Teddy’s Bigger Burgers',
   },
   {
     id: 'paia-fish-market',
@@ -220,6 +234,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80',
     tags: ['7 Min Walk', 'Fresh Local Fish', 'Casual Surf Vibe', 'High Quality'],
+    backlinkUrl: 'https://maps.app.goo.gl/ZHX5Qa8GFZw3vYk47',
+    backlinkLabel: 'Google Maps · Paʻia Fish Market Waikiki',
   },
   {
     id: 'dukes-waikiki',
@@ -246,6 +262,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
     tags: ['8 Min Walk', 'Beachfront Iconic', 'Live Hawaiian Music', 'Hula Pie'],
+    backlinkUrl: 'https://maps.app.goo.gl/VtEasJiEmp324dk1A',
+    backlinkLabel: 'Google Maps · Duke’s Waikiki & Barefoot Bar',
   },
   {
     id: 'leonards-bakery',
@@ -272,6 +290,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80',
     tags: ['Iconic Since 1952', 'Warm Malasadas', 'Under $3', 'Must-Do Island Treat'],
+    backlinkUrl: 'https://maps.app.goo.gl/CvDTgxFxwmRSUJgAA',
+    backlinkLabel: 'Google Maps · Leonard’s Bakery',
   },
   {
     id: 'waikiki-market-groceries',
@@ -298,6 +318,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80',
     tags: ['5 Min Walk', 'Full Supermarket', 'Stock Your Kitchen', 'Hot Food Bar'],
+    backlinkUrl: 'https://maps.app.goo.gl/sYuzdZs4eQkTiRkz5',
+    backlinkLabel: 'Google Maps · Waikiki Market & Piko Kitchen',
   },
   {
     id: 'rainbow-drive-in',
@@ -324,6 +346,8 @@ export const NEARBY_DINING_SPOTS: DiningSpot[] = [
     ],
     image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80',
     tags: ['Since 1961', 'Classic Plate Lunch', 'Loco Moco', 'Under $15'],
+    backlinkUrl: 'https://maps.app.goo.gl/fD7HBLqWDCCw4QYdA',
+    backlinkLabel: 'Google Maps · Rainbow Drive-In',
   },
 ];
 
