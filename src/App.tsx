@@ -119,8 +119,13 @@ export function App() {
       );
     }
 
-    if (currentPath.startsWith('/rentals/')) {
-      const slug = currentPath.replace('/rentals/', '');
+    if (currentPath.startsWith('/rentals/') || currentPath.startsWith('/property/')) {
+      const slug = (
+        currentPath.startsWith('/property/')
+          ? currentPath.replace('/property/', '')
+          : currentPath.replace('/rentals/', '')
+      ).replace(/\/$/, '');
+
       return (
         <PropertyDetailPage
           slug={slug}

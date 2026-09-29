@@ -244,7 +244,7 @@ export const RulesPage: React.FC<RulesPageProps> = ({
                   Promo Base Rate
                 </span>
                 <span className="font-serif text-xl sm:text-2xl font-bold text-white block mt-0.5">
-                  $199<span className="text-xs font-normal text-white/75">/night</span>
+                  $199*<span className="text-xs font-normal text-white/75">/night</span>
                 </span>
                 <span className="text-[11px] text-white/70 block mt-1">
                   Valid until Oct 30 · $0 fees

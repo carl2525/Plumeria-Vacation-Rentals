@@ -44,6 +44,16 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         {/* Gradient overlay on image */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
+        {/* Unavailable overlay badge */}
+        {property.available === false && (
+          <div className="absolute top-12 left-3 sm:left-3.5 z-10 pointer-events-none">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-rose-600/95 text-white shadow-md border border-white/30 backdrop-blur-xs">
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+              <span>Not Available as of the Moment</span>
+            </span>
+          </div>
+        )}
+
         {/* Top Badges: Structured to guarantee zero text-wrapping or oval distortion on mobile */}
         <div className="absolute top-3 left-3 right-3 sm:top-3.5 sm:left-3.5 sm:right-3.5 flex items-start justify-between gap-2 pointer-events-none">
           {/* Left View Badge: Responsive text and whitespace-nowrap prevents multi-line break */}
@@ -146,7 +156,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           <div className="pt-2.5 pb-1 flex items-center justify-between gap-2 border-t border-[#E8DCC6]/60">
             <div>
               <div className="flex items-baseline gap-1.5 shrink-0">
-                <span className="font-serif text-lg font-bold text-[#1A3B34]">$199</span>
+                <span className="font-serif text-lg font-bold text-[#1A3B34]">$199*</span>
                 <span className="text-[11px] text-[#C59B4B] font-semibold">/ night promo</span>
               </div>
               <span className="block text-[9.5px] text-[#1A3B34]/65 font-medium">Valid until Oct 30</span>
@@ -174,14 +184,26 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <span>View Details</span>
           </button>
 
-          <button
-            id={`btn-inquire-${property.slug}`}
-            onClick={() => onInquire(property.id)}
-            className="flex-1 py-2.5 px-3 rounded-xl bg-[#1A3B34] hover:bg-[#2A5D52] text-white text-[11px] font-bold transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-xs border border-[#C59B4B]/30 whitespace-nowrap"
-          >
-            <Calendar className="w-3.5 h-3.5 text-[#F6E7A7] shrink-0" />
-            <span>Inquire to Book</span>
-          </button>
+          {property.available === false ? (
+            <button
+              id={`btn-inquire-${property.slug}`}
+              type="button"
+              onClick={() => onSelect('waikiki-banyan-3205-t2')}
+              className="flex-1 py-2.5 px-3 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 text-[11px] font-bold transition-colors uppercase tracking-wider flex items-center justify-center gap-1 cursor-pointer shadow-xs border border-amber-300 whitespace-nowrap"
+              title="Unit 3609 is currently unavailable. View available Unit #3205"
+            >
+              <span>See Unit #3205</span>
+            </button>
+          ) : (
+            <button
+              id={`btn-inquire-${property.slug}`}
+              onClick={() => onInquire(property.id)}
+              className="flex-1 py-2.5 px-3 rounded-xl bg-[#1A3B34] hover:bg-[#2A5D52] text-white text-[11px] font-bold transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-xs border border-[#C59B4B]/30 whitespace-nowrap"
+            >
+              <Calendar className="w-3.5 h-3.5 text-[#F6E7A7] shrink-0" />
+              <span>Inquire to Book</span>
+            </button>
+          )}
         </div>
       </div>
     </article>

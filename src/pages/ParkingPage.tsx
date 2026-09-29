@@ -113,9 +113,10 @@ const PARKING_GUIDELINES: ParkingStepItem[] = [
     summary: 'Park in any open unreserved parking space and display your parking pass on the dashboard.',
     details: [
       'Do not park in spaces designated Reserved, Staff, or Loading Only.',
-      'Take Tower 2 elevators directly up to your suite.'
+      'Take Tower 2 elevators directly up to your suite.',
+      'Safeguard the parking pass: a $200 fee applies if lost or unreturned.'
     ],
-    tip: 'Complimentary 24/7 unlimited in & out parking access is included.'
+    tip: 'Complimentary 24/7 unlimited in & out parking access is included ($200 fee if parking pass is lost).'
   }
 ];
 
@@ -197,7 +198,7 @@ export const ParkingPage: React.FC<ParkingPageProps> = ({ onNavigate }) => {
             <ShieldCheck className="w-5 h-5 text-[#8CA58A] shrink-0" />
             <div>
               <span className="font-bold text-[#1A3B34] block">Free Parking Pass</span>
-              <span className="text-[#1A3B34]/70 text-[11px] block">24/7 in &amp; out access</span>
+              <span className="text-[#1A3B34]/70 text-[11px] block">24/7 access · $200 lost fee</span>
             </div>
           </div>
 
@@ -474,16 +475,24 @@ export const ParkingPage: React.FC<ParkingPageProps> = ({ onNavigate }) => {
         {/* Garage Rules (Minimal, Clean) */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-white p-5 rounded-2xl border border-[#E8DCC6] shadow-xs space-y-2.5">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#8CA58A]" />
-              <h3 className="font-serif text-base font-bold text-[#1A3B34]">
-                Parking Pass
-              </h3>
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#8CA58A]" />
+                <h3 className="font-serif text-base font-bold text-[#1A3B34]">
+                  Parking Pass
+                </h3>
+              </div>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">
+                $200 Lost Pass Fee
+              </span>
             </div>
             <ul className="space-y-1.5 text-xs text-[#1A3B34]/80">
               <li>• 1 dedicated parking pass included with your suite.</li>
               <li>• Display face-up on vehicle dashboard while parked.</li>
               <li>• Unlimited 24/7 in &amp; out parking access.</li>
+              <li className="pt-2 text-rose-700 font-medium border-t border-[#E8DCC6]/60">
+                • ⚠️ <strong>$200 Lost Pass Fee:</strong> A $200 fee applies if the physical parking pass is lost, damaged, or not returned upon checkout.
+              </li>
             </ul>
           </div>
 
@@ -500,6 +509,26 @@ export const ParkingPage: React.FC<ParkingPageProps> = ({ onNavigate }) => {
               <li>• Do not park in spaces designated Reserved, Staff, or Loading Only.</li>
               <li>• 5 MPH speed limit throughout the structure.</li>
             </ul>
+          </div>
+        </section>
+
+        {/* $200 Lost Pass Policy Card */}
+        <section className="p-4 sm:p-5 rounded-2xl bg-amber-50/80 border border-amber-200/90 text-xs text-[#1A3B34] flex items-start gap-3.5 shadow-2xs">
+          <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5 border border-amber-200">
+            <AlertTriangle className="w-4 h-4 text-amber-700" />
+          </div>
+          <div className="space-y-1 flex-1 min-w-0">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <h4 className="font-serif font-bold text-sm text-[#1A3B34]">
+                Parking Pass Safeguard & $200 Replacement Fee Policy
+              </h4>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-rose-100 text-rose-800 border border-rose-200">
+                $200 Fee
+              </span>
+            </div>
+            <p className="text-[#1A3B34]/85 leading-relaxed font-light">
+              Your complimentary garage parking pass is an official physical permit issued specifically for your suite. Please keep it safely displayed on your dashboard while inside the garage and leave it inside the suite when checking out. If the parking pass is lost, stolen, or not returned upon checkout, a <strong>$200 replacement fee</strong> will be charged to cover the building management re-issue cost.
+            </p>
           </div>
         </section>
 

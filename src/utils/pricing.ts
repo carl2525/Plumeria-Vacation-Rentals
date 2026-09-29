@@ -25,6 +25,23 @@
  */
 
 export const BASE_NIGHTLY_RATE = 199;
+export const POST_PROMO_NIGHTLY_RATE = 249;
+export const PROMO_EXPIRATION_DATE = '2026-10-30';
+
+/**
+ * Checks whether a booking date (e.g. check-in date) is beyond October 30, 2026.
+ */
+export function isDateBeyondPromo(checkInDate?: string): boolean {
+  if (!checkInDate) return false;
+  return checkInDate > PROMO_EXPIRATION_DATE;
+}
+
+/**
+ * Returns the price per night: $249 if booking date is beyond Oct 30, 2026; otherwise $199.
+ */
+export function getBaseNightlyRate(checkInDate?: string): number {
+  return isDateBeyondPromo(checkInDate) ? POST_PROMO_NIGHTLY_RATE : BASE_NIGHTLY_RATE;
+}
 
 export const TAX_RATES = {
   GET_PERCENT: 4.5,

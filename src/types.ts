@@ -18,6 +18,8 @@ export interface Property {
   taxRateDescription?: string;
   airbnbUrl?: string;
   featured: boolean;
+  available?: boolean;
+  availabilityNote?: string;
   heroImage: string;
   gallery: {
     url: string;

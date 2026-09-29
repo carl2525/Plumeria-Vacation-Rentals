@@ -362,6 +362,7 @@ export const IN_HOUSE_RULES: RuleCategory = {
         'Do not use another unit’s parking pass or alter/duplicate any permit.',
         'Do not leave a vehicle in a loading zone beyond the allowed 15 minutes.',
         'If you have an oversized vehicle, contact the host before relying on onsite parking.',
+        'A $200 replacement fee applies if the physical parking pass is lost or not returned upon checkout.',
       ],
     },
     {

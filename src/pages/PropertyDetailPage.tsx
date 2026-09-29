@@ -24,7 +24,13 @@ import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { SITE_CONFIG } from '../config/site';
 import { AppImage } from '../components/common/AppImage';
 import { generateInquiryMailtoUrl } from '../utils/mailto';
-import { calculateStayPricing, formatCurrency, BASE_NIGHTLY_RATE } from '../utils/pricing';
+import {
+  calculateStayPricing,
+  formatCurrency,
+  BASE_NIGHTLY_RATE,
+  POST_PROMO_NIGHTLY_RATE,
+  isDateBeyondPromo,
+} from '../utils/pricing';
 import { getTodayDateString, getNextDayDateString, isDateInPast } from '../utils/date';
 
 interface PropertyDetailPageProps {
@@ -45,7 +51,14 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   onSelectProperty,
   onOpenInquiry,
 }) => {
-  const property = PROPERTIES.find((p) => p.slug === slug) || PROPERTIES[0];
+  const property =
+    PROPERTIES.find(
+      (p) =>
+        p.slug === slug ||
+        p.id === slug ||
+        (slug.includes('3609') && p.id === 'wb-3609-t2') ||
+        (slug.includes('3205') && p.id === 'wb-3205-t2')
+    ) || PROPERTIES[0];
 
   const today = getTodayDateString();
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -88,7 +101,12 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
     return Math.round((end - start) / (1000 * 60 * 60 * 24));
   }, [checkIn, checkOut]);
 
-  const stickyPricing = useMemo(() => calculateStayPricing(stickyNights), [stickyNights]);
+  const isStickyBeyondPromo = useMemo(() => isDateBeyondPromo(checkIn), [checkIn]);
+  const stickyBaseRate = isStickyBeyondPromo ? POST_PROMO_NIGHTLY_RATE : BASE_NIGHTLY_RATE;
+  const stickyPricing = useMemo(
+    () => calculateStayPricing(stickyNights, stickyBaseRate),
+    [stickyNights, stickyBaseRate]
+  );
   const dynamicGallery = useMemo(() => {
     if (property.id !== 'wb-3205-t2') {
       return property.gallery;
@@ -206,6 +224,36 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               1 Block to Kuhio Beach & Queen’s Surf
             </span>
           </div>
+
+          {/* Unit Not Available Alert Notice */}
+          {property.available === false && (
+            <div className="p-4 sm:p-5 rounded-2xl bg-amber-50 border border-amber-200/90 text-[#1A3B34] flex items-start gap-3.5 shadow-xs">
+              <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5 border border-amber-200">
+                <Sparkles className="w-4 h-4 text-amber-700" />
+              </div>
+              <div className="space-y-1 text-xs sm:text-sm flex-1">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <strong className="text-amber-950 font-bold font-serif text-sm sm:text-base">
+                    Unit #3609 is Currently Not Available as of the Moment
+                  </strong>
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-rose-100 text-rose-800 border border-rose-200">
+                    Not Available
+                  </span>
+                </div>
+                <p className="text-amber-900/85 font-light leading-relaxed">
+                  Reservations for Penthouse Suite #3609 are paused at this time. You can view all photos, specs, and floor plans below. For active reservations, please explore our sister high-floor suite:{' '}
+                  <button
+                    type="button"
+                    onClick={() => onSelectProperty('waikiki-banyan-3205-t2')}
+                    className="font-bold underline text-[#1A3B34] hover:text-[#C59B4B] cursor-pointer"
+                  >
+                    Waikiki Banyan Suite #3205 (Floor 32 · Available to Book)
+                  </button>
+                  , or contact our host directly to inquire about future opening dates.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Photo Gallery Grid */}
@@ -527,7 +575,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   <div>
                     <div className="flex items-baseline gap-1.5">
                       <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
-                        $199
+                        $199*
                       </span>
                       <span className="text-xs text-[#C59B4B] font-semibold">/ night promo</span>
                     </div>
@@ -545,8 +593,43 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 </p>
               </div>
 
-              {/* Booking Dates Form in Sticky Card */}
-              <form onSubmit={handleInquirySubmit} className="space-y-3.5">
+              {/* Booking Dates Form in Sticky Card (or Unavailable state) */}
+              {property.available === false ? (
+                <div className="space-y-4 pt-1">
+                  <div className="p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-center space-y-2">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold uppercase tracking-wider border border-rose-200">
+                      <span className="w-2 h-2 rounded-full bg-rose-600 animate-pulse" />
+                      <span>Not Available as of the Moment</span>
+                    </span>
+                    <p className="text-xs text-[#1A3B34]/80 leading-relaxed font-light">
+                      Suite #3609 is temporarily not taking reservations. You can reserve our active sister suite on Floor 32:
+                    </p>
+                  </div>
+
+                  <div className="space-y-2 pt-1">
+                    <button
+                      type="button"
+                      id="view-available-suite-3205-btn"
+                      onClick={() => onSelectProperty('waikiki-banyan-3205-t2')}
+                      className="w-full py-3.5 px-4 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer border border-[#C59B4B]/30"
+                    >
+                      <Sparkles className="w-4 h-4 text-[#F6E7A7]" />
+                      <span>View Available Suite #3205</span>
+                    </button>
+
+                    <a
+                      href={directMailtoUrl}
+                      id="sticky-card-mailto-btn"
+                      className="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-[#E8DCC6]/40 text-[#1A3B34] font-medium text-xs flex items-center justify-center gap-1.5 border border-[#E8DCC6] transition-colors cursor-pointer shadow-2xs"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-[#C59B4B]" />
+                      <span>Contact Host About Upcoming Dates</span>
+                      <ExternalLink className="w-3 h-3 text-[#1A3B34]/40" />
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleInquirySubmit} className="space-y-3.5">
                 <div className="grid grid-cols-2 gap-2">
                   <div className="p-2.5 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6]">
                     <label className="block text-[9px] font-bold uppercase tracking-wider text-[#1A3B34]/60 mb-1">
@@ -665,7 +748,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     <span>
                       {stickyNights > 0
                         ? `Inquire to Book (${formatCurrency(stickyPricing.grandTotal)} Total)`
-                        : 'Inquire to Book · $199/nt (Valid until Oct 30)'}
+                        : isStickyBeyondPromo
+                        ? 'Inquire to Book · $249/nt'
+                        : 'Inquire to Book · $199*/nt (Valid until Oct 30)'}
                     </span>
                   </button>
 
@@ -693,6 +778,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   </a>
                 </div>
               </form>
+            )}
 
               {/* Direct email quick note */}
               <div className="pt-2 text-center text-xs text-[#1A3B34]/70 space-y-1">

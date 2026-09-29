@@ -45,7 +45,7 @@ export const BookingCTA: React.FC<BookingCTAProps> = ({
             Your Waikiki vacation is closer than you think.
           </h2>
           <p className="text-base sm:text-lg text-white/85 font-light leading-relaxed">
-            Our suites are primarily listed on Airbnb, with direct inquiries welcomed right here. Experience why Waikiki Banyan condo rentals are better than any other vacation rental in Honolulu—enjoy spacious 1-bedroom suites with 1-acre resort deck amenities, Full kitchens, <strong className="text-[#F6E7A7] font-semibold">promotional direct pricing ($199/night promo rate across all units)</strong>, free covered parking pass, and $0 Resort fees.
+            Our suites are primarily listed on Airbnb, with direct inquiries welcomed right here. Experience why Waikiki Banyan condo rentals are better than any other vacation rental in Honolulu—enjoy spacious 1-bedroom suites with 1-acre resort deck amenities, Full kitchens, <strong className="text-[#F6E7A7] font-semibold">promotional direct pricing ($199*/night promo rate across all units)</strong>, free covered parking pass, and $0 Resort fees.
           </p>
         </div>
 

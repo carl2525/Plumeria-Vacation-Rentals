@@ -18,6 +18,8 @@ export const PROPERTIES: Property[] = [
     lanaiSquareFeet: 67,
     airbnbUrl: 'https://www.airbnb.com',
     featured: true,
+    available: false,
+    availabilityNote: 'Not available as of the moment',
     heroImage: '/images/banyan/banyan-amenity-03.webp',
     gallery: [
       {
@@ -135,7 +137,7 @@ export const PROPERTIES: Property[] = [
     houseRules: [
       'Check-in: 4:00 PM / Check-out: 10:00 AM (early check-in $50–$75/hr upon availability & late checkout with advance host approval)',
       'Covered garage parking included ($0 extra fee; follow Waikiki Banyan garage rules)',
-      'Base rate: $199/night (Special Promotion valid until Oct 30); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
+      'Base rate: $199*/night (Special Promotion valid until Oct 30); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
       'Cleaning fee: $250 for 1–2 nights; Waived ($0) for stays 3 nights or more (Want to waive cleaning fee? Book 3 nights or more!)',
       'Length of stay discounts: 5 days (5%), 10 days (10%), 15 days (15%), 20 days (20%), 25 days (25%), 30 days (30%)',
       'Hawaii Taxes: 18.5% (Formula = TAX + Base + Cleaning Fee)',
@@ -171,6 +173,7 @@ export const PROPERTIES: Property[] = [
     lanaiSquareFeet: 67,
     airbnbUrl: 'https://www.airbnb.com',
     featured: true,
+    available: true,
     heroImage: '/images/properties/wb-3205-t2/unit-3205-01.webp',
     gallery: [
       {
@@ -341,7 +344,7 @@ export const PROPERTIES: Property[] = [
     houseRules: [
       'Check-in: 4:00 PM / Check-out: 10:00 AM (early check-in $50–$75/hr upon availability & late checkout with advance host approval)',
       'Covered garage parking included ($0 extra fee; follow Waikiki Banyan garage rules)',
-      'Base rate: $199/night (Special Promotion valid until Oct 30); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
+      'Base rate: $199*/night (Special Promotion valid until Oct 30); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
       'Cleaning fee: $250 for 1–2 nights; Waived ($0) for stays 3 nights or more (Want to waive cleaning fee? Book 3 nights or more!)',
       'Length of stay discounts: 5 days (5%), 10 days (10%), 15 days (15%), 20 days (20%), 25 days (25%), 30 days (30%)',
       'Hawaii Taxes: 18.5% (Formula = TAX + Base + Cleaning Fee)',

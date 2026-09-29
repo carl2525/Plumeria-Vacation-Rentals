@@ -1,6 +1,12 @@
 import { SITE_CONFIG } from '../config/site';
 import { PROPERTIES } from '../data/properties';
-import { calculateStayPricing, formatCurrency } from './pricing';
+import {
+  calculateStayPricing,
+  formatCurrency,
+  BASE_NIGHTLY_RATE,
+  POST_PROMO_NIGHTLY_RATE,
+  isDateBeyondPromo,
+} from './pricing';
 
 export interface MailtoInquiryParams {
   firstName?: string;
@@ -40,8 +46,11 @@ export function buildInquiryEmailText(params: MailtoInquiryParams): string {
   const phoneText = params.phone || 'Not provided';
   const notesText = params.message && params.message.trim() ? params.message.trim() : 'None';
 
+  const isBeyondPromo = isDateBeyondPromo(params.checkIn);
+  const baseRate = isBeyondPromo ? POST_PROMO_NIGHTLY_RATE : BASE_NIGHTLY_RATE;
+
   // Calculate nights and estimated pricing if dates provided
-  let rateDetail = `• Promotional Base Rate: $199 / night (Valid until Oct 30)
+  let rateDetail = `• ${isBeyondPromo ? `Base Rate: $${baseRate} / night` : `Promotional Base Rate: $${baseRate} / night (Valid until Oct 30)`}
 • Resort Fees: $0 (Never charged)
 • Covered Parking: Included ($0 dedicated garage pass)`;
 
@@ -50,15 +59,18 @@ export function buildInquiryEmailText(params: MailtoInquiryParams): string {
     const end = new Date(params.checkOut).getTime();
     if (!isNaN(start) && !isNaN(end) && end > start) {
       const nights = Math.round((end - start) / (1000 * 60 * 60 * 24));
-      const pricing = calculateStayPricing(nights);
+      const pricing = calculateStayPricing(nights, baseRate);
       const discountText = pricing.discountPercent > 0 ? ` (Includes ${pricing.discountPercent}% length-of-stay discount: -${formatCurrency(pricing.discountAmount)})` : '';
       const cleaningText = pricing.isCleaningFeeWaived
         ? '$0 (Waived for 3+ nights stay)'
         : `${formatCurrency(pricing.cleaningFee)} (1-2 nights stay)`;
       const taxesText = `${formatCurrency(pricing.totalTaxes)} (18.5% Hawaii State Taxes)`;
+      const rateLabel = isBeyondPromo
+        ? `Base Rate: $${baseRate} / night`
+        : `Promotional Base Rate: $${baseRate} / night (Valid until Oct 30)`;
 
       rateDetail = `• Stay Duration: ${nights} Nights (${params.checkIn} to ${params.checkOut})
-• Promotional Base Rate: $199 / night (Valid until Oct 30; ${formatCurrency(pricing.grossRoomTotal)}${discountText})
+• ${rateLabel} (${formatCurrency(pricing.grossRoomTotal)}${discountText})
 • Resort Fees: $0 (Never charged)
 • Garage Parking: Included ($0 dedicated pass)
 • Cleaning Fee: ${cleaningText}

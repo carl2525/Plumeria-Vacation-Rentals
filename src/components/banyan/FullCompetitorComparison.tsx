@@ -116,10 +116,10 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
       feature: 'Nightly Suite Rate',
       category: 'hotels',
       plumeria: {
-        title: '$199 / Night (Promo Valid until Oct 30)',
+        title: '$199* / Night (Promo Valid until Oct 30)',
         description: 'True 1-bedroom high-floor suite. 5%–30% tiered stay discounts.',
         isSuperior: true,
-        badge: '$199 Promo (Until Oct 30)',
+        badge: '$199* Promo (Until Oct 30)',
       },
       competitor1: {
         name: 'Hilton Hawaiian Village',
@@ -322,7 +322,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
       feature: 'Resort Fees & Pricing',
       category: 'hyatt',
       plumeria: {
-        title: '$199 Promo Rate · $0 Resort Fees',
+        title: '$199* Promo Rate · $0 Resort Fees',
         description: 'Formula: Total = TAX (18.5%) + Base + Cleaning Fee ($0 for 3+ nights). 5% to 30% stay discounts.',
         isSuperior: true,
         badge: '$0 Resort Fees',
@@ -449,7 +449,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
         </h3>
 
         <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">
-          Compare our guaranteed high-floor Tower 2 suites at <strong className="text-[#1A3B34] font-semibold">$199/night promo rate</strong> with free covered parking and $0 Resort fees against prominent Waikiki hotel suites and on-site building rental pools.
+          Compare our guaranteed high-floor Tower 2 suites at <strong className="text-[#1A3B34] font-semibold">$199*/night promo rate</strong> with free covered parking and $0 Resort fees against prominent Waikiki hotel suites and on-site building rental pools.
         </p>
 
         {/* Category Tabs: Compare Hotel First */}
@@ -505,8 +505,8 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
               </span>
               <p className="text-xs sm:text-sm text-[#1A3B34]/80">
                 {activeCategory === 'hotels'
-                  ? 'Plumeria ($199/nt promo, $0 Resort fees, Free Parking, Full kitchen) vs. Hilton Hawaiian Village & Sheraton Waikiki.'
-                  : 'Plumeria (Floors 32 & 36, $199/nt promo, $0 Resort fees, Free Parking) vs. Hyatt Regency Waikiki & Generic Airbnb hosts.'}
+                  ? 'Plumeria ($199*/nt promo, $0 Resort fees, Free Parking, Full kitchen) vs. Hilton Hawaiian Village & Sheraton Waikiki.'
+                  : 'Plumeria (Floors 32 & 36, $199*/nt promo, $0 Resort fees, Free Parking) vs. Hyatt Regency Waikiki & Generic Airbnb hosts.'}
               </p>
             </div>
 
@@ -560,7 +560,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                   <div className="p-3.5 rounded-xl bg-[#1A3B34]/5 border border-[#1A3B34]/15 space-y-1">
                     <div className="flex items-center gap-1.5 text-emerald-800 font-bold text-xs">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Plumeria at Waikiki Banyan ($199/nt Promo)</span>
+                      <span>Plumeria at Waikiki Banyan ($199*/nt Promo)</span>
                     </div>
                     <h5 className="font-serif text-sm font-bold text-[#1A3B34]">
                       {item.plumeria.title}
@@ -632,7 +632,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
                     <th className="p-4 lg:p-5 bg-[#1A3B34] text-white w-1/3 relative">
                       <div className="space-y-1">
                         <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#C59B4B] text-[#1A3B34] text-[10px] font-bold uppercase tracking-wider">
-                          $199 Promo · $0 Resort Fees
+                          $199* Promo · $0 Resort Fees
                         </div>
                         <h4 className="font-serif text-base lg:text-lg font-bold text-[#F6E7A7]">
                           Plumeria at Waikiki Banyan
@@ -752,7 +752,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
               Calculate Your True Vacation Savings
             </h4>
             <p className="text-xs sm:text-sm text-[#1A3B34]/75 font-light">
-              Compare Plumeria ($199 promo rate, $0 Resort fees, Free Parking, and $0 Cleaning Fee for 3+ nights) against Waikiki hotel suites and on-site hotel pools.
+              Compare Plumeria ($199* promo rate, $0 Resort fees, Free Parking, and $0 Cleaning Fee for 3+ nights) against Waikiki hotel suites and on-site hotel pools.
             </p>
           </div>
 
@@ -846,7 +846,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
 
                 <div className="py-2 border-y border-white/15 space-y-1.5 text-xs text-white/85">
                   <div className="flex justify-between">
-                    <span>Base Rate ({stayNights} nts @ $199):</span>
+                    <span>Base Rate ({stayNights} nts @ $199*):</span>
                     <span className="font-semibold">${plumeriaPricing.grossRoomTotal.toLocaleString()}</span>
                   </div>
 
@@ -1059,7 +1059,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
           <div className="p-4 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1.5">
             <span className="font-semibold text-[#1A3B34] block text-sm">How This Comparative Pricing is Grounded:</span>
             <p className="font-light leading-relaxed">
-              • <strong>Plumeria at Waikiki Banyan:</strong> $199/night promotional rate across all units (valid until Oct 30), $0 Resort fees, $0 parking pass. Cleaning fee is $250 for 1–2 nights and waived ($0) for 3+ nights. Tiered stay discounts apply incrementally (5 days: 5%, 10 days: 10%, 15 days: 15%, 20 days: 20%, 25 days: 25%, 30 days: 30%). Hawaii Taxes: 18.5% total applied directly to Base + Cleaning Fee.
+              • <strong>Plumeria at Waikiki Banyan:</strong> $199*/night promotional rate across all units (valid until Oct 30), $0 Resort fees, $0 parking pass. Cleaning fee is $250 for 1–2 nights and waived ($0) for 3+ nights. Tiered stay discounts apply incrementally (5 days: 5%, 10 days: 10%, 15 days: 15%, 20 days: 20%, 25 days: 25%, 30 days: 30%). Hawaii Taxes: 18.5% total applied directly to Base + Cleaning Fee.
             </p>
             <p className="font-light leading-relaxed">
               • <strong>Hawaii Taxes:</strong> Full Hawaii taxes (18.5% total) are applied across competitor room rates and mandatory resort fees, giving you an accurate, true comparison.
