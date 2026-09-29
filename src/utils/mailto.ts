@@ -50,7 +50,7 @@ export function buildInquiryEmailText(params: MailtoInquiryParams): string {
   const baseRate = isBeyondPromo ? POST_PROMO_NIGHTLY_RATE : BASE_NIGHTLY_RATE;
 
   // Calculate nights and estimated pricing if dates provided
-  let rateDetail = `• ${isBeyondPromo ? `Base Rate: $${baseRate} / night` : `Promotional Base Rate: $${baseRate} / night (Valid until Oct 30)`}
+  let rateDetail = `• Base Rate: Starting at $${BASE_NIGHTLY_RATE} / night
 • Resort Fees: $0 (Never charged)
 • Covered Parking: Included ($0 dedicated garage pass)`;
 
@@ -59,23 +59,23 @@ export function buildInquiryEmailText(params: MailtoInquiryParams): string {
     const end = new Date(params.checkOut).getTime();
     if (!isNaN(start) && !isNaN(end) && end > start) {
       const nights = Math.round((end - start) / (1000 * 60 * 60 * 24));
-      const pricing = calculateStayPricing(nights, baseRate);
+      const pricing = calculateStayPricing(nights, undefined, params.checkIn, params.checkOut);
       const discountText = pricing.discountPercent > 0 ? ` (Includes ${pricing.discountPercent}% length-of-stay discount: -${formatCurrency(pricing.discountAmount)})` : '';
       const cleaningText = pricing.isCleaningFeeWaived
         ? '$0 (Waived for 3+ nights stay)'
         : `${formatCurrency(pricing.cleaningFee)} (1-2 nights stay)`;
       const taxesText = `${formatCurrency(pricing.totalTaxes)} (18.5% Hawaii State Taxes)`;
-      const rateLabel = isBeyondPromo
-        ? `Base Rate: $${baseRate} / night`
-        : `Promotional Base Rate: $${baseRate} / night (Valid until Oct 30)`;
+      const rateLabel = pricing.rateLabel || `$${pricing.baseRatePerNight} / night`;
+      const seasonText = pricing.seasonSummary ? `\n• Seasonal Period: ${pricing.seasonSummary}` : '';
 
-      rateDetail = `• Stay Duration: ${nights} Nights (${params.checkIn} to ${params.checkOut})
-• ${rateLabel} (${formatCurrency(pricing.grossRoomTotal)}${discountText})
+      rateDetail = `• Stay Duration: ${nights} Nights (${params.checkIn} to ${params.checkOut})${seasonText}
+• Nightly Rate: ${rateLabel}
+• Base Room Subtotal: ${formatCurrency(pricing.grossRoomTotal)}${discountText}
 • Resort Fees: $0 (Never charged)
 • Garage Parking: Included ($0 dedicated pass)
 • Cleaning Fee: ${cleaningText}
 • Hawaii State Taxes: ${taxesText}
-• Estimated Total: ${formatCurrency(pricing.grandTotal)}`;
+• Estimated Quotation Total: ${formatCurrency(pricing.grandTotal)}`;
     }
   }
 

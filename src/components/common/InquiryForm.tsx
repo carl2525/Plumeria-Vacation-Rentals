@@ -92,16 +92,12 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
     return Math.round((end - start) / (1000 * 60 * 60 * 24));
   }, [formData.checkIn, formData.checkOut]);
 
-  // Determine if booking date is beyond Oct 30, 2026 ($249/nt) or within promo ($199/nt)
-  const isBeyondPromo = useMemo(() => {
-    return isDateBeyondPromo(formData.checkIn);
-  }, [formData.checkIn]);
-
-  const effectiveBaseRate = isBeyondPromo ? POST_PROMO_NIGHTLY_RATE : BASE_NIGHTLY_RATE;
-
+  // Compute dynamic seasonal pricing across selected stay dates
   const pricing = useMemo(() => {
-    return calculateStayPricing(nights, effectiveBaseRate);
-  }, [nights, effectiveBaseRate]);
+    return calculateStayPricing(nights, undefined, formData.checkIn, formData.checkOut);
+  }, [nights, formData.checkIn, formData.checkOut]);
+
+  const isBeyondPromo = isDateBeyondPromo(formData.checkIn);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -219,7 +215,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             </div>
             <div className="flex items-center gap-1.5 self-start sm:self-auto">
               <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-[#C59B4B] text-[#1A3B34] shadow-xs">
-                {isBeyondPromo ? '$249 / Nt Rate' : '$199* / Nt Promo Rate'}
+                {pricing.rateLabel || `$${pricing.baseRatePerNight} / Nt`}
               </span>
               <span className="px-2 py-1 rounded-full text-[10px] font-semibold bg-white/15 text-[#F6E7A7] border border-white/20">
                 Tower 2
@@ -228,7 +224,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
           </div>
 
           <p className="text-white/85 text-xs sm:text-sm pt-3 leading-relaxed font-light relative z-10">
-            Your booking inquiry has been prepared with our {isBeyondPromo ? <strong className="font-semibold text-[#F6E7A7]">$249/Night Rate (All Units)</strong> : <strong className="font-semibold text-[#F6E7A7]">Promotional $199*/Night Rate (All Units)</strong>} and <strong className="font-semibold text-white">$0 Resort Fees</strong>. An email draft has been generated for your email application.
+            Your booking inquiry has been prepared with our seasonal rate (<strong className="font-semibold text-[#F6E7A7]">{pricing.rateLabel || `$${pricing.baseRatePerNight}/night`}</strong>) and <strong className="font-semibold text-white">$0 Resort Fees</strong>. An email draft has been generated for your email application.
           </p>
         </div>
 
@@ -609,16 +605,21 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               </span>
             </div>
             <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-[#1A3B34] text-[#F6E7A7] shrink-0">
-              {isBeyondPromo
-                ? '$249 / Night'
-                : '$199* / Night Promo · Valid until Oct 30'}
+              {pricing.rateLabel || `$${pricing.baseRatePerNight} / Night`}
             </span>
           </div>
 
           <div className="space-y-1.5 text-[#1A3B34]/90">
             {/* Base room */}
             <div className="flex items-center justify-between">
-              <span>Base Rate (${pricing.baseRatePerNight} × {nights} {nights === 1 ? 'nt' : 'nts'}):</span>
+              <div>
+                <span>Base Room Rate ({nights} {nights === 1 ? 'nt' : 'nts'}):</span>
+                {pricing.seasonSummary && (
+                  <span className="block text-[10px] text-[#C59B4B] font-semibold">
+                    {pricing.seasonSummary}
+                  </span>
+                )}
+              </div>
               <span className="font-semibold">{formatCurrency(pricing.grossRoomTotal)}</span>
             </div>
 
@@ -801,8 +802,8 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                   : nights > 0
                   ? `Send Inquiry · ${formatCurrency(pricing.grandTotal)} Total (${nights} nts)`
                   : isBeyondPromo
-                  ? 'Send Booking Inquiry · $249/nt'
-                  : 'Send Booking Inquiry · Promo $199*/nt'}
+                  ? 'Send Booking Inquiry'
+                  : 'Send Booking Inquiry'}
               </span>
               <span className="block text-[10px] text-[#F6E7A7]/90 font-normal truncate">
                 {isBeyondPromo

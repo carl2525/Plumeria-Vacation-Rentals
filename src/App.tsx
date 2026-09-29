@@ -120,14 +120,14 @@ export function App() {
     }
 
     if (currentPath.startsWith('/rentals/') || currentPath.startsWith('/property/')) {
-      const slug = (
-        currentPath.startsWith('/property/')
-          ? currentPath.replace('/property/', '')
-          : currentPath.replace('/rentals/', '')
-      ).replace(/\/$/, '');
+      const rawSlug = currentPath.startsWith('/property/')
+        ? currentPath.replace('/property/', '')
+        : currentPath.replace('/rentals/', '');
+      const slug = rawSlug.replace(/\/$/, '').split('?')[0].split('#')[0];
 
       return (
         <PropertyDetailPage
+          key={slug}
           slug={slug}
           onNavigate={navigate}
           onSelectProperty={handleSelectProperty}

@@ -312,7 +312,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a
               id="topbar-call-now-btn"
               href={`tel:${SITE_CONFIG.phoneRaw}`}
-              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#C59B4B] hover:bg-[#d6a953] text-[#1A3B34] font-bold text-[10.5px] sm:text-xs transition-colors shadow-2xs whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 py-1.5 px-2.5 py-0.5 rounded-full bg-[#C59B4B] hover:bg-[#d6a953] text-[#1A3B34] font-bold text-[10.5px] sm:text-xs transition-colors shadow-2xs whitespace-nowrap"
               title={`Call host directly: ${SITE_CONFIG.phone}`}
             >
               <Phone className="w-3 h-3 text-[#1A3B34]" />
@@ -404,11 +404,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                           const isSubActive = isSubItemActive(sub.href);
 
                           return (
-                            <button
+                            <a
                               key={sub.id}
                               id={`submenu-link-${sub.id}`}
-                              type="button"
-                              onClick={() => handleNavClick(sub.href)}
+                              href={sub.href}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleNavClick(sub.href);
+                              }}
                               className={`w-full group/sub flex items-start gap-3 p-2.5 rounded-xl text-left transition-all cursor-pointer ${
                                 isSubActive
                                   ? 'bg-[#F9F7F2] border border-[#C59B4B]/35 shadow-2xs'
@@ -456,7 +459,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                                   {sub.description}
                                 </p>
                               </div>
-                            </button>
+                            </a>
                           );
                         })}
                       </div>
@@ -607,10 +610,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                             const IconComponent = sub.icon;
                             const isSubActive = isSubItemActive(sub.href);
                             return (
-                              <button
+                              <a
                                 key={sub.id}
-                                type="button"
-                                onClick={() => handleNavClick(sub.href)}
+                                href={sub.href}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleNavClick(sub.href);
+                                }}
                                 className={`w-full flex items-center gap-2.5 p-2 rounded-lg text-left transition-colors cursor-pointer ${
                                   isSubActive ? 'bg-[#F9F7F2] font-semibold text-[#1A3B34]' : 'hover:bg-[#F9F7F2]/80 text-[#1A3B34]/80'
                                 }`}
@@ -634,7 +640,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                                     {sub.badge}
                                   </span>
                                 )}
-                              </button>
+                              </a>
                             );
                           })}
                         </div>

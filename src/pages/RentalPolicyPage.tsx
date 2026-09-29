@@ -485,9 +485,26 @@ export const RentalPolicyPage: React.FC<RentalPolicyPageProps> = ({
                             Official Agreement Terms
                           </span>
                         </div>
-                        <div className="space-y-2.5 text-[#1A3B34] text-xs sm:text-sm leading-relaxed">
+                        <div className="space-y-2 text-[#1A3B34] text-xs sm:text-sm leading-relaxed">
                           {section.content.map((p, pIdx) => {
                             const isBullet = p.startsWith('•');
+                            const isRateLine = isBullet && (p.includes('2026') || p.includes('2027')) && p.includes('$');
+                            if (isRateLine) {
+                              const parts = p.replace(/^•\s*/, '').split(': ');
+                              const datePart = parts[0];
+                              const ratePart = parts.slice(1).join(': ');
+                              return (
+                                <div
+                                  key={pIdx}
+                                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2 p-2.5 px-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs"
+                                >
+                                  <span className="font-semibold text-[#1A3B34]">{datePart}</span>
+                                  <span className="font-bold font-serif text-sm text-[#1A3B34] bg-white px-3 py-0.5 rounded-full border border-[#C59B4B]/40 shadow-2xs self-start sm:self-auto">
+                                    {ratePart}
+                                  </span>
+                                </div>
+                              );
+                            }
                             return (
                               <p
                                 key={pIdx}

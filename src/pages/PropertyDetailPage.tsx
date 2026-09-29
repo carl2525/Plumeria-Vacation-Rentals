@@ -101,11 +101,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
     return Math.round((end - start) / (1000 * 60 * 60 * 24));
   }, [checkIn, checkOut]);
 
-  const isStickyBeyondPromo = useMemo(() => isDateBeyondPromo(checkIn), [checkIn]);
-  const stickyBaseRate = isStickyBeyondPromo ? POST_PROMO_NIGHTLY_RATE : BASE_NIGHTLY_RATE;
   const stickyPricing = useMemo(
-    () => calculateStayPricing(stickyNights, stickyBaseRate),
-    [stickyNights, stickyBaseRate]
+    () => calculateStayPricing(stickyNights, undefined, checkIn, checkOut),
+    [stickyNights, checkIn, checkOut]
   );
   const dynamicGallery = useMemo(() => {
     if (property.id !== 'wb-3205-t2') {
@@ -575,12 +573,20 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   <div>
                     <div className="flex items-baseline gap-1.5">
                       <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
-                        $199*
+                        {stickyNights > 0 && stickyPricing.rateLabel
+                          ? stickyPricing.rateLabel.split(' ')[0]
+                          : '$199*'}
                       </span>
-                      <span className="text-xs text-[#C59B4B] font-semibold">/ night promo</span>
+                      <span className="text-xs text-[#C59B4B] font-semibold">
+                        {stickyNights > 0 && stickyPricing.rateLabel
+                          ? '/ night'
+                          : '/ night promo'}
+                      </span>
                     </div>
                     <span className="text-[10px] text-[#8CA58A] font-bold block uppercase tracking-wider">
-                      Special Rate Promotion · Valid until Oct 30 · All Units
+                      {stickyNights > 0 && stickyPricing.seasonSummary
+                        ? `${stickyPricing.seasonSummary}`
+                        : 'Special Rate Promotion · Valid until Oct 31 · All Units'}
                     </span>
                   </div>
                   <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60 px-2 py-1 rounded-md">
@@ -678,8 +684,15 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     </div>
 
                     <div className="space-y-1 text-[11px] text-white/85">
-                      <div className="flex justify-between">
-                        <span>Base Rate (${BASE_NIGHTLY_RATE} × {stickyNights} nts):</span>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <span>Base Room Rate ({stickyNights} nts):</span>
+                          {stickyPricing.seasonSummary && (
+                            <span className="block text-[10px] text-[#F6E7A7]">
+                              {stickyPricing.seasonSummary}
+                            </span>
+                          )}
+                        </div>
                         <span>{formatCurrency(stickyPricing.grossRoomTotal)}</span>
                       </div>
                       {stickyPricing.discountPercent > 0 && (
@@ -748,9 +761,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     <span>
                       {stickyNights > 0
                         ? `Inquire to Book (${formatCurrency(stickyPricing.grandTotal)} Total)`
-                        : isStickyBeyondPromo
-                        ? 'Inquire to Book · $249/nt'
-                        : 'Inquire to Book · $199*/nt (Valid until Oct 30)'}
+                        : 'Inquire to Book · From $199*/nt'}
                     </span>
                   </button>
 

@@ -1,7 +1,9 @@
 /**
- * Plumeria Vacation Rentals Pricing & Tax System
+ * ============================================================================
+ * PLUMERIA VACATION RENTALS — PRICING & DYNAMIC TAX SYSTEM
+ * ============================================================================
  *
- * Base Nightly Rate: $199 / night (Promotional Rate)
+ * Grounded in City & County of Honolulu Licensed Short-Term Rental Rules.
  *
  * Taxes (Total 18.50%):
  *   - Hawaii General Excise Tax (GET): 4.5%
@@ -13,23 +15,43 @@
  *   - 3+ nights: $0 (Waived!)
  *
  * Length-of-Stay Incremental Discounts:
- *   - 5+ days (5–9 nights): 5% Discount
- *   - 10+ days (10–14 nights): 10% Discount
- *   - 15+ days (15–19 nights): 15% Discount
- *   - 20+ days (20–24 nights): 20% Discount
- *   - 25+ days (25–29 nights): 25% Discount
- *   - 30+ days (30+ nights): 30% Discount
+ *   - 7 to 9 days: 3% Discount
+ *   - 10 to 19 days: 5% Discount
+ *   - 20 to 29 days: 10% Discount
+ *   - 30+ days: 15% Max Discount
  *
- * Legal Status:
- *   - Legally authorized Short-Term Rental (STR) License authorized by the City & County of Honolulu
+ * Dynamic Seasonal Pricing (2026–2027):
+ *   - Rates are dynamically determined from `src/config/rateCalendar.ts`.
+ *   - To update prices, simply edit the values in `src/config/rateCalendar.ts`.
  */
 
-export const BASE_NIGHTLY_RATE = 199;
-export const POST_PROMO_NIGHTLY_RATE = 249;
-export const PROMO_EXPIRATION_DATE = '2026-10-30';
+import {
+  SEASONAL_RATES,
+  SeasonalRatePeriod,
+  NightRateDetail,
+  DEFAULT_FALLBACK_RATE,
+  CURRENT_DISPLAY_BASE_RATE,
+  getNightlyRateForDate,
+  getSeasonForDate,
+  calculateNightlyRatesForStay,
+} from '../config/rateCalendar';
+
+export {
+  SEASONAL_RATES,
+  type SeasonalRatePeriod,
+  type NightRateDetail,
+  DEFAULT_FALLBACK_RATE,
+  getNightlyRateForDate,
+  getSeasonForDate,
+  calculateNightlyRatesForStay,
+};
+
+export const BASE_NIGHTLY_RATE = CURRENT_DISPLAY_BASE_RATE; // $199
+export const POST_PROMO_NIGHTLY_RATE = DEFAULT_FALLBACK_RATE; // $249
+export const PROMO_EXPIRATION_DATE = '2026-10-31';
 
 /**
- * Checks whether a booking date (e.g. check-in date) is beyond October 30, 2026.
+ * Checks whether a booking date (e.g. check-in date) is beyond October 31, 2026.
  */
 export function isDateBeyondPromo(checkInDate?: string): boolean {
   if (!checkInDate) return false;
@@ -37,10 +59,11 @@ export function isDateBeyondPromo(checkInDate?: string): boolean {
 }
 
 /**
- * Returns the price per night: $249 if booking date is beyond Oct 30, 2026; otherwise $199.
+ * Returns the exact price per night for a given date from the 2026–2027 rate calendar.
  */
 export function getBaseNightlyRate(checkInDate?: string): number {
-  return isDateBeyondPromo(checkInDate) ? POST_PROMO_NIGHTLY_RATE : BASE_NIGHTLY_RATE;
+  if (!checkInDate) return BASE_NIGHTLY_RATE;
+  return getNightlyRateForDate(checkInDate);
 }
 
 export const TAX_RATES = {
@@ -58,17 +81,15 @@ export const CLEANING_FEE_SHORT_STAY = 250;
 export const CLEANING_FEE_WAIVED_NIGHTS = 3;
 
 export const LENGTH_DISCOUNT_TIERS = [
-  { minNights: 30, percent: 30, label: '30+ Days: 30% Discount' },
-  { minNights: 25, percent: 25, label: '25+ Days: 25% Discount' },
-  { minNights: 20, percent: 20, label: '20+ Days: 20% Discount' },
-  { minNights: 15, percent: 15, label: '15+ Days: 15% Discount' },
-  { minNights: 10, percent: 10, label: '10+ Days: 10% Discount' },
-  { minNights: 5, percent: 5, label: '5+ Days: 5% Discount' },
+  { minNights: 7, percent: 3, label: '7+ Days: 3% Discount' },
+  { minNights: 10, percent: 5, label: '10+ Days: 5% Discount' },
+  { minNights: 20, percent: 10, label: '20+ Days: 10% Discount' },
+  { minNights: 30, percent: 15, label: '30+ Days: 15% Max Discount' },
 ];
 
 export interface StayPricingBreakdown {
   nights: number;
-  baseRatePerNight: number;
+  baseRatePerNight: number; // Single rate or average nightly rate across stay
   grossRoomTotal: number;
   discountPercent: number;
   discountAmount: number;
@@ -82,15 +103,18 @@ export interface StayPricingBreakdown {
   taxOtat: number;
   totalTaxes: number;
   grandTotal: number;
+  nightlyBreakdown?: NightRateDetail[];
+  minNightlyRate?: number;
+  maxNightlyRate?: number;
+  rateLabel?: string;
+  seasonSummary?: string;
 }
 
 export function getDiscountPercentage(nights: number): number {
-  if (nights >= 30) return 30;
-  if (nights >= 25) return 25;
-  if (nights >= 20) return 20;
-  if (nights >= 15) return 15;
-  if (nights >= 10) return 10;
-  if (nights >= 5) return 5;
+  if (nights >= 30) return 15;
+  if (nights >= 20) return 10;
+  if (nights >= 10) return 5;
+  if (nights >= 7) return 3;
   return 0;
 }
 
@@ -100,10 +124,84 @@ export function getCleaningFee(nights: number): number {
   return 0;
 }
 
-export function calculateStayPricing(nights: number, customBaseRate: number = BASE_NIGHTLY_RATE): StayPricingBreakdown {
-  const safeNights = Math.max(0, nights);
-  const baseRatePerNight = customBaseRate;
-  const grossRoomTotal = safeNights * baseRatePerNight;
+/**
+ * Calculates complete stay pricing with dynamic seasonal night-by-night rates,
+ * tiered length-of-stay discounts, waived cleaning fee for 3+ nights, and 18.5% Hawaii taxes.
+ */
+export function calculateStayPricing(
+  nights: number,
+  customBaseRate?: number,
+  checkInDate?: string,
+  checkOutDate?: string
+): StayPricingBreakdown {
+  let safeNights = Math.max(0, nights);
+  let grossRoomTotal = 0;
+  let baseRatePerNight = customBaseRate ?? BASE_NIGHTLY_RATE;
+  let nightlyBreakdown: NightRateDetail[] | undefined = undefined;
+  let minNightlyRate = baseRatePerNight;
+  let maxNightlyRate = baseRatePerNight;
+  let rateLabel = `$${baseRatePerNight} / night`;
+  let seasonSummary: string | undefined = undefined;
+
+  // Case 1: Both check-in and check-out dates are supplied
+  if (checkInDate && checkOutDate) {
+    const calculatedBreakdown = calculateNightlyRatesForStay(checkInDate, checkOutDate);
+    if (calculatedBreakdown.length > 0) {
+      nightlyBreakdown = calculatedBreakdown;
+      safeNights = calculatedBreakdown.length;
+      grossRoomTotal = calculatedBreakdown.reduce((sum, n) => sum + n.rate, 0);
+      baseRatePerNight = Math.round(grossRoomTotal / safeNights);
+      minNightlyRate = Math.min(...calculatedBreakdown.map((n) => n.rate));
+      maxNightlyRate = Math.max(...calculatedBreakdown.map((n) => n.rate));
+
+      rateLabel =
+        minNightlyRate === maxNightlyRate
+          ? `$${minNightlyRate} / night`
+          : `$${minNightlyRate}–$${maxNightlyRate} / night (avg $${baseRatePerNight}/nt)`;
+
+      const uniqueSeasons = Array.from(new Set(calculatedBreakdown.map((n) => n.seasonName)));
+      seasonSummary = uniqueSeasons.join(', ');
+    } else {
+      grossRoomTotal = safeNights * baseRatePerNight;
+    }
+  } else if (checkInDate && safeNights > 0) {
+    // Case 2: Only check-in date is supplied (synthesize end date)
+    const start = new Date(checkInDate + 'T00:00:00');
+    if (!isNaN(start.getTime())) {
+      const end = new Date(start);
+      end.setDate(end.getDate() + safeNights);
+      const endStr = end.toISOString().split('T')[0];
+      const calculatedBreakdown = calculateNightlyRatesForStay(checkInDate, endStr);
+      if (calculatedBreakdown.length > 0) {
+        nightlyBreakdown = calculatedBreakdown;
+        grossRoomTotal = calculatedBreakdown.reduce((sum, n) => sum + n.rate, 0);
+        baseRatePerNight = Math.round(grossRoomTotal / safeNights);
+        minNightlyRate = Math.min(...calculatedBreakdown.map((n) => n.rate));
+        maxNightlyRate = Math.max(...calculatedBreakdown.map((n) => n.rate));
+
+        rateLabel =
+          minNightlyRate === maxNightlyRate
+            ? `$${minNightlyRate} / night`
+            : `$${minNightlyRate}–$${maxNightlyRate} / night (avg $${baseRatePerNight}/nt)`;
+
+        const uniqueSeasons = Array.from(new Set(calculatedBreakdown.map((n) => n.seasonName)));
+        seasonSummary = uniqueSeasons.join(', ');
+      } else {
+        baseRatePerNight = getNightlyRateForDate(checkInDate);
+        minNightlyRate = baseRatePerNight;
+        maxNightlyRate = baseRatePerNight;
+        grossRoomTotal = safeNights * baseRatePerNight;
+        rateLabel = `$${baseRatePerNight} / night`;
+      }
+    } else {
+      grossRoomTotal = safeNights * baseRatePerNight;
+    }
+  } else {
+    // Case 3: No dates supplied (e.g. calculator without dates)
+    grossRoomTotal = safeNights * baseRatePerNight;
+    rateLabel = `$${baseRatePerNight} / night`;
+  }
+
   const discountPercent = getDiscountPercentage(safeNights);
   const discountAmount = Math.round(grossRoomTotal * (discountPercent / 100));
   const netRoomTotal = grossRoomTotal - discountAmount;
@@ -137,6 +235,11 @@ export function calculateStayPricing(nights: number, customBaseRate: number = BA
     taxOtat,
     totalTaxes,
     grandTotal,
+    nightlyBreakdown,
+    minNightlyRate,
+    maxNightlyRate,
+    rateLabel,
+    seasonSummary,
   };
 }
 
