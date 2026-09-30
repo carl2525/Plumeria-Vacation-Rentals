@@ -291,12 +291,12 @@ export const Navbar: React.FC<NavbarProps> = ({
       >
         {/* Direct Website Booking Transparent Pricing Announcement Bar with Prominent Call Now CTA */}
         <div className="bg-[#1A3B34] text-[#F9F7F2] text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 border-b border-[#C59B4B]/30">
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+          <div className="max-w-7xl mx-auto flex items-center justify-between md:justify-center gap-2 sm:gap-3 lg:gap-4">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink min-w-0 md:min-w-fit">
               <span className="px-1.5 py-0.5 rounded bg-[#C59B4B] text-[#1A3B34] font-black text-[9px] uppercase tracking-wider shrink-0">
                 PROMOTION
               </span>
-              <span className="hidden md:inline font-medium truncate">
+              <span className="hidden md:inline font-medium whitespace-nowrap">
                 Direct Inquiries: $199*/night promo rate in all units (Valid until Oct 30) · $0 Resort fees · Free covered garage parking pass!
               </span>
               <span className="md:hidden text-[10.5px] sm:text-[11px] font-medium truncate">
