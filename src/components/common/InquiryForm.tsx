@@ -735,10 +735,15 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               onChange={handleChange}
               className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             >
-              <option value="">Any Available Waikiki Banyan Suite</option>
+              <option value="">Any Available Waikiki Banyan Suite (Recommended)</option>
               {PROPERTIES.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name}
+                <option
+                  key={p.id}
+                  value={p.id}
+                  disabled={p.available === false}
+                  className={p.available === false ? 'text-neutral-400 bg-neutral-100' : ''}
+                >
+                  {p.name} {p.available === false ? '— (Not Available as of the Moment)' : '— (Available to Book)'}
                 </option>
               ))}
             </select>
@@ -783,46 +788,22 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         </div>
       </div>
 
-      {/* Stylized Send Email Inquiry CTA Button */}
+      {/* Clean Send Booking Inquiry CTA Button */}
       <button
         type="submit"
         id="inquiry-submit-btn"
         disabled={status === 'submitting'}
-        className="group relative overflow-hidden w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-2xl bg-gradient-to-r from-[#1A3B34] via-[#204940] to-[#1A3B34] hover:from-[#204940] hover:to-[#28594E] text-white font-semibold text-xs sm:text-sm shadow-md hover:shadow-xl transition-all duration-300 disabled:opacity-50 cursor-pointer border border-[#C59B4B]/40 min-h-[52px]"
+        className="group w-full py-3.5 sm:py-4 px-6 rounded-2xl bg-[#1A3B34] hover:bg-[#224D44] text-[#F6E7A7] font-bold text-sm sm:text-base shadow-md hover:shadow-xl transition-all duration-200 disabled:opacity-50 cursor-pointer border border-[#C59B4B]/40 flex items-center justify-center gap-2.5"
       >
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 text-left">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/15">
-              <Mail className="w-4 h-4 text-[#F6E7A7]" />
-            </div>
-            <div className="min-w-0">
-              <span className="block font-bold text-white tracking-wide text-xs sm:text-sm truncate">
-                {status === 'submitting'
-                  ? 'Preparing Your Stay Inquiry...'
-                  : nights > 0
-                  ? `Send Inquiry · ${formatCurrency(pricing.grandTotal)} Total (${nights} nts)`
-                  : isBeyondPromo
-                  ? 'Send Booking Inquiry'
-                  : 'Send Booking Inquiry'}
-              </span>
-              <span className="block text-[10px] text-[#F6E7A7]/90 font-normal truncate">
-                {isBeyondPromo
-                  ? '$249/nt Rate · All Units · $0 Resort Fees · Free Parking'
-                  : '$199*/nt Promo (Valid until Oct 30) · All Units · $0 Resort Fees · Free Parking'}
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-1.5 shrink-0 text-[#F6E7A7] font-bold text-xs pl-2 group-hover:translate-x-0.5 transition-transform">
-            <span className="hidden sm:inline">Send</span>
-            <Send className="w-4 h-4" />
-          </div>
-        </div>
+        <Send className="w-4 h-4 sm:w-5 sm:h-5 text-[#F6E7A7] group-hover:translate-x-0.5 transition-transform" />
+        <span className="tracking-wide">
+          {status === 'submitting' ? 'Sending Inquiry...' : 'Send Booking Inquiry'}
+        </span>
       </button>
 
-      <div className="text-[10.5px] sm:text-[11px] text-[#1A3B34]/65 text-center pt-0.5 space-y-0.5">
-        <p>Direct host inquiry via mailto · Final computation sent in email · May require email verification</p>
-        <p className="text-[9.5px] sm:text-[10px] text-[#1A3B34]/60">
+      <div className="text-[11px] text-[#1A3B34]/60 text-center pt-0.5 space-y-0.5">
+        <p>Direct host inquiry · Verified reservation details will be sent directly to your email</p>
+        <p className="text-[10px] text-[#1A3B34]/50">
           Authorized Short-Term Rental · City and County of Honolulu · Waikiki Banyan Tower 2
         </p>
       </div>

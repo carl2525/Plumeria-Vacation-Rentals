@@ -143,18 +143,18 @@ export const ParkingPage: React.FC<ParkingPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-[#F9F7F2] min-h-screen text-[#1A3B34]">
       {/* Header */}
-      <section className="relative bg-[#1A3B34] text-white pt-28 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-[#1A3B34] text-white pt-36 pb-12 sm:pt-44 sm:pb-14 lg:pt-48 lg:pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#F6E7A7] text-xs font-semibold">
-            <Car className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-[#F6E7A7] text-xs font-semibold border border-white/15 shadow-2xs">
+            <Car className="w-3.5 h-3.5 text-[#C59B4B]" />
             <span>GUEST PARKING GUIDE</span>
           </div>
 
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
             Parking &amp; Garage Access
           </h1>
 
-          <p className="text-sm sm:text-base text-white/80 max-w-xl mx-auto font-light">
+          <p className="text-sm sm:text-base text-white/80 max-w-xl mx-auto font-light leading-relaxed">
             Complimentary covered parking at Waikiki Banyan. Follow the 5 photos below for street landmarks and entry.
           </p>
 

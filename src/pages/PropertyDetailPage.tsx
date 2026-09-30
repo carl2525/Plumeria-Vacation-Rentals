@@ -191,6 +191,12 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         {/* Title & Location Header */}
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
+            {property.available === false && (
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-600 text-white shadow-xs whitespace-nowrap flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                <span>Not Available as of the Moment</span>
+              </span>
+            )}
             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8DCC6]/50 text-[#1A3B34] border border-[#C59B4B]/30 whitespace-nowrap">
               {property.viewType}
             </span>
@@ -255,7 +261,11 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         </div>
 
         {/* Photo Gallery Grid */}
-        <div className="relative grid grid-cols-1 md:grid-cols-4 gap-3 rounded-3xl overflow-hidden shadow-sm border border-[#E8DCC6] p-2 bg-white">
+        <div className={`relative grid grid-cols-1 md:grid-cols-4 gap-3 rounded-3xl overflow-hidden shadow-sm border p-2 ${
+          property.available === false
+            ? 'bg-neutral-100 border-neutral-300'
+            : 'border-[#E8DCC6] bg-white'
+        }`}>
 
           {/* Main Hero Photo (Left 2 cols) */}
           <div
@@ -266,7 +276,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               src={dynamicGallery[0]?.url || property.heroImage}
               alt={dynamicGallery[0]?.caption || property.name}
               fallbackSrc={dynamicGallery[0]?.fallbackUrl}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                property.available === false ? 'grayscale-[0.4] contrast-90 brightness-90' : ''
+              }`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="absolute bottom-3 left-3 bg-black/60 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md flex items-center gap-1.5">

@@ -290,34 +290,39 @@ export const Navbar: React.FC<NavbarProps> = ({
         }`}
       >
         {/* Direct Website Booking Transparent Pricing Announcement Bar with Prominent Call Now CTA */}
-        <div className="bg-[#1A3B34] text-[#F9F7F2] text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 border-b border-[#C59B4B]/30 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-          <span className="px-1.5 py-0.5 rounded bg-[#C59B4B] text-[#1A3B34] font-black text-[9px] uppercase tracking-wider shrink-0">
-            PROMOTION
-          </span>
-          <span className="hidden md:inline font-medium">
-            Direct Inquiries: $199*/night promo rate in all units (Valid until Oct 30) · $0 Resort fees · Free covered garage parking pass!
-          </span>
-          <span className="md:hidden text-[11px] font-medium truncate max-w-[210px] xs:max-w-none">
-            $199* Promo (Until Oct 30) · Free Parking
-          </span>
+        <div className="bg-[#1A3B34] text-[#F9F7F2] text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 border-b border-[#C59B4B]/30">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+              <span className="px-1.5 py-0.5 rounded bg-[#C59B4B] text-[#1A3B34] font-black text-[9px] uppercase tracking-wider shrink-0">
+                PROMOTION
+              </span>
+              <span className="hidden md:inline font-medium truncate">
+                Direct Inquiries: $199*/night promo rate in all units (Valid until Oct 30) · $0 Resort fees · Free covered garage parking pass!
+              </span>
+              <span className="md:hidden text-[10.5px] sm:text-[11px] font-medium truncate">
+                $199* Promo (Until Oct 30) · Free Parking
+              </span>
+            </div>
 
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => onOpenInquiry()}
-              className="underline text-[#F6E7A7] font-semibold hover:text-white cursor-pointer text-[11px] sm:text-xs whitespace-nowrap"
-            >
-              Inquire Now
-            </button>
-            <span className="text-white/40">|</span>
-            <a
-              id="topbar-call-now-btn"
-              href={`tel:${SITE_CONFIG.phoneRaw}`}
-              className="inline-flex items-center gap-1.5 py-1.5 px-2.5 py-0.5 rounded-full bg-[#C59B4B] hover:bg-[#d6a953] text-[#1A3B34] font-bold text-[10.5px] sm:text-xs transition-colors shadow-2xs whitespace-nowrap"
-              title={`Call host directly: ${SITE_CONFIG.phone}`}
-            >
-              <Phone className="w-3 h-3 text-[#1A3B34]" />
-              <span>Call Now: {SITE_CONFIG.phone}</span>
-            </a>
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 text-[10.5px] sm:text-xs">
+              <button
+                onClick={() => onOpenInquiry()}
+                className="underline text-[#F6E7A7] font-semibold hover:text-white cursor-pointer whitespace-nowrap"
+              >
+                Inquire Now
+              </button>
+              <span className="text-white/40">|</span>
+              <a
+                id="topbar-call-now-btn"
+                href={`tel:${SITE_CONFIG.phoneRaw}`}
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#C59B4B] hover:bg-[#d6a953] text-[#1A3B34] font-bold text-[10px] sm:text-xs transition-colors shadow-2xs whitespace-nowrap"
+                title={`Call host directly: ${SITE_CONFIG.phone}`}
+              >
+                <Phone className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#1A3B34]" />
+                <span className="hidden sm:inline">Call Now: {SITE_CONFIG.phone}</span>
+                <span className="sm:hidden">Call: {SITE_CONFIG.phone}</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -402,6 +407,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         {group.items?.map((sub) => {
                           const IconComponent = sub.icon;
                           const isSubActive = isSubItemActive(sub.href);
+                          const isUnavailable = sub.badgeVariant === 'danger';
 
                           return (
                             <a
@@ -413,14 +419,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                                 handleNavClick(sub.href);
                               }}
                               className={`w-full group/sub flex items-start gap-3 p-2.5 rounded-xl text-left transition-all cursor-pointer ${
-                                isSubActive
+                                isUnavailable
+                                  ? 'opacity-65 hover:opacity-100 bg-neutral-100/70 hover:bg-neutral-100 border border-neutral-300/70'
+                                  : isSubActive
                                   ? 'bg-[#F9F7F2] border border-[#C59B4B]/35 shadow-2xs'
                                   : 'hover:bg-[#F9F7F2] hover:border-[#E8DCC6]/70 border border-transparent'
                               }`}
                             >
                               <div
                                 className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border transition-colors mt-0.5 ${
-                                  sub.badgeVariant === 'danger'
+                                  isUnavailable
+                                    ? 'bg-neutral-200 text-neutral-500 border-neutral-300'
+                                    : sub.badgeVariant === 'danger'
                                     ? 'bg-rose-50 text-rose-700 border-rose-200'
                                     : isSubActive
                                     ? 'bg-[#1A3B34] text-[#F6E7A7] border-[#1A3B34]'
@@ -434,7 +444,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                                 <div className="flex items-center justify-between gap-1.5">
                                   <span
                                     className={`text-xs font-bold leading-tight truncate ${
-                                      isSubActive
+                                      isUnavailable
+                                        ? 'text-neutral-600'
+                                        : isSubActive
                                         ? 'text-[#1A3B34]'
                                         : 'text-[#1A3B34] group-hover/sub:text-[#1A3B34]'
                                     }`}
@@ -455,7 +467,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                                     </span>
                                   )}
                                 </div>
-                                <p className="text-[11px] text-[#1A3B34]/70 font-light leading-snug line-clamp-2 mt-0.5">
+                                <p className={`text-[11px] font-light leading-snug line-clamp-2 mt-0.5 ${
+                                  isUnavailable ? 'text-neutral-500' : 'text-[#1A3B34]/70'
+                                }`}>
                                   {sub.description}
                                 </p>
                               </div>
@@ -498,17 +512,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a
               id="mobile-quick-call-btn"
               href={`tel:${SITE_CONFIG.phoneRaw}`}
-              className="inline-flex items-center gap-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider px-2.5 sm:px-3 py-1.5 transition-colors cursor-pointer bg-white text-[#1A3B34] border border-[#E8DCC6] shadow-xs"
+              className="inline-flex items-center justify-center p-2 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer bg-white text-[#1A3B34] border border-[#E8DCC6] shadow-xs hover:border-[#C59B4B]"
               title={`Call ${SITE_CONFIG.phone}`}
             >
               <Phone className="w-3.5 h-3.5 text-[#C59B4B]" />
-              <span className="hidden xs:inline">Call Now</span>
+              <span className="hidden sm:inline ml-1.5">Call Host</span>
             </a>
 
             <button
               id="mobile-quick-book-btn"
               onClick={() => onOpenInquiry()}
-              className="inline-flex items-center gap-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider px-2.5 sm:px-3.5 py-1.5 transition-colors cursor-pointer bg-[#1A3B34] text-white shadow-xs"
+              className="inline-flex items-center gap-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider px-2.5 sm:px-3.5 py-1.5 transition-colors cursor-pointer bg-[#1A3B34] text-white shadow-xs hover:bg-[#224D44]"
             >
               <Calendar className="w-3.5 h-3.5 text-[#F6E7A7]" />
               <span>Inquire</span>
@@ -516,12 +530,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               id="nav-mobile-toggle-btn"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen(true)}
               className="p-1.5 sm:p-2 rounded-xl transition-colors cursor-pointer text-[#1A3B34] hover:bg-[#E8DCC6]/50"
-              aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+              aria-label="Open Navigation Menu"
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+              <Menu className="w-6 h-6" />
             </button>
           </div>
         </div>
@@ -531,30 +545,49 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div
           id="mobile-nav-overlay"
-          className="fixed inset-0 z-40 bg-[#1A3B34]/60 backdrop-blur-sm lg:hidden animate-fade-in"
+          className="fixed inset-0 z-[60] bg-[#1A3B34]/60 backdrop-blur-sm lg:hidden animate-fade-in"
           onClick={() => setMobileMenuOpen(false)}
         >
           <div
             id="mobile-nav-panel"
-            className="absolute top-0 right-0 w-full max-w-sm h-full bg-[#F9F7F2] shadow-2xl flex flex-col justify-between p-5 sm:p-6 overflow-y-auto border-l border-[#E8DCC6]"
+            className="fixed inset-y-0 right-0 w-full sm:max-w-md bg-[#F9F7F2] shadow-2xl flex flex-col z-[70] border-l border-[#E8DCC6]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header section in drawer */}
-            <div>
-              <div className="pb-4 mb-4 border-b border-[#E8DCC6] flex items-center justify-between">
+            {/* Dedicated Drawer Top Bar (Clean, Uncut & Spacious) */}
+            <div className="px-5 py-4 border-b border-[#E8DCC6] bg-[#F9F7F2] flex items-center justify-between shrink-0 shadow-2xs">
+              <button
+                onClick={() => handleNavClick('/')}
+                className="flex items-center text-left focus:outline-none cursor-pointer"
+                aria-label="Plumeria Vacation Rentals Home"
+              >
                 <PlumeriaLogo compact={true} variant="dark" />
-                <button
-                  id="mobile-close-inner-btn"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-[#1A3B34]/70 hover:text-[#1A3B34] cursor-pointer"
-                  aria-label="Close navigation"
+              </button>
+
+              <div className="flex items-center gap-2">
+                <a
+                  href={`tel:${SITE_CONFIG.phoneRaw}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-[#1A3B34] border border-[#E8DCC6] hover:border-[#C59B4B] text-xs font-bold shadow-2xs transition-colors"
+                  title={`Call host: ${SITE_CONFIG.phone}`}
                 >
-                  <X className="w-6 h-6" />
+                  <Phone className="w-3.5 h-3.5 text-[#C59B4B]" />
+                  <span className="hidden xs:inline">Call Host</span>
+                </a>
+
+                <button
+                  id="mobile-close-drawer-btn"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 rounded-full bg-white text-[#1A3B34] border border-[#E8DCC6] hover:bg-[#E8DCC6]/40 shadow-2xs transition-colors cursor-pointer"
+                  aria-label="Close navigation menu"
+                >
+                  <X className="w-5 h-5 text-[#1A3B34]" />
                 </button>
               </div>
+            </div>
 
+            {/* Scrollable Navigation Body */}
+            <div className="flex-1 overflow-y-auto px-4 py-4 sm:px-5 sm:py-5 space-y-4 custom-scrollbar">
               {/* Categorized Hierarchical Mobile Navigation */}
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 {NAV_GROUPS.map((group) => {
                   const hasSubmenu = Boolean(group.items && group.items.length > 0);
                   const isExpanded = expandedMobileGroups[group.id];
@@ -566,10 +599,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                         key={group.id}
                         id={`mobile-link-${group.id}`}
                         onClick={() => group.href && handleNavClick(group.href)}
-                        className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors text-left cursor-pointer ${
+                        className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors text-left cursor-pointer border ${
                           isActive
-                            ? 'bg-[#E8DCC6] text-[#1A3B34]'
-                            : 'text-[#1A3B34] hover:bg-[#E8DCC6]/30'
+                            ? 'bg-[#E8DCC6] text-[#1A3B34] border-[#C59B4B]/40 shadow-2xs'
+                            : 'bg-white/70 text-[#1A3B34] border-[#E8DCC6]/70 hover:bg-white'
                         }`}
                       >
                         <span>{group.label}</span>
@@ -579,13 +612,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }
 
                   return (
-                    <div key={group.id} className="rounded-xl border border-[#E8DCC6]/60 bg-white/70 overflow-hidden">
-                      <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#F9F7F2]/80">
+                    <div
+                      key={group.id}
+                      className="rounded-2xl border border-[#E8DCC6] bg-white/80 overflow-hidden shadow-2xs"
+                    >
+                      <div className="flex items-center justify-between px-4 py-3 bg-[#F9F7F2]/90 border-b border-[#E8DCC6]/40">
                         <button
                           type="button"
                           onClick={() => group.href && handleNavClick(group.href)}
                           className={`text-xs font-bold uppercase tracking-wider text-left hover:text-[#C59B4B] transition-colors cursor-pointer ${
-                            isActive ? 'text-[#1A3B34]' : 'text-[#1A3B34]/85'
+                            isActive ? 'text-[#1A3B34]' : 'text-[#1A3B34]/90'
                           }`}
                         >
                           {group.label}
@@ -593,22 +629,24 @@ export const Navbar: React.FC<NavbarProps> = ({
                         <button
                           type="button"
                           onClick={() => toggleMobileGroup(group.id)}
-                          className="p-1 rounded-md text-[#1A3B34]/70 hover:bg-[#E8DCC6]/50 cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#1A3B34]/70 hover:bg-[#E8DCC6]/60 transition-colors cursor-pointer"
                           aria-label={`Toggle ${group.label} submenu`}
                         >
                           <ChevronDown
                             className={`w-4 h-4 transition-transform duration-200 ${
-                              isExpanded ? 'rotate-180 text-[#C59B4B]' : 'text-[#1A3B34]/50'
+                              isExpanded ? 'rotate-180 text-[#C59B4B]' : 'text-[#1A3B34]/60'
                             }`}
                           />
                         </button>
                       </div>
 
                       {isExpanded && (
-                        <div className="p-1.5 space-y-1 border-t border-[#E8DCC6]/50 bg-white">
+                        <div className="p-2 space-y-1 bg-white">
                           {group.items?.map((sub) => {
                             const IconComponent = sub.icon;
                             const isSubActive = isSubItemActive(sub.href);
+                            const isUnavailable = sub.badgeVariant === 'danger';
+
                             return (
                               <a
                                 key={sub.id}
@@ -617,21 +655,35 @@ export const Navbar: React.FC<NavbarProps> = ({
                                   e.preventDefault();
                                   handleNavClick(sub.href);
                                 }}
-                                className={`w-full flex items-center gap-2.5 p-2 rounded-lg text-left transition-colors cursor-pointer ${
-                                  isSubActive ? 'bg-[#F9F7F2] font-semibold text-[#1A3B34]' : 'hover:bg-[#F9F7F2]/80 text-[#1A3B34]/80'
+                                className={`w-full flex items-center gap-3 p-2.5 rounded-xl text-left transition-colors cursor-pointer ${
+                                  isUnavailable
+                                    ? 'opacity-65 hover:opacity-100 bg-neutral-100/80 border border-neutral-300/70'
+                                    : isSubActive
+                                    ? 'bg-[#F9F7F2] font-semibold text-[#1A3B34] border border-[#C59B4B]/30'
+                                    : 'hover:bg-[#F9F7F2]/80 text-[#1A3B34]/85 border border-transparent'
                                 }`}
                               >
-                                <div className="w-6 h-6 rounded-md bg-[#F9F7F2] flex items-center justify-center shrink-0 border border-[#E8DCC6]/50 text-[#1A3B34]">
+                                <div
+                                  className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border text-[#1A3B34] ${
+                                    isUnavailable
+                                      ? 'bg-neutral-200 text-neutral-500 border-neutral-300'
+                                      : 'bg-[#F9F7F2] border-[#E8DCC6]/70'
+                                  }`}
+                                >
                                   <IconComponent className="w-3.5 h-3.5" />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                  <span className="text-xs truncate block">{sub.label}</span>
+                                  <span className={`text-xs truncate block font-medium ${
+                                    isUnavailable ? 'text-neutral-600' : ''
+                                  }`}>
+                                    {sub.label}
+                                  </span>
                                 </div>
                                 {sub.badge && (
                                   <span
-                                    className={`px-1.5 py-0.2 rounded text-[8.5px] font-bold uppercase tracking-wider shrink-0 border ${
+                                    className={`px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider shrink-0 border ${
                                       sub.badgeVariant === 'danger'
-                                        ? 'bg-rose-100 text-rose-800 border-rose-200'
+                                        ? 'bg-rose-100 text-rose-800 border-rose-300'
                                         : sub.badgeVariant === 'success'
                                         ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
                                         : 'bg-[#F6E7A7] text-[#1A3B34] border-[#C59B4B]/30'
@@ -649,57 +701,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                   );
                 })}
               </div>
-            </div>
 
-            {/* Bottom Actions & Brand Note */}
-            <div className="pt-5 border-t border-[#E8DCC6] space-y-2.5">
-              <a
-                id="mobile-drawer-call-cta"
-                href={`tel:${SITE_CONFIG.phoneRaw}`}
-                className="w-full py-3 px-4 rounded-xl bg-[#C59B4B] hover:bg-[#d6a953] text-[#1A3B34] font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
-              >
-                <Phone className="w-4 h-4 text-[#1A3B34]" />
-                <span>Call Host: {SITE_CONFIG.phone}</span>
-              </a>
-
-              <a
-                id="mobile-drawer-airbnb-cta"
-                href={SITE_CONFIG.airbnbUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer"
-              >
-                <span>Book / View on Airbnb</span>
-              </a>
-
-              <button
-                id="mobile-drawer-book-cta"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenInquiry();
-                }}
-                className="w-full py-3 px-4 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer border border-[#C59B4B]/30"
-              >
-                <Calendar className="w-4 h-4 text-[#F6E7A7]" />
-                <span>Inquire to Book</span>
-              </button>
-              <p className="text-[11px] text-center text-[#1A3B34]/70 font-medium">
-                $199*/nt promo (valid until Oct 30) · $0 resort fees · Free parking pass
-              </p>
-
-              <div className="text-xs text-[#1A3B34]/75 space-y-1.5 pt-1.5">
-                <p className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-[#C59B4B] shrink-0" />
-                  <span className="text-[11px]">Waikiki Banyan, 201 ʻOhua Ave, Honolulu</span>
+              {/* Drawer Contact & Location Details */}
+              <div className="pt-3 border-t border-[#E8DCC6]/70 space-y-2 text-xs text-[#1A3B34]/80">
+                <p className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#C59B4B] shrink-0" />
+                  <span className="text-[11px]">Waikiki Banyan, 201 ʻOhua Ave, Honolulu, HI</span>
                 </p>
-                <p className="flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-[#8CA58A] shrink-0" />
+                <p className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-[#8CA58A] shrink-0" />
                   <a href={`mailto:${SITE_CONFIG.email}`} className="truncate hover:underline text-[11px]">
                     {SITE_CONFIG.email}
                   </a>
                 </p>
-                <p className="flex items-center gap-1.5">
-                  <Phone className="w-3.5 h-3.5 text-[#8CA58A] shrink-0" />
+                <p className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-[#8CA58A] shrink-0" />
                   <a href={`tel:${SITE_CONFIG.phoneRaw}`} className="font-semibold text-[#1A3B34] hover:underline text-[11px]">
                     {SITE_CONFIG.phone}
                   </a>
@@ -708,17 +724,17 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* Mobile Drawer Social Links */}
               <div className="pt-2 border-t border-[#E8DCC6]/60">
-                <span className="text-[9.5px] font-bold uppercase tracking-wider text-[#C59B4B] block mb-1.5">
-                  Follow Our Channels
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#C59B4B] block mb-2">
+                  Follow Plumeria
                 </span>
-                <div className="grid grid-cols-2 gap-1.5">
+                <div className="grid grid-cols-2 gap-2">
                   {SITE_CONFIG.socials.map((soc) => (
                     <a
                       key={soc.platform}
                       href={soc.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1.5 rounded-lg bg-[#E8DCC6]/30 hover:bg-[#E8DCC6]/60 text-[11px] font-semibold text-[#1A3B34] flex items-center gap-1.5 transition-colors"
+                      className="p-2 rounded-xl bg-white border border-[#E8DCC6]/60 hover:bg-[#E8DCC6]/30 text-[11px] font-semibold text-[#1A3B34] flex items-center gap-2 transition-colors shadow-2xs"
                     >
                       {getSocialIcon(soc.platform)}
                       <span className="truncate">{soc.name}</span>
@@ -726,6 +742,46 @@ export const Navbar: React.FC<NavbarProps> = ({
                   ))}
                 </div>
               </div>
+            </div>
+
+            {/* Bottom Actions Fixed Area (Elevated above chat widgets with pb-16/safe-area) */}
+            <div className="p-4 sm:p-5 border-t border-[#E8DCC6] bg-[#F9F7F2] space-y-2.5 shrink-0 shadow-lg pb-16 sm:pb-6">
+              <button
+                id="mobile-drawer-book-cta"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenInquiry();
+                }}
+                className="w-full py-3 px-4 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-[#F6E7A7] font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer border border-[#C59B4B]/30"
+              >
+                <Calendar className="w-4 h-4 text-[#F6E7A7]" />
+                <span>Inquire to Book Direct</span>
+              </button>
+
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  id="mobile-drawer-call-cta"
+                  href={`tel:${SITE_CONFIG.phoneRaw}`}
+                  className="py-2.5 px-3 rounded-xl bg-[#C59B4B] hover:bg-[#d6a953] text-[#1A3B34] font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-2xs transition-colors cursor-pointer text-center"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#1A3B34] shrink-0" />
+                  <span className="truncate">Call Host</span>
+                </a>
+
+                <a
+                  id="mobile-drawer-airbnb-cta"
+                  href={SITE_CONFIG.airbnbUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2.5 px-3 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-2xs transition-colors cursor-pointer text-center"
+                >
+                  <span className="truncate">View Airbnb</span>
+                </a>
+              </div>
+
+              <p className="text-[10.5px] text-center text-[#1A3B34]/70 font-medium">
+                $199*/nt promo (valid until Oct 30) · $0 resort fees · Free parking pass
+              </p>
             </div>
           </div>
         </div>

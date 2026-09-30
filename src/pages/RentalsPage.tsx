@@ -124,11 +124,11 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
               onClick={() => setSelectedView('Ocean View')}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                 selectedView === 'Ocean View'
-                  ? 'bg-[#1A3B34] text-white'
-                  : 'bg-[#F9F7F2] text-[#1A3B34]/70 hover:text-[#1A3B34] border border-[#E8DCC6]'
+                  ? 'bg-neutral-800 text-white'
+                  : 'bg-neutral-100 text-neutral-500 hover:text-neutral-700 border border-neutral-300'
               }`}
             >
-              Penthouse Ocean View (#3609)
+              Penthouse Ocean View (#3609) · <span className="text-[10px] text-rose-600 font-bold uppercase">Paused</span>
             </button>
             {(selectedView !== 'all' || searchQuery) && (
               <button
