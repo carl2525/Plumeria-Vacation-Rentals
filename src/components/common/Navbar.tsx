@@ -290,15 +290,21 @@ export const Navbar: React.FC<NavbarProps> = ({
         }`}
       >
         {/* Direct Website Booking Transparent Pricing Announcement Bar with Prominent Call Now CTA */}
-        <div className="bg-[#1A3B34] text-[#F9F7F2] text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 border-b border-[#C59B4B]/30">
-          <div className="max-w-7xl mx-auto flex items-center justify-between md:justify-center gap-2 sm:gap-3 lg:gap-4">
-            <div className="flex items-center gap-1.5 sm:gap-2 shrink min-w-0 md:min-w-fit">
+        <div className="bg-[#1A3B34] text-[#F9F7F2] text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 border-b border-[#C59B4B]/30 overflow-hidden">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 lg:gap-4 min-w-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
               <span className="px-1.5 py-0.5 rounded bg-[#C59B4B] text-[#1A3B34] font-black text-[9px] uppercase tracking-wider shrink-0">
                 PROMOTION
               </span>
-              <span className="hidden md:inline font-medium whitespace-nowrap">
+              {/* Full copy for wide desktop (xl: 1280px+) */}
+              <span className="hidden xl:inline font-medium whitespace-nowrap truncate">
                 Direct Inquiries: $199*/night promo rate in all units (Valid until Oct 30) · $0 Resort fees · Free covered garage parking pass!
               </span>
+              {/* Concise copy for tablet and standard desktop (md: to xl:) */}
+              <span className="hidden md:inline xl:hidden font-medium whitespace-nowrap truncate">
+                $199*/night promo in all units · $0 Resort fees · Free Parking!
+              </span>
+              {/* Compact copy for mobile (< md:) */}
               <span className="md:hidden text-[10.5px] sm:text-[11px] font-medium truncate">
                 $199* Promo (Until Oct 30) · Free Parking
               </span>
@@ -315,7 +321,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 id="topbar-call-now-btn"
                 href={`tel:${SITE_CONFIG.phoneRaw}`}
-                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#C59B4B] hover:bg-[#d6a953] text-[#1A3B34] font-bold text-[10px] sm:text-xs transition-colors shadow-2xs whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1 rounded-full bg-[#C59B4B] hover:bg-[#d6a953] text-[#1A3B34] font-bold text-[10px] sm:text-xs transition-colors shadow-2xs whitespace-nowrap"
                 title={`Call host directly: ${SITE_CONFIG.phone}`}
               >
                 <Phone className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#1A3B34]" />
@@ -493,7 +499,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               title={`Call Host Directly: ${SITE_CONFIG.phone}`}
             >
               <Phone className="w-3.5 h-3.5 text-[#C59B4B]" />
-              <span>Call Now</span>
+              <span>Call Now: {SITE_CONFIG.phone}</span>
             </a>
 
 

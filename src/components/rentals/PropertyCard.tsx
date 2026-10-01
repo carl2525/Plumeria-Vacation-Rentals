@@ -162,6 +162,31 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             </h3>
           </div>
 
+          {/* Official Hawaii Tax Registration: TMK & TAT */}
+          {(property.taxMapKey || property.transientTaxId) && (
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[10.5px] text-[#1A3B34] bg-[#F9F7F2] border border-[#E8DCC6] px-2.5 py-1 rounded-lg w-fit">
+              {property.taxMapKey && (
+                <span className="font-medium">
+                  <span className="text-[#1A3B34]/70">TMK:</span>{' '}
+                  <strong className="font-mono text-[10px] sm:text-[11px] font-semibold text-[#1A3B34]">
+                    TMK {property.taxMapKey}
+                  </strong>
+                </span>
+              )}
+              {property.taxMapKey && property.transientTaxId && (
+                <span className="text-[#1A3B34]/30">·</span>
+              )}
+              {property.transientTaxId && (
+                <span className="font-medium">
+                  <span className="text-[#1A3B34]/70">TAT:</span>{' '}
+                  <strong className="font-mono text-[10px] sm:text-[11px] font-semibold text-[#1A3B34]">
+                    {property.transientTaxId}
+                  </strong>
+                </span>
+              )}
+            </div>
+          )}
+
           <p className={`text-xs sm:text-sm line-clamp-2 leading-relaxed ${
             isUnavailable ? 'text-neutral-500' : 'text-[#1A3B34]/75'
           }`}>
@@ -174,7 +199,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           }`}>
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap pr-2.5">
               <Users className={`w-3.5 h-3.5 shrink-0 ${isUnavailable ? 'text-neutral-400' : 'text-[#8CA58A]'}`} />
-              <span>{property.guestsMax} Guests</span>
+              <span>2–4 Guests</span>
             </span>
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap px-2.5 border-l border-neutral-300">
               <Bed className={`w-3.5 h-3.5 shrink-0 ${isUnavailable ? 'text-neutral-400' : 'text-[#8CA58A]'}`} />

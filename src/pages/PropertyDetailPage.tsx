@@ -229,6 +229,35 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
             </span>
           </div>
 
+          {/* Zoning & Tax Compliance (TMK & TAT) Bar */}
+          {(property.taxMapKey || property.transientTaxId) && (
+            <div className="pt-1 pb-0.5">
+              <div className="p-3 sm:px-4 sm:py-2 rounded-2xl sm:rounded-xl bg-white border border-[#E8DCC6] shadow-2xs w-full sm:w-fit text-xs sm:text-[13px] text-[#1A3B34]">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3.5">
+                  {property.taxMapKey && (
+                    <div className="flex flex-wrap sm:flex-nowrap items-baseline gap-x-1.5 gap-y-0.5">
+                      <span className="text-[#1A3B34]/70 font-medium">Tax Map Key (TMK):</span>
+                      <strong className="font-mono font-semibold text-[#1A3B34] whitespace-nowrap">
+                        TMK {property.taxMapKey}
+                      </strong>
+                    </div>
+                  )}
+                  {property.taxMapKey && property.transientTaxId && (
+                    <span className="hidden sm:inline text-[#1A3B34]/30">|</span>
+                  )}
+                  {property.transientTaxId && (
+                    <div className="flex flex-wrap sm:flex-nowrap items-baseline gap-x-1.5 gap-y-0.5 border-t sm:border-t-0 border-[#E8DCC6]/60 pt-2 sm:pt-0">
+                      <span className="text-[#1A3B34]/70 font-medium">Transient Accommodations Tax (TAT):</span>
+                      <strong className="font-mono font-semibold text-[#1A3B34] whitespace-nowrap">
+                        {property.transientTaxId}
+                      </strong>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Unit Not Available Alert Notice */}
           {property.available === false && (
             <div className="p-4 sm:p-5 rounded-2xl bg-amber-50 border border-amber-200/90 text-[#1A3B34] flex items-start gap-3.5 shadow-xs">
@@ -332,7 +361,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">
                 <Users className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
                 <span className="text-[11px] text-[#1A3B34]/60 block font-medium">Guests</span>
-                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">Up to {property.guestsMax}</span>
+                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">2–4 Guests</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">
@@ -492,6 +521,58 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               </div>
             </div>
 
+            {/* Zoning & Tax Compliance Card: TMK & TAT */}
+            {(property.taxMapKey || property.transientTaxId) && (
+              <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#E8DCC6] shadow-xs space-y-4">
+                <div className="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-[#E8DCC6]/60">
+                  <h2 className="font-serif text-xl font-bold text-[#1A3B34] flex items-center gap-2">
+                    <ShieldCheck className="w-5 h-5 text-[#C59B4B]" />
+                    <span>Zoning &amp; Tax Compliance</span>
+                  </h2>
+                  <span className="text-[11px] font-bold text-[#1A3B34] bg-[#F9F7F2] border border-[#E8DCC6] px-2.5 py-1 rounded-full uppercase tracking-wider">
+                    Zoning &amp; Tax Compliance
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  {property.taxMapKey && (
+                    <div className="p-4 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] space-y-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#1A3B34]/60 block">
+                        Tax Map Key (TMK)
+                      </span>
+                      <span className="font-mono text-sm sm:text-base font-bold text-[#1A3B34] block">
+                        TMK {property.taxMapKey}
+                      </span>
+                      <span className="text-[11px] text-[#1A3B34]/65 block font-light">
+                        City &amp; County of Honolulu Real Property Tax Assessment
+                      </span>
+                    </div>
+                  )}
+
+                  {property.transientTaxId && (
+                    <div className="p-4 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] space-y-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#1A3B34]/60 block">
+                        Transient Accommodations Tax (TAT)
+                      </span>
+                      <span className="font-mono text-sm sm:text-base font-bold text-[#1A3B34] block">
+                        {property.transientTaxId}
+                      </span>
+                      <span className="text-[11px] text-[#1A3B34]/65 block font-light">
+                        State of Hawaii Department of Taxation Certificate
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-[#E8DCC6]/20 border border-[#C59B4B]/30 flex items-start gap-3 text-xs text-[#1A3B34]/85">
+                  <Sparkles className="w-4 h-4 text-[#C59B4B] shrink-0 mt-0.5" />
+                  <p className="leading-relaxed font-light">
+                    <strong className="text-[#1A3B34] font-semibold">Zoning &amp; Tax Compliance:</strong> Unit #{property.unitNumber} is officially registered with <strong>Tax Map Key (TMK): TMK {property.taxMapKey}</strong> and <strong>Transient Accommodations Tax (TAT): {property.transientTaxId}</strong>.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* House Rules */}
             <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#E8DCC6] shadow-xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#E8DCC6]/60">
@@ -581,28 +662,23 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 </div>
 
                 {/* Nightly Rates Breakdown */}
-                <div className="pt-2 flex items-baseline justify-between">
-                  <div>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
-                        {stickyNights > 0 && stickyPricing.rateLabel
-                          ? stickyPricing.rateLabel.split(' ')[0]
-                          : '$199*'}
-                      </span>
-                      <span className="text-xs text-[#C59B4B] font-semibold">
-                        {stickyNights > 0 && stickyPricing.rateLabel
-                          ? '/ night'
-                          : '/ night promo'}
-                      </span>
-                    </div>
-                    <span className="text-[10px] text-[#8CA58A] font-bold block uppercase tracking-wider">
-                      {stickyNights > 0 && stickyPricing.seasonSummary
-                        ? `${stickyPricing.seasonSummary}`
-                        : 'Special Rate Promotion · Valid until Oct 31 · All Units'}
+                <div className="pt-2">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
+                      {stickyNights > 0 && stickyPricing.rateLabel
+                        ? stickyPricing.rateLabel.split(' ')[0]
+                        : '$199*'}
+                    </span>
+                    <span className="text-xs text-[#C59B4B] font-semibold">
+                      {stickyNights > 0 && stickyPricing.rateLabel
+                        ? '/ night'
+                        : '/ night promo'}
                     </span>
                   </div>
-                  <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/60 px-2 py-1 rounded-md">
-                    Honolulu STR License
+                  <span className="text-[10px] text-[#8CA58A] font-bold block uppercase tracking-wider mt-0.5">
+                    {stickyNights > 0 && stickyPricing.seasonSummary
+                      ? `${stickyPricing.seasonSummary}`
+                      : 'Special Rate Promotion · Valid until Oct 31 · All Units'}
                   </span>
                 </div>
 
@@ -832,6 +908,28 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   <span>6th Floor Resort Recreation Deck</span>
                 </div>
               </div>
+
+              {/* Zoning & Tax Compliance in sidebar */}
+              {(property.taxMapKey || property.transientTaxId) && (
+                <div className="pt-3 border-t border-[#E8DCC6]/70 text-xs text-[#1A3B34]/80 space-y-1.5">
+                  <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-[#C59B4B]">
+                    <span>Zoning &amp; Tax Compliance</span>
+                    <span className="text-emerald-700">● Verified</span>
+                  </div>
+                  {property.taxMapKey && (
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-[#1A3B34]/60">Tax Map Key (TMK):</span>
+                      <span className="font-mono font-semibold text-[#1A3B34]">TMK {property.taxMapKey}</span>
+                    </div>
+                  )}
+                  {property.transientTaxId && (
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-[#1A3B34]/60">Transient Accommodations Tax (TAT):</span>
+                      <span className="font-mono font-semibold text-[#1A3B34]">{property.transientTaxId}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

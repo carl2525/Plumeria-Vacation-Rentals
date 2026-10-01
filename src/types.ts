@@ -16,6 +16,8 @@ export interface Property {
   ratePerNight?: number; // Verified rate if supplied, optional
   cleaningFee?: number;
   taxRateDescription?: string;
+  taxMapKey?: string;
+  transientTaxId?: string;
   airbnbUrl?: string;
   featured: boolean;
   available?: boolean;

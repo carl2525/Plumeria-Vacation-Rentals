@@ -10,7 +10,7 @@ export const PROPERTIES: Property[] = [
     tower: 'Tower 2 (Makai/Diamond Head)',
     floorLevel: '36th Floor (Penthouse Tier)',
     viewType: 'Ocean View',
-    guestsMax: 6,
+    guestsMax: 4,
     bedrooms: 1,
     beds: 2,
     bathrooms: 1,
@@ -147,7 +147,7 @@ export const PROPERTIES: Property[] = [
       'Surfboards & bicycles must strictly use Tower 2 freight elevator Car #5',
       'Lanai safety: No hanging towels or items over railings; no grilling or outdoor storage',
       'Pets: Strictly no pets allowed in the unit (service animals accommodated per ADA regulations)',
-      'Maximum occupancy: Up to 6 registered guests; no parties or disruptive gatherings',
+      'Maximum occupancy: 2–4 registered guests; no parties or disruptive gatherings',
     ],
     waikikiBanyanPerks: [
       'Top-tier 36th floor elevation overlooking the Pacific Ocean',
@@ -165,13 +165,15 @@ export const PROPERTIES: Property[] = [
     tower: 'Tower 2 (Makai/Diamond Head)',
     floorLevel: '32nd Floor (High Floor)',
     viewType: 'Beach, Ocean & Mountain View',
-    guestsMax: 6,
+    guestsMax: 4,
     bedrooms: 1,
     beds: 2,
     bathrooms: 1,
     squareFeet: 557,
     lanaiSquareFeet: 67,
     airbnbUrl: 'https://www.airbnb.com',
+    taxMapKey: '1-260250050783-000',
+    transientTaxId: 'TA-047-271-7312-01',
     featured: true,
     available: true,
     heroImage: '/images/properties/wb-3205-t2/unit-3205-01.webp',
@@ -250,9 +252,9 @@ export const PROPERTIES: Property[] = [
       },
     ],
     shortDescription:
-      'High on the 32nd floor of Tower 2 at Waikiki Banyan, Unit #3205-T2 is a comfortable 1-bedroom suite with 2 beds offering 557 sq. ft. of living space plus a 67 sq. ft. private lanai (624 sq. ft. total). Its elevated vantage point commands breathtaking dual panoramas: glistening views of Waikiki Beach and the Pacific Ocean to one side, seamlessly paired with iconic Diamond Head and lush Koʻolau mountain ridges. Features a Full kitchen, Fully Airconditioned comfort, 1-acre resort deck access, and is just 1 flat block to Kuhio Beach with $0 Resort fees. Authorized Short-Term Rental License by the City and County of Honolulu.',
+      'High on the 32nd floor of Tower 2 at Waikiki Banyan, Unit #3205-T2 is a comfortable 1-bedroom suite with 2 beds offering 557 sq. ft. of living space plus a 67 sq. ft. private lanai (624 sq. ft. total). Its elevated vantage point commands breathtaking dual panoramas: glistening views of Waikiki Beach and the Pacific Ocean to one side, seamlessly paired with iconic Diamond Head and lush Koʻolau mountain ridges. Features a Full kitchen, Fully Airconditioned comfort, 1-acre resort deck access, and is just 1 flat block to Kuhio Beach with $0 Resort fees. Zoning & Tax Compliance: Tax Map Key (TMK): TMK 1-260250050783-000 · Transient Accommodations Tax (TAT): TA-047-271-7312-01.',
     fullDescription: [
-      'Experience the magic of Honolulu from Unit #3205-T2 at Waikiki Banyan, hosted by Plumeria Vacation Rentals. Located on the 32nd floor of Tower 2 (Makai/Diamond Head Tower), this high-floor 1-bedroom suite with 2 beds features 557 sq. ft. of interior living space paired with a 67 sq. ft. private covered lanai (624 sq. ft. total living area). Authorized Short-Term Rental License by the City and County of Honolulu.',
+      'Experience the magic of Honolulu from Unit #3205-T2 at Waikiki Banyan, hosted by Plumeria Vacation Rentals. Located on the 32nd floor of Tower 2 (Makai/Diamond Head Tower), this high-floor 1-bedroom suite with 2 beds features 557 sq. ft. of interior living space paired with a 67 sq. ft. private covered lanai (624 sq. ft. total living area). Zoning & Tax Compliance: Tax Map Key (TMK): TMK 1-260250050783-000 · Transient Accommodations Tax (TAT): TA-047-271-7312-01.',
       'From its elevated 32nd-floor vantage point, enjoy breathtaking dual panoramas: sweeping views of the glistening turquoise Pacific ocean and Waikiki Beach shoreline to one side, paired with iconic Diamond Head Crater and dramatic Koʻolau mountain ridges. Step out onto your private 67 sq. ft. covered lanai to catch morning ocean breezes, watch surfers paddle out in the distance, and take in the emerald mountain contours without noisy beachfront street congestion.',
       'Wake up with the morning golden glow illuminating Diamond Head and the turquoise ocean, then sip your morning Kona coffee on your private 67 sq. ft. lanai. The open living room is Fully Airconditioned with comfortable furnishings, high-speed Wi-Fi, and versatile accordion doors for optional bedroom privacy.',
       'Prepare delicious meals in the full kitchen equipped with a breakfast bar island, full-size refrigerator, oven, stove, microwave, and cookware—allowing your group to save significantly over standard hotel rooms. When you are ready for the sand and surf, the calm waters of Kuhio Beach are just 1 flat block away (approx. 3-minute walk), plus full access to Waikiki Banyan’s 1-acre recreation deck with $0 Resort fees.',
@@ -260,13 +262,13 @@ export const PROPERTIES: Property[] = [
     sleepingArrangements: [
       {
         room: 'Master Bedroom',
-        beds: '1 Queen Platform Bed',
+        beds: '2 Queen Platform Bed',
         description: 'Clean modern platform bed, dual nightstands with contemporary reading lamps, 6-drawer dresser, mirrored closet & panoramic mountain/canal windows.',
       },
       {
         room: 'Living Room',
         beds: '1 Sleeper Sofa Bed',
-        description: 'Sleek black leather sofa with fold-out sleeping setup, crimson shag accent rug, and modern coffee table (accommodating up to 6 guests with extra bedding).',
+        description: 'Sleek black leather sofa with fold-out sleeping setup, crimson shag accent rug, and modern coffee table (accommodating 2–4 guests comfortably).',
       },
     ],
     keyAmenities: [
@@ -280,6 +282,13 @@ export const PROPERTIES: Property[] = [
       'Banyan Heated Pool & 2 Spas',
     ],
     fullAmenities: [
+      {
+        category: 'Zoning & Tax Compliance',
+        items: [
+          'Tax Map Key (TMK): TMK 1-260250050783-000',
+          'Transient Accommodations Tax (TAT): TA-047-271-7312-01',
+        ],
+      },
       {
         category: 'Unit Specifics & Comfort',
         items: [
@@ -344,7 +353,8 @@ export const PROPERTIES: Property[] = [
     houseRules: [
       'Check-in: 4:00 PM / Check-out: 10:00 AM (early check-in $50–$75/hr upon availability & late checkout with advance host approval)',
       'Covered garage parking included ($0 extra fee; follow Waikiki Banyan garage rules)',
-      'Base rate: $199*/night (Special Promotion valid until Oct 30); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
+      'Base rate: $199*/night (Special Promotion valid until Oct 30); $0 Resort fees',
+      'Zoning & Tax Compliance: Tax Map Key (TMK): TMK 1-260250050783-000 · Transient Accommodations Tax (TAT): TA-047-271-7312-01',
       'Cleaning fee: $250 for 1–2 nights; Waived ($0) for stays 3 nights or more (Want to waive cleaning fee? Book 3 nights or more!)',
       'Length of stay discounts: 7 days (3%), 10 days (5%), 20 days (10%), 30 days (15% max)',
       'Hawaii Taxes: 18.5% (Formula = TAX + Base + Cleaning Fee)',
@@ -354,7 +364,7 @@ export const PROPERTIES: Property[] = [
       'Surfboards & bicycles must strictly use Tower 2 freight elevator Car #5',
       'Lanai safety: No hanging towels or items over railings; no grilling or outdoor storage',
       'Pets: Strictly no pets allowed in the unit (service animals accommodated per ADA regulations)',
-      'Maximum occupancy: Up to 6 registered guests; no parties or disruptive gatherings',
+      'Maximum occupancy: 2–4 registered guests; no parties or disruptive gatherings',
     ],
     waikikiBanyanPerks: [
       'Stunning 32nd-floor dual views: glistening beach & ocean horizons alongside Diamond Head and mountain ridges',

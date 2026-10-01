@@ -143,7 +143,7 @@ export const ParkingPage: React.FC<ParkingPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-[#F9F7F2] min-h-screen text-[#1A3B34]">
       {/* Header */}
-      <section className="relative bg-[#1A3B34] text-white pt-36 pb-12 sm:pt-44 sm:pb-14 lg:pt-48 lg:pb-16 px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-[#1A3B34] text-white pt-28 pb-10 sm:pt-32 sm:pb-12 lg:pt-36 lg:pb-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-[#F6E7A7] text-xs font-semibold border border-white/15 shadow-2xs">
             <Car className="w-3.5 h-3.5 text-[#C59B4B]" />
@@ -186,38 +186,38 @@ export const ParkingPage: React.FC<ParkingPageProps> = ({ onNavigate }) => {
       {/* Info Bar */}
       <section className="bg-white border-y border-[#E8DCC6] py-4 px-4 sm:px-6 lg:px-8 shadow-xs">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 text-xs sm:text-sm">
-          <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6]">
+          <div className="flex items-center md:justify-center gap-2.5 p-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] text-left md:text-center">
             <AlertTriangle className="w-5 h-5 text-[#C59B4B] shrink-0" />
-            <div>
+            <div className="md:text-center">
               <span className="font-bold text-[#1A3B34] block">6' 0" Max Height</span>
               <span className="text-[#1A3B34]/70 text-[11px] block">No high roof racks</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6]">
+          <div className="flex items-center md:justify-center gap-2.5 p-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] text-left md:text-center">
             <ShieldCheck className="w-5 h-5 text-[#8CA58A] shrink-0" />
-            <div>
+            <div className="md:text-center">
               <span className="font-bold text-[#1A3B34] block">Free Parking Pass</span>
               <span className="text-[#1A3B34]/70 text-[11px] block">24/7 access · $200 lost fee</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6]">
+          <div className="flex items-center md:justify-center gap-2.5 p-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] text-left md:text-center">
             <Clock className="w-5 h-5 text-[#7FB6D9] shrink-0" />
-            <div>
+            <div className="md:text-center">
               <span className="font-bold text-[#1A3B34] block">5 MPH Speed</span>
               <span className="text-[#1A3B34]/70 text-[11px] block">Watch for pedestrians</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6]">
+          <div className="flex items-center md:justify-center gap-2.5 p-3 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] text-left md:text-center">
             <MapPin className="w-5 h-5 text-[#C59B4B] shrink-0" />
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 md:text-center">
               <span className="font-bold text-[#1A3B34] block truncate">201 ʻOhua Ave</span>
               <button
                 type="button"
                 onClick={handleCopyAddress}
-                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center gap-1 text-[11px] font-semibold text-[#1A3B34] hover:text-[#C59B4B] transition-colors cursor-pointer"
               >
                 {copiedAddress ? (
                   <>
