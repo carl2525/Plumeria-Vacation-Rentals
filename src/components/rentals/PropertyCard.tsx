@@ -199,7 +199,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           }`}>
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap pr-2.5">
               <Users className={`w-3.5 h-3.5 shrink-0 ${isUnavailable ? 'text-neutral-400' : 'text-[#8CA58A]'}`} />
-              <span>2–4 Guests</span>
+              <span>2 Guests Max</span>
             </span>
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap px-2.5 border-l border-neutral-300">
               <Bed className={`w-3.5 h-3.5 shrink-0 ${isUnavailable ? 'text-neutral-400' : 'text-[#8CA58A]'}`} />

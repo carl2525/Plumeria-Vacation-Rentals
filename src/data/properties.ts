@@ -10,7 +10,7 @@ export const PROPERTIES: Property[] = [
     tower: 'Tower 2 (Makai/Diamond Head)',
     floorLevel: '36th Floor (Penthouse Tier)',
     viewType: 'Ocean View',
-    guestsMax: 4,
+    guestsMax: 2,
     bedrooms: 1,
     beds: 2,
     bathrooms: 1,
@@ -147,7 +147,7 @@ export const PROPERTIES: Property[] = [
       'Surfboards & bicycles must strictly use Tower 2 freight elevator Car #5',
       'Lanai safety: No hanging towels or items over railings; no grilling or outdoor storage',
       'Pets: Strictly no pets allowed in the unit (service animals accommodated per ADA regulations)',
-      'Maximum occupancy: 2–4 registered guests; no parties or disruptive gatherings',
+      'Maximum occupancy: Up to 2 registered guests; no parties or disruptive gatherings',
     ],
     waikikiBanyanPerks: [
       'Top-tier 36th floor elevation overlooking the Pacific Ocean',
@@ -165,7 +165,7 @@ export const PROPERTIES: Property[] = [
     tower: 'Tower 2 (Makai/Diamond Head)',
     floorLevel: '32nd Floor (High Floor)',
     viewType: 'Beach, Ocean & Mountain View',
-    guestsMax: 4,
+    guestsMax: 2,
     bedrooms: 1,
     beds: 2,
     bathrooms: 1,
@@ -268,7 +268,7 @@ export const PROPERTIES: Property[] = [
       {
         room: 'Living Room',
         beds: '1 Sleeper Sofa Bed',
-        description: 'Sleek black leather sofa with fold-out sleeping setup, crimson shag accent rug, and modern coffee table (accommodating 2–4 guests comfortably).',
+        description: 'Sleek black leather sofa with fold-out sleeping setup, crimson shag accent rug, and modern coffee table (accommodating up to 2 guests comfortably).',
       },
     ],
     keyAmenities: [
@@ -364,7 +364,7 @@ export const PROPERTIES: Property[] = [
       'Surfboards & bicycles must strictly use Tower 2 freight elevator Car #5',
       'Lanai safety: No hanging towels or items over railings; no grilling or outdoor storage',
       'Pets: Strictly no pets allowed in the unit (service animals accommodated per ADA regulations)',
-      'Maximum occupancy: 2–4 registered guests; no parties or disruptive gatherings',
+      'Maximum occupancy: Up to 2 registered guests; no parties or disruptive gatherings',
     ],
     waikikiBanyanPerks: [
       'Stunning 32nd-floor dual views: glistening beach & ocean horizons alongside Diamond Head and mountain ridges',

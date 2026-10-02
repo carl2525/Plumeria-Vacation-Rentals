@@ -361,7 +361,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">
                 <Users className="w-5 h-5 text-[#8CA58A] mx-auto mb-1" />
                 <span className="text-[11px] text-[#1A3B34]/60 block font-medium">Guests</span>
-                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">2–4 Guests</span>
+                <span className="text-xs sm:text-sm font-bold text-[#1A3B34]">Up to 2 Guests</span>
               </div>
 
               <div className="p-3 rounded-2xl bg-[#F9F7F2]">

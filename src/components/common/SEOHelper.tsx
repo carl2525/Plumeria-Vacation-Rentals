@@ -48,7 +48,7 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
       if (prop) {
         meta = {
           title: `${prop.name} (${prop.viewType}) | Waikiki Banyan Vacation Rentals | Plumeria`,
-          description: `${prop.tagline}. High-floor Waikiki condo rental at Waikiki Banyan with Full kitchen, private lanai, sleeps 2–4 guests. 1 block to Kuhio Beach with $0 resort fees. Promotional $199 base rate.`,
+          description: `${prop.tagline}. High-floor Waikiki condo rental at Waikiki Banyan with Full kitchen, private lanai, sleeps up to 2 guests. 1 block to Kuhio Beach with $0 resort fees. Promotional $199 base rate.`,
           canonicalUrl: `https://plumeriavacationrentals.com/#/rentals/${prop.slug}`,
           breadcrumbName: prop.name,
         };

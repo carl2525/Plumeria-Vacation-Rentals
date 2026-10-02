@@ -35,7 +35,7 @@ export const WhyBookWithPlumeria: React.FC<WhyBookWithPlumeriaProps> = ({ onNavi
                 Twice the Living Space
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-                557 sq. ft. true 1-bedroom suite + 67 sq. ft. private lanai (624 sq. ft. total) with closing doors, Full kitchen, and separate living room (sleeps 2–4 guests) vs cramped 280 sq. ft. hotel rooms.
+                557 sq. ft. true 1-bedroom suite + 67 sq. ft. private lanai (624 sq. ft. total) with closing doors, Full kitchen, and separate living room (sleeps up to 2 guests) vs cramped 280 sq. ft. hotel rooms.
               </p>
             </div>
             {onNavigate && (

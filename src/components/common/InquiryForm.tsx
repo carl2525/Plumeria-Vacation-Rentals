@@ -70,7 +70,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
     phone: '',
     checkIn: safeInitialCheckIn,
     checkOut: safeInitialCheckOut,
-    guests: initialGuests,
+    guests: Math.min(Math.max(initialGuests || 2, 1), 2),
     preferredProperty: initialPropertyId,
     message: '',
   });
@@ -713,9 +713,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               className="w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-sm bg-white border border-[#E8DCC6] rounded-xl text-[#1A3B34] focus:outline-none focus:ring-2 focus:ring-[#8CA58A]/40 focus:border-[#8CA58A]"
             >
               <option value={1}>1 Guest</option>
-              <option value={2}>2 Guests</option>
-              <option value={3}>3 Guests</option>
-              <option value={4}>4 Guests</option>
+              <option value={2}>2 Guests (Max)</option>
             </select>
           </div>
         </div>

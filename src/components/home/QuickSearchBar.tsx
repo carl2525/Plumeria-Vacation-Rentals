@@ -135,9 +135,7 @@ export const QuickSearchBar: React.FC<QuickSearchBarProps> = ({ onSearch }) => {
               className="w-full text-xs sm:text-sm font-semibold text-[#1A3B34] bg-transparent focus:outline-none cursor-pointer p-0 m-0"
             >
               <option value={1}>1 Guest</option>
-              <option value={2}>2 Guests</option>
-              <option value={3}>3 Guests</option>
-              <option value={4}>4 Guests</option>
+              <option value={2}>2 Guests (Max)</option>
             </select>
           </div>
         </div>
