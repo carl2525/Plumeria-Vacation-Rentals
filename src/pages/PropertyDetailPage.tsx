@@ -238,7 +238,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     <div className="flex flex-wrap sm:flex-nowrap items-baseline gap-x-1.5 gap-y-0.5">
                       <span className="text-[#1A3B34]/70 font-medium">Tax Map Key (TMK):</span>
                       <strong className="font-mono font-semibold text-[#1A3B34] whitespace-nowrap">
-                        TMK {property.taxMapKey}
+                        {property.taxMapKey}
                       </strong>
                     </div>
                   )}
@@ -541,7 +541,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                         Tax Map Key (TMK)
                       </span>
                       <span className="font-mono text-sm sm:text-base font-bold text-[#1A3B34] block">
-                        TMK {property.taxMapKey}
+                        {property.taxMapKey}
                       </span>
                       <span className="text-[11px] text-[#1A3B34]/65 block font-light">
                         City &amp; County of Honolulu Real Property Tax Assessment
@@ -567,7 +567,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 <div className="p-3.5 rounded-2xl bg-[#E8DCC6]/20 border border-[#C59B4B]/30 flex items-start gap-3 text-xs text-[#1A3B34]/85">
                   <Sparkles className="w-4 h-4 text-[#C59B4B] shrink-0 mt-0.5" />
                   <p className="leading-relaxed font-light">
-                    <strong className="text-[#1A3B34] font-semibold">Zoning &amp; Tax Compliance:</strong> Unit #{property.unitNumber} is officially registered with <strong>Tax Map Key (TMK): TMK {property.taxMapKey}</strong> and <strong>Transient Accommodations Tax (TAT): {property.transientTaxId}</strong>.
+                    <strong className="text-[#1A3B34] font-semibold">Zoning &amp; Tax Compliance:</strong> Unit #{property.unitNumber} is officially registered with <strong>Tax Map Key (TMK): {property.taxMapKey}</strong> and <strong>Transient Accommodations Tax (TAT): {property.transientTaxId}</strong>.
                   </p>
                 </div>
               </div>
@@ -919,7 +919,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   {property.taxMapKey && (
                     <div className="flex items-center justify-between text-[11px]">
                       <span className="text-[#1A3B34]/60">Tax Map Key (TMK):</span>
-                      <span className="font-mono font-semibold text-[#1A3B34]">TMK {property.taxMapKey}</span>
+                      <span className="font-mono font-semibold text-[#1A3B34]">{property.taxMapKey}</span>
                     </div>
                   )}
                   {property.transientTaxId && (

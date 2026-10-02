@@ -169,7 +169,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
                 <span className="font-medium">
                   <span className="text-[#1A3B34]/70">TMK:</span>{' '}
                   <strong className="font-mono text-[10px] sm:text-[11px] font-semibold text-[#1A3B34]">
-                    TMK {property.taxMapKey}
+                    {property.taxMapKey}
                   </strong>
                 </span>
               )}
