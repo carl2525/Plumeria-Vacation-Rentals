@@ -19,9 +19,10 @@ import {
   Mail,
   ExternalLink,
   Mountain,
+  Phone,
 } from 'lucide-react';
 import { LogoWatermark } from '../components/brand/LogoWatermark';
-import { SITE_CONFIG } from '../config/site';
+import { SITE_CONFIG, FORMS_PAUSED_FOR_A2P } from '../config/site';
 import { AppImage } from '../components/common/AppImage';
 import { generateInquiryMailtoUrl } from '../utils/mailto';
 import {
@@ -745,6 +746,72 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                       <span>Contact Host About Upcoming Dates</span>
                       <ExternalLink className="w-3 h-3 text-[#1A3B34]/40" />
                     </a>
+                  </div>
+                </div>
+              ) : FORMS_PAUSED_FOR_A2P ? (
+                <div className="space-y-3.5 pt-1">
+                  {/* Direct Host Value & Inclusions Highlight */}
+                  <div className="p-3.5 rounded-2xl bg-[#1A3B34] text-white space-y-2 text-xs border border-[#C59B4B]/30 shadow-2xs">
+                    <div className="flex items-center justify-between text-[#F6E7A7] font-semibold text-[11px] pb-1 border-b border-white/15">
+                      <span>Direct Booking Privilege</span>
+                      <span>$0 Resort Fees</span>
+                    </div>
+                    <div className="space-y-1 text-[11px] text-white/85">
+                      <div className="flex justify-between items-center">
+                        <span>Nightly Base Rate:</span>
+                        <strong className="text-white font-mono">$199* / nt (Oct Promo)</strong>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span>Mandatory Resort Fees:</span>
+                        <strong className="text-[#F6E7A7] font-mono">$0 (Never Charged)</strong>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span>Covered Garage Parking:</span>
+                        <strong className="text-[#F6E7A7] font-mono">$0 Pass Included</strong>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Direct Booking Actions (No form input, 100% compliant) */}
+                  <div className="space-y-2 pt-1">
+                    {property.airbnbUrl && (
+                      <a
+                        href={property.airbnbUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        id="sticky-card-airbnb-btn"
+                        className="w-full py-3.5 px-4 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md hover:shadow-lg"
+                      >
+                        <span>View &amp; Book on Airbnb</span>
+                        <ExternalLink className="w-4 h-4 text-white/90" />
+                      </a>
+                    )}
+
+                    <a
+                      href={`tel:${SITE_CONFIG.phoneRaw}`}
+                      id="sticky-card-phone-btn"
+                      className="w-full py-2.5 px-3 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-white font-medium text-xs flex items-center justify-center gap-2 border border-[#C59B4B]/30 transition-colors cursor-pointer shadow-2xs"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-[#C59B4B]" />
+                      <span>Call or Text Host: {SITE_CONFIG.phone}</span>
+                    </a>
+
+                    <a
+                      href={directMailtoUrl}
+                      id="sticky-card-mailto-btn"
+                      className="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-[#E8DCC6]/40 text-[#1A3B34] font-medium text-xs flex items-center justify-center gap-1.5 border border-[#E8DCC6] transition-colors cursor-pointer shadow-2xs"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-[#C59B4B]" />
+                      <span>Email Host Directly</span>
+                      <ExternalLink className="w-3 h-3 text-[#1A3B34]/40" />
+                    </a>
+                  </div>
+
+                  {/* Paused notice note */}
+                  <div className="p-2.5 rounded-xl bg-[#F9F7F2] border border-[#E8DCC6] text-center">
+                    <p className="text-[10.5px] text-[#1A3B34]/70 font-light leading-snug">
+                      Online lead capture forms temporarily paused for messaging verification. Inquire directly via Airbnb, phone, or email.
+                    </p>
                   </div>
                 </div>
               ) : (

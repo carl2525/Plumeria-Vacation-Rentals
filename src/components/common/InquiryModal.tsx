@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { X, Sparkles, ExternalLink } from 'lucide-react';
 import { InquiryForm } from './InquiryForm';
 import { PlumeriaSymbolLogo } from '../brand/PlumeriaSymbolLogo';
-import { SITE_CONFIG } from '../../config/site';
+import { SITE_CONFIG, FORMS_PAUSED_FOR_A2P } from '../../config/site';
 
 interface InquiryModalProps {
   isOpen: boolean;
@@ -85,7 +85,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
                 id="inquiry-modal-title"
                 className="font-serif text-lg sm:text-2xl font-bold text-[#1A3B34] truncate"
               >
-                Booking Inquiry
+                {FORMS_PAUSED_FOR_A2P ? 'Direct Booking & Inquiries' : 'Booking Inquiry'}
               </h2>
             </div>
           </div>

@@ -1,3 +1,5 @@
+export const FORMS_PAUSED_FOR_A2P = true;
+
 export const SITE_CONFIG = {
   name: 'Plumeria Vacation Rentals',
   legalName: 'Plumeria Vacation Rentals LLC',

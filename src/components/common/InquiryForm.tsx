@@ -20,10 +20,11 @@ import {
   Car,
   Utensils,
   Eye,
+  Phone,
 } from 'lucide-react';
 import { PlumeriaSymbolLogo } from '../brand/PlumeriaSymbolLogo';
 import { PROPERTIES } from '../../data/properties';
-import { SITE_CONFIG } from '../../config/site';
+import { SITE_CONFIG, FORMS_PAUSED_FOR_A2P } from '../../config/site';
 import {
   generateInquiryMailtoUrl,
   buildInquiryEmailText,
@@ -400,6 +401,131 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
           >
             ← Modify Dates / Edit Inquiry
           </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (FORMS_PAUSED_FOR_A2P) {
+    return (
+      <div className="space-y-4">
+        {title && (
+          <div className="border-b border-[#E8DCC6] pb-2.5 mb-1">
+            <h2 className="font-serif text-lg sm:text-2xl font-bold text-[#1A3B34]">
+              {title}
+            </h2>
+            <p className="text-xs text-[#1A3B34]/70 font-light">
+              Direct host contact &amp; reservation channels. Reach us anytime via Airbnb, phone, or email.
+            </p>
+          </div>
+        )}
+
+        {/* Unified Mobile-Friendly Direct Host Value & Contact Card */}
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-[#1A3B34] to-[#244E45] text-white border border-[#C59B4B]/35 shadow-xs space-y-2.5">
+          <div className="flex items-start gap-2.5 sm:gap-3">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#C59B4B] text-[#1A3B34] flex flex-col items-center justify-center shrink-0 shadow-2xs font-black">
+              <span className="text-[11px] sm:text-xs leading-none">$199*</span>
+              <span className="text-[7.5px] sm:text-[8px] uppercase tracking-tight leading-none mt-0.5">PROMO</span>
+            </div>
+            <div className="space-y-0.5 flex-1 min-w-0">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="font-serif font-bold text-xs sm:text-sm text-[#F6E7A7]">
+                  Special Rate Promotion · All Units
+                </span>
+                <span className="px-1.5 py-0.2 text-[8.5px] sm:text-[9px] font-bold uppercase rounded bg-[#C59B4B] text-[#1A3B34] whitespace-nowrap">
+                  Valid until Oct 30
+                </span>
+                <span className="px-1.5 py-0.2 text-[8.5px] sm:text-[9px] font-bold uppercase rounded bg-white/20 text-white whitespace-nowrap">
+                  $0 Resort Fees
+                </span>
+              </div>
+              <p className="text-[11px] text-white/85 leading-tight sm:leading-relaxed font-light">
+                Enjoy our promotional <strong>$199*/night rate (valid until Oct 30)</strong>, dedicated covered parking pass, and $0 hidden resort fees at Waikiki Banyan!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 3 Direct Contact & Booking Channels (No forms, 100% compliant) */}
+        <div className="space-y-3 pt-1">
+          {/* 1. Airbnb Booking - Primary */}
+          <a
+            href={SITE_CONFIG.airbnbUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            id="form-paused-airbnb-btn"
+            className="w-full p-4 rounded-2xl bg-[#FF385C] hover:bg-[#E00B41] text-white transition-all shadow-sm hover:shadow-md flex items-center justify-between group cursor-pointer"
+          >
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2">
+                <span className="font-serif font-bold text-sm sm:text-base">
+                  View &amp; Book on Airbnb
+                </span>
+                <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase bg-white/20 text-white">
+                  Instant Calendar
+                </span>
+              </div>
+              <p className="text-[11px] text-white/85 font-light">
+                Check real-time suite calendar availability and reserve directly on Airbnb.
+              </p>
+            </div>
+            <ExternalLink className="w-4 h-4 text-white/80 group-hover:translate-x-0.5 transition-transform shrink-0 ml-3" />
+          </a>
+
+          {/* 2. Direct Phone Call or Text */}
+          <a
+            href={`tel:${SITE_CONFIG.phoneRaw}`}
+            id="form-paused-phone-btn"
+            className="w-full p-4 rounded-2xl bg-white hover:bg-[#F9F7F2] border border-[#E8DCC6] hover:border-[#C59B4B] text-[#1A3B34] transition-all shadow-2xs flex items-center justify-between group cursor-pointer"
+          >
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-[#C59B4B] shrink-0" />
+                <span className="font-serif font-bold text-sm sm:text-base text-[#1A3B34]">
+                  Call or Text: {SITE_CONFIG.phone}
+                </span>
+              </div>
+              <p className="text-[11px] text-[#1A3B34]/70 font-light">
+                Speak directly with your host for immediate questions, stay inquiries, and check-in assistance.
+              </p>
+            </div>
+            <span className="text-xs font-bold text-[#8CA58A] shrink-0 ml-3">
+              Call / Text →
+            </span>
+          </a>
+
+          {/* 3. Direct Email to Host */}
+          <a
+            href={`mailto:${SITE_CONFIG.email}?subject=Waikiki%20Banyan%20Reservation%20Inquiry%20(Direct)&body=Aloha%20Plumeria%20Team%2C%0A%0AI%20would%20like%20to%20inquire%20about%20staying%20at%20Waikiki%20Banyan.%0A%0ADesired%20Check-In%3A%20%0ADesired%20Check-Out%3A%20%0ANumber%20of%20Guests%3A%20%0APreferred%20Suite%3A%20%0A%0AMahalo!`}
+            id="form-paused-email-btn"
+            className="w-full p-4 rounded-2xl bg-white hover:bg-[#F9F7F2] border border-[#E8DCC6] hover:border-[#C59B4B] text-[#1A3B34] transition-all shadow-2xs flex items-center justify-between group cursor-pointer"
+          >
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-[#8CA58A] shrink-0" />
+                <span className="font-serif font-bold text-sm sm:text-base text-[#1A3B34] break-all">
+                  Email Host Directly
+                </span>
+              </div>
+              <p className="text-[11px] text-[#1A3B34]/70 font-light">
+                {SITE_CONFIG.email} · Inquiries answered promptly within 2–4 hours.
+              </p>
+            </div>
+            <span className="text-xs font-bold text-[#C59B4B] shrink-0 ml-3">
+              Send Email →
+            </span>
+          </a>
+        </div>
+
+        {/* Verification Pause Notice & Assurance */}
+        <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#E8DCC6] text-xs text-[#1A3B34]/80 space-y-1.5">
+          <div className="flex items-center gap-2 text-[11px] font-bold text-[#1A3B34]">
+            <span className="w-2 h-2 rounded-full bg-emerald-600" />
+            <span>Direct Reservations Active</span>
+          </div>
+          <p className="text-[11px] text-[#1A3B34]/70 font-light leading-relaxed">
+            Online inquiry forms are temporarily paused while our direct communication verification is finalizing. You can reach the host directly above via Phone, Email, or Airbnb with zero delays.
+          </p>
         </div>
       </div>
     );
