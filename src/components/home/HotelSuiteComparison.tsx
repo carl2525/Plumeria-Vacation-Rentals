@@ -130,7 +130,7 @@ export const HotelSuiteComparison: React.FC<HotelSuiteComparisonProps> = ({
           </h2>
 
           <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed max-w-2xl mx-auto">
-            Spacious 624 sq. ft. 1-bedroom suites on floors 32 & 36 in Tower 2 with full kitchens, private lanais, and free covered parking. Compare our all-in <strong className="text-[#1A3B34] font-semibold">~$1,400 total</strong> with <strong className="text-[#1A3B34] font-semibold">$0 Resort fees</strong> against Sheraton Waikiki and Hilton Hawaiian Village ($4,800–$6,500+). Authorized Short-Term Rental License by the City and County of Honolulu.
+            We prepare for the things you shouldn’t have to think about, so you can focus on your vacation. Enjoy spacious 624 sq. ft. 1-bedroom suites on floors 32 & 36 with full kitchens, private lanais, and free covered parking. Compare our all-in <strong className="text-[#1A3B34] font-semibold">~$1,400 total</strong> with <strong className="text-[#1A3B34] font-semibold">$0 Resort fees</strong> against Sheraton Waikiki and Hilton Hawaiian Village ($4,800–$6,500+). Authorized Short-Term Rental License by the City and County of Honolulu.
           </p>
         </div>
 

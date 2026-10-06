@@ -490,7 +490,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Right Action: Call Now CTA + Airbnb + Inquire to Book (Desktop) */}
+          {/* Right Action: Call Now CTA + Inquire to Book (Desktop) */}
           <div className="hidden lg:flex items-center gap-2 xl:gap-2.5 shrink-0">
             <a
               id="nav-call-now-cta"
@@ -501,7 +501,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Phone className="w-3.5 h-3.5 text-[#C59B4B]" />
               <span>Call Now: {SITE_CONFIG.phone}</span>
             </a>
-
 
             <button
               id="nav-book-stay-cta"

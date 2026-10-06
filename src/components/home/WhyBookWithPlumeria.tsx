@@ -12,15 +12,15 @@ export const WhyBookWithPlumeria: React.FC<WhyBookWithPlumeriaProps> = ({ onNavi
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/50 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
             <HeartHandshake className="w-3.5 h-3.5 text-[#C59B4B]" />
-            <span>The Plumeria + Banyan Advantage</span>
+            <span>Our Guiding Promise · The Plumeria Difference</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#1A3B34] leading-tight">
-            Why our guests never go back to standard Waikiki hotels.
+            “We prepare for the things you shouldn’t have to think about, so you can focus on your vacation.”
           </h2>
 
           <p className="text-base sm:text-lg text-[#1A3B34]/80 font-light leading-relaxed">
-            By pairing Waikiki Banyan’s premier resort amenities with Plumeria’s hand-curated high-floor Tower 2 suites, you experience the ultimate Oʻahu vacation stay.
+            Vacation is about swimming in turquoise waters, watching golden sunsets, and savoring island life—not stressing over parking garages, deciphering surprise checkout fees, or feeling confined in a cramped hotel room. We anticipate and prepare every detail before you step through the door.
           </p>
         </div>
 
@@ -32,10 +32,10 @@ export const WhyBookWithPlumeria: React.FC<WhyBookWithPlumeriaProps> = ({ onNavi
                 <Sun className="w-6 h-6 text-[#1A3B34]" />
               </div>
               <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                Twice the Living Space
+                Thoughtful Living Space
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-                557 sq. ft. true 1-bedroom suite + 67 sq. ft. private lanai (624 sq. ft. total) with closing doors, Full kitchen, and separate living room (sleeps up to 2 guests) vs cramped 280 sq. ft. hotel rooms.
+                557 sq. ft. 1-bedroom suite + 67 sq. ft. private lanai (624 sq. ft. total) with closing bedroom doors, full kitchen, and separate living room (sleeps 4–6 guests). Plenty of room to unpack and recharge.
               </p>
             </div>
             {onNavigate && (
@@ -56,10 +56,10 @@ export const WhyBookWithPlumeria: React.FC<WhyBookWithPlumeriaProps> = ({ onNavi
                 <MapPin className="w-6 h-6 text-[#C59B4B]" />
               </div>
               <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                1-Acre Recreation Deck
+                Turnkey Resort Deck
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-                Oʻahu’s largest condo-resort deck: heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs, and children’s playground right on the 6th floor.
+                Oʻahu’s largest condo-resort deck: heated swimming pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs, and playground on the 6th floor—ready for your downtime with zero day-pass friction.
               </p>
             </div>
             {onNavigate && (
@@ -80,10 +80,10 @@ export const WhyBookWithPlumeria: React.FC<WhyBookWithPlumeriaProps> = ({ onNavi
                 <Coffee className="w-6 h-6 text-[#C59B4B]" />
               </div>
               <h3 className="font-serif text-xl font-bold text-[#1A3B34]">
-                Sweet-Spot Location
+                Effortless Beach Access
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-                Just 1 short block (3-minute flat walk) to the calm waters of Kuhio Beach, while buffered from loud late-night Kalākaua traffic noise for restful sleep.
+                Just 1 short block (flat 3-minute stroll) to the calm waters of Kuhio Beach, while buffered from loud late-night Kalākaua traffic noise so you never have to think about disruptive street sounds.
               </p>
             </div>
             {onNavigate && (
@@ -107,7 +107,7 @@ export const WhyBookWithPlumeria: React.FC<WhyBookWithPlumeriaProps> = ({ onNavi
                 Zero Surprise Fees
               </h3>
               <p className="text-xs sm:text-sm text-[#1A3B34]/75 leading-relaxed">
-                No surprise $38–$65 daily resort/amenity fees or $43–$72/day parking fees at checkout. Covered garage parking ($0 fee), high-speed Wi-Fi, Tommy Bahama beach gear, and all recreation deck amenities are 100% included.
+                No surprise $38–$65 daily resort fees or $45–$72/day parking bills at checkout. Free covered garage parking ($0 fee), Tommy Bahama beach gear, fast Wi-Fi, and resort amenities are 100% prepared and included.
               </p>
             </div>
             {onNavigate && (

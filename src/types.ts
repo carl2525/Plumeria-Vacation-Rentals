@@ -18,6 +18,7 @@ export interface Property {
   taxRateDescription?: string;
   taxMapKey?: string;
   transientTaxId?: string;
+  strRegistrationId?: string;
   airbnbUrl?: string;
   featured: boolean;
   available?: boolean;

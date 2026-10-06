@@ -110,7 +110,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ onOpenInquiry, onNavigate }) =
               The Waikiki Banyan Standard
             </span>
             <h3 className="font-serif text-lg font-bold text-[#1A3B34]">
-              Why Waikiki Banyan Outclasses Other Vacation Rentals
+              The Plumeria Standard: Prepared for You
             </h3>
             <p className="text-xs sm:text-sm text-[#1A3B34]/75 font-light leading-relaxed">
               Oʻahu’s largest 1-acre 6th-floor resort deck (heated pool, 2 jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs), Full kitchens in every suite, private ocean-view lanais, 1 flat block to Kuhio Beach, and $0 mandatory resort fees. Authorized Short-Term Rental License by the City and County of Honolulu.

@@ -1083,7 +1083,7 @@ export const FullCompetitorComparison: React.FC<FullCompetitorComparisonProps> =
           </h5>
         </div>
         <p className="text-xs text-[#1A3B34]/75 font-light leading-relaxed">
-          Waikiki Banyan is located in the official City & County of Honolulu <strong>Waikiki Resort Hotel District</strong>, and our suites hold an authorized Short-Term Rental License authorized by the City and County of Honolulu, providing complete compliance and zero cancellation risk.
+          Waikiki Banyan is located in the official City & County of Honolulu <strong>Waikiki Resort Hotel District</strong>, and our suites hold an authorized Short-Term Rental License (STR: 2026-STR-556) authorized by the City and County of Honolulu, providing complete compliance and zero cancellation risk.
         </p>
         <div className="pt-2 border-t border-[#E8DCC6]/60 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#1A3B34]/80">
           <span className="font-semibold text-[#1A3B34]">Verified Sources:</span>

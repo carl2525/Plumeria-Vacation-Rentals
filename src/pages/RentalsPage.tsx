@@ -184,7 +184,7 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
               The Waikiki Banyan Advantage
             </span>
             <h3 className="font-serif text-xl sm:text-2xl font-bold">
-              Amenities No Other Vacation Rental on Oʻahu Can Match
+              Thoughtful Amenities Prepared for Your Peace of Mind
             </h3>
             <p className="text-xs sm:text-sm text-white/80 max-w-xl font-light leading-relaxed">
               Every reservation includes access to the 6th-floor 1-acre recreation oasis: heated swimming pool, therapeutic jet hot tubs, dry sauna, tennis & pickleball, 12 gas BBQs, children’s play park, and beach equipment inside your suite—all with $0 resort fees.
@@ -195,7 +195,7 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
             onClick={() => onNavigate('/waikiki-banyan')}
             className="w-full sm:w-auto px-6 py-3 rounded-full text-xs sm:text-sm font-semibold bg-[#C59B4B] text-[#1A3B34] hover:bg-[#D4A853] transition-colors whitespace-nowrap cursor-pointer shrink-0 shadow-sm inline-flex items-center justify-center gap-1.5"
           >
-            <span>Why Banyan is Better</span>
+            <span>Explore Banyan Amenities</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>

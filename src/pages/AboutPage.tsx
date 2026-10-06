@@ -22,7 +22,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
         <div className="max-w-3xl space-y-5">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8DCC6]/40 border border-[#C59B4B]/30 text-xs font-semibold uppercase tracking-[0.2em] text-[#1A3B34]">
             <HeartHandshake className="w-3.5 h-3.5 text-[#C59B4B]" />
-            <span>Our Island Story</span>
+            <span>Our Island Story &amp; Hospitality Promise</span>
           </div>
 
           <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-[#1A3B34] leading-tight">
@@ -42,11 +42,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           </p>
         </div>
 
+        {/* Brand Mission Callout */}
+        <div className="bg-[#1A3B34] text-white p-7 sm:p-10 rounded-3xl border border-[#C59B4B]/35 shadow-md relative overflow-hidden">
+          <div className="relative z-10 max-w-3xl space-y-3">
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C59B4B]">
+              Our Guiding Purpose · The Plumeria Difference
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-[#F6E7A7] leading-snug">
+              “We prepare for the things you shouldn’t have to think about, so you can focus on your vacation.”
+            </h2>
+            <p className="text-sm sm:text-base text-white/85 font-light leading-relaxed">
+              When you travel to Hawaiʻi, your focus should be on morning ocean breezes, turquoise waves, and making memories with family—not hunting for parking, deciphering hidden resort charges, or cooking without proper pans. We anticipate and prepare every detail before you step through the door.
+            </p>
+          </div>
+        </div>
+
         {/* Narrative & Visual Composite */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-white rounded-3xl p-8 sm:p-12 border border-[#E8DCC6] shadow-xs">
           <div className="lg:col-span-7 space-y-5">
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
-              Why We Chose Waikiki Banyan Above All Other Vacation Rentals
+              The Thoughtful Details Behind Every Stay
             </h2>
 
             <p className="text-sm sm:text-base text-[#1A3B34]/80 font-light leading-relaxed">
@@ -122,8 +137,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   Waikiki Banyan, Honolulu, HI
                 </p>
               </div>
-              <p className="text-xs text-[#1A3B34]/70 font-light italic leading-relaxed">
-                “Stay at Waikiki Banyan. Experience Waikiki with Plumeria.”
+              <p className="text-xs text-[#1A3B34]/80 font-light italic leading-relaxed">
+                “We prepare for the things you shouldn’t have to think about, so you can focus on your vacation.”
               </p>
             </div>
           </div>

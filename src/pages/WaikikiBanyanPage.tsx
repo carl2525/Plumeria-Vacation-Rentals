@@ -119,11 +119,11 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
             </div>
 
             <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-[#1A3B34] leading-tight">
-              Why Waikiki Banyan is Better Than Any Other Vacation Rental
+              A Complete Waikiki Stay, Thoughtfully Prepared
             </h1>
 
             <p className="text-base sm:text-lg text-[#1A3B34]/85 font-light leading-relaxed">
-              Consistently rated among the top Waikiki vacation rentals and condo rentals in Honolulu, <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan (201 ʻOhua Avenue)</strong> solves every headache of traveling to Oʻahu. Unlike ordinary Waikiki short term rentals, you enjoy the space and kitchen savings of a 557 sq. ft. private condo + 67 sq. ft. lanai paired with sweeping beach, ocean, and Diamond Head mountain views and Oʻahu’s largest 1-acre resort deck. Book direct in Waikiki with Plumeria Vacation Rentals for the best rates and zero resort fees.
+              Consistently rated among the top Waikiki vacation rentals and condo rentals in Honolulu, <strong className="text-[#1A3B34] font-semibold">Waikiki Banyan (201 ʻOhua Avenue)</strong> embodies our hospitality goal: <em className="text-[#1A3B34] font-medium not-italic font-serif">“We prepare for the things you shouldn’t have to think about, so you can focus on your vacation.”</em> Unlike ordinary Waikiki short term rentals, you enjoy the space and kitchen savings of a 557 sq. ft. private condo + 67 sq. ft. lanai paired with sweeping beach, ocean, and Diamond Head mountain views and Oʻahu’s largest 1-acre resort deck. Book direct with Plumeria Vacation Rentals for the best rates, free covered parking, and zero resort fees.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2 text-xs sm:text-sm text-[#1A3B34]/80">
@@ -306,10 +306,10 @@ export const WaikikiBanyanPage: React.FC<WaikikiBanyanPageProps> = ({
               The Verdict for Waikiki Travelers
             </span>
             <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1A3B34]">
-              No other vacation rental in Honolulu offers this total package.
+              “We prepare for the things you shouldn’t have to think about, so you can focus on your vacation.”
             </h3>
             <p className="text-xs sm:text-sm text-[#1A3B34]/80 font-light leading-relaxed">
-              When you balance ocean proximity, a 1-acre resort deck, full kitchens, true 1-bedroom space, quiet restful evenings, and zero mandatory resort fees, Waikiki Banyan is unequivocally the highest-value vacation rental destination on Oʻahu.
+              When you balance ocean proximity, a 1-acre resort deck, full kitchens, true 1-bedroom space, quiet restful evenings, free parking, and zero mandatory resort fees, Plumeria at Waikiki Banyan gives you complete peace of mind.
             </p>
           </div>
 

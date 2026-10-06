@@ -162,9 +162,20 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             </h3>
           </div>
 
-          {/* Official Hawaii Tax Registration: TMK & TAT */}
-          {(property.taxMapKey || property.transientTaxId) && (
+          {/* Zoning & Tax Compliance: STR, TMK & TAT */}
+          {(property.strRegistrationId || property.taxMapKey || property.transientTaxId) && (
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[10.5px] text-[#1A3B34] bg-[#F9F7F2] border border-[#E8DCC6] px-2.5 py-1 rounded-lg w-fit">
+              {property.strRegistrationId && (
+                <span className="font-medium">
+                  <span className="text-[#1A3B34]/70">STR:</span>{' '}
+                  <strong className="font-mono text-[10px] sm:text-[11px] font-semibold text-[#1A3B34]">
+                    {property.strRegistrationId}
+                  </strong>
+                </span>
+              )}
+              {property.strRegistrationId && (property.taxMapKey || property.transientTaxId) && (
+                <span className="text-[#1A3B34]/30">·</span>
+              )}
               {property.taxMapKey && (
                 <span className="font-medium">
                   <span className="text-[#1A3B34]/70">TMK:</span>{' '}
@@ -199,7 +210,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           }`}>
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap pr-2.5">
               <Users className={`w-3.5 h-3.5 shrink-0 ${isUnavailable ? 'text-neutral-400' : 'text-[#8CA58A]'}`} />
-              <span>2 Guests Max</span>
+              <span>4–6 Guests</span>
             </span>
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap px-2.5 border-l border-neutral-300">
               <Bed className={`w-3.5 h-3.5 shrink-0 ${isUnavailable ? 'text-neutral-400' : 'text-[#8CA58A]'}`} />

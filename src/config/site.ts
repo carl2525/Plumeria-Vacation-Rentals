@@ -2,6 +2,8 @@ export const SITE_CONFIG = {
   name: 'Plumeria Vacation Rentals',
   legalName: 'Plumeria Vacation Rentals LLC',
   tagline: 'Waikiki Vacation Rentals & Waikiki Banyan Condo Rentals | Book Direct Waikiki',
+  brandPromise: 'We prepare for the things you shouldn’t have to think about, so you can focus on your vacation.',
+  missionStatement: 'We prepare for the things you shouldn’t have to think about, so you can focus on your vacation.',
   shortDescription: 'Book direct Waikiki vacation rentals at Waikiki Banyan with Plumeria Vacation Rentals. Authorized Short-Term Rental License by the City and County of Honolulu. Featuring 1-acre resort deck, Full kitchens, and $0 resort fees in Honolulu, Hawaiʻi.',
   seoKeywords: [
     'waikiki vacation rentals',
@@ -26,7 +28,7 @@ export const SITE_CONFIG = {
   email: 'plumeria.vacationrentals808@gmail.com',
   phone: '(808) 671-9191',
   phoneRaw: '+18086719191',
-  airbnbUrl: 'https://www.airbnb.com',
+  airbnbUrl: 'https://www.airbnb.com/h/plumeriavacationrentals',
   address: {
     building: 'Waikiki Banyan',
     street: '201 ʻOhua Avenue',

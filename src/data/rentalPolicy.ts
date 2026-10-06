@@ -62,7 +62,7 @@ export const RENTAL_POLICY_SECTIONS: RentalPolicySection[] = [
       '• 30+ days: 15% Max Discount',
       'Applicable Hawaii Taxes: 18.5% total applied directly to Base + Cleaning Fee.',
       'Pricing Formula: Grand Total = TAX (18.5%) + Base + Cleaning Fee. Covered garage parking is included ($0 extra).',
-      'Short-Term Rental License: Both suites at Waikiki Banyan hold an authorized Short-Term Rental license issued by the City and County of Honolulu.',
+      'Short-Term Rental License: Authorized Short-Term Rental License by the City and County of Honolulu (STR: 2026-STR-556).',
     ],
     highlights: [
       { label: 'Base Rate', value: '$199* / night', subtext: 'Promotional direct nightly rate (Valid until Oct 30)' },
@@ -79,7 +79,7 @@ export const RENTAL_POLICY_SECTIONS: RentalPolicySection[] = [
       'Tiered stay discounts: 7 days (3%), 10 days (5%), 20 days (10%), 30 days (15% max).',
       'Hawaii Taxes: 18.5% applied directly to Base + Cleaning Fee.',
       'Total Formula: TAX (18.5%) + Base + Cleaning Fee.',
-      'Authorized Short-Term Rental License by the City and County of Honolulu.',
+      'Authorized Short-Term Rental License by the City and County of Honolulu (STR: 2026-STR-556).',
       'Covered garage parking pass is included with every stay.',
     ],
   },

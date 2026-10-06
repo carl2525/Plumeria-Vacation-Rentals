@@ -45,15 +45,15 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
 
         {/* Main Headline - High-contrast botanical green with crisp readability */}
         <h1 className="font-serif text-[28px] xs:text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#1A3B34] leading-[1.18] sm:leading-[1.14] max-w-3xl mx-auto [text-shadow:_0_1px_3px_rgba(255,255,255,0.95),_0_2px_14px_rgba(255,255,255,0.9)]">
-          Why Waikiki Banyan is <br className="hidden sm:inline" />
+          We prepare every detail, <br className="hidden sm:inline" />
           <span className="italic font-medium text-[#1A3B34]">
-            the better way to stay.
+            so you can focus on your vacation.
           </span>
         </h1>
 
         {/* Clean Supporting Copy with crisp text-shadow */}
         <p className="max-w-2xl mx-auto text-[13.5px] sm:text-lg text-[#1A3B34] font-medium leading-relaxed [text-shadow:_0_1px_3px_rgba(255,255,255,0.95),_0_2px_10px_rgba(255,255,255,0.85)] px-1 sm:px-0">
-          Spacious 1-bedroom condo suites with Full kitchens, private lanais, and free covered garage parking—just 1 block to calm Kuhio Beach with $0 resort fees.
+          Spacious high-floor 1-bedroom suites at Waikiki Banyan with Full kitchens, private lanais, and free covered parking—1 block to calm Kuhio Beach with $0 resort fees.
         </p>
 
         {/* Mobile View: Balanced 2x2 Bento Highlight Grid with full text fit */}
