@@ -283,7 +283,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                 Estimated Total
               </span>
               <p className="font-serif font-bold text-sm sm:text-base text-[#1A3B34]">
-                {nights > 0 ? formatCurrency(pricing.grandTotal) : isBeyondPromo ? '$249 / nt' : '$199* / nt'}
+                {nights > 0 ? formatCurrency(pricing.grandTotal) : isBeyondPromo ? '$249 / nt' : '$179* / nt'}
               </p>
               <span className="text-[9.5px] text-[#1A3B34]/60 block truncate">
                 Formula: Base + Clean + Tax
@@ -424,7 +424,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-[#1A3B34] to-[#244E45] text-white border border-[#C59B4B]/35 shadow-xs space-y-2.5">
           <div className="flex items-start gap-2.5 sm:gap-3">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#C59B4B] text-[#1A3B34] flex flex-col items-center justify-center shrink-0 shadow-2xs font-black">
-              <span className="text-[11px] sm:text-xs leading-none">$199*</span>
+              <span className="text-[11px] sm:text-xs leading-none">$179*</span>
               <span className="text-[7.5px] sm:text-[8px] uppercase tracking-tight leading-none mt-0.5">PROMO</span>
             </div>
             <div className="space-y-0.5 flex-1 min-w-0">
@@ -440,7 +440,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                 </span>
               </div>
               <p className="text-[11px] text-white/85 leading-tight sm:leading-relaxed font-light">
-                Enjoy our promotional <strong>$199*/night rate (valid until Oct 30)</strong>, dedicated covered parking pass, and $0 hidden resort fees at Waikiki Banyan!
+                Enjoy our promotional <strong>$179*/night rate (valid until Oct 30)</strong>, dedicated covered parking pass, and $0 hidden resort fees at Waikiki Banyan!
               </p>
             </div>
           </div>
@@ -548,7 +548,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
       <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-[#1A3B34] to-[#244E45] text-white border border-[#C59B4B]/35 shadow-xs space-y-2.5">
         <div className="flex items-start gap-2.5 sm:gap-3">
           <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#C59B4B] text-[#1A3B34] flex flex-col items-center justify-center shrink-0 shadow-2xs font-black">
-            <span className="text-[11px] sm:text-xs leading-none">$199*</span>
+            <span className="text-[11px] sm:text-xs leading-none">$179*</span>
             <span className="text-[7.5px] sm:text-[8px] uppercase tracking-tight leading-none mt-0.5">PROMO</span>
           </div>
           <div className="space-y-0.5 flex-1 min-w-0">
@@ -564,7 +564,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               </span>
             </div>
             <p className="text-[11px] text-white/85 leading-tight sm:leading-relaxed font-light">
-              Enjoy our limited-time <strong>$199*/night promo rate (valid until Oct 30)</strong>, free covered parking pass, and incremental stay discounts for longer trips upon host acceptance!
+              Enjoy our limited-time <strong>$179*/night promo rate (valid until Oct 30)</strong>, free covered parking pass, and incremental stay discounts for longer trips upon host acceptance!
             </p>
           </div>
         </div>

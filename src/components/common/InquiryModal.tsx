@@ -116,7 +116,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
         <div className="bg-[#1A3B34] text-white px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between text-xs border-b border-[#C59B4B]/30 shrink-0">
           <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <span className="px-1.5 py-0.5 rounded bg-[#C59B4B] text-[#1A3B34] text-[9.5px] sm:text-[10px] font-black uppercase tracking-wider shrink-0">
-              $199* / NT PROMO
+              $179* / NT PROMO
             </span>
             <span className="font-semibold text-white text-[11px] sm:text-xs truncate">
               Special Promo Rate · Valid until Oct 30

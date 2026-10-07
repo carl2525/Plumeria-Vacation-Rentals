@@ -36,7 +36,7 @@ export const SEASONAL_RATES: SeasonalRatePeriod[] = [
     name: 'Promotional Fall Aloha Rate',
     startDate: '2026-09-01',
     endDate: '2026-10-31',
-    nightlyRate: 199,
+    nightlyRate: 179,
     badge: 'Special Promo',
     description: 'Promotional rate across all units',
   },
@@ -45,7 +45,7 @@ export const SEASONAL_RATES: SeasonalRatePeriod[] = [
     name: 'Early November Standard',
     startDate: '2026-11-01',
     endDate: '2026-11-22',
-    nightlyRate: 249,
+    nightlyRate: 199,
     description: 'Standard Fall Season',
   },
   {
@@ -53,10 +53,11 @@ export const SEASONAL_RATES: SeasonalRatePeriod[] = [
     name: 'Thanksgiving Holiday Week',
     startDate: '2026-11-23',
     endDate: '2026-11-30',
-    nightlyRate: 299,
+    nightlyRate: 199,
     badge: 'Holiday',
     description: 'Thanksgiving Week in Waikiki',
   },
+
   {
     id: 'rate-2026-early-dec',
     name: 'Early December Pre-Holiday',
@@ -230,7 +231,7 @@ export const DEFAULT_FALLBACK_RATE = 249;
 /**
  * Current base starting rate for display when no dates are selected:
  */
-export const CURRENT_DISPLAY_BASE_RATE = 199;
+export const CURRENT_DISPLAY_BASE_RATE = 179;
 
 /**
  * Finds the seasonal rate period for a specific date (YYYY-MM-DD).

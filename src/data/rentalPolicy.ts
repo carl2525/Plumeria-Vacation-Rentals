@@ -8,7 +8,7 @@ export const RENTAL_POLICY_OVERVIEW = {
   quickHighlights: [
     {
       label: 'Promo Base Rate',
-      value: '$199* / night',
+      value: '$179* / night',
       subtext: 'Valid until Oct 30 · $0 Resort fees · All units',
       highlightBadge: 'Valid Until Oct 30',
     },
@@ -50,9 +50,9 @@ export const RENTAL_POLICY_SECTIONS: RentalPolicySection[] = [
     id: 'rates-fees-payment',
     number: 1,
     title: 'Rate, Taxes, Cleaning Fee & Discounts',
-    summary: 'Your promotional base rate is $199* per night across all units (valid until Oct 30) with $0 Resort fees. Total pricing is calculated simply as: Total = TAX (18.5%) + Base + Cleaning Fee.',
+    summary: 'Your promotional base rate is $179* per night across all units (valid until Oct 30) with $0 Resort fees. Total pricing is calculated simply as: Total = TAX (18.5%) + Base + Cleaning Fee.',
     content: [
-      'Base Rate: Starting at $199* per night promotional rate (Sep 1 – Oct 31, 2026 across all units).',
+      'Base Rate: Starting at $179* per night promotional rate (Sep 1 – Oct 31, 2026 across all units).',
       'Resort Fees: $0 (Plumeria never charges resort fees).',
       'Cleaning Fee: $250 if booking for 1–2 nights only. Fully WAIVED ($0) for reservations of 3 nights or more (Want to waive the cleaning fee? Book 3 nights or more!).',
       'Length-of-Stay Incremental Discounts (applied to room base rate):',
@@ -65,7 +65,7 @@ export const RENTAL_POLICY_SECTIONS: RentalPolicySection[] = [
       'Short-Term Rental License: Authorized Short-Term Rental License by the City and County of Honolulu (STR: 2026-STR-556).',
     ],
     highlights: [
-      { label: 'Base Rate', value: '$199* / night', subtext: 'Promotional direct nightly rate (Valid until Oct 30)' },
+      { label: 'Base Rate', value: '$179* / night', subtext: 'Promotional direct nightly rate (Valid until Oct 30)' },
       { label: 'Resort Fees', value: '$0 (Never Charged)', subtext: 'No surprise resort fees at check-in or checkout' },
       { label: 'Cleaning Fee', value: 'Waived for 3+ Nts', subtext: '$250 fee for 1–2 nights; $0 for 3+ nights' },
       { label: 'Hawaii Taxes', value: '18.5% Total', subtext: 'Applied to Base + Cleaning Fee' },
@@ -73,7 +73,7 @@ export const RENTAL_POLICY_SECTIONS: RentalPolicySection[] = [
       { label: 'Covered Parking', value: 'Included ($0)', subtext: 'Dedicated garage pass included' },
     ],
     importantData: [
-      'Base rate: $199* per night (Special Promotion across all units, valid until Oct 30).',
+      'Base rate: $179* per night (Special Promotion across all units, valid until Oct 30).',
       'Zero ($0) Resort fees.',
       'Cleaning fee: $250 for 1–2 nights; Waived ($0) for 3+ nights (Want to waive cleaning fee? Book 3 nights or more!).',
       'Tiered stay discounts: 7 days (3%), 10 days (5%), 20 days (10%), 30 days (15% max).',

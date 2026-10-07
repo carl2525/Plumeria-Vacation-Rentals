@@ -60,7 +60,7 @@ export const RentalsPage: React.FC<RentalsPageProps> = ({
         {/* Simplified Airbnb & Direct Booking Banner */}
         <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E8DCC6] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <p className="text-xs sm:text-sm text-[#1A3B34]/85 leading-relaxed max-w-2xl">
-            Our primary listings are on <strong className="text-[#1A3B34] font-semibold">Airbnb</strong>. Inquire directly on our website for our <strong className="text-[#1A3B34] font-semibold">$199*/night</strong> promo rate (valid until Oct 30), $0 resort fees, and free garage parking.
+            Our primary listings are on <strong className="text-[#1A3B34] font-semibold">Airbnb</strong>. Inquire directly on our website for our <strong className="text-[#1A3B34] font-semibold">$179*/night</strong> promo rate (valid until Oct 30), $0 resort fees, and free garage parking.
           </p>
           <div className="flex items-center gap-2.5 shrink-0">
             <a

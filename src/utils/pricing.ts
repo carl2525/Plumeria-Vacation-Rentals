@@ -46,7 +46,7 @@ export {
   calculateNightlyRatesForStay,
 };
 
-export const BASE_NIGHTLY_RATE = CURRENT_DISPLAY_BASE_RATE; // $199
+export const BASE_NIGHTLY_RATE = CURRENT_DISPLAY_BASE_RATE; // $179
 export const POST_PROMO_NIGHTLY_RATE = DEFAULT_FALLBACK_RATE; // $249
 export const PROMO_EXPIRATION_DATE = '2026-10-31';
 

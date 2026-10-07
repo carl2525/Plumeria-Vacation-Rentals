@@ -298,15 +298,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               </span>
               {/* Full copy for wide desktop (xl: 1280px+) */}
               <span className="hidden xl:inline font-medium whitespace-nowrap truncate">
-                Direct Inquiries: $199*/night promo rate in all units (Valid until Oct 30) · $0 Resort fees · Free covered garage parking pass!
+                Direct Inquiries: $179*/night promo rate in all units (Valid until Oct 30) · $0 Resort fees · Free covered garage parking pass!
               </span>
               {/* Concise copy for tablet and standard desktop (md: to xl:) */}
               <span className="hidden md:inline xl:hidden font-medium whitespace-nowrap truncate">
-                $199*/night promo in all units · $0 Resort fees · Free Parking!
+                $179*/night promo in all units · $0 Resort fees · Free Parking!
               </span>
               {/* Compact copy for mobile (< md:) */}
               <span className="md:hidden text-[10.5px] sm:text-[11px] font-medium truncate">
-                $199* Promo (Until Oct 30) · Free Parking
+                $179* Promo (Until Oct 30) · Free Parking
               </span>
             </div>
 
@@ -785,7 +785,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
 
               <p className="text-[10.5px] text-center text-[#1A3B34]/70 font-medium">
-                $199*/nt promo (valid until Oct 30) · $0 resort fees · Free parking pass
+                $179*/nt promo (valid until Oct 30) · $0 resort fees · Free parking pass
               </p>
             </div>
           </div>

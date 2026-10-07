@@ -52,16 +52,16 @@ export const HotelSuiteComparison: React.FC<HotelSuiteComparisonProps> = ({
       id: 'rate-fees',
       icon: <DollarSign className="w-5 h-5 text-[#C59B4B]" />,
       eyebrow: 'Base Rate & Resort Fees',
-      title: '$199* / Night (Promo)',
+      title: '$179* / Night (Promo)',
       subtitle: '$0 Resort fees',
-      plumeriaHighlight: 'Promotional $199*/nt',
-      plumeriaDesc: '$0 Resort fees. Total 5-night stay: ~$1,120 all-in with taxes & cleaning.',
+      plumeriaHighlight: 'Promotional $179*/nt',
+      plumeriaDesc: '$0 Resort fees. Total 5-night stay: ~$1,060 all-in with taxes & waived cleaning (3+ nights).',
       hotelComparison: {
         label: 'Sheraton & Hilton:',
         value: '$750–$1,450/nt',
         detail: 'Total 5-night stay: ~$4,800–$6,500+ (includes $55–$61/day resort fees)',
       },
-      footerVerdict: 'Save $3,600+ on room & resort fees',
+      footerVerdict: 'Save $3,700+ on room & resort fees',
     },
     {
       id: 'parking',
@@ -232,12 +232,12 @@ export const HotelSuiteComparison: React.FC<HotelSuiteComparisonProps> = ({
               </div>
 
               <h3 className="font-serif text-xl sm:text-2xl lg:text-3xl font-bold leading-snug tracking-tight">
-                Spend ~$1,120 with Plumeria vs. <br className="hidden sm:inline" />
+                Spend ~$1,060 with Plumeria vs. <br className="hidden sm:inline" />
                 <span className="text-[#F6E7A7]">~$5,200+ at Sheraton & Hilton</span>
               </h3>
 
               <p className="text-xs sm:text-sm text-white/85 font-light leading-relaxed max-w-2xl">
-                Save over $4,000 on a 5-night stay with our limited-time $199*/night promo rate across all units. Enjoy a private 624 sq. ft. high-floor suite with free parking and a full kitchen—without the $55/day resort fees or $72/day valet parking charged by Sheraton and Hilton. Authorized Short-Term Rental License by the City and County of Honolulu.
+                Save over $4,000 on a 5-night stay with our limited-time $179*/night promo rate across all units. Enjoy a private 624 sq. ft. high-floor suite with free parking and a full kitchen—without the $55/day resort fees or $72/day valet parking charged by Sheraton and Hilton. Authorized Short-Term Rental License by the City and County of Honolulu.
               </p>
             </div>
 

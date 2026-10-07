@@ -252,7 +252,7 @@ export const RentalPolicyPage: React.FC<RentalPolicyPageProps> = ({
                 </div>
                 <div className="flex items-baseline gap-1.5">
                   <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34] leading-none">
-                    $199*
+                    $179*
                   </span>
                   <span className="text-xs text-[#C59B4B] font-semibold">/ night</span>
                 </div>

@@ -693,7 +693,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
                       {stickyNights > 0 && stickyPricing.rateLabel
                         ? stickyPricing.rateLabel.split(' ')[0]
-                        : '$199*'}
+                        : '$179*'}
                     </span>
                     <span className="text-xs text-[#C59B4B] font-semibold">
                       {stickyNights > 0 && stickyPricing.rateLabel
@@ -759,7 +759,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     <div className="space-y-1 text-[11px] text-white/85">
                       <div className="flex justify-between items-center">
                         <span>Nightly Base Rate:</span>
-                        <strong className="text-white font-mono">$199* / nt (Oct Promo)</strong>
+                        <strong className="text-white font-mono">$179* / nt (Oct Promo)</strong>
                       </div>
                       <div className="flex justify-between items-center">
                         <span>Mandatory Resort Fees:</span>
@@ -941,7 +941,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                     <span>
                       {stickyNights > 0
                         ? `Inquire to Book (${formatCurrency(stickyPricing.grandTotal)} Total)`
-                        : 'Inquire to Book · From $199*/nt'}
+                        : 'Inquire to Book · From $179*/nt'}
                     </span>
                   </button>
 

@@ -253,7 +253,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             {isUnavailable ? (
               <div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="font-serif text-lg font-bold text-neutral-400 line-through">$199*</span>
+                  <span className="font-serif text-lg font-bold text-neutral-400 line-through">$179*</span>
                   <span className="text-[10px] font-bold text-rose-700 bg-rose-100 px-2 py-0.5 rounded border border-rose-200 uppercase tracking-wider">
                     Reservations Paused
                   </span>
@@ -263,7 +263,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             ) : (
               <div>
                 <div className="flex items-baseline gap-1.5 shrink-0">
-                  <span className="font-serif text-lg font-bold text-[#1A3B34]">$199*</span>
+                  <span className="font-serif text-lg font-bold text-[#1A3B34]">$179*</span>
                   <span className="text-[11px] text-[#C59B4B] font-semibold">/ night promo</span>
                 </div>
                 <span className="block text-[9.5px] text-[#1A3B34]/65 font-medium">Valid until Oct 30</span>

@@ -13,14 +13,14 @@ export const FAQS: FAQItem[] = [
     category: 'Booking & Policies',
     question: 'Are there mandatory daily resort fees or parking fees?',
     answer:
-      'No! Plumeria Vacation Rentals does not charge a separate Resort fee ($0 Resort fees). Furthermore, covered on-site garage parking is included with your stay from check-in through checkout. Your promotional base rate is currently $199* per night across all units (special promotion valid until Oct 30). Transparent pricing: TAX (18.5%) + Base + Cleaning Fee ($250 for 1–2 night stays, waived for 3+ nights, with tiered discounts up to 15% for extended stays). Want to waive the cleaning fee? Simply book 3 nights or more!',
+      'No! Plumeria Vacation Rentals does not charge a separate Resort fee ($0 Resort fees). Furthermore, covered on-site garage parking is included with your stay from check-in through checkout. Your promotional base rate is currently $179* per night across all units (special promotion valid until Oct 30). Transparent pricing: TAX (18.5%) + Base + Cleaning Fee ($250 for 1–2 night stays, waived for 3+ nights, with tiered discounts up to 15% for extended stays). Want to waive the cleaning fee? Simply book 3 nights or more!',
   },
   {
     id: 'faq-competitor-pricing',
     category: 'Booking & Policies',
     question: 'How does Plumeria compare in price to premier Waikiki resort hotels like Hyatt Regency and Hilton?',
     answer:
-      'Compared to premier Waikiki resort hotels like Hyatt Regency Waikiki or Hilton Hawaiian Village (where 1-bedroom suites cost $520–$1,450+/night, daily resort fees run $52–$65/day, and parking is $65–$69/day plus tax), Plumeria saves traveling families thousands of dollars with our $199*/night promo rate across all units (valid until Oct 30), $0 Resort fees, free covered parking pass, and Full kitchens. You receive a private high-floor suite in Tower 2 with full home conveniences and access to the 1-acre Waikiki Banyan recreation deck at a fraction of hotel suite pricing.',
+      'Compared to premier Waikiki resort hotels like Hyatt Regency Waikiki or Hilton Hawaiian Village (where 1-bedroom suites cost $520–$1,450+/night, daily resort fees run $52–$65/day, and parking is $65–$69/day plus tax), Plumeria saves traveling families thousands of dollars with our $179*/night promo rate across all units (valid until Oct 30), $0 Resort fees, free covered parking pass, and Full kitchens. You receive a private high-floor suite in Tower 2 with full home conveniences and access to the 1-acre Waikiki Banyan recreation deck at a fraction of hotel suite pricing.',
   },
   {
     id: 'faq-location',

@@ -90,7 +90,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
               <Sparkles className="w-3 h-3 text-[#F6E7A7]" />
             </div>
             <span className="font-serif font-bold text-[10.5px] xs:text-[11px] text-[#F6E7A7] leading-tight whitespace-nowrap">
-              $199* Promo Rate
+              $179* Promo Rate
             </span>
           </div>
         </div>
@@ -127,7 +127,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreRentals, onBookStay }) => {
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#1A3B34] border border-[#C59B4B]/50 rounded-full text-xs text-[#F6E7A7] shadow-xs">
             <Sparkles className="w-3 h-3 text-[#F6E7A7] shrink-0" />
             <span className="font-serif font-bold tracking-tight whitespace-nowrap">
-              $199* Promo · $0 Resort Fees
+              $179* Promo · $0 Resort Fees
             </span>
           </div>
         </div>

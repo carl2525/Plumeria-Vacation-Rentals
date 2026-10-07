@@ -137,7 +137,7 @@ export const PROPERTIES: Property[] = [
     houseRules: [
       'Check-in: 4:00 PM / Check-out: 10:00 AM (early check-in $50–$75/hr upon availability & late checkout with advance host approval)',
       'Covered garage parking included ($0 extra fee; follow Waikiki Banyan garage rules)',
-      'Base rate: $199*/night (Special Promotion valid until Oct 30); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
+      'Base rate: $179*/night (Special Promotion valid until Oct 30); $0 Resort fees. Authorized Short-Term Rental License by City & County of Honolulu',
       'Cleaning fee: $250 for 1–2 nights; Waived ($0) for stays 3 nights or more (Want to waive cleaning fee? Book 3 nights or more!)',
       'Length of stay discounts: 7 days (3%), 10 days (5%), 20 days (10%), 30 days (15% max)',
       'Hawaii Taxes: 18.5% (Formula = TAX + Base + Cleaning Fee)',
@@ -355,7 +355,7 @@ export const PROPERTIES: Property[] = [
     houseRules: [
       'Check-in: 4:00 PM / Check-out: 10:00 AM (early check-in $50–$75/hr upon availability & late checkout with advance host approval)',
       'Covered garage parking included ($0 extra fee; follow Waikiki Banyan garage rules)',
-      'Base rate: $199*/night (Special Promotion valid until Oct 30); $0 Resort fees',
+      'Base rate: $179*/night (Special Promotion valid until Oct 30); $0 Resort fees',
       'Zoning & Tax Compliance: Short-Term Rental (STR): 2026-STR-556 · Tax Map Key (TMK): 260250050783 · Transient Accommodations Tax (TAT): TA-047-271-7312-01',
       'Cleaning fee: $250 for 1–2 nights; Waived ($0) for stays 3 nights or more (Want to waive cleaning fee? Book 3 nights or more!)',
       'Length of stay discounts: 7 days (3%), 10 days (5%), 20 days (10%), 30 days (15% max)',

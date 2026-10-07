@@ -28,9 +28,9 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
 
     if (cleanPath === '/') {
       meta = {
-        title: 'Waikiki Banyan Vacation Rentals | $199/Night Promo',
+        title: 'Waikiki Banyan Vacation Rentals | $179/Night Promo',
         description:
-          'Book Waikiki Banyan vacation rentals with our $199 per night promo. Enjoy comfortable condos, amazing amenities, and simple direct booking today.',
+          'Book Waikiki Banyan vacation rentals with our $179 per night promo. Enjoy comfortable condos, amazing amenities, and simple direct booking today.',
         canonicalUrl: 'https://plumeriavacationrentals.com',
         breadcrumbName: 'Home',
       };
@@ -38,7 +38,7 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
       meta = {
         title: 'Waikiki Banyan Vacation Rentals & 1-Bedroom Suites | Plumeria Vacation Rentals',
         description:
-          'Spacious 1-bedroom Waikiki vacation rentals and condo suites at Waikiki Banyan Tower 2. Full kitchens, covered parking, private lanais, 1 block to Kuhio Beach, and $0 resort fees. Promotional $199 base rate.',
+          'Spacious 1-bedroom Waikiki vacation rentals and condo suites at Waikiki Banyan Tower 2. Full kitchens, covered parking, private lanais, 1 block to Kuhio Beach, and $0 resort fees. Promotional $179 base rate.',
         canonicalUrl: 'https://plumeriavacationrentals.com/#/rentals',
         breadcrumbName: 'Vacation Rentals',
       };
@@ -48,7 +48,7 @@ export const SEOHelper: React.FC<SEOHelperProps> = ({ currentPath }) => {
       if (prop) {
         meta = {
           title: `${prop.name} (${prop.viewType}) | Waikiki Banyan Vacation Rentals | Plumeria`,
-          description: `${prop.tagline}. High-floor Waikiki condo rental at Waikiki Banyan with Full kitchen, private lanai, sleeps 4–6 guests. 1 block to Kuhio Beach with $0 resort fees. Promotional $199 base rate.`,
+          description: `${prop.tagline}. High-floor Waikiki condo rental at Waikiki Banyan with Full kitchen, private lanai, sleeps 4–6 guests. 1 block to Kuhio Beach with $0 resort fees. Promotional $179 base rate.`,
           canonicalUrl: `https://plumeriavacationrentals.com/#/rentals/${prop.slug}`,
           breadcrumbName: prop.name,
         };
