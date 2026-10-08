@@ -1,7 +1,8 @@
 import React from 'react';
-import { MapPin, Mail, Phone, Calendar, Compass, ShieldCheck, Youtube, Instagram, Facebook, Video, ExternalLink } from 'lucide-react';
+import { MapPin, Mail, Phone, Calendar, Compass, ShieldCheck, Youtube, Instagram, Facebook, Video, ExternalLink, Globe } from 'lucide-react';
 import { PlumeriaLogo } from '../brand/PlumeriaLogo';
 import { SITE_CONFIG } from '../../config/site';
+import { setLanguage } from '../../utils/translator';
 
 interface FooterProps {
   onNavigate: (path: string) => void;
@@ -167,6 +168,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                   className="text-white/75 hover:text-[#F6E7A7] transition-colors cursor-pointer text-left"
                 >
                   Contact & Inquiries
+                </button>
+              </li>
+              <li className="pt-1.5 border-t border-white/10">
+                <button
+                  type="button"
+                  onClick={() => setLanguage('ja')}
+                  className="text-[#F6E7A7] hover:text-white transition-colors cursor-pointer text-left font-semibold flex items-center gap-1.5 text-xs"
+                  title="Translate website into Japanese"
+                >
+                  <Globe className="w-3.5 h-3.5 text-[#C59B4B]" />
+                  <span>🇯🇵 日本語で表示 (Translate to Japanese)</span>
                 </button>
               </li>
             </ul>

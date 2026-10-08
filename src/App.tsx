@@ -4,6 +4,7 @@ import { Footer } from './components/common/Footer';
 import { InquiryModal } from './components/common/InquiryModal';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { SEOHelper } from './components/common/SEOHelper';
+import { LanguageTranslateWidget } from './components/common/LanguageTranslateWidget';
 import { getTodayDateString, isDateInPast } from './utils/date';
 
 import { HomePage } from './pages/HomePage';
@@ -283,6 +284,9 @@ export function App() {
 
       {/* Floating Modern Scroll-to-Top Action */}
       <ScrollToTop />
+
+      {/* Language Translation Widget (Mainly Japanese + other languages) */}
+      <LanguageTranslateWidget />
     </div>
   );
 }

@@ -20,9 +20,11 @@ import {
   Instagram,
   Facebook,
   Video,
+  Globe,
 } from 'lucide-react';
 import { PlumeriaLogo } from '../brand/PlumeriaLogo';
 import { SITE_CONFIG } from '../../config/site';
+import { setLanguage } from '../../utils/translator';
 
 interface NavbarProps {
   currentPath: string;
@@ -745,6 +747,41 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <span className="truncate">{soc.name}</span>
                     </a>
                   ))}
+                </div>
+              </div>
+
+              {/* Language Switcher Section (Mainly Japanese) */}
+              <div className="pt-3 border-t border-[#E8DCC6] space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-[#C59B4B] uppercase tracking-wider flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5" />
+                    <span>Language / 言語選択</span>
+                  </span>
+                  <span className="text-[10.5px] font-semibold text-[#1A3B34]/70">日本語対応</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLanguage('ja');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="p-2.5 rounded-xl border border-[#C59B4B] bg-[#1A3B34] text-[#F6E7A7] font-bold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-2xs active:scale-98 transition-transform"
+                  >
+                    <span className="text-base">🇯🇵</span>
+                    <span>日本語 (Japanese)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLanguage('en');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="p-2.5 rounded-xl border border-[#E8DCC6] bg-white text-[#1A3B34] font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer hover:bg-[#F9F7F2] active:scale-98 transition-transform"
+                  >
+                    <span className="text-base">🇺🇸</span>
+                    <span>English (Original)</span>
+                  </button>
                 </div>
               </div>
             </div>

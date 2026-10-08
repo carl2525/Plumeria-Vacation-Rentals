@@ -15,18 +15,6 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
   onSelect,
   onInquire,
 }) => {
-  const customHero = (() => {
-    if (property.id !== 'wb-3205-t2') return null;
-    try {
-      const stored = localStorage.getItem('wb_3205_custom_photos');
-      if (!stored) return null;
-      const parsed = JSON.parse(stored);
-      return parsed[1] || parsed[2] || null;
-    } catch {
-      return null;
-    }
-  })();
-
   const isUnavailable = property.available === false;
 
   return (
@@ -41,7 +29,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
       {/* Image & Badges */}
       <div className="relative aspect-16/10 overflow-hidden bg-[#1A3B34]/5">
         <AppImage
-          src={customHero || property.heroImage}
+          src={property.heroImage}
           alt={property.name}
           className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
             isUnavailable

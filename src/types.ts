@@ -28,7 +28,7 @@ export interface Property {
     url: string;
     fallbackUrl?: string;
     caption: string;
-    category: 'living' | 'bedroom' | 'kitchen' | 'lanai' | 'view' | 'amenity' | 'bathroom';
+    category: 'living' | 'bedroom' | 'kitchen' | 'lanai' | 'view' | 'amenity' | 'amenities' | 'bathroom';
   }[];
   shortDescription: string;
   fullDescription: string[];

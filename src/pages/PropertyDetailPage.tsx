@@ -106,28 +106,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
     () => calculateStayPricing(stickyNights, undefined, checkIn, checkOut),
     [stickyNights, checkIn, checkOut]
   );
-  const dynamicGallery = useMemo(() => {
-    if (property.id !== 'wb-3205-t2') {
-      return property.gallery;
-    }
-    try {
-      const stored = localStorage.getItem('wb_3205_custom_photos');
-      if (!stored) return property.gallery;
-      const parsed: Record<number, string> = JSON.parse(stored);
-      return property.gallery.map((img, idx) => {
-        const customUrl = parsed[idx + 1];
-        if (customUrl) {
-          return {
-            ...img,
-            url: customUrl,
-          };
-        }
-        return img;
-      });
-    } catch {
-      return property.gallery;
-    }
-  }, [property]);
+  // Use verified gallery directly from properties data
+  const dynamicGallery = property.gallery;
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);

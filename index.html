@@ -9,6 +9,23 @@
     <meta name="robots" content="index, follow" />
     <meta name="google-site-verification" content="IAt1Iu-bhoa0JLHKHmzp1mbDmriKNTBcJ3abVWg8xF0" />
 
+    <!-- Safe Error Interceptor for Third-Party Scripts (GTM, LeadConnector, etc.) -->
+    <script>
+      (function() {
+        window.addEventListener('error', function(event) {
+          if (!event.filename || event.message === 'Script error.' || (event.target && event.target.tagName === 'SCRIPT')) {
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+        window.onerror = function(msg, url) {
+          if (msg === 'Script error.' || !url) {
+            return true;
+          }
+        };
+      })();
+    </script>
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
