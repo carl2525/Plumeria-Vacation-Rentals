@@ -1,5 +1,14 @@
 export const FORMS_PAUSED_FOR_A2P = true;
 
+export const HOSPITABLE_CONFIG = {
+  siteUuid: 'a2f37c49-161d-4f91-913f-1d0de69a5c9e',
+  propertyId: '2516344',
+  theme: 'multi',
+  widgetUrl: 'https://booking.hospitable.com/widget/a2f37c49-161d-4f91-913f-1d0de69a5c9e/2516344?theme=multi',
+  loaderScriptUrl: 'https://cdn.hsptb.com/direct-booking-widget/widget-loader.prod.js',
+  propertyName: 'Waikiki Banyan High-Floor Views + Free Parking',
+};
+
 export const SITE_CONFIG = {
   name: 'Plumeria Vacation Rentals',
   legalName: 'Plumeria Vacation Rentals LLC',

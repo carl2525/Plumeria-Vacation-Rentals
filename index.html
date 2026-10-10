@@ -204,8 +204,46 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
+    <!-- Google Translate Element for 100% Comprehensive Multilingual Page Translation -->
+    <div id="google_translate_element" style="position:fixed;bottom:0;left:0;width:1px;height:1px;overflow:hidden;opacity:0.01;pointer-events:none;z-index:-9999;" aria-hidden="true"></div>
+    <script type="text/javascript">
+      window.googleTranslateElementInit = function() {
+        if (window.google && window.google.translate) {
+          try {
+            new window.google.translate.TranslateElement({
+              pageLanguage: 'en',
+              includedLanguages: 'ja,ko,zh-CN,zh-TW,es,tl,de,fr,en',
+              autoDisplay: false,
+              layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+          } catch (e) {
+            console.warn('Google Translate init warning:', e);
+          }
+        }
+      };
+
+      // Proactively prevent Google Translate from displacing body or showing top frame
+      setInterval(function() {
+        if (document.body && document.body.style.top && document.body.style.top !== '0px') {
+          document.body.style.top = '0px';
+        }
+      }, 250);
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <!-- LeadConnector Chat Widget -->
     <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ac5c548b7b208e9e9f874bb" data-source="WEB_USER"></script>
+
+    <!-- Hospitable Direct Booking Widget Embed -->
+    <div id="hospitable-staging-mount" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0.01; pointer-events: none; z-index: -9999;" aria-hidden="true">
+      <span>Waikiki Banyan High-Floor Views + Free Parking</span>
+      <script
+        src="https://cdn.hsptb.com/direct-booking-widget/widget-loader.prod.js"
+        data-site-uuid="a2f37c49-161d-4f91-913f-1d0de69a5c9e"
+        data-property-id="2516344"
+        data-theme="multi">
+      </script>
+    </div>
   </body>
 </html>
 

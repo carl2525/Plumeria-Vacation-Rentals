@@ -28,6 +28,8 @@ export const SUPPORTED_LANGUAGES: LanguageOption[] = [
 
 export const STORAGE_KEY = 'plumeria_selected_language';
 
+import { EXTENDED_TRANSLATIONS, EXTENDED_JAPANESE_PATTERNS } from './extendedDictionary';
+
 // Comprehensive dictionary covering paragraphs, sentences, headers, cards, and buttons
 export const TRANSLATION_DICTIONARY: Record<string, Record<string, string>> = {
   // ==========================================
@@ -1197,8 +1199,12 @@ export const TRANSLATION_DICTIONARY: Record<string, Record<string, string>> = {
   },
 };
 
+// Merge extended property, rules, policy, and amenity translations
+Object.assign(TRANSLATION_DICTIONARY, EXTENDED_TRANSLATIONS);
+
 // Common terms and regex-like translation helpers
 const JAPANESE_TERMS: [RegExp, string][] = [
+  ...EXTENDED_JAPANESE_PATTERNS,
   [/\$179\*\s*(\/|\s*per\s*)night/gi, '1泊 $179*'],
   [/\$179\s*(\/|\s*per\s*)night/gi, '1泊 $179'],
   [/\$([0-9,]+)\s*(\/|\s*per\s*)(night|nt)/gi, '1泊 $$1'],
@@ -1240,16 +1246,55 @@ function isIgnoredNode(node: Node): boolean {
   return false;
 }
 
+let sortedDictionaryKeysCache: string[] | null = null;
+function getSortedDictionaryKeys(): string[] {
+  if (!sortedDictionaryKeysCache) {
+    sortedDictionaryKeysCache = Object.keys(TRANSLATION_DICTIONARY).sort((a, b) => b.length - a.length);
+  }
+  return sortedDictionaryKeysCache;
+}
+
 /**
- * Substring and regex replacement helper
+ * Normalizes quotes, dashes, entities, and whitespace for robust dictionary lookups
+ */
+function normalizeLookupKey(text: string): string {
+  return text
+    .replace(/[’‘`]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/ʻ/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/–|—/g, '-')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+let normalizedDictCache: Map<string, Record<string, string>> | null = null;
+function getNormalizedDictionary(): Map<string, Record<string, string>> {
+  if (!normalizedDictCache) {
+    normalizedDictCache = new Map();
+    for (const [key, translations] of Object.entries(TRANSLATION_DICTIONARY)) {
+      const norm = normalizeLookupKey(key);
+      normalizedDictCache.set(norm, translations);
+      normalizedDictCache.set(norm.toLowerCase(), translations);
+    }
+  }
+  return normalizedDictCache;
+}
+
+/**
+ * Substring and regex replacement helper.
+ * Replaces dictionary phrases (longest to shortest) and applies language patterns.
  */
 function translateSubstringsAndPatterns(rawText: string, lang: string): string {
+  if (!rawText) return rawText;
   let result = rawText;
 
   // 1. Dictionary phrase replacement (longest to shortest)
-  const keys = Object.keys(TRANSLATION_DICTIONARY).sort((a, b) => b.length - a.length);
+  const keys = getSortedDictionaryKeys();
   for (const phrase of keys) {
-    if (result.includes(phrase)) {
+    if (phrase.length > 2 && result.includes(phrase)) {
       const translated = TRANSLATION_DICTIONARY[phrase][lang];
       if (translated) {
         result = result.split(phrase).join(translated);
@@ -1268,7 +1313,7 @@ function translateSubstringsAndPatterns(rawText: string, lang: string): string {
 }
 
 /**
- * Translate a single text string using exact match, sentence deconstruction, and phrase replacement
+ * Translate a single text string using exact match, normalized match, sentence deconstruction, and phrase replacement
  */
 export function translateString(rawText: string, lang: string): string {
   if (!rawText || lang === 'en') return rawText;
@@ -1276,50 +1321,114 @@ export function translateString(rawText: string, lang: string): string {
   const trimmed = rawText.trim();
   if (!trimmed) return rawText;
 
-  // 1. Exact match in dictionary
+  // 1. Direct exact match in dictionary
   if (TRANSLATION_DICTIONARY[trimmed] && TRANSLATION_DICTIONARY[trimmed][lang]) {
     const translation = TRANSLATION_DICTIONARY[trimmed][lang];
     return rawText.replace(trimmed, translation);
   }
 
-  // 2. Multi-sentence deconstruction
-  // Split paragraph by sentence breaks (. , ! , ? , newline)
+  // 2. Normalized match (quotes, apostrophes, okina, entities, dashes)
+  const normDict = getNormalizedDictionary();
+  const normalizedKey = normalizeLookupKey(trimmed);
+  if (normDict.has(normalizedKey) && normDict.get(normalizedKey)![lang]) {
+    const translation = normDict.get(normalizedKey)![lang];
+    return rawText.replace(trimmed, translation);
+  }
+
+  // 3. Case-insensitive normalized match
+  const lowerKey = normalizedKey.toLowerCase();
+  if (normDict.has(lowerKey) && normDict.get(lowerKey)![lang]) {
+    const translation = normDict.get(lowerKey)![lang];
+    return rawText.replace(trimmed, translation);
+  }
+
+  // 4. Base part without trailing punctuation (. ! ? : ,)
+  const puncMatch = trimmed.match(/([.:,!?]+)$/);
+  if (puncMatch) {
+    const punc = puncMatch[1];
+    const base = trimmed.slice(0, -punc.length).trim();
+    const normBase = normalizeLookupKey(base);
+    if (TRANSLATION_DICTIONARY[base] && TRANSLATION_DICTIONARY[base][lang]) {
+      const res = TRANSLATION_DICTIONARY[base][lang];
+      const endPunc = lang === 'ja' && punc === '.' ? '。' : punc;
+      return rawText.replace(trimmed, res + endPunc);
+    }
+    if (normDict.has(normBase) && normDict.get(normBase)![lang]) {
+      const res = normDict.get(normBase)![lang];
+      const endPunc = lang === 'ja' && punc === '.' ? '。' : punc;
+      return rawText.replace(trimmed, res + endPunc);
+    }
+    if (normDict.has(normBase.toLowerCase()) && normDict.get(normBase.toLowerCase())![lang]) {
+      const res = normDict.get(normBase.toLowerCase())![lang];
+      const endPunc = lang === 'ja' && punc === '.' ? '。' : punc;
+      return rawText.replace(trimmed, res + endPunc);
+    }
+  }
+
+  // 5. Multi-sentence & multi-line deconstruction
   const sentencePattern = /([^\n.!?]+[.!?]+|\n+|[^\n.!?]+$)/g;
   const parts = trimmed.match(sentencePattern);
   if (parts && parts.length > 1) {
-    let anyTranslated = false;
+    let anyChanged = false;
     const translatedParts = parts.map((part) => {
       const partTrimmed = part.trim();
       if (!partTrimmed) return part;
 
-      const puncMatch = partTrimmed.match(/([.!?]+)$/);
-      const punc = puncMatch ? puncMatch[1] : '';
+      const subPuncMatch = partTrimmed.match(/([.!?]+)$/);
+      const punc = subPuncMatch ? subPuncMatch[1] : '';
       const basePart = punc ? partTrimmed.slice(0, -punc.length).trim() : partTrimmed;
+      const normPart = normalizeLookupKey(partTrimmed);
+      const normBasePart = normalizeLookupKey(basePart);
 
       if (TRANSLATION_DICTIONARY[partTrimmed] && TRANSLATION_DICTIONARY[partTrimmed][lang]) {
-        anyTranslated = true;
+        anyChanged = true;
         return part.replace(partTrimmed, TRANSLATION_DICTIONARY[partTrimmed][lang]);
       }
-      if (basePart && TRANSLATION_DICTIONARY[basePart] && TRANSLATION_DICTIONARY[basePart][lang]) {
-        anyTranslated = true;
-        const res = TRANSLATION_DICTIONARY[basePart][lang];
-        return part.replace(basePart, res);
+      if (normDict.has(normPart) && normDict.get(normPart)![lang]) {
+        anyChanged = true;
+        return part.replace(partTrimmed, normDict.get(normPart)![lang]);
       }
-      return translateSubstringsAndPatterns(part, lang);
+      if (normDict.has(normPart.toLowerCase()) && normDict.get(normPart.toLowerCase())![lang]) {
+        anyChanged = true;
+        return part.replace(partTrimmed, normDict.get(normPart.toLowerCase())![lang]);
+      }
+      if (basePart && TRANSLATION_DICTIONARY[basePart] && TRANSLATION_DICTIONARY[basePart][lang]) {
+        anyChanged = true;
+        const res = TRANSLATION_DICTIONARY[basePart][lang];
+        const jaPunc = lang === 'ja' && punc === '.' ? '。' : punc;
+        return part.replace(basePart + punc, res + jaPunc);
+      }
+      if (normBasePart && normDict.has(normBasePart) && normDict.get(normBasePart)![lang]) {
+        anyChanged = true;
+        const res = normDict.get(normBasePart)![lang];
+        const jaPunc = lang === 'ja' && punc === '.' ? '。' : punc;
+        return part.replace(basePart + punc, res + jaPunc);
+      }
+
+      const sub = translateSubstringsAndPatterns(part, lang);
+      if (sub !== part) {
+        anyChanged = true;
+      }
+      return sub;
     });
 
-    if (anyTranslated) {
+    if (anyChanged) {
       const joined = translatedParts.join('');
       return rawText.replace(trimmed, joined);
     }
   }
 
-  // 3. Fallback to substrings & patterns
-  return translateSubstringsAndPatterns(rawText, lang);
+  // 6. Fallback to substrings & patterns
+  const fallback = translateSubstringsAndPatterns(trimmed, lang);
+  if (fallback !== trimmed) {
+    return rawText.replace(trimmed, fallback);
+  }
+
+  return rawText;
 }
 
 /**
- * Walks the DOM and applies translations to visible text nodes and form placeholders
+ * Walks the DOM and applies translations to visible text nodes, form placeholders, titles, and aria-labels
  */
 export function translatePageDOM(lang: string) {
   if (typeof document === 'undefined') return;
@@ -1368,12 +1477,36 @@ export function translatePageDOM(lang: string) {
     'input[placeholder], textarea[placeholder]'
   );
   inputs.forEach((input) => {
+    if (input.closest('.notranslate')) return;
     if (!input.hasAttribute('data-original-placeholder')) {
       input.setAttribute('data-original-placeholder', input.placeholder);
     }
     const origPlaceholder = input.getAttribute('data-original-placeholder') || '';
     if (origPlaceholder) {
       input.placeholder = translateString(origPlaceholder, lang);
+    }
+  });
+
+  // 3. Translate tooltips (title) and accessibility labels (aria-label)
+  const labeled = document.querySelectorAll<HTMLElement>('[title], [aria-label]');
+  labeled.forEach((el) => {
+    if (el.closest('.notranslate')) return;
+    const title = el.getAttribute('title');
+    if (title && !el.hasAttribute('data-original-title')) {
+      el.setAttribute('data-original-title', title);
+    }
+    const origTitle = el.getAttribute('data-original-title');
+    if (origTitle) {
+      el.setAttribute('title', translateString(origTitle, lang));
+    }
+
+    const aria = el.getAttribute('aria-label');
+    if (aria && !el.hasAttribute('data-original-aria-label')) {
+      el.setAttribute('data-original-aria-label', aria);
+    }
+    const origAria = el.getAttribute('data-original-aria-label');
+    if (origAria) {
+      el.setAttribute('aria-label', translateString(origAria, lang));
     }
   });
 
@@ -1393,6 +1526,10 @@ export function restoreOriginalEnglish() {
     domObserver.disconnect();
     domObserver = null;
   }
+
+  // 1. Reset Google Translate cookies and combo
+  applyGoogleTranslateCookie('en');
+  triggerGoogleTranslateElement('en');
 
   const walker = document.createTreeWalker(
     document.body,
@@ -1424,7 +1561,31 @@ export function restoreOriginalEnglish() {
     }
   });
 
+  // Restore titles and aria-labels
+  const labeled = document.querySelectorAll<HTMLElement>(
+    '[data-original-title], [data-original-aria-label]'
+  );
+  labeled.forEach((el) => {
+    const origTitle = el.getAttribute('data-original-title');
+    if (origTitle) {
+      el.setAttribute('title', origTitle);
+    }
+    const origAria = el.getAttribute('data-original-aria-label');
+    if (origAria) {
+      el.setAttribute('aria-label', origAria);
+    }
+  });
+
   document.documentElement.lang = 'en';
+}
+
+let translateDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+function scheduleTranslatePass(lang: string) {
+  if (lang === 'en') return;
+  if (translateDebounceTimer) clearTimeout(translateDebounceTimer);
+  translateDebounceTimer = setTimeout(() => {
+    translatePageDOM(lang);
+  }, 50);
 }
 
 /**
@@ -1438,65 +1599,165 @@ function startDOMObserver(lang: string) {
   }
 
   domObserver = new MutationObserver((mutations) => {
+    let shouldRetranslate = false;
     for (const mutation of mutations) {
-      mutation.addedNodes.forEach((node) => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          if (!isIgnoredNode(node)) {
-            if (!nodeToOriginal.has(node)) {
-              nodeToOriginal.set(node, node.textContent || '');
-            }
-            const original = nodeToOriginal.get(node) || '';
-            const translated = translateString(original, lang);
-            if (translated !== node.textContent) {
-              node.textContent = translated;
-            }
-          }
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-          const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, {
-            acceptNode(sub) {
-              if (isIgnoredNode(sub)) return NodeFilter.FILTER_REJECT;
-              const text = sub.textContent?.trim();
-              if (!text) return NodeFilter.FILTER_SKIP;
-              return NodeFilter.FILTER_ACCEPT;
-            },
-          });
-          let subNode: Node | null;
-          while ((subNode = walker.nextNode())) {
-            if (!nodeToOriginal.has(subNode)) {
-              nodeToOriginal.set(subNode, subNode.textContent || '');
-            }
-            const original = nodeToOriginal.get(subNode) || '';
-            const translated = translateString(original, lang);
-            if (translated !== subNode.textContent) {
-              subNode.textContent = translated;
-            }
-          }
-
-          // Check inputs inside added node
-          const el = node as HTMLElement;
-          if (el.querySelectorAll) {
-            const inputs = el.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
-              'input[placeholder], textarea[placeholder]'
-            );
-            inputs.forEach((input) => {
-              if (!input.hasAttribute('data-original-placeholder')) {
-                input.setAttribute('data-original-placeholder', input.placeholder);
-              }
-              const origPlaceholder = input.getAttribute('data-original-placeholder') || '';
-              if (origPlaceholder) {
-                input.placeholder = translateString(origPlaceholder, lang);
-              }
-            });
+      if (mutation.type === 'childList') {
+        for (const added of Array.from(mutation.addedNodes)) {
+          if (!isIgnoredNode(added)) {
+            shouldRetranslate = true;
+            break;
           }
         }
-      });
+      } else if (mutation.type === 'characterData') {
+        const target = mutation.target;
+        if (!isIgnoredNode(target)) {
+          const currentText = target.textContent || '';
+          // If updated by React with non-empty text, ensure it gets translated
+          if (currentText) {
+            shouldRetranslate = true;
+            break;
+          }
+        }
+      }
+      if (shouldRetranslate) break;
+    }
+
+    if (shouldRetranslate) {
+      scheduleTranslatePass(lang);
     }
   });
 
   domObserver.observe(document.body, {
     childList: true,
     subtree: true,
+    characterData: true,
   });
+}
+
+/**
+ * Sets or clears the official Google Translate cookie across root and host domains
+ */
+export function applyGoogleTranslateCookie(langCode: string) {
+  if (typeof document === 'undefined') return;
+  const isEn = langCode === 'en' || !langCode;
+  const cookieValue = isEn ? '' : `/en/${langCode}`;
+  const host = window.location.hostname;
+  const isLocalhost = host === 'localhost' || host === '127.0.0.1';
+
+  if (isEn) {
+    const expired = 'expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = `googtrans=; ${expired}`;
+    document.cookie = `googtrans=; domain=${host}; ${expired}`;
+    document.cookie = `googtrans=; domain=.${host}; ${expired}`;
+    return;
+  }
+
+  const maxAge = 'max-age=31536000; path=/;';
+  document.cookie = `googtrans=${cookieValue}; ${maxAge}`;
+  document.cookie = `googtrans=${cookieValue}; domain=${host}; ${maxAge}`;
+  if (!isLocalhost) {
+    document.cookie = `googtrans=${cookieValue}; domain=.${host}; ${maxAge}`;
+    const parts = host.split('.');
+    if (parts.length >= 2) {
+      const rootDomain = parts.slice(-2).join('.');
+      document.cookie = `googtrans=${cookieValue}; domain=.${rootDomain}; ${maxAge}`;
+    }
+  }
+}
+
+/**
+ * Triggers the official Google Translate select element (.goog-te-combo) programmatically
+ */
+export function triggerGoogleTranslateElement(langCode: string): boolean {
+  if (typeof document === 'undefined') return false;
+  const targetVal = langCode === 'en' ? '' : langCode;
+
+  const trySelect = (): boolean => {
+    const select = document.querySelector<HTMLSelectElement>('.goog-te-combo');
+    if (select) {
+      if (select.value !== targetVal) {
+        select.value = targetVal;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        select.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      return true;
+    }
+    return false;
+  };
+
+  if (!trySelect()) {
+    let retries = 0;
+    const interval = setInterval(() => {
+      retries++;
+      if (trySelect() || retries >= 20) {
+        clearInterval(interval);
+      }
+    }, 150);
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Continuous suppression of Google Translate top banner, toolbar, and layout shifting.
+ * Ensures zero intrusive bars or top gaps on screen.
+ */
+export function setupGoogleTranslateSuppression() {
+  if (typeof document === 'undefined') return;
+
+  const suppress = () => {
+    // 1. Fix body top offset
+    if (document.body && document.body.style.top && document.body.style.top !== '0px') {
+      document.body.style.top = '0px';
+    }
+    if (document.documentElement && document.documentElement.style.top && document.documentElement.style.top !== '0px') {
+      document.documentElement.style.top = '0px';
+    }
+
+    // 2. Hide injected banner iframes & frames
+    const injectedFrames = document.querySelectorAll<HTMLElement>(
+      '.goog-te-banner-frame, iframe.goog-te-banner-frame, iframe.skiptranslate, .VIpgJd-ZVi9od-ORHb-OEVmcd, .VIpgJd-ZVi9od-l4eHX-hSRLGd'
+    );
+    injectedFrames.forEach((el) => {
+      el.style.setProperty('display', 'none', 'important');
+      el.style.setProperty('visibility', 'hidden', 'important');
+      el.style.setProperty('height', '0px', 'important');
+      el.style.setProperty('pointer-events', 'none', 'important');
+    });
+  };
+
+  // Run immediately and periodically
+  suppress();
+  setInterval(suppress, 250);
+
+  if (typeof MutationObserver !== 'undefined' && document.body) {
+    const obs = new MutationObserver(() => suppress());
+    obs.observe(document.body, { childList: true, attributes: true, attributeFilter: ['style', 'class'] });
+  }
+}
+
+// Auto-run suppression setup in browser
+if (typeof window !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupGoogleTranslateSuppression);
+  } else {
+    setupGoogleTranslateSuppression();
+  }
+}
+
+/**
+ * Purges all translation cache and resets to English
+ */
+export function clearTranslationCache() {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem('plumeria_translation_cache');
+    sessionStorage.clear();
+  } catch {
+    // ignore
+  }
+  setLanguage('en');
 }
 
 /**
@@ -1530,19 +1791,30 @@ export function getStoredLanguage(): string {
 
 /**
  * Master language change function:
- * 1. Immediately executes instant in-app DOM translation (guaranteed 0ms latency)
- * 2. Saves to localStorage
- * 3. Dispatches window custom event for reactive components
+ * 1. Coordinates official Google Translate element (100% full-page translation)
+ * 2. Immediately applies instant in-app dictionary translation for 0ms latency
+ * 3. Saves to localStorage & sets googtrans cookies
+ * 4. Dispatches window custom event for reactive components
  */
 export function setLanguage(langCode: string) {
   if (typeof window === 'undefined') return;
 
   setStoredLanguage(langCode);
 
-  // 1. Instant built-in DOM Translation
-  translatePageDOM(langCode);
+  // 1. Google Translate cookie & combo trigger
+  applyGoogleTranslateCookie(langCode);
+  triggerGoogleTranslateElement(langCode);
 
-  // 2. Dispatch global event
+  // 2. Built-in DOM Translation (instant headers, badges, buttons, cards)
+  if (langCode === 'en') {
+    restoreOriginalEnglish();
+  } else {
+    translatePageDOM(langCode);
+    setTimeout(() => translatePageDOM(langCode), 120);
+    setTimeout(() => translatePageDOM(langCode), 400);
+  }
+
+  // 3. Dispatch global event for React UI state synchronization
   window.dispatchEvent(
     new CustomEvent('plumeria-language-change', {
       detail: { language: langCode },

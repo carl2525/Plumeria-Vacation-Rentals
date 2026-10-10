@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
-import { X, Sparkles, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Sparkles, ExternalLink, Calendar, Mail } from 'lucide-react';
 import { InquiryForm } from './InquiryForm';
 import { PlumeriaSymbolLogo } from '../brand/PlumeriaSymbolLogo';
-import { SITE_CONFIG, FORMS_PAUSED_FOR_A2P } from '../../config/site';
+import { SITE_CONFIG, HOSPITABLE_CONFIG } from '../../config/site';
+import { HospitableBookingWidget } from '../booking/HospitableBookingWidget';
 
 interface InquiryModalProps {
   isOpen: boolean;
@@ -21,6 +22,8 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
   initialCheckOut,
   initialGuests,
 }) => {
+  const [activeTab, setActiveTab] = useState<'hospitable' | 'inquiry'>('hospitable');
+
   // Lock body scroll and listen for Escape key when modal is open
   useEffect(() => {
     if (!isOpen) return;
@@ -55,7 +58,9 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
     >
       <div
         id="inquiry-modal-card"
-        className="relative bg-[#F9F7F2] w-full max-w-xl max-h-[86dvh] sm:max-h-[88vh] flex flex-col rounded-2xl sm:rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] border border-[#E8DCC6] overflow-hidden my-auto animate-modal-pop"
+        className={`relative bg-[#F9F7F2] w-full ${
+          activeTab === 'hospitable' ? 'max-w-3xl' : 'max-w-xl'
+        } max-h-[90dvh] flex flex-col rounded-2xl sm:rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] border border-[#E8DCC6] overflow-hidden my-auto animate-modal-pop transition-all duration-300`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Rainbow top line */}
@@ -85,7 +90,9 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
                 id="inquiry-modal-title"
                 className="font-serif text-lg sm:text-2xl font-bold text-[#1A3B34] truncate"
               >
-                {FORMS_PAUSED_FOR_A2P ? 'Direct Booking & Inquiries' : 'Booking Inquiry'}
+                {activeTab === 'hospitable'
+                  ? 'Direct Booking (Hospitable)'
+                  : 'Direct Host Inquiry'}
               </h2>
             </div>
           </div>
@@ -112,31 +119,57 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
           </div>
         </div>
 
-        {/* Direct Rate & Licensed STR Bar */}
-        <div className="bg-[#1A3B34] text-white px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between text-xs border-b border-[#C59B4B]/30 shrink-0">
-          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-            <span className="px-1.5 py-0.5 rounded bg-[#C59B4B] text-[#1A3B34] text-[9.5px] sm:text-[10px] font-black uppercase tracking-wider shrink-0">
-              $179* / NT PROMO
-            </span>
-            <span className="font-semibold text-white text-[11px] sm:text-xs truncate">
-              Special Promo Rate · Valid until Oct 30
-            </span>
+        {/* Tab Switcher: Hospitable Direct Booking vs Inquiry Form */}
+        <div className="bg-[#1A3B34] text-white px-4 sm:px-6 py-2 flex items-center justify-between border-b border-[#C59B4B]/30 shrink-0 gap-2">
+          <div className="flex items-center gap-1.5 bg-white/10 p-1 rounded-xl">
+            <button
+              type="button"
+              onClick={() => setActiveTab('hospitable')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                activeTab === 'hospitable'
+                  ? 'bg-[#C59B4B] text-[#1A3B34] shadow-xs'
+                  : 'text-white/80 hover:text-white'
+              }`}
+            >
+              <Calendar className="w-3.5 h-3.5" />
+              <span>Direct Booking (Hospitable)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('inquiry')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                activeTab === 'inquiry'
+                  ? 'bg-[#C59B4B] text-[#1A3B34] shadow-xs'
+                  : 'text-white/80 hover:text-white'
+              }`}
+            >
+              <Mail className="w-3.5 h-3.5" />
+              <span>Host Inquiry &amp; Custom Dates</span>
+            </button>
           </div>
-          <span className="flex items-center gap-1 text-[#F6E7A7] text-[10px] sm:text-[11px] font-medium shrink-0 ml-2">
-            <Sparkles className="w-3 h-3 text-[#F6E7A7]" />
-            <span>$0 Resort Fees · Free Parking</span>
+
+          <span className="hidden sm:flex items-center gap-1 text-[#F6E7A7] text-[11px] font-medium shrink-0">
+            <Sparkles className="w-3.5 h-3.5 text-[#F6E7A7]" />
+            <span>$0 Resort Fees · Free Covered Parking</span>
           </span>
         </div>
 
-        {/* Modal Body with Scrollable Form */}
-        <div className="p-4 sm:p-6 md:p-7 flex-1 min-h-0 overflow-y-auto custom-scrollbar">
-          <InquiryForm
-            initialPropertyId={preselectedPropertyId}
-            initialCheckIn={initialCheckIn}
-            initialCheckOut={initialCheckOut}
-            initialGuests={initialGuests}
-            onSuccess={onClose}
-          />
+        {/* Modal Body with Scrollable Area */}
+        <div className="p-3 sm:p-5 md:p-6 flex-1 min-h-0 overflow-y-auto custom-scrollbar">
+          {activeTab === 'hospitable' ? (
+            <div className="space-y-4">
+              <HospitableBookingWidget onSuccess={onClose} />
+            </div>
+          ) : (
+            <InquiryForm
+              initialPropertyId={preselectedPropertyId}
+              initialCheckIn={initialCheckIn}
+              initialCheckOut={initialCheckOut}
+              initialGuests={initialGuests}
+              onSuccess={onClose}
+            />
+          )}
         </div>
       </div>
     </div>

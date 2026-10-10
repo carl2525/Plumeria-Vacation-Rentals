@@ -173,7 +173,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
               <li className="pt-1.5 border-t border-white/10">
                 <button
                   type="button"
-                  onClick={() => setLanguage('ja')}
+                  onClick={() => {
+                    setLanguage('ja');
+                    window.dispatchEvent(new CustomEvent('plumeria-open-language-widget'));
+                  }}
                   className="text-[#F6E7A7] hover:text-white transition-colors cursor-pointer text-left font-semibold flex items-center gap-1.5 text-xs"
                   title="Translate website into Japanese"
                 >

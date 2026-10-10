@@ -24,6 +24,7 @@ import {
 import { LogoWatermark } from '../components/brand/LogoWatermark';
 import { SITE_CONFIG, FORMS_PAUSED_FOR_A2P } from '../config/site';
 import { AppImage } from '../components/common/AppImage';
+import { HospitableBookingWidget } from '../components/booking/HospitableBookingWidget';
 import { generateInquiryMailtoUrl } from '../utils/mailto';
 import {
   calculateStayPricing,
@@ -754,13 +755,30 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
                   {/* Direct Booking Actions (No form input, 100% compliant) */}
                   <div className="space-y-2 pt-1">
+                    <button
+                      type="button"
+                      id="sticky-card-direct-booking-hospitable-btn"
+                      onClick={() => {
+                        const el = document.getElementById('direct-booking-section');
+                        if (el) {
+                          el.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                          onOpenInquiry();
+                        }
+                      }}
+                      className="w-full py-3.5 px-4 rounded-xl bg-[#1A3B34] hover:bg-[#224D44] text-[#F6E7A7] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer border border-[#C59B4B]/40"
+                    >
+                      <Sparkles className="w-4 h-4 text-[#F6E7A7]" />
+                      <span>Direct Booking (Instant Reservation)</span>
+                    </button>
+
                     {property.airbnbUrl && (
                       <a
                         href={property.airbnbUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         id="sticky-card-airbnb-btn"
-                        className="w-full py-3.5 px-4 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md hover:shadow-lg"
+                        className="w-full py-3 px-4 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md hover:shadow-lg"
                       >
                         <span>View &amp; Book on Airbnb</span>
                         <ExternalLink className="w-4 h-4 text-white/90" />
@@ -1010,6 +1028,28 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               )}
             </div>
           </div>
+        </div>
+
+        {/* Hospitable Direct Booking Calendar & Live Reservation Section */}
+        <div id="direct-booking-section" className="pt-12 pb-6 scroll-mt-24">
+          <div className="mb-6 space-y-1.5">
+            <div className="flex items-center gap-2">
+              <span className="px-2.5 py-0.5 rounded-full bg-[#1A3B34] text-[#F6E7A7] text-[10px] font-bold uppercase tracking-wider border border-[#C59B4B]/30">
+                Direct Host Reservation
+              </span>
+              <span className="text-xs font-semibold text-[#8CA58A]">
+                Instant Dates &amp; Calendar
+              </span>
+            </div>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A3B34]">
+              Reserve Directly with Host · $0 Resort Fees
+            </h2>
+            <p className="text-xs sm:text-sm text-[#1A3B34]/70 max-w-2xl">
+              Lock in your dates directly with Plumeria Vacation Rentals via Hospitable. Free covered garage parking pass included, zero resort charges, and direct Superhost communication.
+            </p>
+          </div>
+
+          <HospitableBookingWidget />
         </div>
 
         {/* Similar Plumeria Rentals Section */}

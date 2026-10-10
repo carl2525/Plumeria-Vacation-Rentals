@@ -5,6 +5,7 @@ import { InquiryModal } from './components/common/InquiryModal';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { SEOHelper } from './components/common/SEOHelper';
 import { LanguageTranslateWidget } from './components/common/LanguageTranslateWidget';
+import { getStoredLanguage, translatePageDOM } from './utils/translator';
 import { getTodayDateString, isDateInPast } from './utils/date';
 
 import { HomePage } from './pages/HomePage';
@@ -58,6 +59,17 @@ export function App() {
       window.removeEventListener('hashchange', handlePopState);
     };
   }, []);
+
+  // Re-apply DOM translations whenever user navigates between routes/pages
+  useEffect(() => {
+    const lang = getStoredLanguage();
+    if (lang && lang !== 'en') {
+      const timer = setTimeout(() => {
+        translatePageDOM(lang);
+      }, 80);
+      return () => clearTimeout(timer);
+    }
+  }, [currentPath]);
 
   const navigate = (path: string) => {
     setCurrentPath(path);

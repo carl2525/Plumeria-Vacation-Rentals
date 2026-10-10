@@ -168,36 +168,81 @@
 }
 
 /* ==========================================================================
-   Google Translate Widget Overrides & Clean Layout Preservation
-   Prevents Google banner from shifting body down or injecting intrusive bars
+   Google Translate Bar & UI Suppression
+   Completely hides the Google Translate top banner, toolbar, frames, tooltips,
+   and prevents any body displacement or layout shifts when translating.
    ========================================================================== */
+.goog-te-banner-frame,
 .goog-te-banner-frame.skiptranslate,
-iframe.goog-te-banner-frame {
+iframe.goog-te-banner-frame,
+.goog-te-banner,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-ZVi9od-l4eHX-hSRLGd,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMy,
+.VIpgJd-ZVi9od-xl07Ob-OEVmcd,
+.VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q {
   display: none !important;
   visibility: hidden !important;
+  opacity: 0 !important;
   height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  clip: rect(0, 0, 0, 0) !important;
+  z-index: -9999 !important;
 }
 
-body {
-  top: 0px !important;
-  position: static !important;
-}
-
-#goog-gt-tt,
-.goog-te-balloon-frame {
-  display: none !important;
-  visibility: hidden !important;
-}
-
-.goog-text-highlight {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* Prevent Google font override from breaking custom Fraunces / Outfit typography */
+/* Ensure html and body stay anchored at top with zero unwanted margin/padding */
+html,
+body,
+html body,
+body.translated-ltr,
+body.translated-rtl,
+.translated-ltr,
+.translated-rtl,
 .translated-ltr body,
 .translated-rtl body {
   top: 0px !important;
+  position: static !important;
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+
+/* Completely suppress Google hover translation tooltips & balloon frames */
+#goog-gt-tt,
+#goog-gt-tt *,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  z-index: -9999 !important;
+}
+
+/* Remove hover text highlight box */
+.goog-text-highlight {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Keep Google Translate container offscreen and functional without display:none */
+#google_translate_element {
+  position: fixed !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  width: 120px !important;
+  height: 40px !important;
+  opacity: 0.01 !important;
+  pointer-events: none !important;
+  z-index: -9999 !important;
 }
 
 
